@@ -1,3 +1,8 @@
+2.0.0
+-----
+Ninban takes over the project
+Fixed DPI awareness issue
+
 1.4.0
 -----
 Updated to base code logic v10.2
