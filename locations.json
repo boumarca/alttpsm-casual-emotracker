@@ -3256,7 +3256,7 @@
 					"color": "#aa860d",
 					"access_rules": [ 
 						"$canFly,lift2,mirror", 
-						"$canAccessMiseryMirePortal,mirror"
+						"$canAccessMiseryMirePortal,lift1,mirror"
 					],
 					"sections": [
 					  //  Cave
@@ -3349,7 +3349,18 @@
 					  {
 						"name": "Lanmolas",
 						"short_name": "Lanmo",
-						"access_rules": [ "lift1,firesource,[boots],sword", "lift1,firesource,[boots],hammer", "lift1,firesource,[boots],bow", "lift1,firesource,[boots],somaria", "lift1,firesource,[boots],[sword]" ],
+						"access_rules": [
+							"lift1,firesource,[boots],sword",
+							"lift1,firesource,[boots],hammer",
+							"lift1,firesource,[boots],bow",
+							"lift1,firesource,[boots],somaria",
+							"lift1,firesource,[boots],[sword]",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],sword",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],hammer",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],bow",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],somaria",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],[sword]"
+						],
 						"hosted_item": "desertpalace"
 					  }
 					],
