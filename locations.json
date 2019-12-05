@@ -3817,6 +3817,38 @@
 							"y": 126
 						  }
 						]
+					  },
+					  {
+						"name": "Ganon's Tower",
+						"color": "#af0000",
+						"access_rules": [ "pearl,$gtCrystalCount" ],
+						"sections": [
+						  {
+							"name": "Dungeon",
+							"clear_as_group": false,
+							"access_rules": [
+								"[hammer],[firerod],[hookshot],[boots],[somaria]",
+								"[hammer],[firerod],[hookshot],boots,[somaria]",
+								"[hammer],[firerod],[hookshot],[boots],somaria"
+							],
+							"item_count": 23
+						  },
+						  {
+							"name": "Tower",
+							"clear_as_group": false,
+							"access_rules": [
+								"[bow],firesource,[hookshot]"
+							],
+							"item_count": 4
+						  }
+						],
+						"map_locations": [
+						  {
+							"map": "darkworld",
+							"x": 1126,
+							"y": 68
+						  }
+					    ]
 					  }
 					]
 				  }

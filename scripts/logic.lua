@@ -820,3 +820,14 @@ function canExtendMagic()
 	
 	return 0
 end
+
+function gtCrystalCount()
+    local reqCount = 7
+    local count = Tracker:ProviderCountForCode("crystal") + Tracker:ProviderCountForCode("crystal56")
+
+    if count >= reqCount then
+        return 1
+    else
+        return 0
+    end
+end
