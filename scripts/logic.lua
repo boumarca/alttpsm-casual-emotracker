@@ -427,7 +427,7 @@ function norfairEastTournament()
 		    and canHellRun() == 1
 		    and (hasSuper() == 1 
 		    
-		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringBallJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
+		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
 		    
 		      or (hasSpeedBooster() == 1 and canPowerBomb() == 1))) then
 		return 1
@@ -443,7 +443,7 @@ function norfairEastTournamentSB()
 		    and canHellRun() == 1
 		    and (hasSuper() == 1 
 		    
-		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringBallJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
+		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
 		    
 		      or (hasSpeedBooster() == 1 and canPowerBomb() == 1))) then
 		return 1
