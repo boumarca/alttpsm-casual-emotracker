@@ -2,21 +2,21 @@
 
 function isCasual()
 	local casual = Tracker:ProviderCountForCode("casual")
-	
+
 	if (casual == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function isTournament()
 	local tournament = Tracker:ProviderCountForCode("tournament")
-	
+
 	if (tournament == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -26,7 +26,7 @@ function hasWave()
 	if (wave == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -36,7 +36,7 @@ function hasPlasmaBeam()
 	if (plasma == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -46,7 +46,7 @@ function hasChargeBeam()
 	if (charge == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -56,7 +56,7 @@ function hasHiJump()
 	if (hijump == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -67,7 +67,7 @@ function hasSpaceJump()
 	if (space == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -77,7 +77,7 @@ function hasVaria()
 	if (varia == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -87,7 +87,7 @@ function hasGravity()
 	if (gravity == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -97,7 +97,7 @@ function hasGrapple()
 	if (grapple == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -107,28 +107,28 @@ function hasIceBeam()
 	if (ice == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
 
 function hasBasicBombs()
 	local bomb = Tracker:ProviderCountForCode("bomb")
-	
+
 	if (bomb == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
 function hasPowerBombs()
 	local powerbomb = Tracker:ProviderCountForCode("powerbomb")
-	
+
 	if (powerbomb >= 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -136,70 +136,70 @@ function hasBombs()
 	if (hasBasicBombs() == 1 or hasPowerBombs() == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
 function countPB()
 	local powerbomb = Tracker:ProviderCountForCode("powerbomb")
-	
+
 	return (powerbomb / 5)
 end
 
 function hasMorph()
 	local morph = Tracker:ProviderCountForCode("morph")
-	
+
 	if (morph == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function hasMissiles()
 	local missile = Tracker:ProviderCountForCode("missile")
-	
+
 	if (missile >= 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function hasSuper()
 	local super = Tracker:ProviderCountForCode("super")
-	
+
 	if (super >= 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function hasEnergyReserves()
 	local etanks = Tracker:ProviderCountForCode("etank")
 	local reservetanks = Tracker:ProviderCountForCode("reservetank")
-	
+
 	return (etanks + reservetanks + 1) -- +1 for starting tank
 end
 
 function hasScrewAttack()
 	local screw = Tracker:ProviderCountForCode("screw")
-	
+
 	if (screw == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function hasSpringBall()
 	local spring = Tracker:ProviderCountForCode("spring")
-	
+
 	if (spring == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -208,7 +208,7 @@ function hasGravity()
 	if (gravity == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -217,7 +217,7 @@ function hasSpeedBooster()
 	if (speed == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -225,7 +225,7 @@ function canFlySM()
 	if (hasSpaceJump() == 1 or canBombJump() == 1) then
 		return 1
 	end
-		
+
 	return 0
 end
 
@@ -233,7 +233,7 @@ function canBombWalls()
 	if ((hasMorph() == 1 and hasBombs() == 1) or hasScrewAttack() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -241,7 +241,7 @@ function canBombPassages()
 	if (hasMorph() == 1 and hasBombs() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -249,7 +249,7 @@ function canBombJump()
 	if (hasMorph() == 1 and hasBasicBombs() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -257,7 +257,7 @@ function canBomb()
 	if (hasMorph() == 1 and (hasPowerBombs() == 1 or hasBasicBombs() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -265,7 +265,7 @@ function canPowerBomb()
 	if (hasMorph() == 1 and hasPowerBombs() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -273,7 +273,7 @@ function canOpenRedDoors()
 	if (hasMissiles() == 1 or hasSuper() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -281,7 +281,7 @@ function canSpringJump()
 	if (hasMorph() == 1 and hasSpringBall() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -290,7 +290,7 @@ function canPeekGauntlet()
 			or (hasSpeedBooster() == 1 and hasEnergyReserves() >= 3)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -300,7 +300,7 @@ function canEnterAndLeaveGauntletTournament()
 					 or (hasSpeedBooster() == 1 and canPowerBomb() == 1 and hasEnergyReserves() >= 3)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -311,7 +311,7 @@ function canEnterAndLeaveGauntletCasual()
 						or hasScrewAttack() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -319,7 +319,7 @@ function canDefeatBotwoonCasual()
 	if (hasSpeedBooster() == 1 or canAccessMaridiaPortal() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -327,7 +327,7 @@ function canDefeatBotwoonTournament()
 	if (hasIceBeam() == 1 or hasSpeedBooster() == 1 or canAccessMaridiaPortal() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -336,7 +336,7 @@ function canDefeatDraygonTournament()
 	if (canDefeatBotwoonTournament() == 1 and hasGravity() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -344,7 +344,7 @@ function canDefeatDraygonCasual()
 	if (canDefeatBotwoonCasual() == 1 and hasGravity() == 1 and ((hasSpeedBooster() == 1 and hasHiJump() == 1) or canFlySM() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -352,7 +352,7 @@ function heatProof()
 	if (hasVaria() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -360,7 +360,7 @@ function canHellRun()
 	if (heatProof() == 1 or hasEnergyReserves() >= 6) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -375,7 +375,7 @@ function crocomireTournament()
 			or (canAccessLowerNorfairPortal() == 1 and hasScrewAttack() == 1 and hasSpaceJump() == 1 and hasVaria() == 1 and hasSuper() == 1 and hasEnergyReserves() >= 3) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -390,7 +390,7 @@ function crocomireTournamentSB()
 			or (canAccessLowerNorfairPortal() == 1 and hasScrewAttack() == 1 and hasSpaceJump() == 1 and hasVaria() == 1 and hasSuper() == 1 and hasEnergyReserves() >= 3) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -403,7 +403,7 @@ function crocomireCasual()
 				and ((canPowerBomb() == 1 and hasSpeedBooster() == 1) or (hasSpeedBooster() == 1 and hasWave() == 1) or (hasMorph() == 1 and (canFlySM() == 1 or hasHiJump() == 1) and hasWave() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -416,7 +416,7 @@ function crocomireCasualSB()
 				and ((canPowerBomb() == 1 and hasSpeedBooster() == 1) or (hasSpeedBooster() == 1 and hasWave() == 1) or (hasMorph() == 1 and (canFlySM() == 1 or hasHiJump() == 1) and hasWave() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -425,14 +425,14 @@ function norfairEastTournament()
                 	and (hasSuper() == 1 and hasMorph() == 1))
 		    or canAccessNorfairPortal() == 1)
 		    and canHellRun() == 1
-		    and (hasSuper() == 1 
-		    
-		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringBallJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
-		    
+		    and (hasSuper() == 1
+
+		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
+
 		      or (hasSpeedBooster() == 1 and canPowerBomb() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -441,14 +441,14 @@ function norfairEastTournamentSB()
                 	and (hasSuper() == 1 and hasMorph() == 1))
 		    or canAccessNorfairPortalSB() == 1)
 		    and canHellRun() == 1
-		    and (hasSuper() == 1 
-		    
-		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringBallJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
-		    
+		    and (hasSuper() == 1
+
+		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
+
 		      or (hasSpeedBooster() == 1 and canPowerBomb() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -461,7 +461,7 @@ function norfairEastCasual()
                 and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -474,7 +474,7 @@ function norfairEastCasualSB()
                 and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -484,7 +484,7 @@ function norfairWest()
                 or canAccessNorfairPortal() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -494,75 +494,75 @@ function norfairWestSB()
                 or canAccessNorfairPortalSB() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function lowerNorfairEastTournament()
 	if (heatProof() == 1
 				and	((norfairEastTournament() == 1
-						and canPowerBomb() == 1		
+						and canPowerBomb() == 1
 						and (hasHiJump() == 1 or hasGravity() == 1))
-					or (canAccessLowerNorfairPortal() == 1 
+					or (canAccessLowerNorfairPortal() == 1
 						and canBombWalls() == 1
-						and hasSuper() == 1 
+						and hasSuper() == 1
 						and (canFlySM() == 1 or canSpringJump() == 1 or hasSpeedBooster() == 1)))
 				and (canFlySM() == 1 or hasHiJump() == 1 or canSpringJump() == 1 or (hasIceBeam() == 1 and hasChargeBeam() == 1))
 				and (canBombPassages() == 1 or (hasScrewAttack() == 1 and hasSpaceJump() == 1))
 				and (hasMorph() == 1 or hasEnergyReserves() >= 6)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function lowerNorfairEastTournamentSB()
 	if (heatProof() == 1
 				and	((norfairEastTournamentSB() == 1
-						and canPowerBomb() == 1		
+						and canPowerBomb() == 1
 						and (hasHiJump() == 1 or hasGravity() == 1))
-					or (canAccessLowerNorfairPortal() == 1 
+					or (canAccessLowerNorfairPortal() == 1
 						and canBombWalls() == 1
-						and hasSuper() == 1 
+						and hasSuper() == 1
 						and (canFlySM() == 1 or canSpringJump() == 1 or hasSpeedBooster() == 1)))
 				and (canFlySM() == 1 or hasHiJump() == 1 or canSpringJump() == 1 or (hasIceBeam() == 1 and hasChargeBeam() == 1))
 				and (canBombPassages() == 1 or (hasScrewAttack() == 1 and hasSpaceJump() == 1))
 				and (hasMorph() == 1 or hasEnergyReserves() >= 6)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function lowerNorfairEastCasual()
 	if (heatProof() == 1
 				and	((norfairEastCasual() == 1
-						and canPowerBomb() == 1		
+						and canPowerBomb() == 1
 						and (hasSpaceJump() == 1 and hasGravity() == 1))
-					or (canAccessLowerNorfairPortal() == 1 
+					or (canAccessLowerNorfairPortal() == 1
 						and canBombWalls() == 1
 						and hasSuper() == 1
 						and canPowerBomb() == 1
 						and canFlySM() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function lowerNorfairEastCasualSB()
 	if (heatProof() == 1
 				and	((norfairEastCasualSB() == 1
-						and canPowerBomb() == 1		
+						and canPowerBomb() == 1
 						and (hasSpaceJump() == 1 and hasGravity() == 1))
-					or (canAccessLowerNorfairPortal() == 1 
+					or (canAccessLowerNorfairPortal() == 1
 						and canBombWalls() == 1
 						and hasSuper() == 1
 						and canPowerBomb() == 1
 						and canFlySM() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -572,7 +572,7 @@ function plasmaBeamTournament()
 				and (hasHiJump() == 1 or canSpringJump() == 1 or canFlySM() == 1 or hasSpeedBooster() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -581,7 +581,7 @@ function canAccessDeathMountainPortal()
 		and (hasSuper() == 1 and hasMorph() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -591,21 +591,21 @@ function canAccessMiseryMirePortal()
 	elseif (isTournament() == 1 and heatProof() == 1 and (hasHiJump() == 1 or hasGravity() == 1) and canPowerBomb() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
 function canAccessDarkWorldPortal()
 	if (isCasual() == 1 and canPowerBomb() == 1 and hasSuper() == 1 and hasGravity() == 1 and hasSpeedBooster() == 1) then
 		return 1
-	elseif (isTournament() == 1 and 
-		(hasSuper() == 1 and 
+	elseif (isTournament() == 1 and
+		(hasSuper() == 1 and
 			(hasChargeBeam() == 1 or (hasSuper() == 1 and hasMissiles() == 1)) and
 			(hasGravity() == 1 or (hasHiJump() == 1 and hasIceBeam() == 1 and hasGrapple() == 1)) and
 			(hasIceBeam() == 1 or (hasSpeedBooster() == 1 and hasGravity() == 1)))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -616,7 +616,7 @@ function hasFlute()
 	if (flute == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -625,7 +625,7 @@ function hasBottle()
 	if (bottle >= 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -634,7 +634,7 @@ function hasHalfMagic()
 	if (halfmagic >= 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -643,25 +643,25 @@ function hasLamp()
 	if (lamp == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
-	
+
 function hasPowerGlove()
 	local gloves = Tracker:ProviderCountForCode("gloves")
 	if (gloves == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
-	
+
 function hasTitansMitt()
 	local mitts = Tracker:ProviderCountForCode("mitts")
 	if (mitts == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -670,7 +670,7 @@ function hasMoonPearl()
 	if (moonpearl == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -679,7 +679,7 @@ function hasFlippers()
 	if (flippers == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -688,7 +688,7 @@ function hasHookshot()
 	if (hookshot == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -697,7 +697,7 @@ function hasHammer()
 	if (hammer == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -706,7 +706,7 @@ function defeatedAga()
 	if (aga1 == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -714,15 +714,15 @@ function canFly()
 	if (hasFlute() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
-	
+
 function canLiftRocks()
 	if (hasPowerGlove() == 1 or hasTitansMitt() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -730,7 +730,7 @@ function canLiftDarkRocks()
 	if (hasTitansMitt() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -739,7 +739,7 @@ function canAccessNorfairPortal()
 	if (canFly() == 1 or (canLiftRocks() == 1 and hasLamp() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -747,7 +747,7 @@ function canAccessNorfairPortalSB()
 	if (canFly() == 1 or (canLiftRocks() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -758,7 +758,7 @@ function canAccessMaridiaPortal()
 	elseif (isTournament() == 1 and hasMoonPearl() == 1 and hasFlippers() == 1 and (canSpringJump() == 1 or hasHiJump() == 1 or hasGravity() == 1) and hasMorph() == 1 and (defeatedAga() == 1 or (hasHammer() == 1 and canLiftRocks() == 1) or canLiftDarkRocks() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -766,7 +766,7 @@ function canAccessLowerNorfairPortal()
 	if (canFly() == 1 and canLiftDarkRocks() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -777,7 +777,7 @@ function canEnterNEDarkWorld()
 			or (canAccessDarkWorldPortal() == 1 and hasFlippers() == 1 and hasMoonPearl() == 1))) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -789,7 +789,7 @@ function canEnterNWDarkWorld()
 				or canLiftDarkRocks() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -801,7 +801,7 @@ function canEnterSDarkWorld()
 				or canLiftDarkRocks() == 1)) then
 		return 1
 	end
-	
+
 	return 0
 end
 
@@ -809,14 +809,14 @@ function canEnterDeathMountainWest()
 	if (canFly() == 1 or (hasLamp() == 1 and canLiftRocks() == 1) or canAccessDeathMountainPortal() == 1) then
 		return 1
 	end
-	
+
 	return 0
 end
 
-function canExtendMagic()	
+function canExtendMagic()
 	if (hasHalfMagic() == 1 or hasBottle() == 1) then
 		return true
 	end
-	
+
 	return 0
 end
