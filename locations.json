@@ -5,7 +5,7 @@
 	  {
 		"name": "Zebes",
 		"chest_unopened_img": "images/major_unopened.png",
-		"chest_opened_img": "images/major_opened.png",		
+		"chest_opened_img": "images/major_opened.png",
 		"children": [
 		  {
 			"name": "Crateria",
@@ -36,14 +36,14 @@
 						"map": "crateria",
 						"x": 712,
 						"y": 276
-					  }					  
+					  }
 					]
 				  },
 				  {
 					"name": "Super Missile (Crateria)",
 					"access_rules": [
-					  "$canPowerBomb, speed, $hasEnergyReserves:3",	  
-					  "$canPowerBomb, speed, varia, [$hasEnergyReserves:3]",	  
+					  "$canPowerBomb, speed, $hasEnergyReserves:3",
+					  "$canPowerBomb, speed, varia, [$hasEnergyReserves:3]",
 					  "$canPowerBomb, speed, gravity, [$hasEnergyReserves:3]",
 					  "{$canPowerBomb}"
 					],
@@ -137,23 +137,23 @@
 						"map": "crateria",
 						"x": 968,
 						"y": 116
-					  }					  
+					  }
 					]
-				  },			  
+				  },
 				]
 			  },
 			  {
 				"name": "Crateria East",
 				"access_rules": [
-				
+
 				  "$canPowerBomb, super",
 				  "[$canAccessNorfairPortal],$canAccessNorfairPortalSB, $canPowerBomb, ice",
 				  "[$canAccessNorfairPortal],$canAccessNorfairPortalSB, $canPowerBomb, hijump",
-				  
+
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB, $canPowerBomb, $canSpringJump",
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB, $canPowerBomb, $canFlySM",
 				  "[tournament],$canAccessMaridiaPortal, hijump, super",
-				  
+
 				  "casual,[$canAccessNorfairPortal],$canAccessNorfairPortalSB, $canPowerBomb, space",
 				  "casual,$canAccessMaridiaPortal, gravity, super"
 				],
@@ -162,7 +162,7 @@
 					"name": "Missile (outside Wrecked Ship bottom)",
 					"access_rules": [
 					  "[tournament]",
-					  
+
 					  "casual,speed",
 					  "casual,grapple",
 					  "casual,space",
@@ -193,7 +193,7 @@
 					"name": "Missile (outside Wrecked Ship top)",
 					"access_rules": [
 					  "[tournament],phantoon,super,$canBombPassages",
-					  
+
 					  "casual,phantoon,super,speed",
 					  "casual,phantoon,super,grapple",
 					  "casual,phantoon,super,$canFlySM",
@@ -227,7 +227,7 @@
 					"name": "Missile (outside Wrecked Ship middle)",
 					"access_rules": [
 					  "[tournament],phantoon,super,$canBombPassages",
-					  
+
 					  "casual,phantoon,super,speed",
 					  "casual,phantoon,super,grapple",
 					  "casual,phantoon,super,space",
@@ -255,7 +255,7 @@
 					]
 				  },
 				  {
-					"name": "Missile (Crateria moat)",			
+					"name": "Missile (Crateria moat)",
 					"sections": [
 					  {
 						"name": "Missile (Crateria moat)",
@@ -309,7 +309,7 @@
 						"map": "crateria",
 						"x": 456,
 						"y": 148
-					  }					  
+					  }
 					]
 				  },
 				  {
@@ -330,7 +330,7 @@
 						"map": "crateria",
 						"x": 296,
 						"y": 276
-					  }					  
+					  }
 					]
 				  },
 				  {
@@ -365,13 +365,13 @@
 						"y": 180
 					  }
 					]
-				  },			  
+				  },
 				]
 			  }
 			]
 		  },
 		  {
-			"name": "Brinstar",		
+			"name": "Brinstar",
 			"children": [
 			  {
 				"name": "Blue Brinstar",
@@ -408,7 +408,7 @@
 							"casual,ice",
 							"casual,hijump",
 							"casual,speed",
-							
+
 							"[tournament]",
 							"{}"
 						],
@@ -433,7 +433,7 @@
 					"name": "Missile (blue Brinstar middle)",
 					"access_rules": [
 					  "morph",
-					],					
+					],
 					"sections": [
 					  {
 						"name": "Missile (blue Brinstar middle)",
@@ -461,7 +461,7 @@
 					],
 					"sections": [
 					  {
-						"name": "Missile (blue Brinstar bottom)	",
+						"name": "Missile (blue Brinstar bottom)",
 						"item_count": 1
 					  }
 					],
@@ -491,7 +491,7 @@
 					  {
 						"name": "Missile (blue Brinstar behind missile)",
 						"item_count": 1
-					  }				  
+					  }
 					],
 					"map_locations": [
 					  {
@@ -529,7 +529,7 @@
                         "y": 404
                       }
 					]
-				  }			  
+				  }
 				]
 			  },
 			  {
@@ -643,7 +643,7 @@
 					"name": "Super Missile (green Brinstar top)",
 					"access_rules": [
 					  "casual,$canOpenRedDoors,speed",
-					  
+
 					  "[tournament],$canOpenRedDoors,speed",
 					  "[tournament],$canOpenRedDoors,morph"
 					],
@@ -738,7 +738,7 @@
 				  "$canOpenRedDoors,speed",
 				  "[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,wave,ice",
 				  "[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,wave,hijump",
-				  
+
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,$canOpenRedDoors,ice",
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,$canOpenRedDoors,hijump",
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,$canOpenRedDoors,$canSpringJump",
@@ -746,7 +746,7 @@
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,wave,$canSpringJump",
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,wave,$canFlySM",
 				  "[tournament],[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,wave,[space]",
-				  
+
 				  "open,[$canAccessNorfairPortal],$canAccessNorfairPortalSB,morph,wave,space"
 				],
 				"children": [
@@ -800,7 +800,7 @@
                         "y": 436
                       }
 					]
-				  },					  
+				  },
 				  {
 					"name": "Energy Tank, Waterway",
 					"access_rules": [
@@ -1094,7 +1094,7 @@
 				"access_rules": [
 				  "$canBombWalls, super, morph, $canBombPassages",
 				  "speed, super, morph, $canBombPassages",
-				  "[$canAccessNorfairPortal],$canAccessNorfairPortalSB, super, morph, $canBombPassages"				  
+				  "[$canAccessNorfairPortal],$canAccessNorfairPortalSB, super, morph, $canBombPassages"
 				],
 				"children": [
 				  {
@@ -1425,7 +1425,7 @@
 					  "[tournament],morph,$canFlySM",
 					  "[tournament],morph,grapple",
 					  "casual,morph,$canFlySM,$canPowerBomb",
-					  "casual,morph,speed,$canPowerBomb"				  
+					  "casual,morph,speed,$canPowerBomb"
 					],
 					"sections": [
 					  {
@@ -1485,7 +1485,7 @@
 				],
 				"children": [
 				  {
-					"name": "Norfair Reserve Tank/Missile",
+					"name": "Norfair Reserve Tank Room",
 					"access_rules": [
 					  "[tournament],morph,super",
 					  "casual,morph,$canFlySM",
@@ -1493,7 +1493,7 @@
 					  "casual,morph,ice",
 					  "casual,morph,grapple,speed",
 					  "casual,morph,grapple,bomb"
-					],					
+					],
 					"sections": [
 					  {
 						"name": "Reserve Tank, Norfair",
@@ -1521,7 +1521,7 @@
 					"name": "Speed Booster",
 					"access_rules": [
 					  "[tournament],super",
-					  
+
 					  "casual,$canFlySM",
 					  "casual,morph,speed",
 					  "casual,morph,$canBombPassages",
@@ -1553,10 +1553,10 @@
 					]
 				  },
 				  {
-					"name": "Speed Booster Missile",
+					"name": "Missile (Speed Booster)",
 					"access_rules": [
 					  "[tournament],super",
-					  
+
 					  "casual,$canFlySM",
 					  "casual,morph,speed",
 					  "casual,morph,$canBombPassages",
@@ -1565,7 +1565,7 @@
 					],
 					"sections": [
 					  {
-						"name": "Minor Item",
+						"name": "Missile (Speed Booster)",
 						"item_count": 1
 					  }
 					],
@@ -1589,7 +1589,7 @@
 					  "[tournament],$canOpenRedDoors,grapple",
 					  "[tournament],$canOpenRedDoors,hijump,$heatProof",
 					  "[tournament],$canOpenRedDoors,space",
-					  
+
 					  "casual,morph,$canFly",
 					  "casual,morph,speed",
 					  "casual,morph,$canBombPassages",
@@ -1616,10 +1616,10 @@
 					]
 				  },
 				  {
-					"name": "Wave Beam Missile",
+					"name": "Missile (Wave Beam)",
 					"access_rules": [
 					  "[tournament]",
-					  
+
 					  "casual,$canFly",
 					  "casual,morph,speed",
 					  "casual,morph,$canBombPassages",
@@ -1628,7 +1628,7 @@
 					],
 					"sections": [
 					  {
-						"name": "Wave Beam Missile",
+						"name": "Missile (Wave Beam)",
 						"item_count": 1
 					  }
 					],
@@ -1677,7 +1677,7 @@
 					  "casual,grapple,morph,speed",
 					  "casual,grapple,morph,$canBombPassages",
 					  "casual,hijump",
-					  "casual,ice",					  
+					  "casual,ice",
 					],
 					"sections": [
 					  {
@@ -1825,7 +1825,7 @@
 						  },
 						  {
 							"name": "Missile (lower Norfair near Wave Beam)",
-							"access_rules": [ "morph, $canBombWalls" ],							
+							"access_rules": [ "morph, $canBombWalls" ],
 							"sections": [
 							  {
 								"name": "Missile (lower Norfair near Wave Beam)",
@@ -1943,7 +1943,7 @@
 							  "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,speed,super",
 							  "casual,$canPowerBomb,space,super",
 							  "{$canAccessLowerNorfairPortal}"
-							],							
+							],
 							"sections": [
 							  {
 								"name": "Missile (Gold Torizo)",
@@ -1973,7 +1973,7 @@
 							  "casual,$canBombWalls,charge,space,$canPowerBomb",
 							  "casual,$canBombWalls,super,$canAccessLowerNorfairPortal",
 							  "casual,$canBombWalls,super,space,$canPowerBomb"
-							],							
+							],
 							"sections": [
 							  {
 								"name": "Super Missile (Gold Torizo)",
@@ -2008,7 +2008,7 @@
 			  "[tournament],super,$canPowerBomb",
 			  "[tournament],super,$canAccessMaridiaPortal,hijump,$canBombPassages",
 			  "[tournament],super,$canAccessMaridiaPortal,gravity,$canBombPassages",
-			  
+
 			  "casual,super,$canPowerBomb,speed",
 			  "casual,super,$canPowerBomb,grapple",
 			  "casual,super,$canPowerBomb,space",
@@ -2022,7 +2022,7 @@
 				"access_rules": [
 				  "[tournament],phantoon,$canPowerBomb,speed,varia",
 				  "[tournament],phantoon,$canPowerBomb,speed,$hasEnergyReserves:3",
-				  
+
 				  "casual,phantoon,speed,$canPowerBomb,grapple",
 				  "casual,phantoon,speed,$canPowerBomb,space",
 				  "casual,phantoon,speed,$canPowerBomb,varia,$hasEnergyReserves:3",
@@ -2032,7 +2032,7 @@
 				"sections": [
 				  {
 					"name": "Reserve Tank, Wrecked Ship",
-					"capture_item": true,					
+					"capture_item": true,
 					"item_count": 1
 				  }
 				],
@@ -2106,9 +2106,9 @@
 				"access_rules": [
 				  "[tournament],phantoon,varia",
 				  "[tournament],phantoon,$hasEnergyReserves:2",
-				  
+
 				  "casual,phantoon,grapple",
-				  "casual,phantoon,space",				  
+				  "casual,phantoon,space",
 				  "casual,phantoon,varia,$hasEnergyReserves:3",
 				  "casual,phantoon,$hasEnergyReserves:4"
 				],
@@ -2157,9 +2157,9 @@
 				"access_rules": [
 				  "[tournament],phantoon,varia",
 				  "[tournament],phantoon,$hasEnergyReserves:2",
-				  
+
 				  "casual,phantoon,grapple",
-				  "casual,phantoon,space",				  
+				  "casual,phantoon,space",
 				  "casual,phantoon,varia,$hasEnergyReserves:3",
 				  "casual,phantoon,$hasEnergyReserves:4"
 				],
@@ -2240,7 +2240,7 @@
 				  "[tournament],[$norfairWest],$norfairWestSB,$canPowerBomb,hijump,ice",
 				  "casual,gravity,[$norfairWest],$norfairWestSB,$canPowerBomb",
 				  "casual,gravity,$canAccessMaridiaPortal"
-				],				
+				],
 				"color": "#409078",
 				"children": [
 				  {
@@ -2357,7 +2357,7 @@
 				"color": "#409078",
 				"children": [
 				  {
-					"name": "Super Missile/Missile (yellow Maridia)",
+					"name": "Watering Hole",
 					"access_rules": [
 					  "[tournament],$canBombPassages,gravity",
 					  "[tournament],$canBombPassages,ice",
@@ -2366,8 +2366,12 @@
 					],
 					"sections": [
 					  {
-						"name": "Super Missile/Missile (yellow Maridia)",
-						"item_count": 2
+						"name": "Super Missile (yellow Maridia)",
+						"item_count": 1
+					  },
+					  {
+						"name": "Missile (yellow Maridia super missile)",
+						"item_count": 1
 					  }
 					],
 					"map_locations": [
@@ -2442,19 +2446,23 @@
 					]
 				  },
 				  {
-					"name": "Missile/Reserve Tank (left Maridia sand pit room)",
+					"name": "West Sand Hole",
 					"access_rules": [
 					  "[tournament],hijump,space",
 					  "[tournament],hijump,$canSpringJump",
 					  "[tournament],gravity",
-					  
+
 					  "casual,$canBombPassages"
 					],
 					"sections": [
 					  {
-						"name": "Missile/Reserve Tank (left Maridia sand pit room)",
-						"item_count": 2
+						"name": "Missile (left Maridia sand pit room)",
+						"item_count": 1
 					  },
+					  {
+						"name": "Reserve Tank, Maridia",
+						"item_count": 1
+					  }
 					],
 					"map_locations": [
 					  {
@@ -2685,7 +2693,7 @@
 		"name": "Hyrule",
 		"chest_unopened_img": "images/0058.png",
 		"chest_opened_img": "images/0059.png",
-		"children": [		
+		"children": [
 		  //  Light World
 		  {
 			"name": "Light World",
@@ -2719,7 +2727,7 @@
 				  //  King's Tomb
 				  {
 					"name": "King's Tomb",
-					"access_rules": [ 
+					"access_rules": [
 						"boots,lift2",
 						"boots,mirror,pearl,$canEnterNWDarkWorld"
 					],
@@ -2857,9 +2865,9 @@
 						"y": 1127
 					  }
 					],
-					"access_rules": [ 
-						"hammer", 
-						"moonpearl, mirror, lift2" 
+					"access_rules": [
+						"hammer",
+						"moonpearl, mirror, lift2"
 					],
 					"sections": [
 					  {
@@ -2924,7 +2932,7 @@
 				  },
 				  {
 					"name": "Graveyard Ledge",
-					"access_rules": [ 
+					"access_rules": [
 						"mirror,pearl,bombs,$canEnterNWDarkWorld"
 					],
 					"sections": [
@@ -3004,17 +3012,17 @@
 					"sections": [
 					  {
 						"name": "King Zora",
-						"access_rules": [ 
-							"$canLiftRocks", 
+						"access_rules": [
+							"$canLiftRocks",
 							"[flippers]" ],
 						"item_count": 1
 					  },
 					  {
 						"name": "Ledge",
 						"capture_item": true,
-						"access_rules": [ 
-							"flippers", 
-							"{lift1}", 
+						"access_rules": [
+							"flippers",
+							"{lift1}",
 							"{[flippers]}"
 						],
 						"item_count": 1
@@ -3040,7 +3048,7 @@
 				  },
 				  {
 					"name": "Waterfall Fairy",
-					"access_rules": [ 
+					"access_rules": [
 						"flippers",
 						"pearl,[flippers]",
 						"boots,[flippers]"
@@ -3183,7 +3191,7 @@
 				  },
 				  {
 					"name": "Hobo",
-					"access_rules": [ 
+					"access_rules": [
 						"[flippers]"
 					],
 					"sections": [
@@ -3202,7 +3210,7 @@
 				  },
 				  {
 					"name": "Bombos Tablet",
-					"access_rules": [ 
+					"access_rules": [
 						"book,sword2,mirror,$canEnterSDarkWorld",
 						"{mirror,book,$canEnterSDarkWorld}"
 					],
@@ -3229,7 +3237,7 @@
 				  },
 				  {
 					"name": "Cave 45",
-					"access_rules": [ 
+					"access_rules": [
 						"mirror,$canEnterSDarkWorld"
 					],
 					"sections": [
@@ -3254,8 +3262,8 @@
 				  {
 					"name": "Checkerboard Cave",
 					"color": "#aa860d",
-					"access_rules": [ 
-						"$canFly,lift2,mirror", 
+					"access_rules": [
+						"$canFly,lift2,mirror",
 						"$canAccessMiseryMirePortal,mirror"
 					],
 					"sections": [
@@ -3361,17 +3369,17 @@
 					  }
 					]
 				  },
-				  
+
 				  {
 					"name": "Lake Hylia Island",
 					"sections": [
 					  {
 						"name": "Lake Hylia Island",
-						"access_rules": [ 
-							"flippers,pearl,mirror,hammer,lift1", 
-							"flippers,pearl,mirror,$canEnterSDarkWorld", 
-							"flippers,pearl,mirror,$canEnterNEDarkWorld", 
-							"flippers,mirror,aga1,[pearl]", 
+						"access_rules": [
+							"flippers,pearl,mirror,hammer,lift1",
+							"flippers,pearl,mirror,$canEnterSDarkWorld",
+							"flippers,pearl,mirror,$canEnterNEDarkWorld",
+							"flippers,mirror,aga1,[pearl]",
 							"{[flippers]}"
 						],
 						"capture_item": true,
@@ -3440,7 +3448,7 @@
 						"item_count": 6
 					  }
 					]
-				  },			
+				  },
 				  {
 					"name": "Secret Passage",
 					"short_name": "Uncle",
@@ -3454,8 +3462,12 @@
 					],
 					"sections": [
 					  {
-						"name": "Uncle & Hallway",
-						"item_count": 2
+						"name": "Uncle",
+						"item_count": 1
+					  },
+					  {
+						"name": "Hallway",
+						"item_count": 1
 					  }
 					]
 				  },
@@ -3476,13 +3488,13 @@
 						"hosted_item": "aga1"
 					  }
 					]
-				  },	
+				  },
 				]
 			  },
 			  {
 				"name": "Death Mountain West",
 				"color": "#934f17",
-				"access_rules": [ 
+				"access_rules": [
 					"$canEnterDeathMountainWest",
 					"[lamp],lift1"
 				],
@@ -3564,13 +3576,13 @@
 						"y": 260
 					  }
 					]
-				  },				  
+				  },
 				  //  Ether Tablet
 				  {
 					"name": "Ether Tablet",
-					"access_rules": [ 
-						"mirror,book,sword2", 
-						"hookshot,hammer,book,sword2", 
+					"access_rules": [
+						"mirror,book,sword2",
+						"hookshot,hammer,book,sword2",
 						"{mirror,book}",
 						"{hookshot,hammer,book}"
 					],
@@ -3600,9 +3612,9 @@
 						"sections": [
 						  {
 							"name": "Spike Cave",
-							"access_rules": [ 
-								"pearl,hammer,lift1,[cape],[$canExtendMagic]", 
-								"pearl,hammer,lift1,[byrna],[$canExtendMagic]", 
+							"access_rules": [
+								"pearl,hammer,lift1,[cape],[$canExtendMagic]",
+								"pearl,hammer,lift1,[byrna],[$canExtendMagic]",
 							],
 							"item_count": 1
 						  }
@@ -3623,7 +3635,7 @@
 			  {
 				"name": "Death Mountain East",
 				"color": "#934f17",
-				"access_rules": [ 
+				"access_rules": [
 					"$canEnterDeathMountainWest,hammer,mirror",
 					"$canEnterDeathMountainWest,hookshot",
 					"[lamp],lift1,hammer,mirror",
@@ -3702,14 +3714,14 @@
 				  {
 					"name": "Death Mountain East (Dark)",
 					"color": "#934f17",
-					"access_rules": [ 
+					"access_rules": [
 						"lift2"
 					],
 					"children": [
 					  {
 						"name": "Turtle Rock",
 						"color": "#af0000",
-						"access_rules": [ 
+						"access_rules": [
 							"tr_medallion,sword,pearl,somaria,lift2,hammer",
 							"bombos,ether,quake,sword,pearl,somaria,lift2,hammer"
 						],
@@ -3758,7 +3770,7 @@
 							]
 						  }
 						],
-					  },					  
+					  },
 					  {
 						"name": "Super-Bunny Cave",
 						"access_rules": [ "[pearl]" ],
@@ -3778,17 +3790,17 @@
 					  },
 					  {
 						"name": "Hookshot Cave",
-						"access_rules": [ 
-							"pearl", 
+						"access_rules": [
+							"pearl",
 						],
 						"sections": [
 						  //  Front chest
 						  {
 							"name": "Bonkable Chest",
 							"short_name": "Front",
-							"access_rules": [ 
-								"boots", 
-								"hookshot" 
+							"access_rules": [
+								"boots",
+								"hookshot"
 							],
 							"item_count": 1
 						  },
@@ -3821,7 +3833,7 @@
 			  {
 				"name": "Northeast Dark World",
 				"color": "#35046b",
-				"access_rules": [ 
+				"access_rules": [
 					"aga1",
 					"hammer,lift1,moonpearl",
 					"lift2,flippers,moonpearl",
@@ -3850,40 +3862,31 @@
 				  {
 					"name": "Pyramid Ledge",
 					"color": "#35046b",
-					"children": [
+					"sections": [
 					  {
-						"name": "Pyramid Ledge",
-						"sections": [
-						  {
-							"name": "Ledge",
-							"item_count": 1
-						  }
-						],
-						"map_locations": [
-						  {
-							"map": "darkworld",
-							"x": 1164,
-							"y": 922
-						  }
-						]
+					    "name": "Ledge",
+					    "item_count": 1
+					  }
+					],
+					"map_locations": [
+				 	  {
+						"map": "darkworld",
+					 	"x": 1164,
+					  	"y": 922
 					  }
 					]
 				  },
 				  {
 					"name": "Pyramid Fairy",
 					"color": "#35046b",
-					"access_rules": [ 
+					"access_rules": [
 						"crystal56:2,moonpearl,$canEnterSDarkWorld,hammer",
 						"crystal56:2,moonpearl,$canEnterSDarkWorld,aga1,mirror"
 					],
 					"sections": [
 					  {
-						"name": "Sword Chest (left)",
-						"item_count": 1
-					  },
-					  {
-						"name": "Bow Chest (right)",
-						"item_count": 1
+						"name": "Big Bomb Spot",
+						"item_count": 2
 					  }
 					],
 					"map_locations": [
@@ -3921,21 +3924,21 @@
 						"y": 800
 					  }
 					]
-				  }				  
+				  }
 			    ]
 			  },
 			  // Northwest Dark World
 			  {
 				"name": "Northwest Dark World",
 				"color": "#35046b",
-				"access_rules": [ 
-					"moonpearl,$canEnterNEDarkWorld,hookshot,flippers", 
+				"access_rules": [
+					"moonpearl,$canEnterNEDarkWorld,hookshot,flippers",
 					"moonpearl,$canEnterNEDarkWorld,hookshot,lift1",
 					"moonpearl,$canEnterNEDarkWorld,hookshot,hammer",
 					"moonpearl,hammer,lift1",
 					"moonpearl,lift2"
 				],
-				"children": [				
+				"children": [
 				  {
 					"name": "Brewery",
 					"access_rules": ["bombs"],
@@ -4132,7 +4135,7 @@
 				  {
 					"name": "Misery Mire",
 					"color": "#af0000",
-					"access_rules": [ 
+					"access_rules": [
 						"mm_medallion, sword, moonpearl, boots",
 						"mm_medallion, sword, moonpearl, hookshot",
 						"quake, ether, bombos, sword, moonpearl, boots",
@@ -4266,7 +4269,7 @@
 						"y": 1880
 					  }
 					]
-				  }				  
+				  }
 				]
 			  },
 
@@ -4280,9 +4283,9 @@
 				  {
 					"name": "Ice Palace",
 					"color": "#af0000",
-					"access_rules": [ 
-						"moonpearl,lift2,firerod,[flippers]", 
-						"moonpearl,lift2,bombos,[flippers]" 
+					"access_rules": [
+						"moonpearl,lift2,firerod,[flippers]",
+						"moonpearl,lift2,bombos,[flippers]"
 					],
 					"sections": [
 					  //  Front
@@ -4311,7 +4314,7 @@
 			  }
 			]
 		  }
-		]		
+		]
 	  }
 	]
   }
