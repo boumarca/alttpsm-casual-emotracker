@@ -425,10 +425,10 @@ function norfairEastTournament()
                 	and (hasSuper() == 1 and hasMorph() == 1))
 		    or canAccessNorfairPortal() == 1)
 		    and canHellRun() == 1
-		    and (hasSuper() == 1
-
+		    and (hasSuper() == 1 
+		    
 		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
-
+		    
 		      or (hasSpeedBooster() == 1 and canPowerBomb() == 1))) then
 		return 1
 	end
@@ -441,10 +441,10 @@ function norfairEastTournamentSB()
                 	and (hasSuper() == 1 and hasMorph() == 1))
 		    or canAccessNorfairPortalSB() == 1)
 		    and canHellRun() == 1
-		    and (hasSuper() == 1
-
+		    and (hasSuper() == 1 
+		    
 		    and (canFlySM() == 1 or hasHiJump() == 1 or hasSpeedBooster() == 1 or canSpringJump() == 1 or (hasVaria() == 1 and (hasIceBeam() == 1 or hasSpeedBooster() == 1)))
-
+		    
 		      or (hasSpeedBooster() == 1 and canPowerBomb() == 1))) then
 		return 1
 	end
@@ -819,4 +819,15 @@ function canExtendMagic()
 	end
 
 	return 0
+end
+
+function gtCrystalCount()
+    local reqCount = 7
+    local count = Tracker:ProviderCountForCode("crystal") + Tracker:ProviderCountForCode("crystal56")
+
+    if count >= reqCount then
+        return 1
+    else
+        return 0
+    end
 end
