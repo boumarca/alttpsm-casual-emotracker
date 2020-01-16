@@ -339,7 +339,6 @@
 					  "[tournament],$canEnterAndLeaveGauntletTournament,$canBombPassages",
 					  "casual,$canEnterAndLeaveGauntletCasual,$canBombPassages,[$hasEnergyReserves:3]",
 					  "{$canPowerBomb}",
-					  "{screw}"
 					],
 					"sections": [
 					  {
@@ -3262,9 +3261,9 @@
 				  {
 					"name": "Checkerboard Cave",
 					"color": "#aa860d",
-					"access_rules": [
-						"$canFly,lift2,mirror",
-						"$canAccessMiseryMirePortal,mirror"
+					"access_rules": [ 
+						"$canFly,lift2,mirror", 
+						"$canAccessMiseryMirePortal,lift1,mirror"
 					],
 					"sections": [
 					  //  Cave
@@ -3357,7 +3356,18 @@
 					  {
 						"name": "Lanmolas",
 						"short_name": "Lanmo",
-						"access_rules": [ "lift1,firesource,[boots],sword", "lift1,firesource,[boots],hammer", "lift1,firesource,[boots],bow", "lift1,firesource,[boots],somaria", "lift1,firesource,[boots],[sword]" ],
+						"access_rules": [
+							"lift1,firesource,[boots],sword",
+							"lift1,firesource,[boots],hammer",
+							"lift1,firesource,[boots],bow",
+							"lift1,firesource,[boots],somaria",
+							"lift1,firesource,[boots],[sword]",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],sword",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],hammer",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],bow",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],somaria",
+							"$canAccessMiseryMirePortal,mirror,firesource,[boots],[sword]"
+						],
 						"hosted_item": "desertpalace"
 					  }
 					],
@@ -3818,6 +3828,38 @@
 							"y": 126
 						  }
 						]
+					  },
+					  {
+						"name": "Ganon's Tower",
+						"color": "#af0000",
+						"access_rules": [ "pearl,$gtCrystalCount" ],
+						"sections": [
+						  {
+							"name": "Dungeon",
+							"clear_as_group": false,
+							"access_rules": [
+								"[hammer],[firerod],[hookshot],[boots],[somaria]",
+								"[hammer],[firerod],[hookshot],boots,[somaria]",
+								"[hammer],[firerod],[hookshot],[boots],somaria"
+							],
+							"item_count": 23
+						  },
+						  {
+							"name": "Tower",
+							"clear_as_group": false,
+							"access_rules": [
+								"[bow],firesource,[hookshot]"
+							],
+							"item_count": 4
+						  }
+						],
+						"map_locations": [
+						  {
+							"map": "darkworld",
+							"x": 1126,
+							"y": 68
+						  }
+					    ]
 					  }
 					]
 				  }
