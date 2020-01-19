@@ -1,3 +1,15 @@
+3.0.0
+-----
+Dorkmaster Flek takes over the project
+Updated to use new pack format
+Fixed accessing East Norfair in Hard with Varia + Ice + Supers and access to Business Center
+Fixed accessing Misery Mire area from Lower Norfair portal with mirror
+Fixed logic for back of Gauntlet with only screw (PBs are required)
+Added initial autotracking support:
+    All items/bosses present on the layout are tracked
+    Full SM location support
+    LTTP location support same as official LTTPR pack for now, i.e. no dungeon item tracking
+
 2.0.0
 -----
 Ninban takes over the project
@@ -28,7 +40,7 @@ Fix lower norfair again, this time on hard mode
 Lower norfair fix relating to the sequence break changes
 
 1.3.3
------ 
+-----
 Updated Gauntlet Etank to be blue (checkable) if you can get in but not out
 Updated After Gauntlet end to be blue (checkable) if you can get underneath it with power bombs, but not enough power bombs to get through gauntlet
 Fixed (again) missile above crocomire to be blue instead of yellow when you can't get it
@@ -151,5 +163,5 @@ Pinned items now wrap
 Fixed some bomb logic issues
 
 -----
-1.0.0 
+1.0.0
 Initial Release
