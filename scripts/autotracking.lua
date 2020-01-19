@@ -1085,13 +1085,8 @@ end
 
 -- *************************** Setup/startup stuff
 
--- Invoked when the auto-tracker is activated/connected
-function autotracker_started()
-    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-        print("**** Auto-Tracker started ****")
-    end
-
-    -- Remove existing watches if set.
+function cleanup()
+    -- Clean up existing memory watches and cache data.
     if GAME_WATCH then
         ScriptHost:RemoveMemoryWatch(GAME_WATCH)
     end
@@ -1099,12 +1094,33 @@ function autotracker_started()
 
     clearMemoryWatches()
 
+    AUTOTRACKER_IS_IN_LTTP = false
+    AUTOTRACKER_IS_IN_GAME_LTTP = false
+    AUTOTRACKER_IS_IN_SM = false
+    AUTOTRACKER_IS_IN_GAME_SM = false
+end
+
+-- Invoked when the auto-tracker is activated/connected
+function autotracker_started()
+    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        print("**** Auto-Tracker started ****")
+    end
+    cleanup()
+
     -- Initialize watch for when the game changes.  Everything else happens in there.
     if AutoTracker.SelectedConnectorType.Name == CONNECTOR_NAME_SD2SNES then
         GAME_WATCH = ScriptHost:AddMemoryWatch("Which Game Is It Anyways", 0x7033fe, 0x02, updateGame, 250)
     else
         GAME_WATCH = ScriptHost:AddMemoryWatch("Which Game Is It Anyways", 0xa173fe, 0x02, updateGame, 250)
     end
+end
+
+--Invoked when the auto-tracker is stopped.
+function autotracker_stopped()
+    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        print("**** Auto-Tracker stopped ****")
+    end
+    cleanup()
 end
 
 -- This is kind of hacky, but the tracker needs at least one memory watch set up in order to detect that the package
