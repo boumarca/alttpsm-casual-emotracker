@@ -3516,7 +3516,7 @@
                     "access_rules": [ "mirror", "hookshot,hammer" ],
                     "sections": [
                       {
-                        "name": "Tower of Hera",
+                        "name": "Dungeon",
                         "clear_as_group": false,
                         "access_rules": [ "[firesource]" ],
                         "item_count": 2
