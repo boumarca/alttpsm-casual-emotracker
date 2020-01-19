@@ -5,6 +5,7 @@ Updated to use new pack format
 Fixed accessing East Norfair in Hard with Varia + Ice + Supers and access to Business Center
 Fixed accessing Misery Mire area from Lower Norfair portal with mirror
 Fixed logic for back of Gauntlet with only screw (PBs are required)
+Fixed Mimic Cave access logic with no firerod
 Added initial autotracking support:
     All items/bosses present on the layout are tracked
     Full SM location support
