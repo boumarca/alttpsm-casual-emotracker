@@ -18,7 +18,7 @@
               [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "kraid"],
               [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "phantoon"],
               [ "bottle", "somaria", "byrna", "cape", "mirror", "gomode", "draygon"],
-              [ "lift1", "boots", "flippers", "halfmagic", "", "", "ridley"],
+              [ "lift1", "boots", "flippers", "halfmagic", "heartpiece", "heartcontainer", "ridley"],
               [ "easternpalace", "desertpalace", "towerofhera", "", "owsword", "shield", "armor"],
               [ "palaceofdarkness", "swamppalace", "skullwoods", "thievestown", "icepalace", "miserymire", "turtlerock"]
             ]
@@ -69,8 +69,8 @@
         [ "bow", "silvers", "hookshot", "bombs", "powder", "mushroom", "charge", "ice", "wave", "spazer", "plasma"],
         [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "morph", "bomb", "spring", "space","screw"],
         [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "varia", "gravity", "hijump", "speed", "grapple"],
-        [ "bottle", "somaria", "byrna", "cape", "mirror", "blue_boomerang", "red_boomerang", "heartpiece", "xray", "etank_icon", "reservetank_icon"],
-        [ "lift1", "boots", "flippers", "halfmagic", "owsword", "shield", "armor", "heart", "missile_icon", "super_icon", "pb_icon"]
+        [ "bottle", "somaria", "byrna", "cape", "mirror", "blue_boomerang", "red_boomerang", "heartpiece_capture", "xray", "etank_icon", "reservetank_icon"],
+        [ "lift1", "boots", "flippers", "halfmagic", "owsword", "shield", "armor", "heartcontainer_capture", "missile_icon", "super_icon", "pb_icon"]
       ]
     }
   },
@@ -214,11 +214,19 @@
                   }
                 ]
               }
+            },
+            {
+              "title": "Both",
+              "content": {
+                "type": "map",
+                "maps": [
+                  "metroid", "lightworld", "darkworld"
+                ]
+              }
             }
           ]
         }
       ]
     }
   }
-}
 }

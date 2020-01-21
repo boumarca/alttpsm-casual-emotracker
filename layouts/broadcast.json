@@ -18,7 +18,7 @@
               [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "kraid"],
               [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "phantoon"],
               [ "bottle", "somaria", "byrna", "cape", "mirror", "gomode", "draygon"],
-              [ "lift1", "boots", "flippers", "halfmagic", "", "", "ridley"],
+              [ "lift1", "boots", "flippers", "halfmagic", "heartpiece", "heartcontainer", "ridley"],
               [ "easternpalace", "desertpalace", "towerofhera", "", "owsword", "shield", "armor"],
               [ "palaceofdarkness", "swamppalace", "skullwoods", "thievestown", "icepalace", "miserymire", "turtlerock"]
             ]

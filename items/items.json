@@ -36,7 +36,7 @@
         "img": "images/glitch_overworld.png",
         "inherit_codes": "false",
         "codes": "owglitch"
-      },	  
+      },
       {
         "name": "Major Glitches",
         "img": "images/glitch_major.png",
@@ -44,7 +44,7 @@
         "codes": "majorglitch"
       }
     ]
-  },  
+  },
   {
     "name": "Charge Beam",
     "type": "toggle",
@@ -174,13 +174,13 @@
     "type": "toggle",
     "img": "images/Boss3.png",
     "codes": "phantoon,g4"
-  }, 
+  },
   {
     "name": "Draygon",
     "type": "toggle",
     "img": "images/Boss4.png",
     "codes": "draygon,g4"
-  },  
+  },
   {
     "name": "Etanks",
     "type": "consumable",
@@ -206,7 +206,7 @@
 	"type": "toggle",
 	"img": "images/reservetank.png",
 	"codes": "reservetank_icon"
-  },  
+  },
   {
     "name": "Missile Capacity",
     "type": "consumable",
@@ -697,12 +697,28 @@
     "name": "Heart Container",
     "type": "toggle",
     "img": "images/0060.png",
-    "codes": "heart"
+    "codes": "heartcontainer_capture"
   },
   // Heart Piece (for capturable)
   {
     "name": "Heart Piece",
     "type": "toggle",
+    "img": "images/0067.png",
+    "codes": "heartpiece_capture"
+  },
+  // Heart Container (for tracking)
+  {
+    "name": "Heart Container",
+    "type": "consumable",
+    "max_quantity": 11,
+    "img": "images/0060.png",
+    "codes": "heartcontainer"
+  },
+  // Heart Piece (for tracking)
+  {
+    "name": "Heart Piece",
+    "type": "consumable",
+    "max_quantity": 24,
     "img": "images/0067.png",
     "codes": "heartpiece"
   },
