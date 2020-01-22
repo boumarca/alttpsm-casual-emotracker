@@ -1,3 +1,9 @@
+3.1.0
+-----
+Added heart piece/container counter (cannot be autotracked currently due to technical limitations)
+Added combined map option to show all maps on one screen
+Fixed autotracking support for Bizhawk emulator (requires its own separate variant)
+
 3.0.0
 -----
 Dorkmaster Flek takes over the project

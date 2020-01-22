@@ -1,4 +1,5 @@
 --  Load configuration options up front
+ScriptHost:LoadScript("scripts/constants.lua")
 ScriptHost:LoadScript("scripts/settings.lua")
 
 ScriptHost:LoadScript("scripts/logic.lua")
