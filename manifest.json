@@ -3,7 +3,15 @@
   "game_name": "Super Metroid + LTTP Randomizer",
   "game_variant": "v10.2",
   "platform": "snes",
-  "package_version": "3.0.0",
+  "package_version": "3.1.0",
   "package_uid": "smalttprando_gilgatex",
-  "author": "Dorkmaster Flek & Ninban & gilgatex"
+  "author": "Dorkmaster Flek & Ninban & gilgatex",
+  "variants": {
+    "standard": {
+      "display_name": "Standard Tracker"
+    },
+    "bizhawk": {
+      "display_name": "Bizhawk Autotracker"
+    }
+  }
 }
