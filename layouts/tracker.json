@@ -69,8 +69,8 @@
         [ "bow", "silvers", "hookshot", "bombs", "powder", "mushroom", "charge", "ice", "wave", "spazer", "plasma"],
         [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "morph", "bomb", "spring", "space","screw"],
         [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "varia", "gravity", "hijump", "speed", "grapple"],
-        [ "bottle", "somaria", "byrna", "cape", "mirror", "blue_boomerang", "red_boomerang", "heartpiece_capture", "xray", "etank_icon", "reservetank_icon"],
-        [ "lift1", "boots", "flippers", "halfmagic", "owsword", "shield", "armor", "heartcontainer_capture", "missile_icon", "super_icon", "pb_icon"]
+        [ "bottle", "somaria", "byrna", "cape", "mirror", "blueboomerang", "redboomerang", "heartpiece_icon", "xray", "etank_icon", "reservetank_icon"],
+        [ "lift1", "boots", "flippers", "halfmagic", "owsword", "shield", "armor", "heartcontainer_icon", "missile_icon", "super_icon", "pb_icon"]
       ]
     }
   },
