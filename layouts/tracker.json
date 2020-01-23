@@ -218,9 +218,23 @@
             {
               "title": "Both",
               "content": {
-                "type": "map",
-                "maps": [
-                  "metroid", "lightworld", "darkworld"
+                "type": "array",
+                "orientation": "horizontal",
+                "h_alignment": "center",
+                "content": [
+                  {
+                    "type": "map",
+                    "orientation": "vertical",
+                    "maps": [
+                      "lightworld", "darkworld"
+                    ]
+                  },
+                  {
+                    "type": "map",
+                    "maps": [
+                      "metroid"
+                    ]
+                  }
                 ]
               }
             }
