@@ -1,3 +1,9 @@
+3.1.2
+-----
+Fixed missing fireflea room on Lower Norfair map
+Added Triforce symbols for LTTP portals on SM zone maps
+Cleaned up item codes for better ChatHUD support
+
 3.1.1
 -----
 Changed combined all maps layout so LTTP is stacked on one side and it's less crammed
