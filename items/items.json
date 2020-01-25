@@ -134,24 +134,28 @@
   {
     "name": "Ridley",
     "type": "toggle",
+    "loop": "true",
     "img": "images/Boss1.png",
     "codes": "ridley,g4"
   },
    {
     "name": "Kraid",
     "type": "toggle",
+    "loop": "true",
     "img": "images/Boss2.png",
     "codes": "kraid,g4"
   },
   {
     "name": "Phantoon",
     "type": "toggle",
+    "loop": "true",
     "img": "images/Boss3.png",
     "codes": "phantoon,g4"
   },
   {
     "name": "Draygon",
     "type": "toggle",
+    "loop": "true",
     "img": "images/Boss4.png",
     "codes": "draygon,g4"
   },
@@ -227,6 +231,7 @@
   {
     "name": "Bow",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0000.png",
     "codes": "bow"
   },
@@ -234,6 +239,7 @@
   {
     "name": "Silver Arrows",
     "type": "toggle",
+    "loop": "true",
     "img": "images/silver_arrow.png",
     "codes": "silverarrows,silvers"
   },
@@ -290,6 +296,7 @@
   {
     "name": "Blue Boomerang",
     "type": "toggle",
+    "loop": "true",
     "img": "images/boomerang_blue.png",
     "codes": "blueboomerang,bluemarang"
   },
@@ -298,6 +305,7 @@
   {
     "name": "Red Boomerang",
     "type": "toggle",
+    "loop": "true",
     "img": "images/boomerang_red.png",
     "codes": "redboomerang,redmarang"
   },
@@ -338,6 +346,7 @@
   {
     "name": "Hookshot",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0002.png",
     "codes": "hookshot,hs"
   },
@@ -379,6 +388,7 @@
   {
     "name": "Fire Rod",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0005.png",
     "codes": "firerod,firesource"
   },
@@ -386,6 +396,7 @@
   {
     "name": "Ice Rod",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0006.png",
     "codes": "icerod"
   },
@@ -492,6 +503,7 @@
   {
     "name": "Lamp",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0010.png",
     "codes": "lamp,firesource"
   },
@@ -499,6 +511,7 @@
   {
     "name": "Hammer",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0011.png",
     "codes": "hammer"
   },
@@ -520,6 +533,7 @@
   {
     "name": "Bug Catching Net",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0013.png",
     "codes": "net"
   },
@@ -527,6 +541,7 @@
   {
     "name": "Book of Mudora",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0014.png",
     "codes": "book"
   },
@@ -534,6 +549,7 @@
   {
     "name": "Moon Pearl",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0022.png",
     "codes": "pearl,moonpearl"
   },
@@ -571,6 +587,7 @@
   {
     "name": "Cane of Somaria",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0015.png",
     "codes": "somaria,redcane"
   },
@@ -578,6 +595,7 @@
   {
     "name": "Cane of Byrna",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0016.png",
     "codes": "byrna,bluecane,sakucane,caneofsaku"
   },
@@ -585,6 +603,7 @@
   {
     "name": "Magic Cape",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0017.png",
     "codes": "cape"
   },
@@ -592,6 +611,7 @@
   {
     "name": "Mirror",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0018.png",
     "codes": "mirror"
   },
@@ -601,6 +621,7 @@
     "name": "Go Mode!",
     "capturable": false,
     "type": "toggle",
+    "loop": "true",
     "img": "images/0062.png",
     "codes": "gomode"
   },
@@ -610,6 +631,7 @@
     "name": "Aganhim",
     "capturable": false,
     "type": "toggle",
+    "loop": "true",
     "img": "images/0055.png",
     "codes": "aga1,aga,aganhim"
   },
@@ -633,6 +655,7 @@
   {
     "name": "Boots",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0020.png",
     "codes": "boots"
   },
@@ -640,6 +663,7 @@
   {
     "name": "Flippers",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0021.png",
     "codes": "flippers"
   },
@@ -647,6 +671,7 @@
   {
     "name": "Half-Magic",
     "type": "toggle",
+    "loop": "true",
     "img": "images/0064.png",
     "codes": "halfmagic"
   },
