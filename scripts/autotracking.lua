@@ -47,9 +47,11 @@ end
 CONNECTOR_NAME_SD2SNES = "SD2SNES"
 
 AUTOTRACKER_IS_IN_LTTP = false
-AUTOTRACKER_IS_IN_GAME_LTTP = false
 AUTOTRACKER_IS_IN_SM = false
-AUTOTRACKER_IS_IN_GAME_SM = false
+
+-- Constants
+LTTP = "LTTP"
+SM = "SM"
 
 U8_READ_CACHE = 0
 U8_READ_CACHE_ADDRESS = 0
@@ -177,7 +179,7 @@ end
 
 -- *************************** Game status and memory watches
 
-function updateGame(segment)
+function updateGame()
     -- Figure out which game we're in.
     InvalidateReadCaches()
 
@@ -188,22 +190,20 @@ function updateGame(segment)
         cross_game_offset = LUA_EXTRA_RAM_OFFSET
     end
 
-    local address = 0x7033fe + cross_game_offset
-    local value = ReadU8(segment, address)
-    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-        print("**** Game value:", string.format('0x%x', address), string.format('0x%x', value))
-    end
+    local game = whichGameAreWeIn()
 
     local changingGame = false
-    if (value == 0xFF) then
+    if (game == SM) then
         changingGame = not AUTOTRACKER_IS_IN_SM
         AUTOTRACKER_IS_IN_LTTP = false
         AUTOTRACKER_IS_IN_SM = true
-    elseif (value == 0x00) then
+    elseif (game == LTTP) then
         changingGame = not AUTOTRACKER_IS_IN_LTTP
         AUTOTRACKER_IS_IN_LTTP = true
         AUTOTRACKER_IS_IN_SM = false
     else
+        -- If we got a bad game value, assume we reset or something and clear all the watches.
+        changingGame = true
         AUTOTRACKER_IS_IN_LTTP = false
         AUTOTRACKER_IS_IN_SM = false
     end
@@ -211,18 +211,13 @@ function updateGame(segment)
     -- If we're changing games, update the memory watches accordingly.  This forces all the data to be refreshed.
     if changingGame then
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-            print("**** Game change detected")
+            print("**** Game change detected: ", game)
         end
         clearMemoryWatches()
-
-        -- Start not in-game when switch occurs, let data refresh occur when in-game state is updated.
-        AUTOTRACKER_IS_IN_GAME_LTTP = false
-        AUTOTRACKER_IS_IN_GAME_SM = false
 
         -- Link to the Past
         if AUTOTRACKER_IS_IN_LTTP then
             -- WRAM watches
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP In-Game status", 0x7e0010, 0x01, updateInGameStatusLTTP, 250))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Item Data", 0x7ef340, 0x90, updateItemsActiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP NPC Item Data", 0x7ef410, 0x2, updateNPCItemFlagsActiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Room Data", 0x7ef000, 0x250, updateRoomsActiveLTTP))
@@ -239,7 +234,6 @@ function updateGame(segment)
         -- Super Metroid
         elseif AUTOTRACKER_IS_IN_SM then
             -- WRAM watches
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM In-Game status", 0x7e0998, 0x01, updateInGameStatusSM, 250))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Item Data", 0x7e09a0, 0x10, updateItemsActiveSM))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Ammo Data", 0x7e09c2, 0x16, updateAmmoActiveSM))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Boss Data", 0x7ed828, 0x08, updateSMBossesActive))
@@ -256,49 +250,70 @@ function updateGame(segment)
         end
 
         -- Watches for both games all the time.
-        -- This tracker has no completion item for each game yet, uncomment if it gets added in future...
-        --table.insert(sramWatches, ScriptHost:AddMemoryWatch("LTTP DONE", 0X703506 + cross_game_offset, 0x01, updateLTTPcompletion))
-        --table.insert(sramWatches, ScriptHost:AddMemoryWatch("SM DONE", 0X703402 + cross_game_offset, 0x02, updateSMcompletion))
+        if AUTOTRACKER_IS_IN_LTTP or AUTOTRACKER_IS_IN_SM then
+            -- This tracker has no completion item for each game yet, uncomment if it gets added in future...
+            --table.insert(sramWatches, ScriptHost:AddMemoryWatch("LTTP DONE", 0X703506 + cross_game_offset, 0x01, updateLTTPcompletion))
+            --table.insert(sramWatches, ScriptHost:AddMemoryWatch("SM DONE", 0X703402 + cross_game_offset, 0x02, updateSMcompletion))
+        end
     end
 
     return true
 end
 
-function updateInGameStatusLTTP(segment)
-    if not AUTOTRACKER_IS_IN_LTTP then
-        AUTOTRACKER_IS_IN_GAME_LTTP = false
-        return false
-    else
-        InvalidateReadCaches()
-        local mainModuleIdx = ReadU8(segment, 0x7e0010)
+function whichGameAreWeIn()
+    local address = 0x7033fe
+    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
+        address = address + LUA_EXTRA_RAM_OFFSET
+    end
 
-        AUTOTRACKER_IS_IN_GAME_LTTP = (mainModuleIdx > 0x05 and mainModuleIdx < 0x1b and mainModuleIdx ~= 0x14 and mainModuleIdx ~= 0x17)
-        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-            print("** LTTP Status:", "0x7e0010", string.format('0x%x', mainModuleIdx), AUTOTRACKER_IS_IN_GAME_LTTP)
-        end
-        return true
+    local value = AutoTracker:ReadU8(address, 0)
+    if (value == 0xFF) then
+        return SM
+    elseif (value == 0x00) then
+        return LTTP
+    else
+        return nil
     end
 end
 
-function updateInGameStatusSM(segment)
-    if not AUTOTRACKER_IS_IN_SM then
-        AUTOTRACKER_IS_IN_GAME_SM = false
+function isInLTTP()
+    return whichGameAreWeIn() == LTTP
+end
+
+function isInGameLTTP()
+    if not AUTOTRACKER_IS_IN_LTTP then
         return false
     else
-        InvalidateReadCaches()
+        local mainModuleIdx = AutoTracker:ReadU8(0x7e0010, 0)
 
-        local mainModuleIdx = ReadU8(segment, 0x7e0998)
-
-        AUTOTRACKER_IS_IN_GAME_SM = (mainModuleIdx >= 0x07 and mainModuleIdx <= 0x12)
+        local isInGame = (mainModuleIdx > 0x05 and mainModuleIdx < 0x1b and mainModuleIdx ~= 0x14 and mainModuleIdx ~= 0x17)
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-            print("** SM status:", '0x7e0998', string.format('0x%x', mainModuleIdx), AUTOTRACKER_IS_IN_GAME_SM)
+            print("** LTTP Status:", "0x7e0010", string.format('0x%x', mainModuleIdx), isInGame)
         end
-        return true
+        return isInGame
+    end
+end
+
+function isInSM()
+    return whichGameAreWeIn() == SM
+end
+
+function isInGameSM()
+    if not AUTOTRACKER_IS_IN_SM then
+        return false
+    else
+        local mainModuleIdx = AutoTracker:ReadU8(0x7e0998, 0)
+
+        local isInGame = (mainModuleIdx >= 0x07 and mainModuleIdx <= 0x12)
+        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            print("** SM status:", '0x7e0998', string.format('0x%x', mainModuleIdx), isInGame)
+        end
+        return isInGame
     end
 end
 
 function updateLTTPcompletion(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
 
@@ -322,7 +337,7 @@ function updateLTTPcompletion(segment)
 end
 
 function updateSMcompletion(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
 
@@ -719,7 +734,7 @@ function updateAllDungeonLocationsFromCache()
 end
 
 function updateItemsActiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
@@ -729,7 +744,7 @@ function updateItemsActiveLTTP(segment)
 end
 
 function updateItemsInactiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
 
@@ -868,7 +883,7 @@ function updateItemsLTTP(segment, address)
 end
 
 function updateRoomsActiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
     updateRoomsLTTP(segment, 0x7ef000)
@@ -876,7 +891,7 @@ function updateRoomsActiveLTTP(segment)
 end
 
 function updateRoomsInactiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     updateRoomsLTTP(segment, getSRAMAddressLTTP(0x0))
@@ -1454,7 +1469,7 @@ function updateMushroomStatus(status)
 end
 
 function updateNPCItemFlagsActiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
@@ -1464,7 +1479,7 @@ function updateNPCItemFlagsActiveLTTP(segment)
 end
 
 function updateNPCItemFlagsInactiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
@@ -1500,7 +1515,7 @@ function updateSectionChestCountFromOverworldIndexAndFlag(segment, locationRef, 
 end
 
 function updateOverworldEventsActiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
@@ -1510,7 +1525,7 @@ function updateOverworldEventsActiveLTTP(segment)
 end
 
 function updateOverworldEventsInactiveLTTP(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
@@ -1539,7 +1554,7 @@ end
 -- ************************* SM functions
 
 function updateItemsActiveSM(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
@@ -1549,7 +1564,7 @@ function updateItemsActiveSM(segment)
 end
 
 function updateItemsInactiveSM(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
 
@@ -1588,7 +1603,7 @@ function updateItemsSM(segment, address)
 end
 
 function updateAmmoActiveSM(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
@@ -1598,7 +1613,7 @@ function updateAmmoActiveSM(segment)
 end
 
 function updateAmmoInactiveSM(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
 
@@ -1624,7 +1639,7 @@ function updateAmmoSM(segment, address)
 end
 
 function updateSMBossesActive(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
@@ -1634,7 +1649,7 @@ function updateSMBossesActive(segment)
 end
 
 function updateSMBossesInactive(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
@@ -1653,7 +1668,7 @@ function updateSMBosses(segment, address)
 end
 
 function updateRoomsActiveSM(segment)
-    if not (AUTOTRACKER_IS_IN_SM and AUTOTRACKER_IS_IN_GAME_SM) then
+    if not (isInSM() and isInGameSM()) then
         return false
     end
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
@@ -1663,7 +1678,7 @@ function updateRoomsActiveSM(segment)
 end
 
 function updateRoomsInactiveSM(segment)
-    if not (AUTOTRACKER_IS_IN_LTTP and AUTOTRACKER_IS_IN_GAME_LTTP) then
+    if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
@@ -1803,9 +1818,7 @@ function cleanup()
     clearMemoryWatches()
 
     AUTOTRACKER_IS_IN_LTTP = false
-    AUTOTRACKER_IS_IN_GAME_LTTP = false
     AUTOTRACKER_IS_IN_SM = false
-    AUTOTRACKER_IS_IN_GAME_SM = false
 
     resetDungeonCacheTable(FLOOR_KEYS)
     resetDungeonCacheTable(OPENED_DOORS)
