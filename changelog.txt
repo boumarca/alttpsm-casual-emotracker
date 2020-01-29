@@ -1,3 +1,7 @@
+3.1.5
+-----
+Fixed pink Brinstar missile locations on Brinstar zone map
+
 3.1.4
 -----
 All single toggle items now loop with successive mouse clicks
