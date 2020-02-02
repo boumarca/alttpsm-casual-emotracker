@@ -1,3 +1,7 @@
+3.1.6
+-----
+Rename standard variant to be clear it includes autotracking support
+
 3.1.5
 -----
 Fixed pink Brinstar missile locations on Brinstar zone map
