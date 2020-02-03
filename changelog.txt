@@ -1,3 +1,8 @@
+3.1.7
+-----
+Removed duplicate Speed Booster location on Norfair zone map
+Added missing room on Brinstar map
+
 3.1.6
 -----
 Rename standard variant to be clear it includes autotracking support
