@@ -41,16 +41,16 @@
                   },
                   {
                     "name": "Super Missile (Crateria)",
-                    "access_rules": [
-                      "$canPowerBomb, speed, $hasEnergyReserves:3",
-                      "$canPowerBomb, speed, varia, [$hasEnergyReserves:3]",
-                      "$canPowerBomb, speed, gravity, [$hasEnergyReserves:3]",
-                      "{$canPowerBomb}"
-                    ],
                     "sections": [
                       {
                         "name": "Super Missile (Crateria)",
                         "capture_item": true,
+                        "access_rules": [
+                          "$canPowerBomb, speed, $hasEnergyReserves:3",
+                          "$canPowerBomb, speed, varia, [$hasEnergyReserves:3]",
+                          "$canPowerBomb, speed, gravity, [$hasEnergyReserves:3]",
+                          "{$canPowerBomb}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -287,15 +287,15 @@
                 "children": [
                   {
                     "name": "Energy Tank, Gauntlet",
-                    "access_rules": [
-                      "[tournament],$canEnterAndLeaveGauntletTournament",
-                      "casual,$canEnterAndLeaveGauntletCasual,[$hasEnergyReserves:2]",
-                      "{$canPeekGauntlet}"
-                    ],
                     "sections": [
                       {
                         "name": "Energy Tank, Gauntlet",
                         "capture_item": true,
+                        "access_rules": [
+                          "[tournament],$canEnterAndLeaveGauntletTournament",
+                          "casual,$canEnterAndLeaveGauntletCasual,[$hasEnergyReserves:2]",
+                          "{$canPeekGauntlet}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -335,20 +335,25 @@
                   },
                   {
                     "name": "After Gauntlet",
-                    "access_rules": [
-                      "[tournament],$canEnterAndLeaveGauntletTournament,$canBombPassages",
-                      "casual,$canEnterAndLeaveGauntletCasual,$canBombPassages,[$hasEnergyReserves:3]",
-                      "{$canPowerBomb}",
-                    ],
                     "sections": [
                       {
                         "name": "Missile (Crateria gauntlet left)",
                         "capture_item": true,
+                        "access_rules": [
+                          "[tournament],$canEnterAndLeaveGauntletTournament,$canBombPassages",
+                          "casual,$canEnterAndLeaveGauntletCasual,$canBombPassages,[$hasEnergyReserves:3]",
+                          "{$canPowerBomb}",
+                        ],
                         "item_count": 1
                       },
                       {
                         "name": "Missile (Crateria gauntlet right)",
                         "capture_item": true,
+                        "access_rules": [
+                          "[tournament],$canEnterAndLeaveGauntletTournament,$canBombPassages",
+                          "casual,$canEnterAndLeaveGauntletCasual,$canBombPassages,[$hasEnergyReserves:3]",
+                          "{$canPowerBomb}",
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -614,15 +619,15 @@
                   },
                   {
                     "name": "Missile (green Brinstar below super missile)",
-                    "access_rules": [
-                      "$canBombPassages,$canOpenRedDoors",
-                      "{$canOpenRedDoors}"
-                    ],
                     "sections": [
                       {
                         "name": "Missile (green Brinstar below super missile)",
-                        "item_count": 1,
-                        "capture_item": true
+                        "capture_item": true,
+                        "access_rules": [
+                          "$canBombPassages,$canOpenRedDoors",
+                          "{$canOpenRedDoors}"
+                        ],
+                        "item_count": 1
                       }
                     ],
                     "map_locations": [
@@ -1305,21 +1310,21 @@
                   },
                   {
                     "name": "Missile (above Crocomire)",
-                    "access_rules": [
-                      "[tournament], $canFlySM, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
-                      "[tournament], grapple, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
-                      "[tournament], hijump, speed, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
-                      "[tournament], hijump, spring, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
-                      "[tournament], hijump, varia, ice, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
-                      "casual, $canFlySM, [$crocomireCasual],$crocomireCasualSB",
-                      "casual, grapple, [$crocomireCasual],$crocomireCasualSB",
-                      "casual, hijump, speed, [$crocomireCasual],$crocomireCasualSB",
-                      "{super}"
-                    ],
                     "sections": [
                       {
                         "name": "Missile (above Crocomire)",
                         "capture_item": true,
+                        "access_rules": [
+                          "[tournament], $canFlySM, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
+                          "[tournament], grapple, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
+                          "[tournament], hijump, speed, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
+                          "[tournament], hijump, spring, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
+                          "[tournament], hijump, varia, ice, $canHellRun, [$crocomireTournament],$crocomireTournamentSB",
+                          "casual, $canFlySM, [$crocomireCasual],$crocomireCasualSB",
+                          "casual, grapple, [$crocomireCasual],$crocomireCasualSB",
+                          "casual, hijump, speed, [$crocomireCasual],$crocomireCasualSB",
+                          "{super}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -1929,19 +1934,19 @@
                           },
                           {
                             "name": "Missile (Gold Torizo)",
-                            "access_rules": [
-                              "[tournament],$canPowerBomb,space,$heatProof,hijump",
-                              "[tournament],$canPowerBomb,space,$heatProof,gravity",
-                              "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,$canFly,super",
-                              "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,$canSpringJump,super",
-                              "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,speed,super",
-                              "casual,$canPowerBomb,space,super",
-                              "{$canAccessLowerNorfairPortal}"
-                            ],
                             "sections": [
                               {
                                 "name": "Missile (Gold Torizo)",
                                 "capture_item": true,
+                                "access_rules": [
+                                  "[tournament],$canPowerBomb,space,$heatProof,hijump",
+                                  "[tournament],$canPowerBomb,space,$heatProof,gravity",
+                                  "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,$canFly,super",
+                                  "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,$canSpringJump,super",
+                                  "[tournament],$canPowerBomb,space,$heatProof,$canAccessLowerNorfairPortal,speed,super",
+                                  "casual,$canPowerBomb,space,super",
+                                  "{$canAccessLowerNorfairPortal}"
+                                ],
                                 "item_count": 1
                               }
                             ],
@@ -2013,20 +2018,19 @@
             "children": [
               {
                 "name": "Reserve Tank, Wrecked Ship",
-                "access_rules": [
-                  "[tournament],phantoon,$canPowerBomb,speed,varia",
-                  "[tournament],phantoon,$canPowerBomb,speed,$hasEnergyReserves:3",
-
-                  "casual,phantoon,speed,$canPowerBomb,grapple",
-                  "casual,phantoon,speed,$canPowerBomb,space",
-                  "casual,phantoon,speed,$canPowerBomb,varia,$hasEnergyReserves:3",
-                  "casual,phantoon,speed,$canPowerBomb,$hasEnergyReserves:4",
-                  "{phantoon, $canPowerBomb}"
-                ],
                 "sections": [
                   {
                     "name": "Reserve Tank, Wrecked Ship",
                     "capture_item": true,
+                    "access_rules": [
+                      "[tournament],phantoon,$canPowerBomb,speed,varia",
+                      "[tournament],phantoon,$canPowerBomb,speed,$hasEnergyReserves:3",
+                      "casual,phantoon,speed,$canPowerBomb,grapple",
+                      "casual,phantoon,speed,$canPowerBomb,space",
+                      "casual,phantoon,speed,$canPowerBomb,varia,$hasEnergyReserves:3",
+                      "casual,phantoon,speed,$canPowerBomb,$hasEnergyReserves:4",
+                      "{phantoon, $canPowerBomb}"
+                    ],
                     "item_count": 1
                   }
                 ],
@@ -2239,15 +2243,15 @@
                 "children": [
                   {
                     "name": "Missile (green Maridia shinespark)",
-                    "access_rules": [
-                      "[tournament],gravity,speed",
-                      "casual,speed",
-                      "{}"
-                    ],
                     "sections": [
                       {
                         "name": "Missile (green Maridia shinespark)",
                         "capture_item": true,
+                        "access_rules": [
+                          "[tournament],gravity,speed",
+                          "casual,speed",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -2410,19 +2414,16 @@
                   },
                   {
                     "name": "Plasma Beam",
-                    "access_rules": [
-                      "[tournament],draygon,$plasmaBeamTournament",
-                      "casual,draygon,$canDefeatDraygonCasual,screw,hijump",
-                      "casual,draygon,$canDefeatDraygonCasual,screw,$canFlySM",
-                      "casual,draygon,$canDefeatDraygonCasual,plasma,hijump",
-                      "casual,draygon,$canDefeatDraygonCasual,plasma,$canFlySM",
-                      "{tournament,draygon,$canDefeatDraygonTournament}",
-                      "{casual,draygon,$canDefeatDraygonCasual}"
-                    ],
                     "sections": [
                       {
                         "name": "Plasma Beam",
                         "capture_item": true,
+                        "access_rules": [
+                          "[tournament],draygon,$plasmaBeamTournament",
+                          "casual,draygon,$plasmaBeamCasual",
+                          "{tournament,draygon,$canDefeatDraygonTournament}",
+                          "{casual,draygon,$canDefeatDraygonCasual}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -2660,7 +2661,6 @@
                     "sections": [
                       {
                         "name": "Space Jump",
-                        "capture_item": true,
                         "item_count": 1
                       }
                     ],
@@ -2908,7 +2908,6 @@
                   {
                     "name": "Lumberjack Tree",
                     "short_name": "Lumberjacks",
-                    "access_rules": [ "aga1,boots", "{}" ],
                     "map_locations": [
                       {
                         "map": "lightworld",
@@ -2920,6 +2919,7 @@
                       {
                         "name": "Lumberjack Tree",
                         "capture_item": true,
+                        "access_rules": [ "aga1,boots", "{}" ],
                         "item_count": 1
                       }
                     ]
@@ -3204,15 +3204,15 @@
                   },
                   {
                     "name": "Bombos Tablet",
-                    "access_rules": [
-                      "book,sword2,mirror,$canEnterSDarkWorld",
-                      "{mirror,book,$canEnterSDarkWorld}"
-                    ],
                     "color": "#aa860d",
                     "sections": [
                       {
                         "name": "Tablet",
                         "capture_item": true,
+                        "access_rules": [
+                          "book,sword2,mirror,$canEnterSDarkWorld",
+                          "{mirror,book,$canEnterSDarkWorld}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -3282,7 +3282,6 @@
                   },
                   {
                     "name": "Library",
-                    "access_rules": [ "boots", "{}" ],
                     "map_locations": [
                       {
                         "map": "lightworld",
@@ -3294,13 +3293,16 @@
                       {
                         "name": "On The Shelf",
                         "capture_item": true,
+                        "access_rules": [
+                          "boots",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ]
                   },
                   {
                     "name": "Maze Race",
-                    "access_rules": ["bombs","{}"],
                     "map_locations": [
                       {
                         "map": "lightworld",
@@ -3312,18 +3314,27 @@
                       {
                         "name": "Maze Race",
                         "capture_item": true,
+                        "access_rules": [
+                          "bombs",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ]
                   },
                   {
                     "name": "Desert Ledge",
-                    "access_rules": [ "book", "flute,lift2,mirror", "$canAccessMiseryMirePortal,mirror", "{}" ],
                     "color": "#aa860d",
                     "sections": [
                       {
                         "name": "Desert Ledge",
                         "capture_item": true,
+                        "access_rules": [
+                          "book",
+                          "flute,lift2,mirror",
+                          "$canAccessMiseryMirePortal,mirror",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -3550,11 +3561,14 @@
                   //  Spectacle Rock
                   {
                     "name": "Spectacle Rock",
-                    "access_rules": [ "mirror", "{}" ],
                     "sections": [
                       {
                         "name": "Spectacle Rock",
                         "capture_item": true,
+                        "access_rules": [
+                          "mirror",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -3585,16 +3599,16 @@
                   //  Ether Tablet
                   {
                     "name": "Ether Tablet",
-                    "access_rules": [
-                      "mirror,book,sword2",
-                      "hookshot,hammer,book,sword2",
-                      "{mirror,book}",
-                      "{hookshot,hammer,book}"
-                    ],
                     "sections": [
                       {
                         "name": "Tablet",
                         "capture_item": true,
+                        "access_rules": [
+                          "mirror,book,sword2",
+                          "hookshot,hammer,book,sword2",
+                          "{mirror,book}",
+                          "{hookshot,hammer,book}"
+                        ],
                         "item_count": 1
                       }
                     ],
@@ -3693,12 +3707,14 @@
                   {
                     "name": "Floating Island",
                     "color": "#934f17",
-                    "access_rules": [ "pearl,lift2,mirror,bombs", "{}" ],
                     "sections": [
-                      //  Front chest
                       {
                         "name": "Island",
                         "capture_item": true,
+                        "access_rules": [
+                          "pearl,lift2,mirror,bombs",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ],
