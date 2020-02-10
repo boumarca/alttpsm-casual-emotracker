@@ -71,6 +71,23 @@ DUNGEON_ITEMS = {}
 REMAINING_KEYS = {}
 FLOOR_KEYS = {}
 
+-- Dungeon room indexes so we can tell what dungeon we're in by the room number.
+DUNGEON_ROOMS = {
+    hc = { 1, 2, 17, 18, 33, 34, 50, 65, 66, 80, 81, 82, 96, 97, 98, 112, 113, 114, 128, 129, 130 },
+    ep = { 153, 168, 169, 170, 184, 185, 186, 200, 201, 216, 217, 218 },
+    dp = { 51, 67, 83, 99, 115, 116, 117, 131, 132, 133 },
+    toh = { 7, 23, 39, 49, 119, 135, 167 },
+    at = { 32, 48, 64, 176, 192, 208, 224 },
+    pod = { 9, 10, 11, 25, 26, 27, 42, 43, 58, 59, 74, 75, 90, 106, 137 },
+    sp = { 6, 22, 38, 40, 52, 53, 54, 55, 56, 70, 84, 102, 118 },
+    sw = { 41, 57, 73, 86, 87, 88, 89, 103, 104 },
+    tt = { 68, 69, 100, 101, 171, 172, 187, 188, 203, 204, 219, 220 },
+    ip = { 14, 30, 31, 46, 62, 63, 78, 79, 94, 95, 110, 126, 127, 142, 158, 159, 174, 175, 190, 191, 206, 222 },
+    mm = { 144, 145, 146, 147, 151, 152, 160, 161, 162, 163, 177, 178, 179, 193, 194, 195, 209, 210 },
+    tr = { 4, 19, 20, 21, 35, 36, 164, 180, 181, 182, 183, 196, 197, 198, 199, 213, 214 },
+    gt = { 12, 13, 28, 29, 61, 76, 77, 91, 92, 93, 107, 108, 109, 123, 124, 125, 139, 140, 141, 149, 150, 155, 156, 157, 165, 166 },
+}
+
 -- ************************** Table helper functions for debug printing
 
 function table.val_to_str ( v )
@@ -107,6 +124,15 @@ function table.tostring( tbl )
         end
     end
     return "{" .. table.concat( result, "," ) .. "}"
+end
+
+function table.has_value(tbl, value)
+    for _, v in ipairs(tbl) do
+        if v == value then
+            return true
+        end
+    end
+    return false
 end
 
 -- ************************** Memory reading helper functions
@@ -694,6 +720,17 @@ function updateDungeonLocationFromCache(locationRef, code)
     end
 end
 
+function getCurrentKeysForDungeon(segment, address, code, currentKeys, currentDungeon)
+    -- If we're in this dungeon, use the current keys value.  Otherwise read the dungeon-specific value from memory.
+    local keys
+    if code == currentDungeon then
+        keys = currentKeys
+    else
+        keys = ReadU8(segment, address)
+    end
+    REMAINING_KEYS[code] = keys
+end
+
 function updateGanonsTowerFromCache()
     local dungeon = Tracker:FindObjectForCode("@Ganon's Tower/Dungeon")
     local tower = Tracker:FindObjectForCode("@Ganon's Tower/Tower")
@@ -738,7 +775,7 @@ function updateItemsActiveLTTP(segment)
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateItemsLTTP(segment, 0x7ef300)
+        updateItemsLTTP(segment, 0x7ef300, true)
     end
     return true
 end
@@ -754,12 +791,12 @@ function updateItemsInactiveLTTP(segment)
     end
 
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateItemsLTTP(segment, address)
+        updateItemsLTTP(segment, address, false)
     end
     return true
 end
 
-function updateItemsLTTP(segment, address)
+function updateItemsLTTP(segment, address, inLTTP)
     InvalidateReadCaches()
 
     updateProgressiveItemFromByte(segment, "owsword",  address + 0x59)
@@ -812,19 +849,42 @@ function updateItemsLTTP(segment, address)
         resetDungeonCacheTable(REMAINING_KEYS)
         resetDungeonCacheTable(DUNGEON_ITEMS)
 
+        -- If we're in LTTP, check if we're inside a dungeon.  If so, read the remaining keys from the common variable
+        -- used for all dungeons.  This is because the dungeon-specific key spots don't update all the time.  They only
+        -- update for sure when you leave the dungeon.  We can tell what dungeon we're in by the current room index, and
+        -- the common key spot will read 0xff if we're outside.
+        local currentDungeon = ''
+        local currentKeys = ReadU8(segment, address + 0x6f)
+        local currentRoom = 0
+        if inLTTP and currentKeys ~= 0xff then
+            currentRoom = math.floor(AutoTracker:ReadU8(0x7e00a0, 0))
+            for key, rooms in pairs(DUNGEON_ROOMS) do
+                if table.has_value(rooms, currentRoom) then
+                    currentDungeon = key
+                    break
+                end
+            end
+        end
+
+        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            print("Current room ID: ", currentRoom, "Current dungeon: ", currentDungeon, "Current keys: ", currentKeys)
+        end
+
         -- Remaining keys.
-        REMAINING_KEYS.hc = ReadU8(segment, address + 0x7c)
-        REMAINING_KEYS.ep = ReadU8(segment, address + 0x7e)
-        REMAINING_KEYS.dp = ReadU8(segment, address + 0x7f)
-        REMAINING_KEYS.toh = ReadU8(segment, address + 0x86)
-        REMAINING_KEYS.pod = ReadU8(segment, address + 0x82)
-        REMAINING_KEYS.sp = ReadU8(segment, address + 0x81)
-        REMAINING_KEYS.sw = ReadU8(segment, address + 0x84)
-        REMAINING_KEYS.tt = ReadU8(segment, address + 0x87)
-        REMAINING_KEYS.ip = ReadU8(segment, address + 0x85)
-        REMAINING_KEYS.mm = ReadU8(segment, address + 0x83)
-        REMAINING_KEYS.tr = ReadU8(segment, address + 0x88)
-        REMAINING_KEYS.gt = ReadU8(segment, address + 0x89)
+        getCurrentKeysForDungeon(segment, address + 0x7c, "hc", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x7e, "ep", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x7f, "dp", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x86, "toh", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x80, "at", currentKeys, currentDungeon)
+
+        getCurrentKeysForDungeon(segment, address + 0x82, "pod", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x81, "sp", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x84, "sw", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x87, "tt", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x85, "ip", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x83, "mm", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x88, "tr", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(segment, address + 0x89, "gt", currentKeys, currentDungeon)
 
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
             print("Remaining key counts: ", table.tostring(REMAINING_KEYS))
