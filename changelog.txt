@@ -1,3 +1,7 @@
+3.1.9
+-----
+Sand pit items and Aqueduct missiles in SM are now capturable
+
 3.1.8
 -----
 Fixed capture locations so they turn red after marking the item contained there

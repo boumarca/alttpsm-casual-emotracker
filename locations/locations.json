@@ -2248,8 +2248,7 @@
                         "name": "Missile (green Maridia shinespark)",
                         "capture_item": true,
                         "access_rules": [
-                          "[tournament],gravity,speed",
-                          "casual,speed",
+                          "gravity,speed",
                           "{}"
                         ],
                         "item_count": 1
@@ -2452,10 +2451,12 @@
                     "sections": [
                       {
                         "name": "Missile (left Maridia sand pit room)",
+                        "capture_item": true,
                         "item_count": 1
                       },
                       {
                         "name": "Reserve Tank, Maridia",
+                        "capture_item": true,
                         "item_count": 1
                       }
                     ],
@@ -2482,6 +2483,7 @@
                     "sections": [
                       {
                         "name": "Missile (right Maridia sand pit room)",
+                        "capture_item": true,
                         "item_count": 1
                       }
                     ],
@@ -2508,6 +2510,7 @@
                     "sections": [
                       {
                         "name": "Power Bomb (right Maridia sand pit room)",
+                        "capture_item": true,
                         "item_count": 1
                       }
                     ],
@@ -2528,7 +2531,7 @@
                     "name": "Super Missile (pink Maridia)",
                     "access_rules": [
                       "[tournament],gravity",
-                      "casual,speed"
+                      "gravity,speed"
                     ],
                     "sections": [
                       {
@@ -2551,13 +2554,15 @@
                   },
                   {
                     "name": "Missile (pink Maridia)",
-                    "access_rules": [
-                      "[tournament],gravity",
-                      "casual,speed"
-                    ],
                     "sections": [
                       {
                         "name": "Missile (pink Maridia)",
+                        "capture_item": true,
+                        "access_rules": [
+                          "[tournament],gravity",
+                          "gravity,speed",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ],
