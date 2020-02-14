@@ -1,5 +1,7 @@
 -- Configuration --------------------------------------
 AUTOTRACKER_ENABLE_DEBUG_LOGGING = false
+AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING = false
+SHOW_DUNGEON_DEBUG_LOGGING = AUTOTRACKER_ENABLE_DEBUG_LOGGING or AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING
 -------------------------------------------------------
 
 -- Some useful stuff for reference from Z3SM ASM GitHub repo: https://github.com/tewtal/alttp_sm_combo_randomizer_rom
@@ -29,10 +31,13 @@ if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
     print("Location Tracking enabled")
 end
 if AUTOTRACKER_ENABLE_DUNGEON_TRACKING then
-    print("Dungeon Tracking enabled **EXPERIMENTAL**")
+    print("Dungeon Tracking enabled")
 end
 if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
     print("Debug Logging enabled")
+end
+if AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING then
+    print("Debug Dungeon Logging enabled")
 end
 print("---------------------------------------------------------------------")
 print("")
@@ -716,7 +721,7 @@ function updateDungeonLocationFromCache(locationRef, code)
     if location then
         -- Do not auto-track this if the user has manually modified it
         if location.Owner.ModifiedByUser then
-            if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            if SHOW_DUNGEON_DEBUG_LOGGING then
                 print("* Skipping user modified location: ", locationRef)
             end
             return
@@ -725,7 +730,7 @@ function updateDungeonLocationFromCache(locationRef, code)
         local totalKeys = REMAINING_KEYS[code] + OPENED_DOORS[code]
         local keysFromChests = math.max(0, totalKeys - FLOOR_KEYS[code])
         local itemsFound = math.floor(math.min(location.ChestCount, math.max(0, OPENED_CHESTS[code] - DUNGEON_ITEMS[code] - keysFromChests)))
-        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Dungeon item count: ", locationRef,
                     "Total keys: " .. totalKeys, "Remaining keys: " .. REMAINING_KEYS[code],
                     "Opened doors: " .. OPENED_DOORS[code], "Floor keys: " .. FLOOR_KEYS[code],
@@ -734,7 +739,7 @@ function updateDungeonLocationFromCache(locationRef, code)
         end
         location.AvailableChestCount = location.ChestCount - itemsFound
 
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_DUNGEON_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find location:", locationRef)
     end
 end
@@ -759,7 +764,7 @@ function updateGanonsTowerFromCache()
     local itemsFound1 = math.floor(math.min(dungeon.ChestCount, OPENED_CHESTS.gt))
     local itemsFound2 = math.floor(math.min(tower.ChestCount, OPENED_CHESTS.gt2))
 
-    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    if SHOW_DUNGEON_DEBUG_LOGGING then
         print("Dungeon item count: Ganon's Tower",
                 "Total keys: " .. totalKeys, "Remaining keys: " .. REMAINING_KEYS.gt,
                 "Opened doors: " .. OPENED_DOORS.gt, "Floor keys: " .. FLOOR_KEYS.gt,
@@ -804,7 +809,7 @@ function updateCurrentRoomDataLTTP(segment)
             CURRENT_ROOM_DATA = ((val1 & 0xf0) | ((val2 & 0xf0) >> 4)) << 8
             CURRENT_ROOM_DATA = CURRENT_ROOM_DATA | (((val2 & 0x0f) << 4) | (val3 & 0x0f))
 
-            if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            if SHOW_DUNGEON_DEBUG_LOGGING then
                 print("LTTP current room data: ", CURRENT_ROOM_ID, string.format("0x%x", CURRENT_ROOM_DATA))
             end
         else
@@ -1277,7 +1282,7 @@ function updateRoomDataFromCache(inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt2", { 77, 4 }, inLTTP)
 
 
-    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    if SHOW_DUNGEON_DEBUG_LOGGING then
         print("Floor key counts: ", table.tostring(FLOOR_KEYS))
         print("Opened door counts: ", table.tostring(OPENED_DOORS))
         print("Opened chest counts: ", table.tostring(OPENED_CHESTS))
@@ -1383,7 +1388,7 @@ function updateItemsLTTP(segment, address, inLTTP)
             end
         end
 
-        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Current room ID: ", currentRoom, "Current dungeon: ", currentDungeon, "Current keys: ", currentKeys)
         end
 
@@ -1403,7 +1408,7 @@ function updateItemsLTTP(segment, address, inLTTP)
         getCurrentKeysForDungeon(segment, address + 0x88, "tr", currentKeys, currentDungeon)
         getCurrentKeysForDungeon(segment, address + 0x89, "gt", currentKeys, currentDungeon)
 
-        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Remaining key counts: ", table.tostring(REMAINING_KEYS))
         end
 
@@ -1450,7 +1455,7 @@ function updateItemsLTTP(segment, address, inLTTP)
         updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ep", address + 0x69, 0x20)
         updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "hc", address + 0x69, 0x80)
 
-        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Dungeon item counts: ", table.tostring(DUNGEON_ITEMS))
         end
 
