@@ -808,13 +808,13 @@ function updateCurrentRoomDataLTTP(segment)
             -- Room data: 0x7e0401 high byte, 0x7e0403 both bytes, 0x7e0408 low byte
             CURRENT_ROOM_DATA = ((val1 & 0xf0) | ((val2 & 0xf0) >> 4)) << 8
             CURRENT_ROOM_DATA = CURRENT_ROOM_DATA | (((val2 & 0x0f) << 4) | (val3 & 0x0f))
-
-            if SHOW_DUNGEON_DEBUG_LOGGING then
-                print("LTTP current room data: ", CURRENT_ROOM_ID, string.format("0x%x", CURRENT_ROOM_DATA))
-            end
         else
             CURRENT_ROOM_ID = nil
             CURRENT_ROOM_DATA = 0x0
+        end
+
+        if SHOW_DUNGEON_DEBUG_LOGGING then
+            print("LTTP current room data: ", CURRENT_ROOM_ID, string.format("0x%x", CURRENT_ROOM_DATA))
         end
 
         -- Update keys and door data from the cache.
