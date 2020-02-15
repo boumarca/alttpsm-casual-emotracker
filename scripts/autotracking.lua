@@ -80,6 +80,8 @@ CURRENT_ROOM_ID = nil
 CURRENT_ROOM_DATA = 0x0
 SAVED_ROOM_DATA = {}
 
+DUNGEON_DATA_LAST_UPDATE = nil
+
 -- Dungeon room indexes so we can tell what dungeon we're in by the room number.
 DUNGEON_ROOMS = {
     hc = { 1, 2, 17, 18, 33, 34, 50, 65, 66, 80, 81, 82, 96, 97, 98, 112, 113, 114, 128, 129, 130 },
@@ -248,11 +250,17 @@ function updateGame()
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
             print("**** Game change detected: ", game)
         end
+
         clearMemoryWatches()
+
+        CURRENT_ROOM_ID = nil
+        CURRENT_ROOM_DATA = 0x0
 
         -- Link to the Past
         if AUTOTRACKER_IS_IN_LTTP then
             -- WRAM watches
+            -- This first one is a bit of a hack, it's basically a way to get a time interval check on this function.
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Dungeon Location Update Check", 0x7e0000, 0x1, updateDungeonLocationsFromTimestamp))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Current Room Data", 0x7e0401, 0x8, updateCurrentRoomDataLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Item Data", 0x7ef340, 0x90, updateItemsActiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP NPC Item Data", 0x7ef410, 0x2, updateNPCItemFlagsActiveLTTP))
@@ -794,6 +802,27 @@ function updateAllDungeonLocationsFromCache()
     updateGanonsTowerFromCache()
 end
 
+function updateDungeonLocationsFromTimestamp()
+    -- Check if the dungeon cache data has been updated in the last 1-2 seconds.  If so, wait for it to stabilize.
+    -- If it's been stable for more than 1 second, perform the location update from the cached data.
+    -- This should hopefully avoid a "flickering" of incorrect counts on the locations which may cause pinned locations
+    -- to be accidentally cleared if the count goes 1 -> 0 -> 1 again very quickly.
+    -- Set last update timestamp to nil so we don't update again until data changes.
+    if DUNGEON_DATA_LAST_UPDATE ~= nil then
+        local howLongAgo = os.time() - DUNGEON_DATA_LAST_UPDATE
+        if howLongAgo > 1 then
+            if SHOW_DUNGEON_DEBUG_LOGGING then
+                print(string.format("Dungeon data updated %d seconds ago, updating locations", howLongAgo))
+            end
+            updateAllDungeonLocationsFromCache()
+            DUNGEON_DATA_LAST_UPDATE = nil
+        end
+    end
+
+    -- This is intentional.  Return false so this function will keep firing periodically like a setInterval().
+    return false
+end
+
 function updateCurrentRoomDataLTTP(segment)
     if not (isInLTTP() and isInGameLTTP()) then
         return false
@@ -1288,8 +1317,13 @@ function updateRoomDataFromCache(inLTTP)
         print("Opened chest counts: ", table.tostring(OPENED_CHESTS))
     end
 
-    -- Update dungeon location chest counts based on cached data.
-    updateAllDungeonLocationsFromCache()
+    -- Set last update timestamp for dungeon data.
+    DUNGEON_DATA_LAST_UPDATE = os.time()
+
+    -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
+    if not inLTTP then
+        updateAllDungeonLocationsFromCache()
+    end
 end
 
 function updateItemsActiveLTTP(segment)
@@ -1459,8 +1493,13 @@ function updateItemsLTTP(segment, address, inLTTP)
             print("Dungeon item counts: ", table.tostring(DUNGEON_ITEMS))
         end
 
-        -- Update dungeon location chest counts based on cached data.
-        updateAllDungeonLocationsFromCache()
+        -- Set last update timestamp for dungeon data.
+        DUNGEON_DATA_LAST_UPDATE = os.time()
+
+        -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
+        if not inLTTP then
+            updateAllDungeonLocationsFromCache()
+        end
     end
 end
 
@@ -1468,7 +1507,7 @@ function updateRoomsActiveLTTP(segment)
     if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
-    updateRoomsLTTP(segment, 0x7ef000)
+    updateRoomsLTTP(segment, 0x7ef000, true)
     return true
 end
 
@@ -1476,7 +1515,7 @@ function updateRoomsInactiveLTTP(segment)
     if not (isInSM() and isInGameSM()) then
         return false
     end
-    updateRoomsLTTP(segment, getSRAMAddressLTTP(0x0))
+    updateRoomsLTTP(segment, getSRAMAddressLTTP(0x0), false)
     return true
 end
 
