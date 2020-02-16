@@ -76,7 +76,7 @@ DUNGEON_ITEMS = {}
 REMAINING_KEYS = {}
 FLOOR_KEYS = {}
 
-CURRENT_ROOM_ID = nil
+CURRENT_ROOM_ID = 0
 CURRENT_ROOM_DATA = 0x0
 SAVED_ROOM_DATA = {}
 
@@ -669,6 +669,7 @@ function resetDungeonCacheTable(cacheTable)
     cacheTable.ep = 0
     cacheTable.dp = 0
     cacheTable.toh = 0
+    cacheTable.at = 0
     cacheTable.pod = 0
     cacheTable.sp = 0
     cacheTable.sw = 0
@@ -684,6 +685,10 @@ function updateDungeonCacheTableFromByteAndFlag(segment, cacheTable, code, addre
     local value = ReadU8(segment, address)
     local check = value & flag
     if check ~= 0 then
+        -- Initialize key if not set.
+        if cacheTable[code] == nil then
+            cacheTable[code] = 0
+        end
         cacheTable[code] = cacheTable[code] + 1
     end
 end
@@ -760,7 +765,15 @@ function getCurrentKeysForDungeon(segment, address, code, currentKeys, currentDu
     else
         keys = ReadU8(segment, address)
     end
-    REMAINING_KEYS[code] = keys
+
+    -- Update data timestamp if we're actually changing the value.
+    if REMAINING_KEYS[code] ~= keys then
+        if SHOW_DUNGEON_DEBUG_LOGGING then
+            print("Remaining keys changed for: ", code, "Old: ", REMAINING_KEYS[code], "New: ", keys)
+        end
+        REMAINING_KEYS[code] = keys
+        DUNGEON_DATA_LAST_UPDATE = os.time()
+    end
 end
 
 function updateGanonsTowerFromCache()
@@ -828,31 +841,38 @@ function updateCurrentRoomDataLTTP(segment)
         return false
     end
     if AUTOTRACKER_ENABLE_DUNGEON_TRACKING then
+        local newRoomId
+        local newRoomData
         local currentKeys = math.floor(AutoTracker:ReadU8(0x7ef36f, 0))
+
         if currentKeys ~= 0xff then
-            CURRENT_ROOM_ID = math.floor(AutoTracker:ReadU8(0x7e00a0, 0))
+            newRoomId = math.floor(AutoTracker:ReadU8(0x7e00a0, 0))
             local val1 = ReadU8(segment, 0x7e0401)
             local val2 = ReadU8(segment, 0x7e0403)
             local val3 = ReadU8(segment, 0x7e0408)
             -- Room data: 0x7e0401 high byte, 0x7e0403 both bytes, 0x7e0408 low byte
-            CURRENT_ROOM_DATA = ((val1 & 0xf0) | ((val2 & 0xf0) >> 4)) << 8
-            CURRENT_ROOM_DATA = CURRENT_ROOM_DATA | (((val2 & 0x0f) << 4) | (val3 & 0x0f))
+            newRoomData = ((val1 & 0xf0) | ((val2 & 0xf0) >> 4)) << 8
+            newRoomData = newRoomData | (((val2 & 0x0f) << 4) | (val3 & 0x0f))
         else
-            CURRENT_ROOM_ID = nil
-            CURRENT_ROOM_DATA = 0x0
+            newRoomId = 0
+            newRoomData = 0x0
         end
+
+        local changed = (newRoomId ~= CURRENT_ROOM_ID) or (newRoomData ~= CURRENT_ROOM_DATA)
+        CURRENT_ROOM_ID = newRoomId
+        CURRENT_ROOM_DATA = newRoomData
 
         if SHOW_DUNGEON_DEBUG_LOGGING then
             print("LTTP current room data: ", CURRENT_ROOM_ID, string.format("0x%x", CURRENT_ROOM_DATA))
         end
 
         -- Update keys and door data from the cache.
-        updateRoomDataFromCache(true)
+        updateRoomDataFromCache(true, changed)
     end
     return true
 end
 
-function updateRoomDataFromCache(inLTTP)
+function updateRoomDataFromCache(inLTTP, changed)
     -- Update dungeon room data cache for counting dungeon items without cheating.
     resetDungeonCacheTable(FLOOR_KEYS)
     resetDungeonCacheTable(OPENED_DOORS)
@@ -1317,8 +1337,10 @@ function updateRoomDataFromCache(inLTTP)
         print("Opened chest counts: ", table.tostring(OPENED_CHESTS))
     end
 
-    -- Set last update timestamp for dungeon data.
-    DUNGEON_DATA_LAST_UPDATE = os.time()
+    -- Set last update timestamp for dungeon data if it changed.
+    if changed then
+        DUNGEON_DATA_LAST_UPDATE = os.time()
+    end
 
     -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
     if not inLTTP then
@@ -1402,9 +1424,6 @@ function updateItemsLTTP(segment, address, inLTTP)
 
     -- Update remaining small keys and dungeon item (map/compass/big key) data caches from item data.
     if AUTOTRACKER_ENABLE_DUNGEON_TRACKING then
-        resetDungeonCacheTable(REMAINING_KEYS)
-        resetDungeonCacheTable(DUNGEON_ITEMS)
-
         -- If we're in LTTP, check if we're inside a dungeon.  If so, read the remaining keys from the common variable
         -- used for all dungeons.  This is because the dungeon-specific key spots don't update all the time.  They only
         -- update for sure when you leave the dungeon.  We can tell what dungeon we're in by the current room index, and
@@ -1446,55 +1465,65 @@ function updateItemsLTTP(segment, address, inLTTP)
             print("Remaining key counts: ", table.tostring(REMAINING_KEYS))
         end
 
-        -- Compasses
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "gt", address + 0x64, 0x04)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "tr", address + 0x64, 0x08)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "tt", address + 0x64, 0x10)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "toh", address + 0x64, 0x20)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ip", address + 0x64, 0x40)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "sw", address + 0x64, 0x80)
+        local newDungeonItems = {}
 
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "mm", address + 0x65, 0x01)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "pod", address + 0x65, 0x02)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "sp", address + 0x65, 0x04)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "dp", address + 0x65, 0x10)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ep", address + 0x65, 0x20)
+        -- Compasses
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "gt", address + 0x64, 0x04)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "tr", address + 0x64, 0x08)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "tt", address + 0x64, 0x10)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "toh", address + 0x64, 0x20)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ip", address + 0x64, 0x40)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sw", address + 0x64, 0x80)
+
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "mm", address + 0x65, 0x01)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "pod", address + 0x65, 0x02)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sp", address + 0x65, 0x04)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "dp", address + 0x65, 0x10)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ep", address + 0x65, 0x20)
 
         -- Big keys
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "gt", address + 0x66, 0x04)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "tr", address + 0x66, 0x08)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "tt", address + 0x66, 0x10)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "toh", address + 0x66, 0x20)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ip", address + 0x66, 0x40)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "sw", address + 0x66, 0x80)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "gt", address + 0x66, 0x04)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "tr", address + 0x66, 0x08)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "tt", address + 0x66, 0x10)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "toh", address + 0x66, 0x20)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ip", address + 0x66, 0x40)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sw", address + 0x66, 0x80)
 
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "mm", address + 0x67, 0x01)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "pod", address + 0x67, 0x02)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "sp", address + 0x67, 0x04)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "dp", address + 0x67, 0x10)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ep", address + 0x67, 0x20)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "mm", address + 0x67, 0x01)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "pod", address + 0x67, 0x02)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sp", address + 0x67, 0x04)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "dp", address + 0x67, 0x10)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ep", address + 0x67, 0x20)
 
         -- Maps
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "gt", address + 0x68, 0x04)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "tr", address + 0x68, 0x08)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "tt", address + 0x68, 0x10)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "toh", address + 0x68, 0x20)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ip", address + 0x68, 0x40)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "sw", address + 0x68, 0x80)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "gt", address + 0x68, 0x04)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "tr", address + 0x68, 0x08)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "tt", address + 0x68, 0x10)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "toh", address + 0x68, 0x20)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ip", address + 0x68, 0x40)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sw", address + 0x68, 0x80)
 
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "mm", address + 0x69, 0x01)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "pod", address + 0x69, 0x02)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "sp", address + 0x69, 0x04)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "dp", address + 0x69, 0x10)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "ep", address + 0x69, 0x20)
-        updateDungeonCacheTableFromByteAndFlag(segment, DUNGEON_ITEMS, "hc", address + 0x69, 0x80)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "mm", address + 0x69, 0x01)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "pod", address + 0x69, 0x02)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sp", address + 0x69, 0x04)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "dp", address + 0x69, 0x10)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ep", address + 0x69, 0x20)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "hc", address + 0x69, 0x80)
+
+        -- Check if any of the dungeon item counts actually changed.  Set last update timestamp if so.
+        for key, count in pairs(newDungeonItems) do
+            if DUNGEON_ITEMS[key] ~= count then
+                if SHOW_DUNGEON_DEBUG_LOGGING then
+                    print("Dungeon item count changed for: ", key, "Old: ", DUNGEON_ITEMS[key], "New: ", count)
+                end
+                DUNGEON_ITEMS[key] = count
+                DUNGEON_DATA_LAST_UPDATE = os.time()
+            end
+        end
 
         if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Dungeon item counts: ", table.tostring(DUNGEON_ITEMS))
         end
-
-        -- Set last update timestamp for dungeon data.
-        DUNGEON_DATA_LAST_UPDATE = os.time()
 
         -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
         if not inLTTP then
@@ -1585,14 +1614,20 @@ function updateRoomsLTTP(segment, address, inLTTP)
 
     if AUTOTRACKER_ENABLE_DUNGEON_TRACKING then
         -- Read room data for data cache update.
+        local changed = false
+        local newRoomData
         for _, rooms in pairs(DUNGEON_ROOMS) do
             for _, room in ipairs(rooms) do
-                SAVED_ROOM_DATA[room] = ReadU16(segment, address + (room * 2))
+                newRoomData = ReadU16(segment, address + (room * 2))
+                if SAVED_ROOM_DATA[room] ~= newRoomData then
+                    changed = true
+                end
+                SAVED_ROOM_DATA[room] = newRoomData
             end
         end
 
         -- Update keys and door data from the cache.
-        updateRoomDataFromCache(inLTTP)
+        updateRoomDataFromCache(inLTTP, changed)
     end
 end
 

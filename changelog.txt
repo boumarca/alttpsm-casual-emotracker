@@ -1,3 +1,7 @@
+3.2.1
+-----
+Slight efficiency improvement to only update dungeon locations if data actually changes
+
 3.2.0
 -----
 Added dungeon location autotracking for LTTP
