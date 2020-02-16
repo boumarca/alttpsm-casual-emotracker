@@ -1,3 +1,8 @@
+3.2.0
+-----
+Added dungeon location autotracking for LTTP
+Removed version number from package name (this works with v11 beta so far)
+
 3.1.9
 -----
 Sand pit items and Aqueduct missiles in SM are now capturable
