@@ -2635,8 +2635,10 @@
                   {
                     "name": "Energy Tank, Botwoon",
                     "access_rules": [
-                      "tournament,$canDefeatBotwoonTournament",
-                      "casual,$canDefeatBotwoonCasual"
+                      "tournament,$canDefeatBotwoonTournament,gravity",
+                      "tournament,$canDefeatBotwoonTournament,ice",
+                      "casual,$canDefeatBotwoonCasual,gravity",
+                      "casual,$canDefeatBotwoonCasual,ice,[gravity]"
                     ],
                     "sections": [
                       {

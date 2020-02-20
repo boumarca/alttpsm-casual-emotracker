@@ -324,7 +324,7 @@ function canDefeatBotwoonCasual()
 end
 
 function canDefeatBotwoonTournament()
-	if (hasIceBeam() == 1 or hasSpeedBooster() == 1 or canAccessMaridiaPortal() == 1) then
+	if hasIceBeam() == 1 or (hasSpeedBooster() == 1 and hasGravity() == 1) or canAccessMaridiaPortal() == 1 then
 		return 1
 	end
 
