@@ -1646,12 +1646,14 @@
                   },
                   {
                     "name": "Norfair Missile (lava room)",
-                    "access_rules": [
-                      "morph"
-                    ],
                     "sections": [
                       {
                         "name": "Norfair Missile (lava room)",
+                        "capture_item": true,
+                        "access_rules": [
+                          "morph",
+                          "{}"
+                        ],
                         "item_count": 1
                       }
                     ],

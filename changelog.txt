@@ -1,3 +1,7 @@
+3.2.2
+-----
+Norfair Missile (lava room) is now capturable
+
 3.2.1
 -----
 Slight efficiency improvement to only update dungeon locations if data actually changes
