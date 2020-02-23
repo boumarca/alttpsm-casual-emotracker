@@ -1,0 +1,210 @@
+[
+  {
+    "name": "Wrecked Ship",
+    "chest_unopened_img": "images/major_unopened.png",
+    "chest_opened_img": "images/major_opened.png",
+    "color": "#707048",
+    "access_rules": [
+      "[hard],$canEnterWreckedShipHard",
+      "normal,$canEnterWreckedShipNormal"
+    ],
+    "children": [
+      {
+        "name": "Reserve Tank, Wrecked Ship",
+        "sections": [
+          {
+            "name": "Reserve Tank, Wrecked Ship",
+            "capture_item": true,
+            "access_rules": [
+              "[hard],$reserveTankWreckedShipHard",
+              "normal,$reserveTankWreckedShipNormal",
+              "{phantoon,$canUsePowerBombs}",
+              "{phantoon,xray}"
+            ],
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1608,
+            "y": 112
+          },
+          {
+            "map": "wreckedship",
+            "x": 504,
+            "y": 180
+          }
+        ]
+      },
+      {
+        "name": "Energy Tank, Wrecked Ship",
+        "access_rules": [
+          "$energyTankWreckedShipNormal",
+          "[hard],$energyTankWreckedShipHard"
+        ],
+        "sections": [
+          {
+            "name": "Energy Tank, Wrecked Ship",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1704,
+            "y": 176
+          },
+          {
+            "map": "wreckedship",
+            "x": 600,
+            "y": 244
+          }
+        ]
+      },
+      {
+        "name": "Right Super, Wrecked Ship",
+        "access_rules": [
+          "phantoon"
+        ],
+        "sections": [
+          {
+            "name": "Right Super, Wrecked Ship",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1800,
+            "y": 304
+          },
+          {
+            "map": "wreckedship",
+            "x": 696,
+            "y": 372
+          }
+        ]
+      },
+      {
+        "name": "Gravity Suit",
+        "access_rules": [
+          "[hard],$gravitySuitHard",
+          "normal,$gravitySuitNormal"
+        ],
+        "sections": [
+          {
+            "name": "Gravity Suit",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1448,
+            "y": 176
+          },
+          {
+            "map": "wreckedship",
+            "x": 344,
+            "y": 244
+          }
+        ]
+      },
+      {
+        "name": "Missile (Wrecked Ship middle)",
+        "sections": [
+          {
+            "name": "Missile (Wrecked Ship middle)",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1512,
+            "y": 272
+          },
+          {
+            "map": "wreckedship",
+            "x": 408,
+            "y": 340
+          }
+        ]
+      },
+      {
+        "name": "Missile (Gravity Suit)",
+        "access_rules": [
+          "[hard],$gravitySuitHard",
+          "normal,$gravitySuitNormal"
+        ],
+        "sections": [
+          {
+            "name": "Missile (Gravity Suit)",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1542,
+            "y": 176
+          },
+          {
+            "map": "wreckedship",
+            "x": 440,
+            "y": 244
+          }
+        ]
+      },
+      {
+        "name": "Missile (Wrecked Ship top)",
+        "access_rules": [
+          "phantoon"
+        ],
+        "sections": [
+          {
+            "name": "Missile (Wrecked Ship top)",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1798,
+            "y": 79
+          },
+          {
+            "map": "wreckedship",
+            "x": 696,
+            "y": 148
+          }
+        ]
+      },
+      {
+        "name": "Super Missile (Wrecked Ship left)",
+        "access_rules": [
+          "phantoon"
+        ],
+        "sections": [
+          {
+            "name": "Super Missile (Wrecked Ship left)",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1608,
+            "y": 304
+          },
+          {
+            "map": "wreckedship",
+            "x": 504,
+            "y": 372
+          }
+        ]
+      }
+    ]
+  }
+]
