@@ -1,22 +1,33 @@
---  Load configuration options up front
+-- Load configuration options up front
 ScriptHost:LoadScript("scripts/constants.lua")
 ScriptHost:LoadScript("scripts/settings.lua")
 
--- TODO: Access logic scripts
-ScriptHost:LoadScript("scripts/logic/common.lua")
-ScriptHost:LoadScript("scripts/logic/alttp/dungeons.lua")
-ScriptHost:LoadScript("scripts/logic/sm/wreckedship.lua")
+-- Access logic
+ScriptHost:LoadScript("scripts/logic.lua")
 
 -- Items
-Tracker:AddItems("items/items.json")
+Tracker:AddItems("items/common.json")
+Tracker:AddItems("items/dungeon_items.json")
+Tracker:AddItems("items/keys.json")
+Tracker:AddItems("items/labels.json")
 
 -- Maps
 Tracker:AddMaps("maps/maps.json")
 
--- TODO: Locations
+-- Locations
+Tracker:AddLocations("locations/portals.json")
+Tracker:AddLocations("locations/alttp/lightworld.json")
+Tracker:AddLocations("locations/alttp/darkworld.json")
+Tracker:AddLocations("locations/alttp/dungeons.json")
+Tracker:AddLocations("locations/sm/crateria.json")
+Tracker:AddLocations("locations/sm/brinstar.json")
+Tracker:AddLocations("locations/sm/norfairupper.json")
+Tracker:AddLocations("locations/sm/norfairlower.json")
+Tracker:AddLocations("locations/sm/maridia.json")
 Tracker:AddLocations("locations/sm/wreckedship.json")
 
 -- Layouts
+Tracker:AddLayouts("layouts/common.json")
 Tracker:AddLayouts("layouts/tracker.json")
 Tracker:AddLayouts("layouts/broadcast.json")
 

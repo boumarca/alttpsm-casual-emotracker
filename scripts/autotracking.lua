@@ -1,7 +1,12 @@
 -- Configuration --------------------------------------
 AUTOTRACKER_ENABLE_DEBUG_LOGGING = false
 AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING = false
+AUTOTRACKER_ENABLE_DEBUG_ERROR_LOGGING = false
 SHOW_DUNGEON_DEBUG_LOGGING = AUTOTRACKER_ENABLE_DEBUG_LOGGING or AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING
+SHOW_ERROR_DEBUG_LOGGING = AUTOTRACKER_ENABLE_DEBUG_LOGGING or AUTOTRACKER_ENABLE_DEBUG_ERROR_LOGGING
+
+-- Are we using a keysanity variant?
+IS_KEYSANITY = string.find(Tracker.ActiveVariantUID, "keys") ~= nil
 -------------------------------------------------------
 
 -- Some useful stuff for reference from Z3SM ASM GitHub repo: https://github.com/tewtal/alttp_sm_combo_randomizer_rom
@@ -24,6 +29,9 @@ SHOW_DUNGEON_DEBUG_LOGGING = AUTOTRACKER_ENABLE_DEBUG_LOGGING or AUTOTRACKER_ENA
 print("")
 print("Active Auto-Tracker Configuration")
 print("---------------------------------------------------------------------")
+if IS_KEYSANITY then
+    print("Keysanity Mode enabled")
+end
 if AUTOTRACKER_ENABLE_ITEM_TRACKING then
     print("Item Tracking enabled")
 end
@@ -38,6 +46,9 @@ if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
 end
 if AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING then
     print("Debug Dungeon Logging enabled")
+end
+if AUTOTRACKER_ENABLE_DEBUG_ERROR_LOGGING then
+    print("Debug Error Logging enabled")
 end
 print("---------------------------------------------------------------------")
 print("")
@@ -373,7 +384,7 @@ function updateLTTPcompletion(segment)
         if (ReadU8(segment, address) == 0x01) then
             item.Active = true
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", "ganon")
     end
 
@@ -397,7 +408,7 @@ function updateSMcompletion(segment)
         if (ReadU8(segment, address) == 0x01) then
             item.Active = true
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", "brain")
     end
 
@@ -419,7 +430,7 @@ function updateToggleFromRoomSlot(segment, address, code, slot)
         end
 
         item.Active = check ~= 0
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", code)
     end
 end
@@ -455,7 +466,7 @@ function updateSectionChestCountFromRoomSlotList(segment, address, locationRef, 
         if callback then
             callback(clearedCount > 0)
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find location: ", locationRef)
     end
 end
@@ -472,7 +483,7 @@ function updateProgressiveItemFromByte(segment, code, address, offset)
         end
 
         item.CurrentStage = newStage
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", code)
     end
 end
@@ -495,7 +506,7 @@ function updatePseudoProgressiveItemFromByteAndFlag(segment, code, address, flag
         elseif item.CurrentStage < 2 then
             item.CurrentStage = 0
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item:", code)
     end
 end
@@ -530,7 +541,7 @@ function updateSectionChestCountFromByteAndFlag(segment, locationRef, address, f
                 callback(false)
             end
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find location:", locationRef)
     end
 end
@@ -549,7 +560,7 @@ function updateToggleItemFromByte(segment, code, address)
         elseif value == 0 then
             item.Active = false
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", code)
     end
 end
@@ -578,7 +589,7 @@ function updateAmmoFrom2Bytes(segment, code, address)
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
             print("Ammo:", item.Name, string.format("0x%x", address), value, item.AcquiredCount)
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", code)
     end
 end
@@ -600,7 +611,7 @@ function updateToggleItemFromByteAndFlag(segment, code, address, flag)
         else
             item.Active = false
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", code)
     end
 end
@@ -659,7 +670,7 @@ function updateMirror(segment, address)
         elseif value == 0 then
             item.Active = false
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find item: ", code)
     end
 end
@@ -678,7 +689,67 @@ function resetDungeonCacheTable(cacheTable)
     cacheTable.mm = 0
     cacheTable.tr = 0
     cacheTable.gt = 0
-    cacheTable.gt2 = 0
+    cacheTable.gt_up = 0
+
+    -- Extra cache codes specifically for keysanity.
+    -- Bosses are separate item locations now, and dungeons have separate sections for different key requirements.
+    if IS_KEYSANITY then
+        -- Aga tower exists now.
+        cacheTable.at = 0
+        cacheTable.at2 = 0
+
+        cacheTable.hc2 = 0
+        cacheTable.hc3 = 0
+        cacheTable.hc4 = 0
+
+        cacheTable.ep2 = 0
+        cacheTable.ep3 = 0
+        cacheTable.ep4 = 0
+
+        cacheTable.dp2 = 0
+        cacheTable.dp3 = 0
+        cacheTable.dp4 = 0
+
+        cacheTable.toh2 = 0
+        cacheTable.toh3 = 0
+        cacheTable.toh4 = 0
+
+        cacheTable.pod2 = 0
+        cacheTable.pod3 = 0
+        cacheTable.pod4 = 0
+        cacheTable.pod5 = 0
+        cacheTable.pod6 = 0
+
+        cacheTable.sp2 = 0
+        cacheTable.sp3 = 0
+        cacheTable.sp4 = 0
+        cacheTable.sp5 = 0
+        cacheTable.sp6 = 0
+
+        cacheTable.sw2 = 0
+        cacheTable.sw3 = 0
+        cacheTable.sw4 = 0
+
+        cacheTable.tt2 = 0
+        cacheTable.tt3 = 0
+        cacheTable.tt4 = 0
+
+        cacheTable.ip2 = 0
+        cacheTable.ip3 = 0
+        cacheTable.ip4 = 0
+
+        cacheTable.mm2 = 0
+        cacheTable.mm3 = 0
+        cacheTable.mm4 = 0
+
+        cacheTable.tr2 = 0
+        cacheTable.tr3 = 0
+        cacheTable.tr4 = 0
+        cacheTable.tr5 = 0
+        cacheTable.tr6 = 0
+        cacheTable.tr7 = 0
+        cacheTable.tr8 = 0
+    end
 end
 
 function updateDungeonCacheTableFromByteAndFlag(segment, cacheTable, code, address, flag)
@@ -708,11 +779,19 @@ function getRoomDataById(roomId, inLTTP)
 end
 
 function updateDungeonCacheTableFromRoomSlot(cacheTable, code, slot, inLTTP)
+    -- For keysanity, we have separate section chest counts for dungeons.  For non-keysanity, combine these into a
+    -- single entry by stripping the number off the extra section codes.
+    -- ex. Hyrule Castle has "hc", "hc2", "hc3" in keysanity, but just "hc" in regular.
+    local codeToUse = code
+    if not IS_KEYSANITY then
+        codeToUse = string.gsub(code, "%d", "")
+    end
+
     local roomData = getRoomDataById(slot[1], inLTTP)
     local flag = 1 << slot[2]
     local check = roomData & flag
     if check ~= 0 then
-        cacheTable[code] = cacheTable[code] + 1
+        cacheTable[codeToUse] = cacheTable[codeToUse] + 1
     end
 end
 
@@ -742,7 +821,15 @@ function updateDungeonLocationFromCache(locationRef, code)
 
         local totalKeys = REMAINING_KEYS[code] + OPENED_DOORS[code]
         local keysFromChests = math.max(0, totalKeys - FLOOR_KEYS[code])
-        local itemsFound = math.floor(math.min(location.ChestCount, math.max(0, OPENED_CHESTS[code] - DUNGEON_ITEMS[code] - keysFromChests)))
+
+        -- For keysanity, items found is just number of opened chests.  Otherwise subtract dungeon items and small keys.
+        local itemsFound
+        if IS_KEYSANITY then
+            itemsFound = math.floor(math.min(location.ChestCount, math.max(0, OPENED_CHESTS[code])))
+        else
+            itemsFound = math.floor(math.min(location.ChestCount, math.max(0, OPENED_CHESTS[code] - DUNGEON_ITEMS[code] - keysFromChests)))
+        end
+
         if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Dungeon item count: ", locationRef,
                     "Total keys: " .. totalKeys, "Remaining keys: " .. REMAINING_KEYS[code],
@@ -752,7 +839,7 @@ function updateDungeonLocationFromCache(locationRef, code)
         end
         location.AvailableChestCount = location.ChestCount - itemsFound
 
-    elseif SHOW_DUNGEON_DEBUG_LOGGING then
+    elseif SHOW_DUNGEON_DEBUG_LOGGING or SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find location:", locationRef)
     end
 end
@@ -783,13 +870,13 @@ function updateGanonsTowerFromCache()
     local totalKeys = REMAINING_KEYS.gt + OPENED_DOORS.gt
     local keysFromChests = math.max(0, totalKeys - FLOOR_KEYS.gt)
     local itemsFound1 = math.floor(math.min(dungeon.ChestCount, OPENED_CHESTS.gt))
-    local itemsFound2 = math.floor(math.min(tower.ChestCount, OPENED_CHESTS.gt2))
+    local itemsFound2 = math.floor(math.min(tower.ChestCount, OPENED_CHESTS.gt_up))
 
     if SHOW_DUNGEON_DEBUG_LOGGING then
         print("Dungeon item count: Ganon's Tower",
                 "Total keys: " .. totalKeys, "Remaining keys: " .. REMAINING_KEYS.gt,
                 "Opened doors: " .. OPENED_DOORS.gt, "Floor keys: " .. FLOOR_KEYS.gt,
-                "Opened chests downstairs: " .. OPENED_CHESTS.gt, "Opened chests upstairs: " .. OPENED_CHESTS.gt2,
+                "Opened chests downstairs: " .. OPENED_CHESTS.gt, "Opened chests upstairs: " .. OPENED_CHESTS.gt_up,
                 "Dungeon items: " .. DUNGEON_ITEMS.gt, "Keys from chests: " .. keysFromChests,
                 "Items found downstars: " .. itemsFound1, "Items found upstairs: " .. itemsFound2)
     end
@@ -797,21 +884,123 @@ function updateGanonsTowerFromCache()
     tower.AvailableChestCount = tower.ChestCount - itemsFound2
 end
 
-function updateAllDungeonLocationsFromCache()
-    -- Light World
-    updateDungeonLocationFromCache("@Hyrule Castle & Sanctuary/Escape", "hc")
-    updateDungeonLocationFromCache("@Eastern Palace/Dungeon", "ep")
-    updateDungeonLocationFromCache("@Desert Palace/Dungeon", "dp")
-    updateDungeonLocationFromCache("@Tower of Hera/Dungeon", "toh")
+function updateDungeonSmallKeysFromCache(code)
+    -- Update small key items for a single dungeon in the keysanity tracker.
+    local item = Tracker:FindObjectForCode(code .. "_smallkey")
+    if item then
+        local keysFromChests = math.max(0, REMAINING_KEYS[code] + OPENED_DOORS[code] - FLOOR_KEYS[code])
+        if SHOW_DUNGEON_DEBUG_LOGGING then
+            print("Dungeon small key count: ", code, keysFromChests)
+        end
+        item.AcquiredCount = keysFromChests
+    elseif SHOW_DUNGEON_DEBUG_LOGGING then
+        print("***ERROR*** Couldn't find small key item: ", code)
+    end
+end
 
-    -- Dark World
-    updateDungeonLocationFromCache("@Palace of Darkness/Dungeon", "pod")
-    updateDungeonLocationFromCache("@Swamp Palace/Dungeon", "sp")
-    updateDungeonLocationFromCache("@Skull Woods/Dungeon", "sw")
-    updateDungeonLocationFromCache("@Thieves Town/Dungeon", "tt")
-    updateDungeonLocationFromCache("@Ice Palace/Dungeon", "ip")
-    updateDungeonLocationFromCache("@Misery Mire/Dungeon", "mm")
-    updateDungeonLocationFromCache("@Turtle Rock/Dungeon", "tr")
+function updateAllDungeonLocationsFromCache()
+    -- Update all dungeon locations in the tracker based on the inventory/room data caches.
+    if IS_KEYSANITY then
+        -- Light World
+        updateDungeonLocationFromCache("@Hyrule Castle/Dungeon", "hc")
+        updateDungeonLocationFromCache("@Hyrule Castle/Dark Cross", "hc2")
+        updateDungeonLocationFromCache("@Hyrule Castle/Back of Escape", "hc3")
+        updateDungeonLocationFromCache("@Hyrule Castle/Sanctuary", "hc4")
+        updateDungeonSmallKeysFromCache("hc")
+
+        updateDungeonLocationFromCache("@Eastern Palace/Front", "ep")
+        updateDungeonLocationFromCache("@Eastern Palace/Big Key Chest", "ep2")
+        updateDungeonLocationFromCache("@Eastern Palace/Big Chest", "ep3")
+        updateDungeonLocationFromCache("@Eastern Palace/Armos Knights", "ep4")
+        -- Eastern Palace has no small keys in chests.
+
+        updateDungeonLocationFromCache("@Desert Palace/Entrance", "dp")
+        updateDungeonLocationFromCache("@Desert Palace/Right Side", "dp2")
+        updateDungeonLocationFromCache("@Desert Palace/Big Chest", "dp3")
+        updateDungeonLocationFromCache("@Desert Palace/Lanmolas", "dp4")
+        updateDungeonSmallKeysFromCache("dp")
+
+        updateDungeonLocationFromCache("@Tower of Hera/Entrance", "toh")
+        updateDungeonLocationFromCache("@Tower of Hera/Basement", "toh2")
+        updateDungeonLocationFromCache("@Tower of Hera/Upper", "toh3")
+        updateDungeonLocationFromCache("@Tower of Hera/Moldorm", "toh4")
+        updateDungeonSmallKeysFromCache("toh")
+
+        updateDungeonLocationFromCache("@Castle Tower/Foyer", "at")
+        updateDungeonLocationFromCache("@Castle Tower/Dark Maze", "at2")
+        updateDungeonSmallKeysFromCache("at")
+
+        -- Dark World
+        updateDungeonLocationFromCache("@Palace of Darkness/Entrance", "pod")
+        updateDungeonLocationFromCache("@Palace of Darkness/Front", "pod2")
+        updateDungeonLocationFromCache("@Palace of Darkness/Right Side", "pod3")
+        updateDungeonLocationFromCache("@Palace of Darkness/Back", "pod4")
+        updateDungeonLocationFromCache("@Palace of Darkness/Big Chest", "pod5")
+        updateDungeonLocationFromCache("@Palace of Darkness/Helmasaur King", "pod6")
+        updateDungeonSmallKeysFromCache("pod")
+
+        updateDungeonLocationFromCache("@Swamp Palace/Entrance", "sp")
+        updateDungeonLocationFromCache("@Swamp Palace/Bomb Wall", "sp2")
+        updateDungeonLocationFromCache("@Swamp Palace/Front", "sp3")
+        updateDungeonLocationFromCache("@Swamp Palace/Big Chest", "sp4")
+        updateDungeonLocationFromCache("@Swamp Palace/Back", "sp5")
+        updateDungeonLocationFromCache("@Swamp Palace/Arrgus", "sp6")
+        updateDungeonSmallKeysFromCache("sp")
+
+        updateDungeonLocationFromCache("@Skull Woods/Front", "sw")
+        updateDungeonLocationFromCache("@Skull Woods/Big Chest", "sw2")
+        updateDungeonLocationFromCache("@Skull Woods/Back", "sw3")
+        updateDungeonLocationFromCache("@Skull Woods/Mothula", "sw4")
+        updateDungeonSmallKeysFromCache("sw")
+
+        updateDungeonLocationFromCache("@Thieves Town/Front", "tt")
+        updateDungeonLocationFromCache("@Thieves Town/Back", "tt2")
+        updateDungeonLocationFromCache("@Thieves Town/Big Chest", "tt3")
+        updateDungeonLocationFromCache("@Thieves Town/Blind", "tt4")
+        updateDungeonSmallKeysFromCache("tt")
+
+        updateDungeonLocationFromCache("@Ice Palace/Left Side", "ip")
+        updateDungeonLocationFromCache("@Ice Palace/Big Chest", "ip2")
+        updateDungeonLocationFromCache("@Ice Palace/Right Side", "ip3")
+        updateDungeonLocationFromCache("@Ice Palace/Kholdstare", "ip4")
+        updateDungeonSmallKeysFromCache("ip")
+
+        updateDungeonLocationFromCache("@Misery Mire/Right Side", "mm")
+        updateDungeonLocationFromCache("@Misery Mire/Big Chest", "mm2")
+        updateDungeonLocationFromCache("@Misery Mire/Left Side", "mm3")
+        updateDungeonLocationFromCache("@Misery Mire/Vitreous", "mm4")
+        updateDungeonSmallKeysFromCache("mm")
+
+        updateDungeonLocationFromCache("@Turtle Rock/Entrance", "tr")
+        updateDungeonLocationFromCache("@Turtle Rock/Roller Room", "tr2")
+        updateDungeonLocationFromCache("@Turtle Rock/Chain Chomps", "tr3")
+        updateDungeonLocationFromCache("@Turtle Rock/Pipe Room", "tr4")
+        updateDungeonLocationFromCache("@Turtle Rock/Big Chest", "tr5")
+        updateDungeonLocationFromCache("@Turtle Rock/Crystaroller Room", "tr6")
+        updateDungeonLocationFromCache("@Turtle Rock/Laser Bridge", "tr7")
+        updateDungeonLocationFromCache("@Turtle Rock/Trinexx", "tr8")
+        updateDungeonSmallKeysFromCache("tr")
+
+        updateDungeonSmallKeysFromCache("gt")
+
+    else
+        -- Light World
+        updateDungeonLocationFromCache("@Hyrule Castle/Escape", "hc")
+        updateDungeonLocationFromCache("@Eastern Palace/Dungeon", "ep")
+        updateDungeonLocationFromCache("@Desert Palace/Dungeon", "dp")
+        updateDungeonLocationFromCache("@Tower of Hera/Dungeon", "toh")
+
+        -- Dark World
+        updateDungeonLocationFromCache("@Palace of Darkness/Dungeon", "pod")
+        updateDungeonLocationFromCache("@Swamp Palace/Dungeon", "sp")
+        updateDungeonLocationFromCache("@Skull Woods/Dungeon", "sw")
+        updateDungeonLocationFromCache("@Thieves Town/Dungeon", "tt")
+        updateDungeonLocationFromCache("@Ice Palace/Dungeon", "ip")
+        updateDungeonLocationFromCache("@Misery Mire/Dungeon", "mm")
+        updateDungeonLocationFromCache("@Turtle Rock/Dungeon", "tr")
+    end
+
+    -- Ganon's Tower has its own special logic since it's in two main parts.
     updateGanonsTowerFromCache()
 end
 
@@ -878,7 +1067,7 @@ function updateRoomDataFromCache(inLTTP, changed)
     resetDungeonCacheTable(OPENED_DOORS)
     resetDungeonCacheTable(OPENED_CHESTS)
 
-    -- *** Hyrule Castle & Sanctuary
+    -- *** Hyrule Castle
     -- Room 114 offset 0xE4 (First basement room with blue key guard, locked door, and chest)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "hc", { 114, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "hc", { 114, 15 }, inLTTP)
@@ -893,7 +1082,7 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 128, 4 }, inLTTP)
 
     -- Room 50 offset 0x64 (Dark cross)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 50, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc2", { 50, 4 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("hc", { 50, 15 }, { 34, 15 }, inLTTP)
 
     -- Room 33 offset 0x42 (Dark room with key on rat)
@@ -901,12 +1090,12 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonDoorCacheFromTwoRooms("hc", { 33, 15 }, { 17, 13 }, inLTTP)
 
     -- Room 17 offset 0x22 (Escape secret side room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 17, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 17, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 17, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc3", { 17, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc3", { 17, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc3", { 17, 6 }, inLTTP)
 
     -- Room 18 offset 0x24 (Sanctuary)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 18, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc4", { 18, 4 }, inLTTP)
 
 
     -- *** Eastern Palace
@@ -923,33 +1112,33 @@ function updateRoomDataFromCache(inLTTP, changed)
     -- Room 168 offset 0x150 (Compass chest)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 168, 4 }, inLTTP)
 
-    -- Room 169 offset 0x152 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 169, 4 }, inLTTP)
-
     -- Room 184 offset 0x170 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 184, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep2", { 184, 4 }, inLTTP)
 
     -- Room 153 offset 0x132 (Small key on mimic)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ep", { 153, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "ep", { 153, 15 }, inLTTP)
 
+    -- Room 169 offset 0x152 (Big chest)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep3", { 169, 4 }, inLTTP)
+
     -- Room 200 offset 0x190 (Armos Knights)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 200, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep4", { 200, 11 }, inLTTP)
 
 
     -- *** Desert Palace
     -- Room 115 offset 0xE6 (Big chest and torch item)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 115, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp3", { 115, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 115, 10 }, inLTTP)
 
     -- Room 116 offset 0xE8 (Top room single chest)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 116, 4 }, inLTTP)
 
     -- Room 117 offset 0xE9 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 117, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp2", { 117, 4 }, inLTTP)
 
     -- Room 133 offset 0x10A (Room before big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 133, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp2", { 133, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "dp", { 133, 14 }, inLTTP)
 
     -- Room 99 offset 0xC6 (First flying tile room in back)
@@ -965,7 +1154,7 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "dp", { 67, 14 }, inLTTP)
 
     -- Room 51 offset 0x66 (Lanmolas)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 51, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp4", { 51, 11 }, inLTTP)
 
 
     -- *** Tower of Hera
@@ -975,14 +1164,34 @@ function updateRoomDataFromCache(inLTTP, changed)
 
     -- Room 135 offset 0x10E (Basement)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 135, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 135, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh2", { 135, 4 }, inLTTP)
 
     -- Room 39 offset 0x4E (Big chest room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 39, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 39, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh3", { 39, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh3", { 39, 5 }, inLTTP)
 
     -- Room 7 offset 0xE (Trolldorm)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 7, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh4", { 7, 11 }, inLTTP)
+
+
+    -- *** Agahnim's Tower (keysanity only)
+    if IS_KEYSANITY then
+        -- Room 224 offset 0x1C0 (First chest)
+        updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "at", { 224, 4 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 224, 13 }, inLTTP)
+
+        -- Room 208 offset 0x1A0 (Dark maze)
+        updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "at2", { 208, 4 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 208, 15 }, inLTTP)
+
+        -- Room 192 offset 0x180 (Guards after pit room)
+        updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "at", { 192, 10 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 192, 13 }, inLTTP)
+
+        -- Room 176 offset 0x160 (Red guard with last key)
+        updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "at", { 176, 10 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 176, 13 }, inLTTP)
+    end
 
 
     -- *** Palace of Darkness
@@ -993,40 +1202,40 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonDoorCacheFromTwoRooms("pod", { 74, 13 }, { 58, 15 }, inLTTP)
 
     -- Room 58 offset 0x74 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 58, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod2", { 58, 4 }, inLTTP)
 
     -- Room 10 offset 0x14 (Basement teleporter room with locked door stairs to big key)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 10, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod2", { 10, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "pod", { 10, 15 }, inLTTP)
 
     -- Room 43 offset 0x56 (Coming up from basement, bombable wall to second chest in bouncy room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 43, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod3", { 43, 4 }, inLTTP)
 
     -- Room 42 offset 0x54 (Bouncy enemy room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 42, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 42, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod3", { 42, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod2", { 42, 5 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("pod", { 42, 14 }, { 26, 12 }, inLTTP)
 
     -- Room 26 offset 0x34 (Crumble bridge room and adjacent)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 26, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 26, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 26, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod5", { 26, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 26, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 26, 6 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "pod", { 26, 15 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("pod", { 26, 14 }, { 25, 14 }, inLTTP)
 
     -- Room 25 offset 0x32 (Dark maze)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 25, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 25, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 25, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 25, 5 }, inLTTP)
 
     -- Room 106 offset 0xD4 (Room before boss)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 106, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 106, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 106, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 106, 5 }, inLTTP)
 
     -- Room 11 offset 0x16 (Basement locked door leading to boss)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "pod", { 11, 13 }, inLTTP)
 
     -- Room 90 offset 0xB4 (Helmasaur King)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 90, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod6", { 90, 11 }, inLTTP)
 
 
     -- *** Swamp Palace
@@ -1039,39 +1248,39 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonDoorCacheFromTwoRooms("sp", { 56, 14 }, { 55, 12 }, inLTTP)
 
     -- Room 55 offset 0x6E (First water valve and key)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 55, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp2", { 55, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 55, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sp", { 55, 13 }, inLTTP)
 
     -- Room 70 offset 0x8C (Map chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 70, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp3", { 70, 4 }, inLTTP)
 
     -- Room 54 offset 0x6C (Central big chest room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 54, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp4", { 54, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 54, 10 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("sp", { 54, 14 }, { 38, 15 }, inLTTP)  -- Top locked door
     updateDungeonDoorCacheFromTwoRooms("sp", { 54, 13 }, { 53, 15 }, inLTTP)  -- Left locked door
 
     -- Room 53 offset 0x6A (Second water valve, pot key, and big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 53, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp3", { 53, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 53, 10 }, inLTTP)
 
     -- Room 52 offset 0x68 (Left side chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 52, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp3", { 52, 4 }, inLTTP)
 
     -- Room 118 offset 0xEC (Underwater chests)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 118, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 118, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp5", { 118, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp5", { 118, 5 }, inLTTP)
 
     -- Room 102 offset 0xCC (Last chest before boss)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 102, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp5", { 102, 4 }, inLTTP)
 
     -- Room 22 offset 0x2C (Room before boss)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 22, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sp", { 22, 14 }, inLTTP)
 
     -- Room 6 offset 0xC (Arrghus)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 6, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp6", { 6, 11 }, inLTTP)
 
 
     -- *** Skull Woods
@@ -1084,7 +1293,7 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonDoorCacheFromTwoRooms("sw", { 87, 13 }, { 88, 14 }, inLTTP)
 
     -- Room 88 offset 0xB0 (First entrance with big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 88, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw2", { 88, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 88, 5 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("sw", { 88, 13 }, { 104, 14 }, inLTTP)
 
@@ -1096,7 +1305,7 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sw", { 86, 15 }, inLTTP)
 
     -- Room 89 offset 0xB2 (Back area entrance)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 89, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw3", { 89, 4 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("sw", { 89, 15 }, { 73, 13 }, inLTTP)
 
     -- Room 57 offset 0x72 (Drop down to boss)
@@ -1104,7 +1313,7 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sw", { 57, 14 }, inLTTP)
 
     -- Room 41 offset 0x52 (Mothula)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 41, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw4", { 41, 11 }, inLTTP)
 
 
     -- *** Thieves Town
@@ -1127,17 +1336,17 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tt", { 171, 15 }, inLTTP)
 
     -- Room 101 offset 0xCA (2F attic)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 101, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt2", { 101, 4 }, inLTTP)
 
     -- Room 69 (nice) offset 0x8A ("Maiden" cell)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 69, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt2", { 69, 4 }, inLTTP)
 
     -- Room 68 offset 0x88 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 68, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt3", { 68, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tt", { 68, 14 }, inLTTP)
 
     -- Room 172 offset 0x158 (Blind)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 172, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt4", { 172, 11 }, inLTTP)
 
 
     -- *** Ice Palace
@@ -1157,31 +1366,31 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonDoorCacheFromTwoRooms("ip", { 126, 15 }, { 142, 15 }, inLTTP)
 
     -- Room 158 offset 0x13C (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 158, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip2", { 158, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "ip", { 158, 15 }, inLTTP)
 
     -- Room 159 offset 0x13E (Ice room key in pot east of block pushing room)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ip", { 159, 10 }, inLTTP)
 
-    -- Room 174 offset 0x15C (Beginning of ascent up the back)
+    -- Room 174 offset 0x15C (Ice T room)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 174, 4 }, inLTTP)
 
     -- Room 95 offset 0xBE (Hookshot over spikes)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 95, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip3", { 95, 4 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("ip", { 95, 15 }, { 94, 15 }, inLTTP)
 
     -- Room 63 offset 0x7E (Pulling tongues before big key)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 63, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip3", { 63, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ip", { 63, 10 }, inLTTP)
 
     -- Room 31 offset 0x3E (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 31, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip3", { 31, 4 }, inLTTP)
 
     -- Room 190 offset 0x17C (Block switch room)
     updateDungeonDoorCacheFromTwoRooms("ip", { 190, 14 }, { 191, 15 }, inLTTP)
 
     -- Room 222 offset 0x1BC (Kholdstare)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 222, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip4", { 222, 11 }, inLTTP)
 
 
     -- *** Misery Mire
@@ -1201,24 +1410,24 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 194, 4 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("mm", { 194, 15 }, { 195, 15 }, inLTTP)
 
-    -- Room 195 offset 0x186 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 195, 4 }, inLTTP)
+    -- Room 195 offset 0x186 (Big chest and small chest next door)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm2", { 195, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 195, 5 }, inLTTP)
 
     -- Room 193 offset 0x182 (Conveyor belt and tile room, compass chest)
     updateDungeonDoorCacheFromTwoRooms("mm", { 194, 14 }, { 193, 14 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 193, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm3", { 193, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "mm", { 193, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "mm", { 193, 15 }, inLTTP)
 
     -- Room 209 offset 0x1A2 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 209, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm3", { 209, 4 }, inLTTP)
 
     -- Room 147 offset 0x126 (Basement locked rupee room)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "mm", { 147, 14 }, inLTTP)
 
     -- Room 144 offset 0x120 (Vitreous)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 144, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm4", { 144, 11 }, inLTTP)
 
 
     -- *** Turtle Rock
@@ -1226,14 +1435,14 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 214, 4 }, inLTTP)
 
     -- Room 183 offset 0x16E (Double spike rollers)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 183, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 183, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr2", { 183, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr2", { 183, 5 }, inLTTP)
 
     -- Room 198 offset 0x18C (1F central room)
     updateDungeonDoorCacheFromTwoRooms("tr", { 198, 15 }, { 182, 13 }, inLTTP)
 
     -- Room 182 offset 0x16C (Chain Chomp room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 182, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr3", { 182, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "tr", { 182, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tr", { 182, 12 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tr", { 182, 15 }, inLTTP)
@@ -1243,26 +1452,26 @@ function updateRoomDataFromCache(inLTTP, changed)
     updateDungeonDoorCacheFromTwoRooms("tr", { 19, 15 }, { 20, 14 }, inLTTP)
 
     -- Room 20 offset 0x28 (Central tube room with big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 20, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr4", { 20, 4 }, inLTTP)
 
     -- Room 36 offset 0x48 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 36, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr5", { 36, 4 }, inLTTP)
 
     -- Room 4 offset 0x8 (Spike roller after big key door)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 4, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr6", { 4, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tr", { 4, 15 }, inLTTP)
 
     -- Room 213 offset 0x1AA (Laser bridge)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 213, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 213, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 213, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 213, 7 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 7 }, inLTTP)
 
     -- Room 197 offset 0x18A (Door to crystal switch room before boss)
     updateDungeonDoorCacheFromTwoRooms("tr", { 197, 15 }, { 196, 15 }, inLTTP)
 
     -- Room 164 offset 0x148 (Trinexx)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 164, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr8", { 164, 11 }, inLTTP)
 
 
     -- *** Ganon's Tower (dungeon)
@@ -1319,16 +1528,16 @@ function updateRoomDataFromCache(inLTTP, changed)
 
     -- *** Ganon's Tower (tower)
     -- Room 61 offset 0x7A (Mini helmasaur room before Moldorm 2)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt2", { 61, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt2", { 61, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt2", { 61, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 61, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 61, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 61, 6 }, inLTTP)
     -- Floor key and opened doors need to be in the main GT count for the math!
     updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "gt", { 61, 10 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 61, 14 }, inLTTP)
     updateDungeonDoorCacheFromTwoRooms("gt", { 61, 13 }, { 77, 15 }, inLTTP)
 
     -- Room 77 offset 0x9A (Validation chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt2", { 77, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 77, 4 }, inLTTP)
 
 
     if SHOW_DUNGEON_DEBUG_LOGGING then
@@ -1415,9 +1624,22 @@ function updateItemsLTTP(segment, address, inLTTP)
     updateMirror(segment, address + 0x53)
     updateAga1(segment, address + 0xc5)
 
+    -- Big keys for keysanity.
+    updateToggleItemFromByteAndFlag(segment, "gt_bigkey",  address + 0x66, 0x04)
+    updateToggleItemFromByteAndFlag(segment, "tr_bigkey",  address + 0x66, 0x08)
+    updateToggleItemFromByteAndFlag(segment, "tt_bigkey",  address + 0x66, 0x10)
+    updateToggleItemFromByteAndFlag(segment, "toh_bigkey", address + 0x66, 0x20)
+    updateToggleItemFromByteAndFlag(segment, "ip_bigkey",  address + 0x66, 0x40)
+    updateToggleItemFromByteAndFlag(segment, "sw_bigkey",  address + 0x66, 0x80)
+    updateToggleItemFromByteAndFlag(segment, "mm_bigkey",  address + 0x67, 0x01)
+    updateToggleItemFromByteAndFlag(segment, "pod_bigkey", address + 0x67, 0x02)
+    updateToggleItemFromByteAndFlag(segment, "sp_bigkey",  address + 0x67, 0x04)
+    updateToggleItemFromByteAndFlag(segment, "dp_bigkey",  address + 0x67, 0x10)
+    updateToggleItemFromByteAndFlag(segment, "ep_bigkey",  address + 0x67, 0x20)
+
     --  It may seem unintuitive, but these locations are controlled by flags stored adjacent to the item data,
     --  which makes it more efficient to update them here.
-    updateSectionChestCountFromByteAndFlag(segment, "@Secret Passage/Uncle", address + 0xc6, 0x01)
+    updateSectionChestCountFromByteAndFlag(segment, "@Secret Passage/Link's Uncle", address + 0xc6, 0x01)
     updateSectionChestCountFromByteAndFlag(segment, "@Hobo/Under The Bridge", address + 0xc9, 0x01)
     updateSectionChestCountFromByteAndFlag(segment, "@Bottle Merchant/Bottle Merchant", address + 0xc9, 0x02)
     updateSectionChestCountFromByteAndFlag(segment, "@Purple Chest/Purple Chest", address + 0xc9, 0x10)
@@ -1508,7 +1730,7 @@ function updateItemsLTTP(segment, address, inLTTP)
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sp", address + 0x69, 0x04)
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "dp", address + 0x69, 0x10)
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ep", address + 0x69, 0x20)
-        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "hc", address + 0x69, 0x80)
+        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "hc", address + 0x69, 0x40)
 
         -- Check if any of the dungeon item counts actually changed.  Set last update timestamp if so.
         for key, count in pairs(newDungeonItems) do
@@ -1566,9 +1788,9 @@ function updateRoomsLTTP(segment, address, inLTTP)
     end
 
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
-        updateSectionChestCountFromRoomSlotList(segment, address, "@The Well/Cave",
+        updateSectionChestCountFromRoomSlotList(segment, address, "@Kakariko Well/Cave",
                 { { 47, 5 }, { 47, 6 }, { 47, 7 }, { 47, 8 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@The Well/Bombable Wall", { { 47, 4 } })
+        updateSectionChestCountFromRoomSlotList(segment, address, "@Kakariko Well/Bombable Wall", { { 47, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Hookshot Cave/Bonkable Chest", { { 60, 7 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Hookshot Cave/Back", { { 60, 4 }, { 60, 5 }, { 60, 6 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Secret Passage/Hallway", { { 85, 4 } })
@@ -1580,15 +1802,15 @@ function updateRoomsLTTP(segment, address, inLTTP)
         updateSectionChestCountFromRoomSlotList(segment, address, "@Super-Bunny Cave/Cave", { { 248, 4 }, { 248, 5 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Spiral Cave/Spiral Cave", { { 254, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Paradox Cave/Bottom", { { 255, 4 }, { 255, 5 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@Tavern/Back Room", { { 259, 4 } })
+        updateSectionChestCountFromRoomSlotList(segment, address, "@Kakariko Tavern/Back Room", { { 259, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Link's House/Link's House", { { 260, 4 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@Sahasrala's Hut/Back Room",
+        updateSectionChestCountFromRoomSlotList(segment, address, "@Sahasrahla's Hut/Back Room",
                 { { 261, 4 }, { 261, 5 }, { 261, 6 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Brewery/Brewery", { { 262, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Chest Game/Chest Game", { { 262, 10 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Chicken House/Bombable Wall", { { 264, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Aginah's Cave/Aginah's Cave", { { 266, 4 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@Floodgate Chests/Floodgate Chest", { { 267, 4 } })
+        updateSectionChestCountFromRoomSlotList(segment, address, "@The Dam/Floodgate Chest", { { 267, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Mimic Cave/Mimic Cave", { { 268, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Mire Shed/Shack", { { 269, 4 }, { 269, 5 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@King's Tomb/The Crypt", { { 275, 4 } })
@@ -1597,11 +1819,11 @@ function updateRoomsLTTP(segment, address, inLTTP)
                 { { 278, 4 }, { 278, 5 } }, updateBombIndicatorStatus)
         updateSectionChestCountFromRoomSlotList(segment, address, "@Spike Cave/Spike Cave", { { 279, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Graveyard Ledge/Cave", { { 283, 9 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@Cave 45/Cave 45", { { 283, 10 } })
+        updateSectionChestCountFromRoomSlotList(segment, address, "@South of Grove/Cave", { { 283, 10 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@C-Shaped House/House", { { 284, 4 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@Blind's House/Basement",
+        updateSectionChestCountFromRoomSlotList(segment, address, "@Blind's Hideout/Basement",
                 { { 285, 5 }, { 285, 6 }, { 285, 7 }, { 285, 8 } })
-        updateSectionChestCountFromRoomSlotList(segment, address, "@Blind's House/Bombable Wall", { { 285, 4 } })
+        updateSectionChestCountFromRoomSlotList(segment, address, "@Blind's Hideout/Bombable Wall", { { 285, 4 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Hype Cave/Cave",
                 { { 286, 4 }, { 286, 5 }, { 286, 6 }, { 286, 7 }, { 286, 10 } })
         updateSectionChestCountFromRoomSlotList(segment, address, "@Ice Rod Cave/Ice Rod Cave", { { 288, 4 } })
@@ -1639,7 +1861,7 @@ function updateBombIndicatorStatus(status)
         else
             item.CurrentStage = 0
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find bombs for status update")
     end
 end
@@ -1661,7 +1883,7 @@ function updateMushroomStatus(status)
         if status then
             item.CurrentStage = 2
         end
-    elseif AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+    elseif SHOW_ERROR_DEBUG_LOGGING then
         print("***ERROR*** Couldn't find mushroom for status update")
     end
 end
@@ -1693,8 +1915,8 @@ function updateNPCItemFlagsLTTP(segment, address)
     updateSectionChestCountFromByteAndFlag(segment, "@Zora Area/King Zora", address, 0x02)
     updateSectionChestCountFromByteAndFlag(segment, "@Sick Kid/By The Bed", address, 0x04)
     updateSectionChestCountFromByteAndFlag(segment, "@Stumpy/Stumpy", address, 0x08)
-    updateSectionChestCountFromByteAndFlag(segment, "@Sahasrala's Hut/Sahasrala's Reward", address, 0x10)
-    updateSectionChestCountFromByteAndFlag(segment, "@Catfish/Ring of Stones", address, 0x20)
+    updateSectionChestCountFromByteAndFlag(segment, "@Sahasrahla's Hut/Sahasrahla", address, 0x10)
+    updateSectionChestCountFromByteAndFlag(segment, "@Catfish/Catfish", address, 0x20)
     -- 0x40 is unused
     updateSectionChestCountFromByteAndFlag(segment, "@Library/On The Shelf", address, 0x80)
 
@@ -1741,12 +1963,12 @@ function updateOverworldEventsLTTP(segment, address)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Flute Spot/Flute Spot", address, 42)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Desert Ledge/Desert Ledge", address, 48)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Lake Hylia Island/Lake Hylia Island", address, 53)
-    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Floodgate Chests/Sunken Treasure", address, 59)
+    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@The Dam/Sunken Treasure", address, 59)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Bumper Cave/Ledge", address, 74)
-    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Pyramid Ledge/Ledge", address, 91)
+    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Pyramid/Ledge", address, 91)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Digging Game/Dig For Treasure", address, 104)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Master Sword Pedestal/Pedestal", address, 128)
-    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Zora Area/Ledge", address, 129)
+    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Zora Area/Zora's Ledge", address, 129)
 end
 
 -- ************************* SM functions
@@ -1895,7 +2117,7 @@ function updateRoomsSM(segment, address)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (Crateria moat)/Missile (Crateria moat)", address + 0x0, 0x10)
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank, Gauntlet/Energy Tank, Gauntlet", address + 0x0, 0x20)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (Crateria bottom)/Missile (Crateria bottom)", address + 0x0, 0x40)
-    updateSectionChestCountFromByteAndFlag(segment, "@Bomb Torizo/Bomb Torizo", address + 0x0, 0x80)
+    updateSectionChestCountFromByteAndFlag(segment, "@Bombs/Bombs", address + 0x0, 0x80)
 
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank, Terminator/Energy Tank, Terminator", address + 0x1, 0x01)
     updateSectionChestCountFromByteAndFlag(segment, "@After Gauntlet/Missile (Crateria gauntlet right)", address + 0x1, 0x02)
@@ -1916,7 +2138,7 @@ function updateRoomsSM(segment, address)
 
     updateSectionChestCountFromByteAndFlag(segment, "@Power Bomb (pink Brinstar)/Power Bomb (pink Brinstar)", address + 0x3, 0x01)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (green Brinstar pipe)/Missile (green Brinstar pipe)", address + 0x3, 0x02)
-    updateSectionChestCountFromByteAndFlag(segment, "@Morph Ball/Morph Ball", address + 0x3, 0x04)
+    updateSectionChestCountFromByteAndFlag(segment, "@Morphing Ball/Morphing Ball", address + 0x3, 0x04)
     updateSectionChestCountFromByteAndFlag(segment, "@Power Bomb (blue Brinstar)/Power Bomb (blue Brinstar)", address + 0x3, 0x08)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (blue Brinstar middle)/Missile (blue Brinstar middle)", address + 0x3, 0x10)
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank, Brinstar Ceiling/Energy Tank, Brinstar Ceiling", address + 0x3, 0x20)
@@ -1926,8 +2148,8 @@ function updateRoomsSM(segment, address)
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank, Waterway/Energy Tank, Waterway", address + 0x4, 0x02)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (blue Brinstar bottom)/Missile (blue Brinstar bottom)", address + 0x4, 0x04)
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank, Brinstar Gate/Energy Tank, Brinstar Gate", address + 0x4, 0x08)
-    updateSectionChestCountFromByteAndFlag(segment, "@Missiles (blue Brinstar top)/Missile (blue Brinstar top)", address + 0x4, 0x10)
-    updateSectionChestCountFromByteAndFlag(segment, "@Missiles (blue Brinstar top)/Missile (blue Brinstar behind missile)", address + 0x4, 0x20)
+    updateSectionChestCountFromByteAndFlag(segment, "@Billy Mays Room/Missile (blue Brinstar top)", address + 0x4, 0x10)
+    updateSectionChestCountFromByteAndFlag(segment, "@Billy Mays Room/Missile (blue Brinstar behind missile)", address + 0x4, 0x20)
     updateSectionChestCountFromByteAndFlag(segment, "@X-Ray Scope/X-Ray Scope", address + 0x4, 0x40)
     updateSectionChestCountFromByteAndFlag(segment, "@Power Bomb (red Brinstar sidehopper room)/Power Bomb (red Brinstar sidehopper room)", address + 0x4, 0x80)
 
@@ -1938,9 +2160,9 @@ function updateRoomsSM(segment, address)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (Kraid)/Missile (Kraid)", address + 0x5, 0x10)
 
     updateSectionChestCountFromByteAndFlag(segment, "@Varia Suit/Varia Suit", address + 0x6, 0x01)
-    updateSectionChestCountFromByteAndFlag(segment, "@Norfair Missile (lava room)/Norfair Missile (lava room)", address + 0x6, 0x02)
+    updateSectionChestCountFromByteAndFlag(segment, "@Missile (lava room)/Missile (lava room)", address + 0x6, 0x02)
     updateSectionChestCountFromByteAndFlag(segment, "@Ice Beam/Ice Beam", address + 0x6, 0x04)
-    updateSectionChestCountFromByteAndFlag(segment, "@Norfair Missile (below ice)/Norfair Missile (below ice)", address + 0x6, 0x08)
+    updateSectionChestCountFromByteAndFlag(segment, "@Missile (below Ice Beam)/Missile (below Ice Beam)", address + 0x6, 0x08)
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank, Crocomire/Energy Tank, Crocomire", address + 0x6, 0x10)
     updateSectionChestCountFromByteAndFlag(segment, "@Hi-Jump Boots/Hi-Jump Boots", address + 0x6, 0x20)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (above Crocomire)/Missile (above Crocomire)", address + 0x6, 0x40)

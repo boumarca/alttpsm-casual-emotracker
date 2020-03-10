@@ -1,0 +1,310 @@
+﻿{
+  "alttp_item_grid": {
+    "type": "itemgrid",
+    "h_alignment": "center",
+    "item_margin": "1,2",
+    "rows": [
+      [ "bowandarrows", "boomerangs", "hookshot", "bombs", "powder", "mushroom", "aga"],
+      [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "kraid"],
+      [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "phantoon"],
+      [ "bottle", "somaria", "byrna", "cape", "mirror", "gomode", "draygon"],
+      [ "lift1", "boots", "flippers", "halfmagic", "heartpiece", "heartcontainer", "ridley"],
+      [ "", "", "", "", "owsword", "shield", "armor"]
+    ]
+  },
+  "sm_item_grid": {
+    "type": "array",
+    "orientation": "vertical",
+    "h_alignment": "center",
+    "v_alignment": "top",
+    "margin": "0,0",
+    "content": [
+      {
+        "type": "itemgrid",
+        "item_margin": "1,2",
+        "h_alignment": "left",
+        "rows": [
+          [ "charge", "ice", "wave", "spazer", "plasma"],
+          [ "morph", "bomb", "spring", "space","screw"],
+          [ "varia", "gravity", "hijump", "speed", ""],
+          [ "grapple", "xray", "etank", "reservetank", ""],
+          [ "missile", "supermissile", "powerbomb", "", ""]
+        ]
+      },
+      {
+        "type": "array",
+        "orientation": "horizontal",
+        "margin": "0,0",
+        "content": [
+          {
+            "type": "item",
+            "item": "difficulty"
+          }
+        ]
+      }
+    ]
+  },
+  "keys_item_grid": {
+    "type": "array",
+    "orientation": "vertical",
+    "content": [
+      {
+        "type": "array",
+        "orientation": "horizontal",
+        "content": [
+          {
+            "type": "itemgrid",
+            "margin": "0,2",
+            "h_alignment": "center",
+            "item_margin": "1,0",
+            "item_height": 16,
+            "item_width": 20,
+            "rows": [
+              [
+                "hc_label"
+              ]
+            ]
+          },
+          {
+            "type": "itemgrid",
+            "margin": "0,2",
+            "h_alignment": "center",
+            "item_margin": "1,0",
+            "item_size": 16,
+            "badge_font_size": 10,
+            "rows": [
+              [
+                "hc_smallkey"
+              ]
+            ]
+          },
+          {
+            "type": "itemgrid",
+            "margin": "0,2",
+            "h_alignment": "center",
+            "item_margin": "1,0",
+            "item_height": 16,
+            "item_width": 20,
+            "rows": [
+              [
+                "at_label"
+              ]
+            ]
+          },
+          {
+            "type": "itemgrid",
+            "margin": "0,2",
+            "h_alignment": "center",
+            "item_margin": "1,0",
+            "item_size": 16,
+            "badge_font_size": 10,
+            "rows": [
+              [
+                "at_smallkey"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "type": "array",
+        "orientation": "horizontal",
+        "content": [
+          {
+            "type": "itemgrid",
+            "margin": "0,2",
+            "h_alignment": "center",
+            "item_margin": "1,0",
+            "item_height": 16,
+            "item_width": 20,
+            "rows": [
+              [
+                "ep_label"
+              ],
+              [
+                "dp_label"
+              ],
+              [
+                "toh_label"
+              ],
+              [
+                "pod_label"
+              ],
+              [
+                "sp_label"
+              ],
+              [
+                "sw_label"
+              ],
+              [
+                "tt_label"
+              ],
+              [
+                "ip_label"
+              ],
+              [
+                "mm_label"
+              ],
+              [
+                "tr_label"
+              ],
+              [
+                "gt_label"
+              ]
+            ]
+          },
+          {
+            "type": "itemgrid",
+            "h_alignment": "center",
+            "item_margin": "1,0",
+            "item_size": 16,
+            "badge_font_size": 10,
+            "rows": [
+              [
+                "easternpalace",
+                "ep_smallkey",
+                "ep_bigkey"
+              ],
+              [
+                "desertpalace",
+                "dp_smallkey",
+                "dp_bigkey"
+              ],
+              [
+                "towerofhera",
+                "toh_smallkey",
+                "toh_bigkey"
+              ],
+              [
+                "palaceofdarkness",
+                "pod_smallkey",
+                "pod_bigkey"
+              ],
+              [
+                "swamppalace",
+                "sp_smallkey",
+                "sp_bigkey"
+              ],
+              [
+                "skullwoods",
+                "sw_smallkey",
+                "sw_bigkey"
+              ],
+              [
+                "thievestown",
+                "tt_smallkey",
+                "tt_bigkey"
+              ],
+              [
+                "icepalace",
+                "ip_smallkey",
+                "ip_bigkey"
+              ],
+              [
+                "miserymire",
+                "mm_smallkey",
+                "mm_bigkey"
+              ],
+              [
+                "turtlerock",
+                "tr_smallkey",
+                "tr_bigkey"
+              ],
+              [
+                "",
+                "gt_smallkey",
+                "gt_bigkey"
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "tracker_capture_item": {
+    "type": "container",
+    "content": {
+      "type": "itemgrid",
+      "h_alignment": "center",
+      "item_margin": "1,2",
+      "rows": [
+        [ "bow", "silvers", "hookshot", "bombs", "powder", "mushroom", "charge", "ice", "wave", "spazer", "plasma"],
+        [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "morph", "bomb", "spring", "space","screw"],
+        [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "varia", "gravity", "hijump", "speed", "grapple"],
+        [ "bottle", "somaria", "byrna", "cape", "mirror", "blueboomerang", "redboomerang", "heartpiece_icon", "xray", "etank_icon", "reservetank_icon"],
+        [ "lift1", "boots", "flippers", "halfmagic", "owsword", "shield", "armor", "heartcontainer_icon", "missile_icon", "super_icon", "pb_icon"],
+        [ "generic_smallkey", "generic_bigkey" ]
+      ]
+    }
+  },
+  "tracker_default": {
+    "type": "container",
+    "background": "#000000",
+    "content": {
+      "type": "dock",
+      "dropshadow": true,
+      "content": [
+        {
+          "type": "dock",
+          "dock": "bottom",
+          "h_alignment": "stretch",
+          "content": [
+            {
+              "type": "dock",
+              "dock": "left",
+              "content": [
+                {
+                  "type": "group",
+                  "header": "Items",
+                  "dock": "top",
+                  "content": {
+                    "type": "array",
+                    "orientation": "vertical",
+                    "margin": "0,0",
+                    "content": [
+                      {
+                        "type": "array",
+                        "orientation": "horizontal",
+                        "margin": "0,0",
+                        "content": [
+                          {
+                            "type": "layout",
+                            "key": "alttp_item_grid",
+                          },
+                          {
+                            "type": "layout",
+                            "key": "sm_item_grid",
+                          },
+                          {
+                            "type": "layout",
+                            "key": "keys_item_grid",
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "group",
+              "header": "Pinned Locations",
+              "content": {
+                "type": "recentpins",
+                "style": "wrap",
+                "h_alignment": "stretch",
+                "v_alignment": "stretch",
+                "orientation": "horizontal",
+                "compact": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "layout",
+          "key": "shared_maps"
+        }
+      ]
+    }
+  }
+}

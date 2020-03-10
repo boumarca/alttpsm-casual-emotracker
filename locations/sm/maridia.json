@@ -1,0 +1,494 @@
+[
+  {
+    "name": "Maridia",
+    "chest_unopened_img": "images/major_unopened.png",
+    "chest_opened_img": "images/major_opened.png",
+    "color": "#409078",
+    "children": [
+      {
+        "name": "Can Defeat Botwoon",
+        "access_rules": [
+          "@Maridia Portal",
+
+          "normal,speed",
+
+          "[hard],ice",
+          "[hard],speed,gravity",
+        ]
+      },
+      {
+        "name": "Can Defeat Draygon",
+        "access_rules": [
+          "normal,@Can Defeat Botwoon,$notKeysanity,gravity,speed,hijump",
+          "normal,@Can Defeat Botwoon,$notKeysanity,gravity,$canFly",
+          "normal,@Can Defeat Botwoon,draygon_key,gravity,speed,hijump",
+          "normal,@Can Defeat Botwoon,draygon_key,gravity,$canFly",
+
+          "[hard],@Can Defeat Botwoon,$notKeysanity,gravity",
+          "[hard],@Can Defeat Botwoon,draygon_key,gravity",
+        ]
+      },
+      {
+        "name": "Maridia Outer",
+        "access_rules": [
+          "normal,@Norfair Upper West,$canUsePowerBombs,gravity",
+          "normal,@Maridia Portal,gravity",
+
+          "[hard],@Norfair Upper West,$canUsePowerBombs,gravity",
+          "[hard],@Norfair Upper West,$canUsePowerBombs,hijump,$canSpringBallJump",
+          "[hard],@Norfair Upper West,$canUsePowerBombs,hijump,ice",
+          "[hard],@Maridia Portal"
+        ],
+        "children": [
+          {
+            "name": "Missile (green Maridia shinespark)",
+            "sections": [
+              {
+                "name": "Missile (green Maridia shinespark)",
+                "capture_item": true,
+                "access_rules": [
+                  "gravity,speed",
+                  "{}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1160,
+                "y": 1040
+              },
+              {
+                "map": "maridia",
+                "x": 232,
+                "y": 468
+              }
+            ]
+          },
+          {
+            "name": "Super Missile (green Maridia)",
+            "sections": [
+              {
+                "name": "Super Missile (green Maridia)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1192,
+                "y": 1008
+              },
+              {
+                "map": "maridia",
+                "x": 264,
+                "y": 436
+              }
+            ]
+          },
+          {
+            "name": "Energy Tank, Mama turtle",
+            "access_rules": [
+              "$canFly",
+              "speed",
+              "grapple",
+              "[hard],$canSpringBallJump,gravity",
+              "[hard],$canSpringBallJump,hijump"
+            ],
+            "sections": [
+              {
+                "name": "Energy Tank, Mama turtle",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1416,
+                "y": 1040
+              },
+              {
+                "map": "maridia",
+                "x": 488,
+                "y": 468
+              }
+            ]
+          },
+          {
+            "name": "Missile (green Maridia tatori)",
+            "sections": [
+              {
+                "name": "Missile (green Maridia tatori)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1448,
+                "y": 1072
+              },
+              {
+                "map": "maridia",
+                "x": 520,
+                "y": 500
+              }
+            ]
+          },
+        ]
+      },
+      {
+        "name": "Maridia Inner",
+        "access_rules": [
+          "normal,gravity,@Norfair Upper West,super,$canUsePowerBombs,$canFly",
+          "normal,gravity,@Norfair Upper West,super,$canUsePowerBombs,speed",
+          "normal,gravity,@Norfair Upper West,super,$canUsePowerBombs,grapple",
+          "normal,gravity,@Maridia Portal",
+
+          "[hard],super,@Norfair Upper West,$canUsePowerBombs,gravity",
+          "[hard],super,@Norfair Upper West,$canUsePowerBombs,hijump,ice,grapple",
+          "[hard],super,@Norfair Upper West,$canUsePowerBombs,hijump,$canSpringBallJump,grapple",
+          "[hard],@Maridia Portal"
+        ],
+        "children": [
+          {
+            "name": "Watering Hole",
+            "access_rules": [
+              "normal,$canPassBombPassages",
+              "[hard],$canPassBombPassages,gravity",
+              "[hard],$canPassBombPassages,ice",
+              "[hard],$canPassBombPassages,hijump,$canSpringBallJump"
+            ],
+            "sections": [
+              {
+                "name": "Super Missile (yellow Maridia)",
+                "item_count": 1
+              },
+              {
+                "name": "Missile (yellow Maridia super missile)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1224,
+                "y": 848
+              },
+              {
+                "map": "maridia",
+                "x": 296,
+                "y": 276
+              }
+            ]
+          },
+          {
+            "name": "Missile (yellow Maridia false wall)",
+            "access_rules": [
+              "normal,$canPassBombPassages",
+              "[hard],$canPassBombPassages,gravity",
+              "[hard],$canPassBombPassages,ice",
+              "[hard],$canPassBombPassages,hijump,$canSpringBallJump"
+            ],
+            "sections": [
+              {
+                "name": "Missile (yellow Maridia false wall)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1480,
+                "y": 848
+              },
+              {
+                "map": "maridia",
+                "x": 552,
+                "y": 276
+              }
+            ]
+          },
+          {
+            "name": "Plasma Beam",
+            "sections": [
+              {
+                "name": "Plasma Beam",
+                "capture_item": true,
+                "access_rules": [
+                  "draygon,screw,hijump",
+                  "draygon,screw,$canFly",
+                  "draygon,plasma,hijump",
+                  "draygon,plasma,$canFly",
+
+                  "[hard],draygon,speed",
+                  "[hard],draygon,screw,$canSpringBallJump",
+                  "[hard],draygon,plasma,$canSpringBallJump",
+                  "[hard],draygon,charge,$countEnergyReserves:3,hijump",
+                  "[hard],draygon,charge,$countEnergyReserves:3,$canSpringBallJump",
+                  "[hard],draygon,charge,$countEnergyReserves:3,$canFly",
+
+                  "{draygon,@Can Defeat Draygon}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1736,
+                "y": 720
+              },
+              {
+                "map": "maridia",
+                "x": 808,
+                "y": 148
+              }
+            ]
+          },
+          {
+            "name": "West Sand Hole",
+            "access_rules": [
+              "normal,super,$canPassBombPassages",
+              "[hard],super,hijump,space",
+              "[hard],super,hijump,$canSpringBallJump",
+              "[hard],super,gravity"
+            ],
+            "sections": [
+              {
+                "name": "Missile (left Maridia sand pit room)",
+                "capture_item": true,
+                "item_count": 1
+              },
+              {
+                "name": "Reserve Tank, Maridia",
+                "capture_item": true,
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1480,
+                "y": 1104
+              },
+              {
+                "map": "maridia",
+                "x": 552,
+                "y": 532
+              }
+            ]
+          },
+          {
+            "name": "Missile (right Maridia sand pit room)",
+            "access_rules": [
+              "normal,super",
+              "[hard],super,hijump",
+              "[hard],super,gravity"
+            ],
+            "sections": [
+              {
+                "name": "Missile (right Maridia sand pit room)",
+                "capture_item": true,
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1576,
+                "y": 1104
+              },
+              {
+                "map": "maridia",
+                "x": 648,
+                "y": 532
+              }
+            ]
+          },
+          {
+            "name": "Power Bomb (right Maridia sand pit room)",
+            "access_rules": [
+              "normal,super",
+              "[hard],super,hijump,$canSpringBallJump",
+              "[hard],super,gravity"
+            ],
+            "sections": [
+              {
+                "name": "Power Bomb (right Maridia sand pit room)",
+                "capture_item": true,
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1608,
+                "y": 1136
+              },
+              {
+                "map": "maridia",
+                "x": 680,
+                "y": 564
+              }
+            ]
+          },
+          {
+            "name": "Super Missile (pink Maridia)",
+            "access_rules": [
+              "normal,speed",
+              "[hard],gravity"
+            ],
+            "sections": [
+              {
+                "name": "Super Missile (pink Maridia)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1640,
+                "y": 944
+              },
+              {
+                "map": "maridia",
+                "x": 712,
+                "y": 372
+              }
+            ]
+          },
+          {
+            "name": "Missile (pink Maridia)",
+            "sections": [
+              {
+                "name": "Missile (pink Maridia)",
+                "capture_item": true,
+                "access_rules": [
+                  "normal,speed",
+                  "[hard],gravity",
+                  "{}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1608,
+                "y": 944
+              },
+              {
+                "map": "maridia",
+                "x": 680,
+                "y": 372
+              }
+            ]
+          },
+          {
+            "name": "Spring Ball",
+            "access_rules": [
+              "normal,super,grapple,$canUsePowerBombs,space",
+              "normal,super,grapple,$canUsePowerBombs,hijump",
+              "[hard],super,grapple,$canUsePowerBombs,gravity,$canFly",
+              "[hard],super,grapple,$canUsePowerBombs,gravity,hijump",
+              "[hard],super,grapple,$canUsePowerBombs,ice,hijump,$canSpringBallJump,space"
+            ],
+            "sections": [
+              {
+                "name": "Spring Ball",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1896,
+                "y": 1168
+              },
+              {
+                "map": "maridia",
+                "x": 968,
+                "y": 596
+              }
+            ]
+          },
+          {
+            "name": "Missile (Draygon)",
+            "access_rules": [
+              "@Can Defeat Botwoon,gravity"
+            ],
+            "sections": [
+              {
+                "name": "Missile (Draygon)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 2184,
+                "y": 880
+              },
+              {
+                "map": "maridia",
+                "x": 1256,
+                "y": 308
+              }
+            ]
+          },
+          {
+            "name": "Energy Tank, Botwoon",
+            "access_rules": [
+              "@Can Defeat Botwoon"
+            ],
+            "sections": [
+              {
+                "name": "Energy Tank, Botwoon",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1768,
+                "y": 912
+              },
+              {
+                "map": "maridia",
+                "x": 840,
+                "y": 340
+              }
+            ]
+          },
+          {
+            "name": "Space Jump",
+            "access_rules": [
+              "@Can Defeat Draygon,$canFly",
+              "@Can Defeat Draygon,speed,hijump"
+            ],
+            "sections": [
+              {
+                "name": "Space Jump",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 2056,
+                "y": 976
+              },
+              {
+                "map": "maridia",
+                "x": 1128,
+                "y": 404
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+﻿{
+  "tracker_broadcast": {
+    "type": "array",
+    "orientation": "vertical",
+    "margin": "0,0",
+    "content": [
+      {
+        "type": "layout",
+        "key": "alttp_item_grid",
+      },
+      {
+        "type": "array",
+        "orientation": "horizontal",
+        "h_alignment": "stretch",
+        "margin": "0,0",
+        "content": [
+          {
+            "type": "layout",
+            "key": "sm_item_grid",
+          },
+          {
+            "type": "layout",
+            "key": "keys_item_grid",
+          }
+        ]
+      },
+    ]
+  }
+}

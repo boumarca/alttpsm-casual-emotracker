@@ -1,0 +1,587 @@
+[
+  {
+    "name": "Norfair Upper",
+    "chest_unopened_img": "images/major_unopened.png",
+    "chest_opened_img": "images/major_opened.png",
+    "children": [
+      {
+        "name": "Norfair Upper West",
+        "color": "#b81818",
+        "access_rules": [
+          "$canDestroyBombWalls,super,morph",
+          "speed,super,morph",
+          "@Norfair Upper Portal"
+        ],
+        "children": [
+          {
+            "name": "Ice Beam",
+            "access_rules": [
+              "normal,super,$canPassBombPassages,varia,speed",
+              "[hard],super,morph,varia",
+              "[hard],super,morph,$countEnergyReserves:3"
+            ],
+            "sections": [
+              {
+                "name": "Ice Beam",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1096,
+                "y": 1360
+              },
+              {
+                "map": "norfair",
+                "x": 216,
+                "y": 148
+              }
+            ]
+          },
+          {
+            "name": "Missile (below Ice Beam)",
+            "access_rules": [
+              "normal,super,$canUsePowerBombs,varia,speed",
+              "[hard],super,$canUsePowerBombs,varia",
+              "[hard],super,$canUsePowerBombs,$countEnergyReserves:3",
+              "[hard],varia,speed,super"
+            ],
+            "sections": [
+              {
+                "name": "Missile (below Ice Beam)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1000,
+                "y": 1424
+              },
+              {
+                "map": "norfair",
+                "x": 120,
+                "y": 212
+              }
+            ]
+          },
+          {
+            "name": "Hi-Jump Boots",
+            "access_rules": [
+              "$canOpenRedDoors,$canPassBombPassages",
+            ],
+            "sections": [
+              {
+                "name": "Hi-Jump Boots",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1160,
+                "y": 1488
+              },
+              {
+                "map": "norfair",
+                "x": 280,
+                "y": 276
+              }
+            ]
+          },
+          {
+            "name": "Missile (Hi-Jump Boots)",
+            "access_rules": [
+              "$canOpenRedDoors,morph"
+            ],
+            "sections": [
+              {
+                "name": "Missile (Hi-Jump Boots)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1192,
+                "y": 1456
+              },
+              {
+                "map": "norfair",
+                "x": 312,
+                "y": 244
+              }
+            ]
+          },
+          {
+            "name": "Energy Tank (Hi-Jump Boots)",
+            "access_rules": [
+              "$canOpenRedDoors"
+            ],
+            "sections": [
+              {
+                "name": "Energy Tank (Hi-Jump Boots)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1224,
+                "y": 1456
+              },
+              {
+                "map": "norfair",
+                "x": 344,
+                "y": 244
+              }
+            ]
+          },
+          {
+            // This is part of the Crocomire section, but located here for capture logic!
+            "name": "Missile (above Crocomire)",
+            "sections": [
+              {
+                "name": "Missile (above Crocomire)",
+                "capture_item": true,
+                "access_rules": [
+                  "normal,@Norfair Upper Crocomire,$canFly",
+                  "normal,@Norfair Upper Crocomire,grapple",
+                  "normal,@Norfair Upper Crocomire,hijump,speed",
+
+                  "[hard],@Norfair Upper Crocomire,$canHellRun,$canFly",
+                  "[hard],@Norfair Upper Crocomire,$canHellRun,grapple",
+                  "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,speed",
+                  "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,$canSpringBallJump",
+                  "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,varia,ice",
+
+                  "{super}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1288,
+                "y": 1488
+              },
+              {
+                "map": "norfair",
+                "x": 408,
+                "y": 276
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Norfair Upper East",
+        "access_rules": [
+          "normal,@Norfair Upper West,varia,super,$canFly",
+          "normal,@Norfair Upper West,varia,super,hijump",
+          "normal,@Norfair Upper West,varia,super,speed",
+
+          "[hard],@Norfair Upper West,$canHellRun,super,$canFly",
+          "[hard],@Norfair Upper West,$canHellRun,super,hijump",
+          "[hard],@Norfair Upper West,$canHellRun,super,speed",
+          "[hard],@Norfair Upper West,$canHellRun,super,$canSpringBallJump",
+          "[hard],@Norfair Upper West,$canHellRun,super,varia,ice",
+          "[hard],@Norfair Upper West,$canHellRun,speed,$canUsePowerBombs"
+        ],
+        "children": [
+          {
+            "name": "Norfair Reserve Tank Room",
+            "access_rules": [
+              "normal,morph,$canFly",
+              "normal,morph,grapple,speed",
+              "normal,morph,grapple,$canPassBombPassages",
+              "normal,morph,hijump",
+              "normal,morph,ice",
+
+              "[hard],morph,super"
+            ],
+            "sections": [
+              {
+                "name": "Reserve Tank, Norfair",
+                "item_count": 1
+              },
+              {
+                "name": "Missile (Norfair Reserve Tank)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1512,
+                "y": 1360
+              },
+              {
+                "map": "norfair",
+                "x": 632,
+                "y": 148
+              }
+            ]
+          },
+          {
+            "name": "Speed Booster Hallway",
+            "access_rules": [
+              "normal,$canFly",
+              "normal,morph,speed",
+              "normal,morph,$canPassBombPassages",
+              "normal,hijump",
+              "normal,ice",
+
+              "[hard],super"
+            ],
+            "children": [
+              {
+                "name": "Speed Booster",
+                "sections": [
+                  {
+                    "name": "Speed Booster",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 2120,
+                    "y": 1360
+                  },
+                  {
+                    "map": "norfair",
+                    "x": 1240,
+                    "y": 148
+                  }
+                ]
+              },
+              {
+                "name": "Missile (Speed Booster)",
+                "sections": [
+                  {
+                    "name": "Missile (Speed Booster)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 2088,
+                    "y": 1360
+                  },
+                  {
+                    "map": "norfair",
+                    "x": 1208,
+                    "y": 148
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Wave Beam",
+            "access_rules": [
+              "normal,morph,$canFly",
+              "normal,morph,speed",
+              "normal,morph,$canPassBombPassages",
+              "normal,morph,hijump",
+              "normal,morph,ice",
+
+              "[hard],$canOpenRedDoors,morph",
+              "[hard],$canOpenRedDoors,grapple",
+              "[hard],$canOpenRedDoors,hijump,varia",
+              "[hard],$canOpenRedDoors,space"
+            ],
+            "sections": [
+              {
+                "name": "Wave Beam",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1864,
+                "y": 1424
+              },
+              {
+                "map": "norfair",
+                "x": 984,
+                "y": 212
+              }
+            ]
+          },
+          {
+            "name": "Missile (Wave Beam)",
+            "access_rules": [
+              "normal,$canFly",
+              "normal,morph,speed",
+              "normal,morph,$canPassBombPassages",
+              "normal,hijump",
+              "normal,ice",
+
+              "[hard]"
+            ],
+            "sections": [
+              {
+                "name": "Missile (Wave Beam)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1768,
+                "y": 1424
+              },
+              {
+                "map": "norfair",
+                "x": 888,
+                "y": 212
+              }
+            ]
+          },
+          {
+            "name": "Missile (lava room)",
+            "sections": [
+              {
+                "name": "Missile (lava room)",
+                "capture_item": true,
+                "access_rules": [
+                  "morph",
+                  "{}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1448,
+                "y": 1424
+              },
+              {
+                "map": "norfair",
+                "x": 568,
+                "y": 212
+              }
+            ]
+          },
+          {
+            "name": "Missile (bubble Norfair green door)",
+            "access_rules": [
+              "normal,$canFly",
+              "normal,grapple,morph,speed",
+              "normal,grapple,morph,$canPassBombPassages",
+              "normal,hijump",
+              "normal,ice",
+
+              "[hard],super"
+            ],
+            "sections": [
+              {
+                "name": "Missile (bubble Norfair green door)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1608,
+                "y": 1360
+              },
+              {
+                "map": "norfair",
+                "x": 728,
+                "y": 148
+              }
+            ]
+          },
+          {
+            "name": "Missile (bubble Norfair)",
+            "sections": [
+              {
+                "name": "Missile (bubble Norfair)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1672,
+                "y": 1456
+              },
+              {
+                "map": "norfair",
+                "x": 792,
+                "y": 244
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Norfair Upper Crocomire",
+        "access_rules": [
+          "normal,@Norfair Upper West,varia,super,$canUsePowerBombs,speed",
+          "normal,@Norfair Upper West,varia,super,speed,wave",
+          "normal,@Norfair Upper West,varia,super,morph,$canFly,gravity,wave",
+          "normal,@Norfair Upper West,varia,super,morph,hijump,gravity,wave",
+
+          "[hard],@Norfair Upper West,super,$countEnergyReserves:2,speed",
+          "[hard],@Norfair Upper West,super,$canHellRun,$canFly,$canPassBombPassages",
+          "[hard],@Norfair Upper West,super,$canHellRun,$canFly,varia,morph",
+          "[hard],@Norfair Upper West,super,$canHellRun,hijump,$canPassBombPassages",
+          "[hard],@Norfair Upper West,super,$canHellRun,hijump,varia,morph",
+          "[hard],@Norfair Upper West,super,$canHellRun,$canSpringBallJump,$canPassBombPassages",
+          "[hard],@Norfair Upper West,super,$canHellRun,$canSpringBallJump,varia,morph",
+          "[hard],@Norfair Upper West,super,$canHellRun,varia,ice,$canPassBombPassages",
+          "[hard],@Norfair Upper West,super,$canHellRun,varia,ice,morph",
+          "[hard],@Norfair Upper West,super,$canHellRun,speed",
+
+          "[hard],@Norfair Lower Portal,screw,space,varia,super,$countEnergyReserves:2"
+        ],
+        "children": [
+          {
+            "name": "Energy Tank, Crocomire",
+            "access_rules": [
+              "normal,$countEnergyReserves:1",
+              "normal,space",
+              "normal,grapple",
+              "[hard]"
+            ],
+            "sections": [
+              {
+                "name": "Energy Tank, Crocomire",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1544,
+                "y": 1616
+              },
+              {
+                "map": "norfair",
+                "x": 664,
+                "y": 404
+              }
+            ]
+          },
+          {
+            "name": "Missile (below Crocomire)",
+            "access_rules": [
+              "morph"
+            ],
+            "sections": [
+              {
+                "name": "Missile (below Crocomire)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1384,
+                "y": 1776
+              },
+              {
+                "map": "norfair",
+                "x": 504,
+                "y": 564
+              }
+            ]
+          },
+          {
+            "name": "Power Bomb (Crocomire)",
+            "access_rules": [
+              "normal,$canFly",
+              "normal,hijump",
+              "normal,grapple",
+              "[hard]"
+            ],
+            "sections": [
+              {
+                "name": "Power Bomb (Crocomire)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1224,
+                "y": 1616
+              },
+              {
+                "map": "norfair",
+                "x": 344,
+                "y": 404
+              }
+            ]
+          },
+          {
+            "name": "Missile (Grapple Beam)",
+            "access_rules": [
+              "normal,morph,$canFly",
+              "normal,morph,speed,$canUsePowerBombs",
+              "[hard],speed",
+              "[hard],morph,$canFly",
+              "[hard],morph,grapple"
+            ],
+            "sections": [
+              {
+                "name": "Missile (Grapple Beam)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1192,
+                "y": 1776
+              },
+              {
+                "map": "norfair",
+                "x": 312,
+                "y": 564
+              }
+            ]
+          },
+          {
+            "name": "Grapple Beam",
+            "access_rules": [
+              "normal,morph,$canFly",
+              "normal,morph,speed,$canUsePowerBombs",
+              "[hard],space",
+              "[hard],morph",
+              "[hard],grapple",
+              "[hard],hijump,speed"
+            ],
+            "sections": [
+              {
+                "name": "Grapple Beam",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1032,
+                "y": 1808
+              },
+              {
+                "map": "norfair",
+                "x": 152,
+                "y": 596
+              }
+            ]
+          },
+        ]
+      }
+    ]
+  }
+]

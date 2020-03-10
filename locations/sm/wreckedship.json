@@ -5,8 +5,16 @@
     "chest_opened_img": "images/major_opened.png",
     "color": "#707048",
     "access_rules": [
-      "[hard],$canEnterWreckedShipHard",
-      "normal,$canEnterWreckedShipNormal"
+      "super,@Maridia Portal,gravity,$canPassBombPassages",
+
+      "normal,super,$canUsePowerBombs,speed",
+      "normal,super,$canUsePowerBombs,grapple",
+      "normal,super,$canUsePowerBombs,space",
+      "normal,super,$canUsePowerBombs,gravity,$canFly",
+      "normal,super,$canUsePowerBombs,gravity,hijump",
+
+      "[hard],super,$canUsePowerBombs",
+      "[hard],super,@Maridia Portal,hijump,$canPassBombPassages"
     ],
     "children": [
       {
@@ -16,8 +24,14 @@
             "name": "Reserve Tank, Wrecked Ship",
             "capture_item": true,
             "access_rules": [
-              "[hard],$reserveTankWreckedShipHard",
-              "normal,$reserveTankWreckedShipNormal",
+              "normal,phantoon,speed,$canUsePowerBombs,grapple",
+              "normal,phantoon,speed,$canUsePowerBombs,space",
+              "normal,phantoon,speed,$canUsePowerBombs,varia,$countEnergyReserves:2",
+              "normal,phantoon,speed,$canUsePowerBombs,$countEnergyReserves:3",
+
+              "[hard],phantoon,$canUsePowerBombs,speed,varia",
+              "[hard],phantoon,$canUsePowerBombs,speed,$countEnergyReserves:2",
+
               "{phantoon,$canUsePowerBombs}",
               "{phantoon,xray}"
             ],
@@ -40,8 +54,14 @@
       {
         "name": "Energy Tank, Wrecked Ship",
         "access_rules": [
-          "$energyTankWreckedShipNormal",
-          "[hard],$energyTankWreckedShipHard"
+          "phantoon,hijump",
+          "phantoon,space",
+          "phantoon,speed",
+          "phantoon,gravity",
+
+          "[hard],phantoon,bomb",
+          "[hard],phantoon,powerbomb",
+          "[hard],phantoon,$canSpringBallJump",
         ],
         "sections": [
           {
@@ -89,8 +109,13 @@
       {
         "name": "Gravity Suit",
         "access_rules": [
-          "[hard],$gravitySuitHard",
-          "normal,$gravitySuitNormal"
+          "normal,phantoon,grapple",
+          "normal,phantoon,space",
+          "normal,phantoon,varia,$countEnergyReserves:2",
+          "normal,phantoon,$countEnergyReserves:3",
+
+          "[hard],phantoon,varia",
+          "[hard],phantoon,$countEnergyReserves:1"
         ],
         "sections": [
           {
@@ -135,8 +160,13 @@
       {
         "name": "Missile (Gravity Suit)",
         "access_rules": [
-          "[hard],$gravitySuitHard",
-          "normal,$gravitySuitNormal"
+          "normal,phantoon,grapple",
+          "normal,phantoon,space",
+          "normal,phantoon,varia,$countEnergyReserves:2",
+          "normal,phantoon,$countEnergyReserves:3",
+
+          "[hard],phantoon,varia",
+          "[hard],phantoon,$countEnergyReserves:1"
         ],
         "sections": [
           {

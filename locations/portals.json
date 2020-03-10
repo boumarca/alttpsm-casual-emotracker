@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Death Mountain Portal",
+    "access_rules": [
+      "$canDestroyBombWalls,super,morph",
+      "speed,super,morph"
+    ]
+  },
+  {
+    "name": "Dark World Portal",
+    "access_rules": [
+      "normal,$canUsePowerBombs,super,gravity,speed",
+      "[hard],$canUsePowerBombs,super,charge,gravity,ice",
+      "[hard],$canUsePowerBombs,super,charge,gravity,speed",
+      "[hard],$canUsePowerBombs,super,charge,hijump,ice,grapple",
+      "[hard],$canUsePowerBombs,super,missile,gravity,ice",
+      "[hard],$canUsePowerBombs,super,missile,gravity,speed",
+      "[hard],$canUsePowerBombs,super,missile,hijump,ice,grapple"
+    ]
+  },
+  {
+    "name": "Misery Mire Portal",
+    "access_rules": [
+      "normal,varia,super,gravity,space,$canUsePowerBombs",
+      "[hard],varia,super,gravity,$canUsePowerBombs",
+      "[hard],varia,super,hijump,$canUsePowerBombs"
+    ]
+  },
+  {
+    "name": "Norfair Upper Portal",
+    "access_rules": [
+      "flute",
+      "lift1,[lamp]"
+    ]
+  },
+  {
+    "name": "Norfair Lower Portal",
+    "access_rules": [
+      "flute,lift2"
+    ]
+  },
+  {
+    "name": "Maridia Portal",
+    "access_rules": [
+      "pearl,flippers,gravity,morph,aga1",
+      "pearl,flippers,gravity,morph,hammer,lift1",
+      "pearl,flippers,gravity,morph,lift2",
+
+      "[hard],pearl,flippers,morph,$canSpringBallJump,aga1",
+      "[hard],pearl,flippers,morph,$canSpringBallJump,hammer,lift1",
+      "[hard],pearl,flippers,morph,$canSpringBallJump,lift2",
+      "[hard],pearl,flippers,morph,hijump,aga1",
+      "[hard],pearl,flippers,morph,hijump,hammer,lift1",
+      "[hard],pearl,flippers,morph,hijump,lift2",
+    ]
+  }
+]
