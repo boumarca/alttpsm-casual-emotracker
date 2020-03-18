@@ -137,42 +137,6 @@
                 "y": 244
               }
             ]
-          },
-          {
-            // This is part of the Crocomire section, but located here for capture logic!
-            "name": "Missile (above Crocomire)",
-            "sections": [
-              {
-                "name": "Missile (above Crocomire)",
-                "capture_item": true,
-                "access_rules": [
-                  "normal,@Norfair Upper Crocomire,$canFly",
-                  "normal,@Norfair Upper Crocomire,grapple",
-                  "normal,@Norfair Upper Crocomire,hijump,speed",
-
-                  "[hard],@Norfair Upper Crocomire,$canHellRun,$canFly",
-                  "[hard],@Norfair Upper Crocomire,$canHellRun,grapple",
-                  "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,speed",
-                  "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,$canSpringBallJump",
-                  "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,varia,ice",
-
-                  "{super}"
-                ],
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1288,
-                "y": 1488
-              },
-              {
-                "map": "norfair",
-                "x": 408,
-                "y": 276
-              }
-            ]
           }
         ]
       },
@@ -580,6 +544,42 @@
               }
             ]
           },
+        ]
+      },
+      {
+        // This is part of the Crocomire section, but located here for capture logic!
+        "name": "Missile (above Crocomire)",
+        "sections": [
+          {
+            "name": "Missile (above Crocomire)",
+            "capture_item": true,
+            "access_rules": [
+              "normal,@Norfair Upper Crocomire,$canFly",
+              "normal,@Norfair Upper Crocomire,grapple",
+              "normal,@Norfair Upper Crocomire,hijump,speed",
+
+              "[hard],@Norfair Upper Crocomire,$canHellRun,$canFly",
+              "[hard],@Norfair Upper Crocomire,$canHellRun,grapple",
+              "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,speed",
+              "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,$canSpringBallJump",
+              "[hard],@Norfair Upper Crocomire,$canHellRun,hijump,varia,ice",
+
+              "{@Norfair Upper West,super}"
+            ],
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1288,
+            "y": 1488
+          },
+          {
+            "map": "norfair",
+            "x": 408,
+            "y": 276
+          }
         ]
       }
     ]
