@@ -189,7 +189,7 @@
     "name": "Missile Capacity",
     "type": "consumable",
     "img": "images/missile.png",
-    "max_quantity": 255,
+    "max_quantity": 200,
     "increment": 5,
     "codes": "missile"
   },
@@ -203,7 +203,7 @@
     "name": "Super Missile Capacity",
     "type": "consumable",
     "img": "images/super.png",
-    "max_quantity": 100,
+    "max_quantity": 80,
     "increment": 5,
     "codes": "supermissile,super"
   },
@@ -217,7 +217,7 @@
     "name": "Power Bomb Capacity",
     "type": "consumable",
     "img": "images/powerbomb.png",
-    "max_quantity": 100,
+    "max_quantity": 50,
     "increment": 5,
     "codes": "powerbomb,pb"
   },
