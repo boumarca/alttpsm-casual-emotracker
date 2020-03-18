@@ -1,3 +1,9 @@
+3.3.0
+-----
+Logic refactor for v11 rewrite
+Added scaffolding for future keysanity support
+Cap missiles, supers, and power bombs at fixed max values used by the randomizer (200, 80, 50 respectively)
+
 3.2.2
 -----
 Norfair Missile (lava room) is now capturable
