@@ -756,11 +756,10 @@ function updateDungeonCacheTableFromByteAndFlag(segment, cacheTable, code, addre
     local value = ReadU8(segment, address)
     local check = value & flag
     if check ~= 0 then
-        -- Initialize key if not set.
-        if cacheTable[code] == nil then
-            cacheTable[code] = 0
-        end
         cacheTable[code] = cacheTable[code] + 1
+        return true
+    else
+        return false
     end
 end
 
@@ -1688,6 +1687,7 @@ function updateItemsLTTP(segment, address, inLTTP)
         end
 
         local newDungeonItems = {}
+        resetDungeonCacheTable(newDungeonItems)
 
         -- Compasses
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "gt", address + 0x64, 0x04)
@@ -1730,7 +1730,11 @@ function updateItemsLTTP(segment, address, inLTTP)
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "sp", address + 0x69, 0x04)
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "dp", address + 0x69, 0x10)
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "ep", address + 0x69, 0x20)
-        updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "hc", address + 0x69, 0x40)
+
+        -- Map for Hyrule Castle/Escape is weird.  There are two separate addresses for HC and sewers, check both.
+        if not updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "hc", address + 0x69, 0x40) then
+            updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "hc", address + 0x69, 0x80)
+        end
 
         -- Check if any of the dungeon item counts actually changed.  Set last update timestamp if so.
         for key, count in pairs(newDungeonItems) do
