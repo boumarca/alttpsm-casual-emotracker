@@ -753,6 +753,11 @@ function resetDungeonCacheTable(cacheTable)
 end
 
 function updateDungeonCacheTableFromByteAndFlag(segment, cacheTable, code, address, flag)
+    -- Initialize key if not set.
+    if cacheTable[code] == nil then
+        cacheTable[code] = 0
+    end
+
     local value = ReadU8(segment, address)
     local check = value & flag
     if check ~= 0 then
@@ -1687,7 +1692,6 @@ function updateItemsLTTP(segment, address, inLTTP)
         end
 
         local newDungeonItems = {}
-        resetDungeonCacheTable(newDungeonItems)
 
         -- Compasses
         updateDungeonCacheTableFromByteAndFlag(segment, newDungeonItems, "gt", address + 0x64, 0x04)
