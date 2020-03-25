@@ -675,80 +675,24 @@ function updateMirror(segment, address)
     end
 end
 
-function resetDungeonCacheTable(cacheTable)
-    cacheTable.hc = 0
-    cacheTable.ep = 0
-    cacheTable.dp = 0
-    cacheTable.toh = 0
-    cacheTable.at = 0
-    cacheTable.pod = 0
-    cacheTable.sp = 0
-    cacheTable.sw = 0
-    cacheTable.tt = 0
-    cacheTable.ip = 0
-    cacheTable.mm = 0
-    cacheTable.tr = 0
-    cacheTable.gt = 0
-    cacheTable.gt_up = 0
+function checkDungeonCacheTableChanged(cacheTable, newTable, label)
+    -- Check if the cached dungeon data has changed, and set last update timestamp if so.
+    local changed = false
+    for key, count in pairs(newTable) do
+        if cacheTable[key] ~= count then
+            if SHOW_DUNGEON_DEBUG_LOGGING then
+                print(label .. " changed for: ", key, "Old: ", tostring(cacheTable[key]), "New: ", count)
+            end
+            cacheTable[key] = count
+            changed = true
+        end
+    end
 
-    -- Extra cache codes specifically for keysanity.
-    -- Bosses are separate item locations now, and dungeons have separate sections for different key requirements.
-    if IS_KEYSANITY then
-        -- Aga tower exists now.
-        cacheTable.at = 0
-        cacheTable.at2 = 0
-
-        cacheTable.hc2 = 0
-        cacheTable.hc3 = 0
-        cacheTable.hc4 = 0
-
-        cacheTable.ep2 = 0
-        cacheTable.ep3 = 0
-        cacheTable.ep4 = 0
-
-        cacheTable.dp2 = 0
-        cacheTable.dp3 = 0
-        cacheTable.dp4 = 0
-
-        cacheTable.toh2 = 0
-        cacheTable.toh3 = 0
-        cacheTable.toh4 = 0
-
-        cacheTable.pod2 = 0
-        cacheTable.pod3 = 0
-        cacheTable.pod4 = 0
-        cacheTable.pod5 = 0
-        cacheTable.pod6 = 0
-
-        cacheTable.sp2 = 0
-        cacheTable.sp3 = 0
-        cacheTable.sp4 = 0
-        cacheTable.sp5 = 0
-        cacheTable.sp6 = 0
-
-        cacheTable.sw2 = 0
-        cacheTable.sw3 = 0
-        cacheTable.sw4 = 0
-
-        cacheTable.tt2 = 0
-        cacheTable.tt3 = 0
-        cacheTable.tt4 = 0
-
-        cacheTable.ip2 = 0
-        cacheTable.ip3 = 0
-        cacheTable.ip4 = 0
-
-        cacheTable.mm2 = 0
-        cacheTable.mm3 = 0
-        cacheTable.mm4 = 0
-
-        cacheTable.tr2 = 0
-        cacheTable.tr3 = 0
-        cacheTable.tr4 = 0
-        cacheTable.tr5 = 0
-        cacheTable.tr6 = 0
-        cacheTable.tr7 = 0
-        cacheTable.tr8 = 0
+    if changed then
+        DUNGEON_DATA_LAST_UPDATE = os.time()
+        if SHOW_DUNGEON_DEBUG_LOGGING then
+            print(label .. ": ", table.tostring(cacheTable))
+        end
     end
 end
 
@@ -791,6 +735,11 @@ function updateDungeonCacheTableFromRoomSlot(cacheTable, code, slot, inLTTP)
         codeToUse = string.gsub(code, "%d", "")
     end
 
+    -- Initialize key if not set.
+    if cacheTable[codeToUse] == nil then
+        cacheTable[codeToUse] = 0
+    end
+
     local roomData = getRoomDataById(slot[1], inLTTP)
     local flag = 1 << slot[2]
     local check = roomData & flag
@@ -801,14 +750,19 @@ end
 
 -- Update opened door cache for a door with two separate room slots in case they only opened one side.
 -- Most small key doors have both sides in a single room, but some have the two sides in two different rooms.
-function updateDungeonDoorCacheFromTwoRooms(code, slot1, slot2, inLTTP)
+function updateDungeonDoorCacheFromTwoRooms(cacheTable, code, slot1, slot2, inLTTP)
+    -- Initialize key if not set.
+    if cacheTable[code] == nil then
+        cacheTable[code] = 0
+    end
+
     local roomData1 = getRoomDataById(slot1[1], inLTTP)
     local flag1 = 1 << slot1[2]
     local roomData2 = getRoomDataById(slot2[1], inLTTP)
     local flag2 = 1 << slot2[2]
     local check = (roomData1 & flag1) + (roomData2 & flag2)
     if check ~= 0 then
-        OPENED_DOORS[code] = OPENED_DOORS[code] + 1
+        cacheTable[code] = cacheTable[code] + 1
     end
 end
 
@@ -823,22 +777,27 @@ function updateDungeonLocationFromCache(locationRef, code)
             return
         end
 
-        local totalKeys = REMAINING_KEYS[code] + OPENED_DOORS[code]
-        local keysFromChests = math.max(0, totalKeys - FLOOR_KEYS[code])
+        -- Get variables.
+        local remainingKeys = REMAINING_KEYS[code] or 0
+        local openedDoors = OPENED_DOORS[code] or 0
+        local floorKeys = FLOOR_KEYS[code] or 0
+        local openedChests = OPENED_CHESTS[code] or 0
+        local dungeonItems = DUNGEON_ITEMS[code] or 0
+
+        local keysFromChests = math.max(0, remainingKeys + openedDoors - floorKeys)
 
         -- For keysanity, items found is just number of opened chests.  Otherwise subtract dungeon items and small keys.
         local itemsFound
         if IS_KEYSANITY then
-            itemsFound = math.floor(math.min(location.ChestCount, math.max(0, OPENED_CHESTS[code])))
+            itemsFound = math.floor(math.min(location.ChestCount, math.max(0, openedChests)))
         else
-            itemsFound = math.floor(math.min(location.ChestCount, math.max(0, OPENED_CHESTS[code] - DUNGEON_ITEMS[code] - keysFromChests)))
+            itemsFound = math.floor(math.min(location.ChestCount, math.max(0, openedChests - dungeonItems - keysFromChests)))
         end
 
         if SHOW_DUNGEON_DEBUG_LOGGING then
-            print("Dungeon item count: ", locationRef,
-                    "Total keys: " .. totalKeys, "Remaining keys: " .. REMAINING_KEYS[code],
-                    "Opened doors: " .. OPENED_DOORS[code], "Floor keys: " .. FLOOR_KEYS[code],
-                    "Opened chests: " .. OPENED_CHESTS[code], "Dungeon items: " .. DUNGEON_ITEMS[code],
+            print("Dungeon item count: ", locationRef, "Remaining keys: " .. remainingKeys,
+                    "Opened doors: " .. openedDoors, "Floor keys: " .. floorKeys,
+                    "Opened chests: " .. openedChests, "Dungeon items: " .. dungeonItems,
                     "Keys from chests: " .. keysFromChests, "Items found: " .. itemsFound)
         end
         location.AvailableChestCount = location.ChestCount - itemsFound
@@ -848,22 +807,12 @@ function updateDungeonLocationFromCache(locationRef, code)
     end
 end
 
-function getCurrentKeysForDungeon(segment, address, code, currentKeys, currentDungeon)
+function getCurrentKeysForDungeon(cacheTable, segment, address, code, currentKeys, currentDungeon)
     -- If we're in this dungeon, use the current keys value.  Otherwise read the dungeon-specific value from memory.
-    local keys
     if code == currentDungeon then
-        keys = currentKeys
+        cacheTable[code] = currentKeys
     else
-        keys = ReadU8(segment, address)
-    end
-
-    -- Update data timestamp if we're actually changing the value.
-    if REMAINING_KEYS[code] ~= keys then
-        if SHOW_DUNGEON_DEBUG_LOGGING then
-            print("Remaining keys changed for: ", code, "Old: ", REMAINING_KEYS[code], "New: ", keys)
-        end
-        REMAINING_KEYS[code] = keys
-        DUNGEON_DATA_LAST_UPDATE = os.time()
+        cacheTable[code] = ReadU8(segment, address)
     end
 end
 
@@ -871,17 +820,23 @@ function updateGanonsTowerFromCache()
     local dungeon = Tracker:FindObjectForCode("@Ganon's Tower/Dungeon")
     local tower = Tracker:FindObjectForCode("@Ganon's Tower/Tower")
 
-    local totalKeys = REMAINING_KEYS.gt + OPENED_DOORS.gt
-    local keysFromChests = math.max(0, totalKeys - FLOOR_KEYS.gt)
-    local itemsFound1 = math.floor(math.min(dungeon.ChestCount, OPENED_CHESTS.gt))
-    local itemsFound2 = math.floor(math.min(tower.ChestCount, OPENED_CHESTS.gt_up))
+    -- Get variables.
+    local remainingKeys = REMAINING_KEYS.gt or 0
+    local openedDoors = OPENED_DOORS.gt or 0
+    local floorKeys = FLOOR_KEYS.gt or 0
+    local openedChests1 = OPENED_CHESTS.gt or 0
+    local openedChests2 = OPENED_CHESTS.gt_up or 0
+    local dungeonItems = DUNGEON_ITEMS.gt or 0
+
+    local keysFromChests = math.max(0, remainingKeys + openedDoors - floorKeys)
+    local itemsFound1 = math.floor(math.min(dungeon.ChestCount, openedChests1))
+    local itemsFound2 = math.floor(math.min(tower.ChestCount, openedChests2))
 
     if SHOW_DUNGEON_DEBUG_LOGGING then
-        print("Dungeon item count: Ganon's Tower",
-                "Total keys: " .. totalKeys, "Remaining keys: " .. REMAINING_KEYS.gt,
-                "Opened doors: " .. OPENED_DOORS.gt, "Floor keys: " .. FLOOR_KEYS.gt,
-                "Opened chests downstairs: " .. OPENED_CHESTS.gt, "Opened chests upstairs: " .. OPENED_CHESTS.gt_up,
-                "Dungeon items: " .. DUNGEON_ITEMS.gt, "Keys from chests: " .. keysFromChests,
+        print("Dungeon item count: Ganon's Tower", "Remaining keys: " .. remainingKeys,
+                "Opened doors: " .. openedDoors, "Floor keys: " .. floorKeys,
+                "Opened chests downstairs: " .. openedChests1, "Opened chests upstairs: " .. openedChests2,
+                "Dungeon items: " .. dungeonItems, "Keys from chests: " .. keysFromChests,
                 "Items found downstars: " .. itemsFound1, "Items found upstairs: " .. itemsFound2)
     end
     dungeon.AvailableChestCount = dungeon.ChestCount - itemsFound1
@@ -892,7 +847,12 @@ function updateDungeonSmallKeysFromCache(code)
     -- Update small key items for a single dungeon in the keysanity tracker.
     local item = Tracker:FindObjectForCode(code .. "_smallkey")
     if item then
-        local keysFromChests = math.max(0, REMAINING_KEYS[code] + OPENED_DOORS[code] - FLOOR_KEYS[code])
+        -- Get variables.
+        local remainingKeys = REMAINING_KEYS[code] or 0
+        local openedDoors = OPENED_DOORS[code] or 0
+        local floorKeys = FLOOR_KEYS[code] or 0
+
+        local keysFromChests = math.max(0, remainingKeys + openedDoors - floorKeys)
         if SHOW_DUNGEON_DEBUG_LOGGING then
             print("Dungeon small key count: ", code, keysFromChests)
         end
@@ -1055,505 +1015,499 @@ function updateCurrentRoomDataLTTP(segment)
         CURRENT_ROOM_ID = newRoomId
         CURRENT_ROOM_DATA = newRoomData
 
-        if SHOW_DUNGEON_DEBUG_LOGGING then
+        if SHOW_DUNGEON_DEBUG_LOGGING and changed then
             print("LTTP current room data: ", CURRENT_ROOM_ID, string.format("0x%x", CURRENT_ROOM_DATA))
         end
 
         -- Update keys and door data from the cache.
-        updateRoomDataFromCache(true, changed)
+        updateRoomDataFromCache(true)
     end
     return true
 end
 
-function updateRoomDataFromCache(inLTTP, changed)
+function updateRoomDataFromCache(inLTTP)
     -- Update dungeon room data cache for counting dungeon items without cheating.
-    resetDungeonCacheTable(FLOOR_KEYS)
-    resetDungeonCacheTable(OPENED_DOORS)
-    resetDungeonCacheTable(OPENED_CHESTS)
+    local newFloorKeys = {}
+    local newOpenedDoors = {}
+    local newOpenedChests = {}
 
     -- *** Hyrule Castle
     -- Room 114 offset 0xE4 (First basement room with blue key guard, locked door, and chest)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "hc", { 114, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "hc", { 114, 15 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 114, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "hc", { 114, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "hc", { 114, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc", { 114, 4 }, inLTTP)
 
     -- Room 113 offset 0xE2 (Room before stairs to prison)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "hc", { 113, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "hc", { 113, 15 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 113, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "hc", { 113, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "hc", { 113, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc", { 113, 4 }, inLTTP)
 
     -- Room 128 offset 0x100 (Zelda's cell)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc", { 128, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc", { 128, 4 }, inLTTP)
 
     -- Room 50 offset 0x64 (Dark cross)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc2", { 50, 4 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("hc", { 50, 15 }, { 34, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc2", { 50, 4 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "hc", { 50, 15 }, { 34, 15 }, inLTTP)
 
     -- Room 33 offset 0x42 (Dark room with key on rat)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "hc", { 33, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("hc", { 33, 15 }, { 17, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "hc", { 33, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "hc", { 33, 15 }, { 17, 13 }, inLTTP)
 
     -- Room 17 offset 0x22 (Escape secret side room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc3", { 17, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc3", { 17, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc3", { 17, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc3", { 17, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc3", { 17, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc3", { 17, 6 }, inLTTP)
 
     -- Room 18 offset 0x24 (Sanctuary)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "hc4", { 18, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "hc4", { 18, 4 }, inLTTP)
 
 
     -- *** Eastern Palace
     -- Room 186 offset 0x174 (Small key under pot)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ep", { 186, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("ep", { 186, 15 }, { 185, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "ep", { 186, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "ep", { 186, 15 }, { 185, 15 }, inLTTP)
 
     -- Room 185 offset 0x172 (Rolling ball entrance room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 185, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ep", { 185, 4 }, inLTTP)
 
     -- Room 170 offset 0x154 (Map chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 170, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ep", { 170, 4 }, inLTTP)
 
     -- Room 168 offset 0x150 (Compass chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep", { 168, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ep", { 168, 4 }, inLTTP)
 
     -- Room 184 offset 0x170 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep2", { 184, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ep2", { 184, 4 }, inLTTP)
 
     -- Room 153 offset 0x132 (Small key on mimic)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ep", { 153, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "ep", { 153, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "ep", { 153, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "ep", { 153, 15 }, inLTTP)
 
     -- Room 169 offset 0x152 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep3", { 169, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ep3", { 169, 4 }, inLTTP)
 
     -- Room 200 offset 0x190 (Armos Knights)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ep4", { 200, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ep4", { 200, 11 }, inLTTP)
 
 
     -- *** Desert Palace
     -- Room 115 offset 0xE6 (Big chest and torch item)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp3", { 115, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 115, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp3", { 115, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp", { 115, 10 }, inLTTP)
 
     -- Room 116 offset 0xE8 (Top room single chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp", { 116, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp", { 116, 4 }, inLTTP)
 
     -- Room 117 offset 0xE9 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp2", { 117, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp2", { 117, 4 }, inLTTP)
 
     -- Room 133 offset 0x10A (Room before big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp2", { 133, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "dp", { 133, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp2", { 133, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "dp", { 133, 14 }, inLTTP)
 
     -- Room 99 offset 0xC6 (First flying tile room in back)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "dp", { 99, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "dp", { 99, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "dp", { 99, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "dp", { 99, 15 }, inLTTP)
 
     -- Room 83 offset 0xA6 (Long room with beamos)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "dp", { 83, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("dp", { 83, 13 }, { 67, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "dp", { 83, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "dp", { 83, 13 }, { 67, 13 }, inLTTP)
 
     -- Room 67 offset 0x86 (Second flying tile room before boss)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "dp", { 67, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "dp", { 67, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "dp", { 67, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "dp", { 67, 14 }, inLTTP)
 
     -- Room 51 offset 0x66 (Lanmolas)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "dp4", { 51, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp4", { 51, 11 }, inLTTP)
 
 
     -- *** Tower of Hera
     -- Room 119 offset 0xEE (Entrance)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 119, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "toh", { 119, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "toh", { 119, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "toh", { 119, 15 }, inLTTP)
 
     -- Room 135 offset 0x10E (Basement)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh", { 135, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh2", { 135, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "toh", { 135, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "toh2", { 135, 4 }, inLTTP)
 
     -- Room 39 offset 0x4E (Big chest room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh3", { 39, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh3", { 39, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "toh3", { 39, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "toh3", { 39, 5 }, inLTTP)
 
     -- Room 7 offset 0xE (Trolldorm)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "toh4", { 7, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "toh4", { 7, 11 }, inLTTP)
 
 
     -- *** Agahnim's Tower (keysanity only)
     if IS_KEYSANITY then
         -- Room 224 offset 0x1C0 (First chest)
-        updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "at", { 224, 4 }, inLTTP)
-        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 224, 13 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newOpenedChests, "at", { 224, 4 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "at", { 224, 13 }, inLTTP)
 
         -- Room 208 offset 0x1A0 (Dark maze)
-        updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "at2", { 208, 4 }, inLTTP)
-        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 208, 15 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newOpenedChests, "at2", { 208, 4 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "at", { 208, 15 }, inLTTP)
 
         -- Room 192 offset 0x180 (Guards after pit room)
-        updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "at", { 192, 10 }, inLTTP)
-        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 192, 13 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newFloorKeys, "at", { 192, 10 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "at", { 192, 13 }, inLTTP)
 
         -- Room 176 offset 0x160 (Red guard with last key)
-        updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "at", { 176, 10 }, inLTTP)
-        updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "at", { 176, 13 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newFloorKeys, "at", { 176, 10 }, inLTTP)
+        updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "at", { 176, 13 }, inLTTP)
     end
 
 
     -- *** Palace of Darkness
     -- Room 9 offset 0x12 (Left entrance basement room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod", { 9, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod", { 9, 4 }, inLTTP)
 
     -- Room 74 offset 0x94 (Entrance area locked door, double-sided)
-    updateDungeonDoorCacheFromTwoRooms("pod", { 74, 13 }, { 58, 15 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "pod", { 74, 13 }, { 58, 15 }, inLTTP)
 
     -- Room 58 offset 0x74 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod2", { 58, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod2", { 58, 4 }, inLTTP)
 
     -- Room 10 offset 0x14 (Basement teleporter room with locked door stairs to big key)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod2", { 10, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "pod", { 10, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod2", { 10, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "pod", { 10, 15 }, inLTTP)
 
     -- Room 43 offset 0x56 (Coming up from basement, bombable wall to second chest in bouncy room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod3", { 43, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod3", { 43, 4 }, inLTTP)
 
     -- Room 42 offset 0x54 (Bouncy enemy room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod3", { 42, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod2", { 42, 5 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("pod", { 42, 14 }, { 26, 12 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod3", { 42, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod2", { 42, 5 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "pod", { 42, 14 }, { 26, 12 }, inLTTP)
 
     -- Room 26 offset 0x34 (Crumble bridge room and adjacent)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod5", { 26, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 26, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 26, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "pod", { 26, 15 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("pod", { 26, 14 }, { 25, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod5", { 26, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod4", { 26, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod4", { 26, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "pod", { 26, 15 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "pod", { 26, 14 }, { 25, 14 }, inLTTP)
 
     -- Room 25 offset 0x32 (Dark maze)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 25, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 25, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod4", { 25, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod4", { 25, 5 }, inLTTP)
 
     -- Room 106 offset 0xD4 (Room before boss)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 106, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod4", { 106, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod4", { 106, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod4", { 106, 5 }, inLTTP)
 
     -- Room 11 offset 0x16 (Basement locked door leading to boss)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "pod", { 11, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "pod", { 11, 13 }, inLTTP)
 
     -- Room 90 offset 0xB4 (Helmasaur King)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "pod6", { 90, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "pod6", { 90, 11 }, inLTTP)
 
 
     -- *** Swamp Palace
     -- Room 40 offset 0x50 (Entrance)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp", { 40, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sp", { 40, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp", { 40, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "sp", { 40, 15 }, inLTTP)
 
     -- Room 56 offset 0x70 (First basement room with key under pot)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 56, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("sp", { 56, 14 }, { 55, 12 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sp", { 56, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "sp", { 56, 14 }, { 55, 12 }, inLTTP)
 
     -- Room 55 offset 0x6E (First water valve and key)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp2", { 55, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 55, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sp", { 55, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp2", { 55, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sp", { 55, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "sp", { 55, 13 }, inLTTP)
 
     -- Room 70 offset 0x8C (Map chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp3", { 70, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp3", { 70, 4 }, inLTTP)
 
     -- Room 54 offset 0x6C (Central big chest room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp4", { 54, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 54, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("sp", { 54, 14 }, { 38, 15 }, inLTTP)  -- Top locked door
-    updateDungeonDoorCacheFromTwoRooms("sp", { 54, 13 }, { 53, 15 }, inLTTP)  -- Left locked door
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp4", { 54, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sp", { 54, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "sp", { 54, 14 }, { 38, 15 }, inLTTP)  -- Top locked door
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "sp", { 54, 13 }, { 53, 15 }, inLTTP)  -- Left locked door
 
     -- Room 53 offset 0x6A (Second water valve, pot key, and big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp3", { 53, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 53, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp3", { 53, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sp", { 53, 10 }, inLTTP)
 
     -- Room 52 offset 0x68 (Left side chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp3", { 52, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp3", { 52, 4 }, inLTTP)
 
     -- Room 118 offset 0xEC (Underwater chests)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp5", { 118, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp5", { 118, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp5", { 118, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp5", { 118, 5 }, inLTTP)
 
     -- Room 102 offset 0xCC (Last chest before boss)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp5", { 102, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp5", { 102, 4 }, inLTTP)
 
     -- Room 22 offset 0x2C (Room before boss)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sp", { 22, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sp", { 22, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sp", { 22, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "sp", { 22, 14 }, inLTTP)
 
     -- Room 6 offset 0xC (Arrghus)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sp6", { 6, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sp6", { 6, 11 }, inLTTP)
 
 
     -- *** Skull Woods
     -- Room 103 offset 0xCE (Bottom left drop down room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 103, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw", { 103, 4 }, inLTTP)
 
     -- Room 87 offset 0xAE (Drag the statue room and corner chest from first entrance)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 87, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 87, 5 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("sw", { 87, 13 }, { 88, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw", { 87, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw", { 87, 5 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "sw", { 87, 13 }, { 88, 14 }, inLTTP)
 
     -- Room 88 offset 0xB0 (First entrance with big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw2", { 88, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 88, 5 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("sw", { 88, 13 }, { 104, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw2", { 88, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw", { 88, 5 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "sw", { 88, 13 }, { 104, 14 }, inLTTP)
 
     -- Room 104 offset 0xD0 (Soft-lock potential room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw", { 104, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw", { 104, 4 }, inLTTP)
 
     -- Room 86 offset 0xAC (Exit towards boss area)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sw", { 86, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sw", { 86, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sw", { 86, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "sw", { 86, 15 }, inLTTP)
 
     -- Room 89 offset 0xB2 (Back area entrance)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw3", { 89, 4 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("sw", { 89, 15 }, { 73, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw3", { 89, 4 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "sw", { 89, 15 }, { 73, 13 }, inLTTP)
 
     -- Room 57 offset 0x72 (Drop down to boss)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "sw", { 57, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "sw", { 57, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "sw", { 57, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "sw", { 57, 14 }, inLTTP)
 
     -- Room 41 offset 0x52 (Mothula)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "sw4", { 41, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "sw4", { 41, 11 }, inLTTP)
 
 
     -- *** Thieves Town
     -- Room 219 offset 0x1B6 (Entrance, SW main area)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 219, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 219, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt", { 219, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt", { 219, 5 }, inLTTP)
 
     -- Room 203 offset 0x196 (NW main area)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 203, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt", { 203, 4 }, inLTTP)
 
     -- Room 220 offset 0x1B8 (SE main area)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt", { 220, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt", { 220, 4 }, inLTTP)
 
     -- Room 188 offset 0x178 (Room before boss)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "tt", { 188, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tt", { 188, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "tt", { 188, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tt", { 188, 15 }, inLTTP)
 
     -- Room 171 offset 0x156 (Locked door to 2F)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "tt", { 171, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tt", { 171, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "tt", { 171, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tt", { 171, 15 }, inLTTP)
 
     -- Room 101 offset 0xCA (2F attic)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt2", { 101, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt2", { 101, 4 }, inLTTP)
 
     -- Room 69 (nice) offset 0x8A ("Maiden" cell)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt2", { 69, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt2", { 69, 4 }, inLTTP)
 
     -- Room 68 offset 0x88 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt3", { 68, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tt", { 68, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt3", { 68, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tt", { 68, 14 }, inLTTP)
 
     -- Room 172 offset 0x158 (Blind)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tt4", { 172, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt4", { 172, 11 }, inLTTP)
 
 
     -- *** Ice Palace
     -- Room 14 offset 0x1C (Entrance)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ip", { 14, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "ip", { 14, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "ip", { 14, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "ip", { 14, 15 }, inLTTP)
 
     -- Room 46 offset 0x5C (Penguin ice room with first chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 46, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip", { 46, 4 }, inLTTP)
 
     -- Room 62 offset 0x7C (Conveyor room before bomb jump)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ip", { 62, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("ip", { 62, 14 }, { 78, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "ip", { 62, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "ip", { 62, 14 }, { 78, 14 }, inLTTP)
 
     -- Room 126 offset 0xFC (Room above big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 126, 4 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("ip", { 126, 15 }, { 142, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip", { 126, 4 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "ip", { 126, 15 }, { 142, 15 }, inLTTP)
 
     -- Room 158 offset 0x13C (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip2", { 158, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "ip", { 158, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip2", { 158, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "ip", { 158, 15 }, inLTTP)
 
     -- Room 159 offset 0x13E (Ice room key in pot east of block pushing room)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ip", { 159, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "ip", { 159, 10 }, inLTTP)
 
     -- Room 174 offset 0x15C (Ice T room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip", { 174, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip", { 174, 4 }, inLTTP)
 
     -- Room 95 offset 0xBE (Hookshot over spikes)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip3", { 95, 4 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("ip", { 95, 15 }, { 94, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip3", { 95, 4 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "ip", { 95, 15 }, { 94, 15 }, inLTTP)
 
     -- Room 63 offset 0x7E (Pulling tongues before big key)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip3", { 63, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "ip", { 63, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip3", { 63, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "ip", { 63, 10 }, inLTTP)
 
     -- Room 31 offset 0x3E (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip3", { 31, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip3", { 31, 4 }, inLTTP)
 
     -- Room 190 offset 0x17C (Block switch room)
-    updateDungeonDoorCacheFromTwoRooms("ip", { 190, 14 }, { 191, 15 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "ip", { 190, 14 }, { 191, 15 }, inLTTP)
 
     -- Room 222 offset 0x1BC (Kholdstare)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "ip4", { 222, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "ip4", { 222, 11 }, inLTTP)
 
 
     -- *** Misery Mire
     -- Room 162 offset 0x144 (Map chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 162, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm", { 162, 4 }, inLTTP)
 
     -- Room 179 offset 0x166 (Right side spike room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 179, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "mm", { 179, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "mm", { 179, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm", { 179, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "mm", { 179, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "mm", { 179, 15 }, inLTTP)
 
     -- Room 161 offset 0x142 (Top left crystal switch + pot key)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "mm", { 161, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("mm", { 161, 15 }, { 177, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "mm", { 161, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "mm", { 161, 15 }, { 177, 14 }, inLTTP)
 
     -- Room 194 offset 0x184 (Central room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 194, 4 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("mm", { 194, 15 }, { 195, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm", { 194, 4 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "mm", { 194, 15 }, { 195, 15 }, inLTTP)
 
     -- Room 195 offset 0x186 (Big chest and small chest next door)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm2", { 195, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm", { 195, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm2", { 195, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm", { 195, 5 }, inLTTP)
 
     -- Room 193 offset 0x182 (Conveyor belt and tile room, compass chest)
-    updateDungeonDoorCacheFromTwoRooms("mm", { 194, 14 }, { 193, 14 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm3", { 193, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "mm", { 193, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "mm", { 193, 15 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "mm", { 194, 14 }, { 193, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm3", { 193, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "mm", { 193, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "mm", { 193, 15 }, inLTTP)
 
     -- Room 209 offset 0x1A2 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm3", { 209, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm3", { 209, 4 }, inLTTP)
 
     -- Room 147 offset 0x126 (Basement locked rupee room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "mm", { 147, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "mm", { 147, 14 }, inLTTP)
 
     -- Room 144 offset 0x120 (Vitreous)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "mm4", { 144, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "mm4", { 144, 11 }, inLTTP)
 
 
     -- *** Turtle Rock
     -- Room 214 offset 0x1AC (Map chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr", { 214, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr", { 214, 4 }, inLTTP)
 
     -- Room 183 offset 0x16E (Double spike rollers)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr2", { 183, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr2", { 183, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr2", { 183, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr2", { 183, 5 }, inLTTP)
 
     -- Room 198 offset 0x18C (1F central room)
-    updateDungeonDoorCacheFromTwoRooms("tr", { 198, 15 }, { 182, 13 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "tr", { 198, 15 }, { 182, 13 }, inLTTP)
 
     -- Room 182 offset 0x16C (Chain Chomp room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr3", { 182, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "tr", { 182, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tr", { 182, 12 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tr", { 182, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr3", { 182, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "tr", { 182, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tr", { 182, 12 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tr", { 182, 15 }, inLTTP)
 
     -- Room 19 offset 0x26 (Quad anti-fairy room)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "tr", { 19, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("tr", { 19, 15 }, { 20, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "tr", { 19, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "tr", { 19, 15 }, { 20, 14 }, inLTTP)
 
     -- Room 20 offset 0x28 (Central tube room with big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr4", { 20, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr4", { 20, 4 }, inLTTP)
 
     -- Room 36 offset 0x48 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr5", { 36, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr5", { 36, 4 }, inLTTP)
 
     -- Room 4 offset 0x8 (Spike roller after big key door)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr6", { 4, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "tr", { 4, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr6", { 4, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tr", { 4, 15 }, inLTTP)
 
     -- Room 213 offset 0x1AA (Laser bridge)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr7", { 213, 7 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr7", { 213, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr7", { 213, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr7", { 213, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr7", { 213, 7 }, inLTTP)
 
     -- Room 197 offset 0x18A (Door to crystal switch room before boss)
-    updateDungeonDoorCacheFromTwoRooms("tr", { 197, 15 }, { 196, 15 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "tr", { 197, 15 }, { 196, 15 }, inLTTP)
 
     -- Room 164 offset 0x148 (Trinexx)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "tr8", { 164, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tr8", { 164, 11 }, inLTTP)
 
 
     -- *** Ganon's Tower (dungeon)
     -- Room 140 offset 0x118 (First two rooms with torch, plus Bob's chest and big chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 140, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 140, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 140, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 140, 7 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 140, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 140, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 140, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 140, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 140, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 140, 7 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 140, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "gt", { 140, 13 }, inLTTP)
 
     -- Room 139 offset 0x116 (Hookshot block room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 139, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "gt", { 139, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 139, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 139, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "gt", { 139, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "gt", { 139, 14 }, inLTTP)
 
     -- Room 155 offset 0x136 (Pot key below hookshot room with locked door)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "gt", { 155, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 155, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "gt", { 155, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "gt", { 155, 15 }, inLTTP)
 
     -- Room 125 offset 0xFA (Entrance to warp maze)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 125, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 125, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 125, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "gt", { 125, 13 }, inLTTP)
 
     -- Room 123 offset 0xF6 (Four chests on left side above hookshot room, plus end of right side)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 123, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 123, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 123, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 123, 7 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "gt", { 123, 10 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("gt", { 123, 14 }, { 124, 13 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 123, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 123, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 123, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 123, 7 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "gt", { 123, 10 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "gt", { 123, 14 }, { 124, 13 }, inLTTP)
 
     -- Room 124 offset 0xF8 (Rando room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 124, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 124, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 124, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 124, 7 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 124, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 124, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 124, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 124, 7 }, inLTTP)
 
     -- Room 28 offset 0x38 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 28, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 28, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 28, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 28, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 28, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 28, 6 }, inLTTP)
 
     -- Room 141 offset 0x11A (Tile room)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 141, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 141, 14 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 141, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "gt", { 141, 14 }, inLTTP)
 
     -- Room 157 offset 0x13A (Last four chests on right side)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 157, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 157, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 157, 6 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt", { 157, 7 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 157, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 157, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 157, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt", { 157, 7 }, inLTTP)
 
 
     -- *** Ganon's Tower (tower)
     -- Room 61 offset 0x7A (Mini helmasaur room before Moldorm 2)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 61, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 61, 5 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 61, 6 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt_up", { 61, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt_up", { 61, 5 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt_up", { 61, 6 }, inLTTP)
     -- Floor key and opened doors need to be in the main GT count for the math!
-    updateDungeonCacheTableFromRoomSlot(FLOOR_KEYS, "gt", { 61, 10 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(OPENED_DOORS, "gt", { 61, 14 }, inLTTP)
-    updateDungeonDoorCacheFromTwoRooms("gt", { 61, 13 }, { 77, 15 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newFloorKeys, "gt", { 61, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "gt", { 61, 14 }, inLTTP)
+    updateDungeonDoorCacheFromTwoRooms(newOpenedDoors, "gt", { 61, 13 }, { 77, 15 }, inLTTP)
 
     -- Room 77 offset 0x9A (Validation chest)
-    updateDungeonCacheTableFromRoomSlot(OPENED_CHESTS, "gt_up", { 77, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "gt_up", { 77, 4 }, inLTTP)
 
 
-    if SHOW_DUNGEON_DEBUG_LOGGING then
-        print("Floor key counts: ", table.tostring(FLOOR_KEYS))
-        print("Opened door counts: ", table.tostring(OPENED_DOORS))
-        print("Opened chest counts: ", table.tostring(OPENED_CHESTS))
-    end
-
-    -- Set last update timestamp for dungeon data if it changed.
-    if changed then
-        DUNGEON_DATA_LAST_UPDATE = os.time()
-    end
+    -- Check if any of the values changed.
+    checkDungeonCacheTableChanged(FLOOR_KEYS, newFloorKeys, "Floor keys count")
+    checkDungeonCacheTableChanged(OPENED_DOORS, newOpenedDoors, "Opened door count")
+    checkDungeonCacheTableChanged(OPENED_CHESTS, newOpenedChests, "Opened chest count")
 
     -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
     if not inLTTP then
@@ -1667,29 +1621,29 @@ function updateItemsLTTP(segment, address, inLTTP)
             end
         end
 
-        if SHOW_DUNGEON_DEBUG_LOGGING then
+        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
             print("Current room ID: ", currentRoom, "Current dungeon: ", currentDungeon, "Current keys: ", currentKeys)
         end
 
         -- Remaining keys.
-        getCurrentKeysForDungeon(segment, address + 0x7c, "hc", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x7e, "ep", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x7f, "dp", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x86, "toh", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x80, "at", currentKeys, currentDungeon)
+        local newRemainingKeys = {}
 
-        getCurrentKeysForDungeon(segment, address + 0x82, "pod", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x81, "sp", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x84, "sw", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x87, "tt", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x85, "ip", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x83, "mm", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x88, "tr", currentKeys, currentDungeon)
-        getCurrentKeysForDungeon(segment, address + 0x89, "gt", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x7c, "hc", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x7e, "ep", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x7f, "dp", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x86, "toh", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x80, "at", currentKeys, currentDungeon)
 
-        if SHOW_DUNGEON_DEBUG_LOGGING then
-            print("Remaining key counts: ", table.tostring(REMAINING_KEYS))
-        end
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x82, "pod", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x81, "sp", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x84, "sw", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x87, "tt", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x85, "ip", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x83, "mm", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x88, "tr", currentKeys, currentDungeon)
+        getCurrentKeysForDungeon(newRemainingKeys, segment, address + 0x89, "gt", currentKeys, currentDungeon)
+
+        checkDungeonCacheTableChanged(REMAINING_KEYS, newRemainingKeys, "Remaining key count")
 
         local newDungeonItems = {}
 
@@ -1741,19 +1695,7 @@ function updateItemsLTTP(segment, address, inLTTP)
         end
 
         -- Check if any of the dungeon item counts actually changed.  Set last update timestamp if so.
-        for key, count in pairs(newDungeonItems) do
-            if DUNGEON_ITEMS[key] ~= count then
-                if SHOW_DUNGEON_DEBUG_LOGGING then
-                    print("Dungeon item count changed for: ", key, "Old: ", DUNGEON_ITEMS[key], "New: ", count)
-                end
-                DUNGEON_ITEMS[key] = count
-                DUNGEON_DATA_LAST_UPDATE = os.time()
-            end
-        end
-
-        if SHOW_DUNGEON_DEBUG_LOGGING then
-            print("Dungeon item counts: ", table.tostring(DUNGEON_ITEMS))
-        end
+        checkDungeonCacheTableChanged(DUNGEON_ITEMS, newDungeonItems, "Dungeon item count")
 
         -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
         if not inLTTP then
@@ -1857,7 +1799,7 @@ function updateRoomsLTTP(segment, address, inLTTP)
         end
 
         -- Update keys and door data from the cache.
-        updateRoomDataFromCache(inLTTP, changed)
+        updateRoomDataFromCache(inLTTP)
     end
 end
 
@@ -2248,11 +2190,11 @@ function cleanup()
     AUTOTRACKER_IS_IN_LTTP = false
     AUTOTRACKER_IS_IN_SM = false
 
-    resetDungeonCacheTable(FLOOR_KEYS)
-    resetDungeonCacheTable(OPENED_DOORS)
-    resetDungeonCacheTable(OPENED_CHESTS)
-    resetDungeonCacheTable(REMAINING_KEYS)
-    resetDungeonCacheTable(DUNGEON_ITEMS)
+    OPENED_DOORS = {}
+    OPENED_CHESTS = {}
+    DUNGEON_ITEMS = {}
+    REMAINING_KEYS = {}
+    FLOOR_KEYS = {}
 end
 
 -- Invoked when the auto-tracker is activated/connected
