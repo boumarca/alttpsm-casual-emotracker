@@ -31,13 +31,18 @@
       {
         "name": "Maridia Outer",
         "access_rules": [
-          "normal,@Norfair Upper West,$canUsePowerBombs,gravity",
-          "normal,@Maridia Portal,gravity",
+          "normal,gravity,@Norfair Upper West,$canUsePowerBombs",
+          "normal,gravity,@Maridia Portal,$canPassBombPassages",
+          "normal,gravity,@Maridia Portal,screw",
 
           "[hard],@Norfair Upper West,$canUsePowerBombs,gravity",
           "[hard],@Norfair Upper West,$canUsePowerBombs,hijump,$canSpringBallJump",
           "[hard],@Norfair Upper West,$canUsePowerBombs,hijump,ice",
-          "[hard],@Maridia Portal"
+          "[hard],@Maridia Portal,$canPassBombPassages",
+          "[hard],@Maridia Portal,gravity,screw",
+          "[hard],@Maridia Portal,super,gravity",
+          "[hard],@Maridia Portal,super,hijump,$canSpringBallJump",
+          "[hard],@Maridia Portal,super,hijump,ice"
         ],
         "children": [
           {
@@ -88,54 +93,62 @@
             ]
           },
           {
-            "name": "Energy Tank, Mama turtle",
+            "name": "Mama Turtle Room",
             "access_rules": [
-              "$canFly",
-              "speed",
-              "grapple",
-              "[hard],$canSpringBallJump,gravity",
-              "[hard],$canSpringBallJump,hijump"
+              "$canOpenRedDoors"
             ],
-            "sections": [
+            "children": [
               {
                 "name": "Energy Tank, Mama turtle",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1416,
-                "y": 1040
+                "access_rules": [
+                  "$canFly",
+                  "speed",
+                  "grapple",
+                  "[hard],$canSpringBallJump,gravity",
+                  "[hard],$canSpringBallJump,hijump"
+                ],
+                "sections": [
+                  {
+                    "name": "Energy Tank, Mama turtle",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1416,
+                    "y": 1040
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 488,
+                    "y": 468
+                  }
+                ]
               },
-              {
-                "map": "maridia",
-                "x": 488,
-                "y": 468
-              }
-            ]
-          },
-          {
-            "name": "Missile (green Maridia tatori)",
-            "sections": [
               {
                 "name": "Missile (green Maridia tatori)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1448,
-                "y": 1072
-              },
-              {
-                "map": "maridia",
-                "x": 520,
-                "y": 500
+                "sections": [
+                  {
+                    "name": "Missile (green Maridia tatori)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1448,
+                    "y": 1072
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 520,
+                    "y": 500
+                  }
+                ]
               }
             ]
-          },
+          }
         ]
       },
       {
