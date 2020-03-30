@@ -31,26 +31,6 @@
             ]
           },
           {
-            "name": "King's Tomb",
-            "access_rules": [
-              "boots,lift2",
-              "boots,mirror,pearl,@Dark World North West"
-            ],
-            "sections": [
-              {
-                "name": "The Crypt",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "lightworld",
-                "x": 1207,
-                "y": 598
-              }
-            ]
-          },
-          {
             "name": "Kakariko Tavern",
             "map_locations": [
               {
@@ -246,30 +226,6 @@
                   "{}"
                 ],
                 "item_count": 1
-              }
-            ]
-          },
-          {
-            "name": "Graveyard Ledge",
-            "access_rules": [
-              "mirror,pearl,@Dark World North West"
-            ],
-            "sections": [
-              {
-                "name": "Cave",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "lightworld",
-                "x": 1132,
-                "y": 549
-              },
-              {
-                "map": "darkworld",
-                "x": 1132,
-                "y": 530
               }
             ]
           },
@@ -532,57 +488,6 @@
             ]
           },
           {
-            "name": "Bombos Tablet",
-            "color": "#aa860d",
-            "sections": [
-              {
-                "name": "Tablet",
-                "capture_item": true,
-                "access_rules": [
-                  "book,sword2,mirror,@Dark World South",
-                  "{book,mirror,@Dark World South}"
-                ],
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "lightworld",
-                "x": 440,
-                "y": 1845
-              },
-              {
-                "map": "darkworld",
-                "x": 440,
-                "y": 1845
-              }
-            ]
-          },
-          {
-            "name": "South of Grove",
-            "access_rules": [
-              "mirror,@Dark World South"
-            ],
-            "sections": [
-              {
-                "name": "Cave",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "lightworld",
-                "x": 552,
-                "y": 1693
-              },
-              {
-                "map": "darkworld",
-                "x": 552,
-                "y": 1693
-              }
-            ]
-          },
-          {
             "name": "Checkerboard Cave",
             "color": "#aa860d",
             "access_rules": [
@@ -658,7 +563,9 @@
                 "name": "Desert Ledge",
                 "capture_item": true,
                 "access_rules": [
-                  "@Desert Palace",
+                  "book",
+                  "mirror,lift2,flute",
+                  "@Misery Mire Portal,mirror",
                   "{}"
                 ],
                 "item_count": 1
@@ -669,33 +576,6 @@
                 "map": "lightworld",
                 "x": 40,
                 "y": 1835
-              }
-            ]
-          },
-          {
-            "name": "Lake Hylia Island",
-            "sections": [
-              {
-                "name": "Lake Hylia Island",
-                "access_rules": [
-                  "flippers,pearl,mirror,@Dark World South",
-                  "flippers,pearl,mirror,@Dark World North East",
-                  "{[flippers]}"
-                ],
-                "capture_item": true,
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "lightworld",
-                "x": 1450,
-                "y": 1666
-              },
-              {
-                "map": "darkworld",
-                "x": 1450,
-                "y": 1666
               }
             ]
           },

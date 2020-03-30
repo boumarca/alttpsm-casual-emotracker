@@ -50,27 +50,6 @@
                 "y": 922
               }
             ]
-          },
-          {
-            "name": "Pyramid Fairy",
-            "color": "#35046b",
-            "access_rules": [
-              "crystal56:2,pearl,@Dark World South,hammer",
-              "crystal56:2,pearl,@Dark World South,mirror,aga1"
-            ],
-            "sections": [
-              {
-                "name": "Big Bomb Spot",
-                "item_count": 2
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "darkworld",
-                "x": 940,
-                "y": 976
-              }
-            ]
           }
         ]
       },
@@ -78,9 +57,9 @@
         "name": "Dark World North West",
         "color": "#35046b",
         "access_rules": [
-          "pearl,hookshot,ag1,flippers",
-          "pearl,hookshot,ag1,lift1",
-          "pearl,hookshot,ag1,hammer",
+          "pearl,hookshot,aga1,flippers",
+          "pearl,hookshot,aga1,lift1",
+          "pearl,hookshot,aga1,hammer",
           "pearl,hookshot,@Dark World Portal,flippers",
           "pearl,hammer,lift1",
           "pearl,lift2"
@@ -178,6 +157,30 @@
             ]
           },
           {
+            "name": "Graveyard Ledge",
+            "access_rules": [
+              "mirror"
+            ],
+            "sections": [
+              {
+                "name": "Cave",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "lightworld",
+                "x": 1132,
+                "y": 549
+              },
+              {
+                "map": "darkworld",
+                "x": 1132,
+                "y": 530
+              }
+            ]
+          },
+          {
             "name": "Blacksmith",
             "short_name": "Blacksmith",
             "access_rules": [
@@ -231,9 +234,9 @@
       {
         "name": "Dark World South",
         "access_rules": [
-          "pearl,ag1,hammer",
-          "pearl,ag1,hookshot,flippers",
-          "pearl,ag1,hookshot,lift1",
+          "pearl,aga1,hammer",
+          "pearl,aga1,hookshot,flippers",
+          "pearl,aga1,hookshot,lift1",
           "pearl,@Dark World Portal,flippers,hammer",
           "pearl,@Dark World Portal,flippers,hookshot",
           "pearl,hammer,lift1",
@@ -241,6 +244,27 @@
         ],
         "color": "#0d8452",
         "children": [
+          {
+            "name": "Pyramid Fairy",
+            "color": "#35046b",
+            "access_rules": [
+              "crystal56:2,hammer",
+              "crystal56:2,mirror,aga1"
+            ],
+            "sections": [
+              {
+                "name": "Big Bomb Spot",
+                "item_count": 2
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "darkworld",
+                "x": 940,
+                "y": 976
+              }
+            ]
+          },
           {
             "name": "Hype Cave",
             "color": "#35046b",
@@ -278,6 +302,30 @@
             ]
           },
           {
+            "name": "South of Grove",
+            "access_rules": [
+              "mirror"
+            ],
+            "sections": [
+              {
+                "name": "Cave",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "lightworld",
+                "x": 552,
+                "y": 1693
+              },
+              {
+                "map": "darkworld",
+                "x": 552,
+                "y": 1693
+              }
+            ]
+          },
+          {
             "name": "Digging Game",
             "sections": [
               {
@@ -290,6 +338,33 @@
                 "map": "darkworld",
                 "x": 100,
                 "y": 1385
+              }
+            ]
+          },
+          {
+            "name": "Bombos Tablet",
+            "color": "#aa860d",
+            "sections": [
+              {
+                "name": "Tablet",
+                "capture_item": true,
+                "access_rules": [
+                  "book,sword2,mirror",
+                  "{book,mirror}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "lightworld",
+                "x": 440,
+                "y": 1845
+              },
+              {
+                "map": "darkworld",
+                "x": 440,
+                "y": 1845
               }
             ]
           }
