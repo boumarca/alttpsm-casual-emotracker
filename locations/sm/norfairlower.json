@@ -59,6 +59,8 @@
                   "[hard],$canUsePowerBombs,space,varia,@Norfair Lower Portal,super,$canSpringBallJump",
                   "[hard],$canUsePowerBombs,space,varia,@Norfair Lower Portal,super,speed",
 
+                  // Allow viewable on hard mode via green gate glitch.
+                  "{hard,super}",
                   "{@Norfair Lower Portal}"
                 ],
                 "item_count": 1
@@ -252,8 +254,7 @@
           {
             "name": "Energy Tank, Ridley",
             "access_rules": [
-              "$notKeysanity,$canUsePowerBombs,super",
-              "ridley_key,$canUsePowerBombs,super"
+              "ridley"
             ],
             "sections": [
               {

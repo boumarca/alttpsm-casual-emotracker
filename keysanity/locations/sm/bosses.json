@@ -1,0 +1,99 @@
+[
+  {
+    "name": "Kraid's Lair",
+    "access_rules": [
+      "@Brinstar Kraid,kraid_key"
+    ],
+    "sections": [
+      {
+        "name": "Kraid",
+        "hosted_item": "kraid"
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "metroid",
+        "x": 1720,
+        "y": 1248
+      },
+      {
+        "map": "brinstar",
+        "x": 1720,
+        "y": 676
+      }
+    ]
+  },
+  {
+    "name": "Phantoon's Lair",
+    "access_rules": [
+      "@Wrecked Ship,phantoon_key"
+    ],
+    "sections": [
+      {
+        "name": "Phantoon",
+        "hosted_item": "phantoon"
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "metroid",
+        "x": 1736,
+        "y": 368
+      },
+      {
+        "map": "wreckedship",
+        "x": 632,
+        "y": 436
+      }
+    ]
+  },
+  {
+    "name": "Draygon's Lair",
+    "access_rules": [
+      "@Maridia Inner,@Can Defeat Draygon,draygon_key,$canFly",
+      "@Maridia Inner,@Can Defeat Draygon,draygon_key,speed,hijump"
+    ],
+    "sections": [
+      {
+        "name": "Draygon",
+        "hosted_item": "draygon"
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "metroid",
+        "x": 2104,
+        "y": 960
+      },
+      {
+        "map": "maridia",
+        "x": 1176,
+        "y": 388
+      }
+    ]
+  },
+  {
+    "name": "Ridley's Lair",
+    "access_rules": [
+      "@Norfair Lower East,$canUsePowerBombs,super,ridley_key"
+    ],
+    "sections": [
+      {
+        "name": "Ridley",
+        "hosted_item": "ridley"
+      }
+    ],
+    "map_locations": [
+      {
+        "map": "metroid",
+        "x": 1672,
+        "y": 1840
+      },
+      {
+        "map": "norfair",
+        "x": 792,
+        "y": 628
+      }
+    ]
+  }
+]

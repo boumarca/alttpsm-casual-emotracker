@@ -19,13 +19,9 @@
       {
         "name": "Can Defeat Draygon",
         "access_rules": [
-          "normal,@Can Defeat Botwoon,$notKeysanity,gravity,speed,hijump",
-          "normal,@Can Defeat Botwoon,$notKeysanity,gravity,$canFly",
-          "normal,@Can Defeat Botwoon,draygon_key,gravity,speed,hijump",
-          "normal,@Can Defeat Botwoon,draygon_key,gravity,$canFly",
-
-          "[hard],@Can Defeat Botwoon,$notKeysanity,gravity",
-          "[hard],@Can Defeat Botwoon,draygon_key,gravity",
+          "normal,@Can Defeat Botwoon,gravity,speed,hijump",
+          "normal,@Can Defeat Botwoon,gravity,$canFly",
+          "[hard],@Can Defeat Botwoon,gravity"
         ]
       },
       {
@@ -478,8 +474,7 @@
           {
             "name": "Space Jump",
             "access_rules": [
-              "@Can Defeat Draygon,$canFly",
-              "@Can Defeat Draygon,speed,hijump"
+              "draygon"
             ],
             "sections": [
               {

@@ -754,8 +754,7 @@
           {
             "name": "Varia Suit",
             "access_rules": [
-              "$notKeysanity",
-              "kraid_key"
+              "kraid"
             ],
             "sections": [
               {

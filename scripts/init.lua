@@ -26,6 +26,7 @@ Tracker:AddLocations("locations/sm/norfairupper.json")
 Tracker:AddLocations("locations/sm/norfairlower.json")
 Tracker:AddLocations("locations/sm/maridia.json")
 Tracker:AddLocations("locations/sm/wreckedship.json")
+Tracker:AddLocations("locations/sm/bosses.json")
 
 -- Layouts
 Tracker:AddLayouts("layouts/common.json")
