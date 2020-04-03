@@ -24,16 +24,16 @@
             "name": "Reserve Tank, Wrecked Ship",
             "capture_item": true,
             "access_rules": [
-              "normal,phantoon,speed,$canUsePowerBombs,grapple",
-              "normal,phantoon,speed,$canUsePowerBombs,space",
-              "normal,phantoon,speed,$canUsePowerBombs,varia,$countEnergyReserves:2",
-              "normal,phantoon,speed,$canUsePowerBombs,$countEnergyReserves:3",
+              "normal,@Phantoon's Lair,speed,$canUsePowerBombs,grapple",
+              "normal,@Phantoon's Lair,speed,$canUsePowerBombs,space",
+              "normal,@Phantoon's Lair,speed,$canUsePowerBombs,varia,$countEnergyReserves:2",
+              "normal,@Phantoon's Lair,speed,$canUsePowerBombs,$countEnergyReserves:3",
 
-              "[hard],phantoon,$canUsePowerBombs,speed,varia",
-              "[hard],phantoon,$canUsePowerBombs,speed,$countEnergyReserves:2",
+              "[hard],@Phantoon's Lair,$canUsePowerBombs,speed,varia",
+              "[hard],@Phantoon's Lair,$canUsePowerBombs,speed,$countEnergyReserves:2",
 
-              "{phantoon,$canUsePowerBombs}",
-              "{phantoon,xray}"
+              "{@Phantoon's Lair,$canUsePowerBombs}",
+              "{@Phantoon's Lair,xray}"
             ],
             "item_count": 1
           }
@@ -54,14 +54,14 @@
       {
         "name": "Energy Tank, Wrecked Ship",
         "access_rules": [
-          "phantoon,hijump",
-          "phantoon,space",
-          "phantoon,speed",
-          "phantoon,gravity",
+          "@Phantoon's Lair,hijump",
+          "@Phantoon's Lair,space",
+          "@Phantoon's Lair,speed",
+          "@Phantoon's Lair,gravity",
 
-          "[hard],phantoon,bomb",
-          "[hard],phantoon,powerbomb",
-          "[hard],phantoon,$canSpringBallJump",
+          "[hard],@Phantoon's Lair,bomb",
+          "[hard],@Phantoon's Lair,powerbomb",
+          "[hard],@Phantoon's Lair,$canSpringBallJump",
         ],
         "sections": [
           {
@@ -85,7 +85,7 @@
       {
         "name": "Right Super, Wrecked Ship",
         "access_rules": [
-          "phantoon"
+          "@Phantoon's Lair"
         ],
         "sections": [
           {
@@ -109,13 +109,13 @@
       {
         "name": "Gravity Suit",
         "access_rules": [
-          "normal,phantoon,grapple",
-          "normal,phantoon,space",
-          "normal,phantoon,varia,$countEnergyReserves:2",
-          "normal,phantoon,$countEnergyReserves:3",
+          "normal,@Phantoon's Lair,grapple",
+          "normal,@Phantoon's Lair,space",
+          "normal,@Phantoon's Lair,varia,$countEnergyReserves:2",
+          "normal,@Phantoon's Lair,$countEnergyReserves:3",
 
-          "[hard],phantoon,varia",
-          "[hard],phantoon,$countEnergyReserves:1"
+          "[hard],@Phantoon's Lair,varia",
+          "[hard],@Phantoon's Lair,$countEnergyReserves:1"
         ],
         "sections": [
           {
@@ -160,13 +160,13 @@
       {
         "name": "Missile (Gravity Suit)",
         "access_rules": [
-          "normal,phantoon,grapple",
-          "normal,phantoon,space",
-          "normal,phantoon,varia,$countEnergyReserves:2",
-          "normal,phantoon,$countEnergyReserves:3",
+          "normal,@Phantoon's Lair,grapple",
+          "normal,@Phantoon's Lair,space",
+          "normal,@Phantoon's Lair,varia,$countEnergyReserves:2",
+          "normal,@Phantoon's Lair,$countEnergyReserves:3",
 
-          "[hard],phantoon,varia",
-          "[hard],phantoon,$countEnergyReserves:1"
+          "[hard],@Phantoon's Lair,varia",
+          "[hard],@Phantoon's Lair,$countEnergyReserves:1"
         ],
         "sections": [
           {
@@ -190,7 +190,7 @@
       {
         "name": "Missile (Wrecked Ship top)",
         "access_rules": [
-          "phantoon"
+          "@Phantoon's Lair"
         ],
         "sections": [
           {
@@ -214,7 +214,7 @@
       {
         "name": "Super Missile (Wrecked Ship left)",
         "access_rules": [
-          "phantoon"
+          "@Phantoon's Lair"
         ],
         "sections": [
           {

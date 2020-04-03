@@ -730,7 +730,7 @@
           {
             "name": "Energy Tank, Kraid",
             "access_rules": [
-              "kraid"
+              "@Kraid's Lair"
             ],
             "sections": [
               {
@@ -754,7 +754,7 @@
           {
             "name": "Varia Suit",
             "access_rules": [
-              "kraid"
+              "@Kraid's Lair"
             ],
             "sections": [
               {

@@ -296,18 +296,18 @@
           {
             "name": "Missile (outside Wrecked Ship top)",
             "access_rules": [
-              "normal,$canPassBombPassages,phantoon,super,speed",
-              "normal,$canPassBombPassages,phantoon,super,grapple,hijump",
-              "normal,$canPassBombPassages,phantoon,super,grapple,$canFly",
-              "normal,$canPassBombPassages,phantoon,super,space",
-              "normal,$canPassBombPassages,phantoon,super,gravity,$canFly",
-              "normal,$canPassBombPassages,phantoon,super,gravity,hijump",
+              "normal,$canPassBombPassages,@Phantoon's Lair,super,speed",
+              "normal,$canPassBombPassages,@Phantoon's Lair,super,grapple,hijump",
+              "normal,$canPassBombPassages,@Phantoon's Lair,super,grapple,$canFly",
+              "normal,$canPassBombPassages,@Phantoon's Lair,super,space",
+              "normal,$canPassBombPassages,@Phantoon's Lair,super,gravity,$canFly",
+              "normal,$canPassBombPassages,@Phantoon's Lair,super,gravity,hijump",
 
-              "normal,$canPassBombPassages,phantoon,@Maridia Portal,hijump",
-              "normal,$canPassBombPassages,phantoon,@Maridia Portal,$canFly",
-              "normal,$canPassBombPassages,phantoon,@Maridia Portal,speed",
+              "normal,$canPassBombPassages,@Phantoon's Lair,@Maridia Portal,hijump",
+              "normal,$canPassBombPassages,@Phantoon's Lair,@Maridia Portal,$canFly",
+              "normal,$canPassBombPassages,@Phantoon's Lair,@Maridia Portal,speed",
 
-              "[hard],super,$canPassBombPassages,phantoon"
+              "[hard],super,$canPassBombPassages,@Phantoon's Lair"
             ],
             "sections": [
               {
@@ -331,14 +331,14 @@
           {
             "name": "Missile (outside Wrecked Ship middle)",
             "access_rules": [
-              "normal,$canPassBombPassages,super,phantoon,speed",
-              "normal,$canPassBombPassages,super,phantoon,grapple",
-              "normal,$canPassBombPassages,super,phantoon,space",
-              "normal,$canPassBombPassages,super,phantoon,gravity,$canFly",
-              "normal,$canPassBombPassages,super,phantoon,gravity,hijump",
-              "normal,$canPassBombPassages,super,phantoon,@Maridia Portal",
+              "normal,$canPassBombPassages,super,@Phantoon's Lair,speed",
+              "normal,$canPassBombPassages,super,@Phantoon's Lair,grapple",
+              "normal,$canPassBombPassages,super,@Phantoon's Lair,space",
+              "normal,$canPassBombPassages,super,@Phantoon's Lair,gravity,$canFly",
+              "normal,$canPassBombPassages,super,@Phantoon's Lair,gravity,hijump",
+              "normal,$canPassBombPassages,super,@Phantoon's Lair,@Maridia Portal",
 
-              "[hard],super,$canPassBombPassages,phantoon"
+              "[hard],super,$canPassBombPassages,@Phantoon's Lair"
             ],
             "sections": [
               {
