@@ -2,7 +2,7 @@
 -----
 Logic refactor for v11 rewrite
 Added scaffolding for future keysanity support
-Added SM boss locations for items that require the boss to be defeated similar to Castle Tower with Aga1
+Wrecked Ship + West Ocean locations now show as accessible before defeating Phantoon for convenience
 Cap missiles, supers, and power bombs at fixed max values used by the randomizer (200, 80, 50 respectively)
 
 3.2.2
