@@ -31,8 +31,8 @@
         "name": "Back of Escape",
         "clear_as_group": true,
         "access_rules": [
-          "bombs,lift1",
-          "bombs,hc_smallkey:1,[lamp]"
+          "lift1",
+          "hc_smallkey:1,[lamp]"
         ],
         "item_count": 3
       },
@@ -252,8 +252,7 @@
         "name": "Right Side",
         "clear_as_group": false,
         "access_rules": [
-          "bow,bombs",
-          "bow,boots"
+          "bow"
         ],
         "item_count": 2
       },
@@ -461,6 +460,7 @@
         "name": "Right Side",
         "access_rules": [
           "hookshot,[hammer]",
+          "[hookshot],[hammer],somaria",  // For icebreaker
           "[ip_bigkey],ip_smallkey:1,[hammer]"
         ],
         "clear_as_group": false,
@@ -611,7 +611,7 @@
         "name": "Mimic Cave",
         "color": "#934f17",
         "access_rules": [
-          "mirror,bombs,tr_smallkey:2"
+          "mirror,tr_smallkey:2"
         ],
         "sections": [
           {

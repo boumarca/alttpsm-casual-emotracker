@@ -1,3 +1,8 @@
+3.3.1
+-----
+Bombs no longer required for LTTP access checks for convenience
+Cane of Somaria is required for Kholdstare to be fully accessible
+
 3.3.0
 -----
 Logic refactor for v11 rewrite

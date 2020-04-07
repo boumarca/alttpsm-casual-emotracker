@@ -67,9 +67,6 @@
         "children": [
           {
             "name": "Brewery",
-            "access_rules": [
-              "bombs"
-            ],
             "sections": [
               {
                 "name": "Brewery",
@@ -268,9 +265,6 @@
           {
             "name": "Hype Cave",
             "color": "#35046b",
-            "access_rules": [
-              "bombs"
-            ],
             "sections": [
               {
                 "name": "Cave",

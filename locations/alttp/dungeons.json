@@ -19,7 +19,7 @@
         "name": "Escape",
         "clear_as_group": false,
         "access_rules": [
-          "[lift1],[lamp],[bombs]"
+          "[lift1],[lamp]"
         ],
         "item_count": 6
       }
@@ -169,7 +169,7 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[bow],[lamp],[bombs]"
+          "[bow],[lamp]"
         ],
         "item_count": 5
       },
@@ -201,7 +201,7 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[hammer],[hookshot],[bombs]"
+          "[hammer],[hookshot]"
         ],
         "item_count": 6
       },
@@ -297,14 +297,14 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[hammer],[hookshot],[bombs]"
+          "[hammer],[hookshot]"
         ],
         "item_count": 3
       },
       {
         "name": "Kholdstare",
         "access_rules": [
-          "@Ice Palace/Dungeon,hammer"
+          "@Ice Palace/Dungeon,hammer,[somaria]"
         ],
         "hosted_item": "icepalace"
       }
@@ -390,7 +390,7 @@
         "name": "Mimic Cave",
         "color": "#934f17",
         "access_rules": [
-          "[firerod],mirror,bombs"
+          "[firerod],mirror"
         ],
         "sections": [
           {

@@ -58,9 +58,6 @@
             "sections": [
               {
                 "name": "Bombable Wall",
-                "access_rules": [
-                  "bombs"
-                ],
                 "item_count": 1
               }
             ]
@@ -81,9 +78,6 @@
               },
               {
                 "name": "Bombable Wall",
-                "access_rules": [
-                  "bombs"
-                ],
                 "short_name": "Bomb",
                 "item_count": 1
               }
@@ -106,7 +100,6 @@
               },
               {
                 "name": "Bombable Wall",
-                "access_rules": ["bombs"],
                 "short_name": "Bomb",
                 "item_count": 1
               }
@@ -284,9 +277,6 @@
             "sections": [
               {
                 "name": "Back Room",
-                "access_rules": [
-                  "bombs"
-                ],
                 "item_count": 3
               },
               {
@@ -411,9 +401,6 @@
           },
           {
             "name": "Aginah's Cave",
-            "access_rules": [
-              "bombs"
-            ],
             "sections": [
               {
                 "name": "Aginah's Cave",
@@ -431,9 +418,6 @@
           {
             "name": "Mini Moldorm Cave",
             "color": "#158134",
-            "access_rules": [
-              "bombs"
-            ],
             "sections": [
               {
                 "name": "Mini Moldorm Cave",
@@ -451,9 +435,6 @@
           {
             "name": "Ice Rod Cave",
             "color": "#158134",
-            "access_rules": [
-              "bombs"
-            ],
             "sections": [
               {
                 "name": "Ice Rod Cave",
@@ -547,10 +528,6 @@
               {
                 "name": "Maze Race",
                 "capture_item": true,
-                "access_rules": [
-                  "bombs",
-                  "{}"
-                ],
                 "item_count": 1
               }
             ]
@@ -716,9 +693,6 @@
           },
           {
             "name": "Paradox Cave",
-            "access_rules": [
-              "bombs"
-            ],
             "sections": [
               {
                 "name": "Bottom",
@@ -750,7 +724,7 @@
                 "name": "Island",
                 "capture_item": true,
                 "access_rules": [
-                  "mirror,pearl,lift2,bombs",
+                  "mirror,pearl,lift2",
                   "{}"
                 ],
                 "item_count": 1
