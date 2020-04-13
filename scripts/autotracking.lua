@@ -1571,7 +1571,7 @@ function updateItemsLTTP(segment, address, inLTTP)
     updateToggleItemFromByteAndFlag(segment, "blueboomerang", address + 0x8c, 0x80)
     updateToggleItemFromByteAndFlag(segment, "redboomerang",  address + 0x8c, 0x40)
     updateToggleItemFromByteAndFlag(segment, "powder", address + 0x8c, 0x10)
-    updateToggleItemFromByteAndFlag(segment, "bow", address + 0x8e, 0x80)
+    updateToggleItemFromByte(segment, "bow", address + 0x40)
     updateToggleItemFromByteAndFlag(segment, "silvers", address + 0x8e, 0x40)
 
     updatePseudoProgressiveItemFromByteAndFlag(segment, "mushroom", address + 0x8c, 0x20)
