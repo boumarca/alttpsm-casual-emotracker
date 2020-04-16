@@ -1,3 +1,8 @@
+3.3.3
+-----
+Added "full" option for both games map view to show LTTP maps full size
+Added vertical layout support
+
 3.3.2
 -----
 Fixed bug with collecting single arrow in SM causing erroneous bow detection

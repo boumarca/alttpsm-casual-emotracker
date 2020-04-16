@@ -300,8 +300,68 @@
           ]
         },
         {
-          "type": "layout",
-          "key": "shared_maps"
+          "type": "tabbed",
+          "tabs": [
+            {
+              "title": "Super Metroid",
+              "content": {
+                "type": "layout",
+                "key": "sm_maps"
+              }
+            },
+            {
+              "title": "Link to the Past",
+              "content": {
+                "type": "layout",
+                "key": "alttp_maps"
+              }
+            },
+            {
+              "title": "Both",
+              "content": {
+                "type": "tabbed",
+                "tabs": [
+                  {
+                    "title": "Compact",
+                    "content": {
+                      "type": "array",
+                      "orientation": "horizontal",
+                      "h_alignment": "center",
+                      "content": [
+                        {
+                          "type": "map",
+                          "orientation": "vertical",
+                          "maps": [
+                            "lightworld",
+                            "darkworld"
+                          ]
+                        },
+                        {
+                          "type": "map",
+                          "maps": [
+                            "metroid"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "title": "Full",
+                    "content": {
+                      "type": "map",
+                      "orientation": "horizontal",
+                      "h_alignment": "center",
+                      "maps": [
+                        "lightworld",
+                        "darkworld",
+                        "metroid"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     }
