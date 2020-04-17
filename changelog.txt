@@ -1,3 +1,7 @@
+3.3.4
+-----
+Tweaked vertical layout for bigger map size
+
 3.3.3
 -----
 Added "full" option for both games map view to show LTTP maps full size
