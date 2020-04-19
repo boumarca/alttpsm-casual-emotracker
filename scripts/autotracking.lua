@@ -5,8 +5,8 @@ AUTOTRACKER_ENABLE_DEBUG_ERROR_LOGGING = false
 SHOW_DUNGEON_DEBUG_LOGGING = AUTOTRACKER_ENABLE_DEBUG_LOGGING or AUTOTRACKER_ENABLE_DEBUG_DUNGEON_LOGGING
 SHOW_ERROR_DEBUG_LOGGING = AUTOTRACKER_ENABLE_DEBUG_LOGGING or AUTOTRACKER_ENABLE_DEBUG_ERROR_LOGGING
 
--- Are we using a keysanity variant?
-IS_KEYSANITY = string.find(Tracker.ActiveVariantUID, "keys") ~= nil
+-- Are we using a Bizhawk-specific variant?  This matters for memory addressing, until we get a new connectorlib.
+BIZHAWK_MODE = string.find(Tracker.ActiveVariantUID, "bizhawk") ~= nil
 -------------------------------------------------------
 
 -- Some useful stuff for reference from Z3SM ASM GitHub repo: https://github.com/tewtal/alttp_sm_combo_randomizer_rom
@@ -26,11 +26,34 @@ IS_KEYSANITY = string.find(Tracker.ActiveVariantUID, "keys") ~= nil
 -- be able to directly address the SRAM banks but currently we have to use the bank 0xe0 mapping instead.
 -- See the getSRAMAddressLTTP() and getSRAMAddressSM() functions below for the mapping math.
 
+-----------------------------------------
+-- TODO: CURRENT KEYSANITY DOORS
+-- Crateria 1 locked landing site pbs and gauntlet
+-- Crateria 2 locked moat (only from ship side)
+-- Crateria B locked G4 hallway
+-- Brinstar 1 locked Ceiling Etank
+-- Brinstar 2 locked Etecoons, SpoSpo back door, and wave gate e-tank.
+-- Brinstar B locked SpoSpo front door and Baby Kraid room
+-- U Norfair 1 locked Ice and Crumble Tower (includes bottom door)
+-- U Norfair 2 locked Cathedral<->Rising Tide
+-- U Norfair B locked Croc
+-- Maridia 1 locked Crab shaft (both from Everest and Aqueduct) and Aqueduct Save Room (troll)
+-- Maridia 2 locked east door of Botwoon Hallway (both directions)
+-- Maridia B locked Draygon
+-- WS 1 locked Bowling Alley/Peekaboo room
+-- WS B locked Phantoon
+-- L Norfair 1 locked Ampitheater
+-- L Norfair B locked Ridley
+-----------------------------------------
+
 print("")
 print("Active Auto-Tracker Configuration")
 print("---------------------------------------------------------------------")
 if IS_KEYSANITY then
     print("Keysanity Mode enabled")
+end
+if BIZHAWK_MODE then
+    print("Bizhawk Mode enabled")
 end
 if AUTOTRACKER_ENABLE_ITEM_TRACKING then
     print("Item Tracking enabled")
@@ -281,10 +304,17 @@ function updateGame()
             -- Extra cross-game RAM watches specifically for items.
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Item Data In LTTP", 0x703900 + cross_game_offset, 0x10, updateItemsInactiveSM))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Ammo Data In LTTP", 0x703920 + cross_game_offset, 0x16, updateAmmoInactiveSM))
+            if IS_KEYSANITY then
+                table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Key Data In LTTP", 0x703970 + cross_game_offset, 0x02, updateKeycardsInactiveSM))
+            end
 
             -- SRAM watches for things that aren't in cross-game extra RAM.
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Boss Data In LTTP", getSRAMAddressSM(0x68), 0x08, updateSMBossesInactive))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Room Data In LTTP", getSRAMAddressSM(0xb0), 0x20, updateRoomsInactiveSM))
+
+            -- Game completion checks
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP DONE", 0x703506 + cross_game_offset, 0x01, updateLTTPcompletionInLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM DONE", 0x703402 + cross_game_offset, 0x01, updateSMcompletionInLTTP))
 
         -- Super Metroid
         elseif AUTOTRACKER_IS_IN_SM then
@@ -293,6 +323,9 @@ function updateGame()
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Ammo Data", 0x7e09c2, 0x16, updateAmmoActiveSM))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Boss Data", 0x7ed828, 0x08, updateSMBossesActive))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Room Data", 0x7ed870, 0x20, updateRoomsActiveSM))
+            if IS_KEYSANITY then
+                table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Key Data In LTTP", 0x7ed830, 0x02, updateKeycardsActiveSM))
+            end
 
             -- Extra cross-game RAM watches specifically for items.
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Item Data In SM", 0x703b40 + cross_game_offset, 0x90, updateItemsInactiveLTTP))
@@ -302,13 +335,10 @@ function updateGame()
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Room In SM", getSRAMAddressLTTP(0x0), 0x250, updateRoomsInactiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Overworld Event Data In SM", getSRAMAddressLTTP(0x280), 0x82, updateOverworldEventsInactiveLTTP))
 
-        end
+            -- Game completion checks
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP DONE", 0x703506 + cross_game_offset, 0x01, updateLTTPcompletionInSM))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM DONE", 0x703402 + cross_game_offset, 0x01, updateSMcompletionInSM))
 
-        -- Watches for both games all the time.
-        if AUTOTRACKER_IS_IN_LTTP or AUTOTRACKER_IS_IN_SM then
-            -- This tracker has no completion item for each game yet, uncomment if it gets added in future...
-            --table.insert(sramWatches, ScriptHost:AddMemoryWatch("LTTP DONE", 0X703506 + cross_game_offset, 0x01, updateLTTPcompletion))
-            --table.insert(sramWatches, ScriptHost:AddMemoryWatch("SM DONE", 0X703402 + cross_game_offset, 0x02, updateSMcompletion))
         end
     end
 
@@ -367,52 +397,56 @@ function isInGameSM()
     end
 end
 
-function updateLTTPcompletion(segment)
+function updateLTTPcompletionInLTTP(segment)
     if not (isInLTTP() and isInGameLTTP()) then
         return false
     end
+    updateLTTPcompletion(segment)
+    return true
+end
 
+function updateLTTPcompletionInSM(segment)
+    if not (isInSM() and isInGameSM()) then
+        return false
+    end
+    updateLTTPcompletion(segment)
+    return true
+end
+
+function updateLTTPcompletion(segment)
     InvalidateReadCaches()
 
     local address = 0x703506
     if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
         address = address + LUA_EXTRA_RAM_OFFSET
     end
+    updateToggleItemFromByte(segment, "ganon", address)
+end
 
-    local item = Tracker:FindObjectForCode("ganon")
-    if item then
-        if (ReadU8(segment, address) == 0x01) then
-            item.Active = true
-        end
-    elseif SHOW_ERROR_DEBUG_LOGGING then
-        print("***ERROR*** Couldn't find item: ", "ganon")
+function updateSMcompletionInLTTP(segment)
+    if not (isInLTTP() and isInGameLTTP()) then
+        return false
     end
+    updateSMcompletion(segment)
+    return true
+end
 
+function updateSMcompletionInSM(segment)
+    if not (isInSM() and isInGameSM()) then
+        return false
+    end
+    updateSMcompletion(segment)
     return true
 end
 
 function updateSMcompletion(segment)
-    if not (isInSM() and isInGameSM()) then
-        return false
-    end
-
     InvalidateReadCaches()
 
-    local address = 0x703403
+    local address = 0x703402
     if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
         address = address + LUA_EXTRA_RAM_OFFSET
     end
-
-    local item = Tracker:FindObjectForCode("brain")
-    if item then
-        if (ReadU8(segment, address) == 0x01) then
-            item.Active = true
-        end
-    elseif SHOW_ERROR_DEBUG_LOGGING then
-        print("***ERROR*** Couldn't find item: ", "brain")
-    end
-
-    return true
+    updateToggleItemFromByte(segment, "brain", address)
 end
 
 -- ******************** Helper functions for updating items and locations
@@ -855,10 +889,11 @@ function updateAllDungeonLocationsFromCache()
         updateDungeonLocationFromCache("@Eastern Palace/Armos Knights", "ep4")
         -- Eastern Palace has no small keys in chests.
 
-        updateDungeonLocationFromCache("@Desert Palace/Entrance", "dp")
-        updateDungeonLocationFromCache("@Desert Palace/Right Side", "dp2")
-        updateDungeonLocationFromCache("@Desert Palace/Big Chest", "dp3")
-        updateDungeonLocationFromCache("@Desert Palace/Lanmolas", "dp4")
+        updateDungeonLocationFromCache("@Desert Palace/Map Chest", "dp")
+        updateDungeonLocationFromCache("@Desert Palace/Torch", "dp2")
+        updateDungeonLocationFromCache("@Desert Palace/Right Side", "dp3")
+        updateDungeonLocationFromCache("@Desert Palace/Big Chest", "dp4")
+        updateDungeonLocationFromCache("@Desert Palace/Lanmolas", "dp5")
         updateDungeonSmallKeysFromCache("dp")
 
         updateDungeonLocationFromCache("@Tower of Hera/Entrance", "toh")
@@ -915,7 +950,7 @@ function updateAllDungeonLocationsFromCache()
         updateDungeonLocationFromCache("@Turtle Rock/Entrance", "tr")
         updateDungeonLocationFromCache("@Turtle Rock/Roller Room", "tr2")
         updateDungeonLocationFromCache("@Turtle Rock/Chain Chomps", "tr3")
-        updateDungeonLocationFromCache("@Turtle Rock/Pipe Room", "tr4")
+        updateDungeonLocationFromCache("@Turtle Rock/Big Key Chest", "tr4")
         updateDungeonLocationFromCache("@Turtle Rock/Big Chest", "tr5")
         updateDungeonLocationFromCache("@Turtle Rock/Crystaroller Room", "tr6")
         updateDungeonLocationFromCache("@Turtle Rock/Laser Bridge", "tr7")
@@ -946,14 +981,14 @@ function updateAllDungeonLocationsFromCache()
 end
 
 function updateDungeonLocationsFromTimestamp()
-    -- Check if the dungeon cache data has been updated in the last 1-2 seconds.  If so, wait for it to stabilize.
-    -- If it's been stable for more than 1 second, perform the location update from the cached data.
+    -- Check if the dungeon cache data has been updated in the last few seconds.  If so, wait for it to stabilize.
+    -- If it's been stable for more than a couple seconds, perform the location update from the cached data.
     -- This should hopefully avoid a "flickering" of incorrect counts on the locations which may cause pinned locations
     -- to be accidentally cleared if the count goes 1 -> 0 -> 1 again very quickly.
     -- Set last update timestamp to nil so we don't update again until data changes.
     if DUNGEON_DATA_LAST_UPDATE ~= nil then
         local howLongAgo = os.time() - DUNGEON_DATA_LAST_UPDATE
-        if howLongAgo > 1 then
+        if howLongAgo > 2 then
             if SHOW_DUNGEON_DEBUG_LOGGING then
                 print(string.format("Dungeon data updated %d seconds ago, updating locations", howLongAgo))
             end
@@ -1069,17 +1104,17 @@ function updateRoomDataFromCache(inLTTP)
 
     -- *** Desert Palace
     -- Room 115 offset 0xE6 (Big chest and torch item)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp3", { 115, 4 }, inLTTP)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp", { 115, 10 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp4", { 115, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp2", { 115, 10 }, inLTTP)
 
-    -- Room 116 offset 0xE8 (Top room single chest)
+    -- Room 116 offset 0xE8 (Map chest)
     updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp", { 116, 4 }, inLTTP)
 
     -- Room 117 offset 0xE9 (Big key chest)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp2", { 117, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp3", { 117, 4 }, inLTTP)
 
     -- Room 133 offset 0x10A (Room before big key chest)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp2", { 133, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp3", { 133, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "dp", { 133, 14 }, inLTTP)
 
     -- Room 99 offset 0xC6 (First flying tile room in back)
@@ -1095,7 +1130,7 @@ function updateRoomDataFromCache(inLTTP)
     updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "dp", { 67, 14 }, inLTTP)
 
     -- Room 51 offset 0x66 (Lanmolas)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp4", { 51, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "dp5", { 51, 11 }, inLTTP)
 
 
     -- *** Tower of Hera
@@ -1940,6 +1975,55 @@ function updateItemsSM(segment, address)
     updateToggleItemFromByteAndFlag(segment, "spazer", address + 0x06, 0x04)
     updateToggleItemFromByteAndFlag(segment, "plasma", address + 0x06, 0x08)
     updateToggleItemFromByteAndFlag(segment, "charge", address + 0x07, 0x10)
+end
+
+function updateKeycardsActiveSM(segment)
+    if not (isInSM() and isInGameSM()) then
+        return false
+    end
+    if AUTOTRACKER_ENABLE_ITEM_TRACKING then
+        updateKeycardsSM(segment, 0x7ed830)
+    end
+    return true
+end
+
+function updateKeycardsInactiveSM(segment)
+    if not (isInLTTP() and isInGameLTTP()) then
+        return false
+    end
+
+    local address = 0x703970
+    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
+        address = address + LUA_EXTRA_RAM_OFFSET
+    end
+
+    if AUTOTRACKER_ENABLE_ITEM_TRACKING then
+        updateKeycardsSM(segment, address)
+    end
+    return true
+end
+
+function updateKeycardsSM(segment, address)
+    InvalidateReadCaches()
+
+    updateToggleItemFromByteAndFlag(segment, "crateria_key1", address + 0x00, 0x01)
+    updateToggleItemFromByteAndFlag(segment, "crateria_key2", address + 0x00, 0x02)
+    updateToggleItemFromByteAndFlag(segment, "crateria_bosskey", address + 0x00, 0x04)
+    updateToggleItemFromByteAndFlag(segment, "brinstar_key1", address + 0x00, 0x08)
+    updateToggleItemFromByteAndFlag(segment, "brinstar_key2", address + 0x00, 0x10)
+    updateToggleItemFromByteAndFlag(segment, "brinstar_bosskey", address + 0x00, 0x20)
+    updateToggleItemFromByteAndFlag(segment, "un_key1", address + 0x00, 0x40)
+    updateToggleItemFromByteAndFlag(segment, "un_key2", address + 0x00, 0x80)
+
+    updateToggleItemFromByteAndFlag(segment, "un_bosskey", address + 0x01, 0x01)
+    updateToggleItemFromByteAndFlag(segment, "maridia_key1", address + 0x01, 0x02)
+    updateToggleItemFromByteAndFlag(segment, "maridia_key2", address + 0x01, 0x04)
+    updateToggleItemFromByteAndFlag(segment, "maridia_bosskey", address + 0x01, 0x08)
+    updateToggleItemFromByteAndFlag(segment, "ws_key1", address + 0x01, 0x10)
+    updateToggleItemFromByteAndFlag(segment, "ws_bosskey", address + 0x01, 0x20)
+    updateToggleItemFromByteAndFlag(segment, "ln_key1", address + 0x01, 0x40)
+    updateToggleItemFromByteAndFlag(segment, "ln_bosskey", address + 0x01, 0x80)
+
 end
 
 function updateAmmoActiveSM(segment)

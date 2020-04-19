@@ -1,4 +1,5 @@
 [
+  // LTTP keys
   {
     "name": "Eastern Palace Big Key",
     "type": "toggle",
@@ -160,6 +161,121 @@
     "img": "images/BigKey.png",
     "codes": "gt_bigkey"
   },
+
+  // SM keys
+  {
+    "name": "Crateria Key 1",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "crateria_key1"
+  },
+  {
+    "name": "Crateria Key 2",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level2.png",
+    "codes": "crateria_key2"
+  },
+  {
+    "name": "Crateria Boss Key",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "crateria_bosskey"
+  },
+  {
+    "name": "Brinstar Key 1",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "brinstar_key1"
+  },
+  {
+    "name": "Brinstar Key 2",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level2.png",
+    "codes": "brinstar_key2"
+  },
+  {
+    "name": "Brinstar Boss Key",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "brinstar_bosskey"
+  },
+  {
+    "name": "Upper Norfair Key 1",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "un_key1"
+  },
+  {
+    "name": "Upper Norfair Key 2",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level2.png",
+    "codes": "un_key2"
+  },
+  {
+    "name": "Upper Norfair Boss Key",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "un_bosskey"
+  },
+  {
+    "name": "Maridia Key 1",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "maridia_key1"
+  },
+  {
+    "name": "Maridia Key 2",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level2.png",
+    "codes": "maridia_key2"
+  },
+  {
+    "name": "Maridia Boss Key",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "maridia_bosskey"
+  },
+  {
+    "name": "Wrecked Ship Key 1",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "ws_key1"
+  },
+  {
+    "name": "Wrecked Ship Boss Key",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "ws_bosskey"
+  },
+  {
+    "name": "Lower Norfair Key 1",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "ln_key1"
+  },
+  {
+    "name": "Lower Norfair Boss Key",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "ln_bosskey"
+  },
+
   // Generic keys for capture.
   {
     "name": "Generic Small Key",
@@ -173,6 +289,27 @@
     "type": "static",
     "img": "images/BigKey.png",
     "codes": "generic_bigkey",
+    "capturable": true
+  },
+  {
+    "name": "Generic Level 1 Keycard",
+    "type": "static",
+    "img": "images/sm_keycard_level1.png",
+    "codes": "generic_l1_keycard",
+    "capturable": true
+  },
+  {
+    "name": "Generic Level 2 Keycard",
+    "type": "static",
+    "img": "images/sm_keycard_level2.png",
+    "codes": "generic_l2_keycard",
+    "capturable": true
+  },
+  {
+    "name": "Generic Boss Keycard",
+    "type": "static",
+    "img": "images/sm_keycard_boss.png",
+    "codes": "generic_boss_keycard",
     "capturable": true
   }
 ]

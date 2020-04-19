@@ -9,42 +9,10 @@
       [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "phantoon"],
       [ "bottle", "somaria", "byrna", "cape", "mirror", "gomode", "draygon"],
       [ "lift1", "boots", "flippers", "halfmagic", "heartpiece", "heartcontainer", "ridley"],
-      [ "", "", "", "", "owsword", "shield", "armor"]
+      [ "", "", "", "owsword", "shield", "armor", ""]
     ]
   },
-  "sm_item_grid": {
-    "type": "array",
-    "orientation": "vertical",
-    "h_alignment": "center",
-    "v_alignment": "top",
-    "margin": "0,0",
-    "content": [
-      {
-        "type": "itemgrid",
-        "item_margin": "1,2",
-        "h_alignment": "left",
-        "rows": [
-          [ "charge", "ice", "wave", "spazer", "plasma"],
-          [ "morph", "bomb", "spring", "space","screw"],
-          [ "varia", "gravity", "hijump", "speed", ""],
-          [ "grapple", "xray", "etank", "reservetank", ""],
-          [ "missile", "supermissile", "powerbomb", "", ""]
-        ]
-      },
-      {
-        "type": "array",
-        "orientation": "horizontal",
-        "margin": "0,0",
-        "content": [
-          {
-            "type": "item",
-            "item": "difficulty"
-          }
-        ]
-      }
-    ]
-  },
-  "keys_item_grid": {
+  "alttp_keys_item_grid": {
     "type": "array",
     "orientation": "vertical",
     "content": [
@@ -221,6 +189,51 @@
       }
     ]
   },
+  "sm_item_grid": {
+    "type": "array",
+    "orientation": "vertical",
+    "h_alignment": "center",
+    "v_alignment": "top",
+    "margin": "0,0",
+    "content": [
+      {
+        "type": "itemgrid",
+        "item_margin": "1,2",
+        "h_alignment": "left",
+        "rows": [
+          [ "charge", "ice", "wave", "spazer", "plasma"],
+          [ "morph", "bomb", "spring", "space","screw"],
+          [ "varia", "gravity", "hijump", "speed", ""],
+          [ "grapple", "xray", "etank", "reservetank", ""],
+          [ "missile", "supermissile", "powerbomb", "", ""]
+        ]
+      },
+      {
+        "type": "array",
+        "orientation": "horizontal",
+        "margin": "0,0",
+        "content": [
+          {
+            "type": "item",
+            "item": "difficulty"
+          }
+        ]
+      }
+    ]
+  },
+  "sm_keys_item_grid": {
+    "type": "itemgrid",
+    "h_alignment": "center",
+    "item_margin": "1,2",
+    "rows": [
+      [ "crateria_label", "crateria_key1", "crateria_key2", "crateria_bosskey"],
+      [ "brinstar_label", "brinstar_key1", "brinstar_key2", "brinstar_bosskey"],
+      [ "un_label", "un_key1", "un_key2", "un_bosskey"],
+      [ "maridia_label", "maridia_key1", "maridia_key2", "maridia_bosskey"],
+      [ "ws_label", "ws_key1", "", "ws_bosskey"],
+      [ "ln_label", "ln_key1", "", "ln_bosskey"],
+    ]
+  },
   "tracker_capture_item": {
     "type": "container",
     "content": {
@@ -233,7 +246,7 @@
         [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "varia", "gravity", "hijump", "speed", "grapple"],
         [ "bottle", "somaria", "byrna", "cape", "mirror", "blueboomerang", "redboomerang", "heartpiece_icon", "xray", "etank_icon", "reservetank_icon"],
         [ "lift1", "boots", "flippers", "halfmagic", "owsword", "shield", "armor", "heartcontainer_icon", "missile_icon", "super_icon", "pb_icon"],
-        [ "generic_smallkey", "generic_bigkey" ]
+        [ "", "", "","generic_smallkey", "generic_bigkey", "generic_l1_keycard", "generic_l2_keycard", "generic_boss_keycard", "", "", "" ]
       ]
     }
   },
@@ -272,11 +285,15 @@
                           },
                           {
                             "type": "layout",
+                            "key": "alttp_keys_item_grid",
+                          },
+                          {
+                            "type": "layout",
                             "key": "sm_item_grid",
                           },
                           {
                             "type": "layout",
-                            "key": "keys_item_grid",
+                            "key": "sm_keys_item_grid",
                           }
                         ]
                       }

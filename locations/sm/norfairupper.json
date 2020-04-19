@@ -14,62 +14,70 @@
         ],
         "children": [
           {
-            "name": "Ice Beam",
+            "name": "Ice Beam Area",
             "access_rules": [
-              "normal,super,$canPassBombPassages,varia,speed",
-              "[hard],super,morph,varia",
-              "[hard],super,morph,$countEnergyReserves:3"
+              "@Upper Norfair Ice Beam Door"
             ],
-            "sections": [
+            "children": [
               {
                 "name": "Ice Beam",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1096,
-                "y": 1360
+                "access_rules": [
+                  "normal,$canPassBombPassages,varia,speed",
+                  "[hard],morph,varia",
+                  "[hard],morph,$countEnergyReserves:3"
+                ],
+                "sections": [
+                  {
+                    "name": "Ice Beam",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1096,
+                    "y": 1360
+                  },
+                  {
+                    "map": "norfair",
+                    "x": 216,
+                    "y": 148
+                  }
+                ]
               },
-              {
-                "map": "norfair",
-                "x": 216,
-                "y": 148
-              }
-            ]
-          },
-          {
-            "name": "Missile (below Ice Beam)",
-            "access_rules": [
-              "normal,super,$canUsePowerBombs,varia,speed",
-              "[hard],super,$canUsePowerBombs,varia",
-              "[hard],super,$canUsePowerBombs,$countEnergyReserves:3",
-              "[hard],varia,speed,super"
-            ],
-            "sections": [
               {
                 "name": "Missile (below Ice Beam)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1000,
-                "y": 1424
-              },
-              {
-                "map": "norfair",
-                "x": 120,
-                "y": 212
+                "access_rules": [
+                  "normal,$canUsePowerBombs,varia,speed",
+                  "[hard],$canUsePowerBombs,varia",
+                  "[hard],$canUsePowerBombs,$countEnergyReserves:3",
+                  "[hard],varia,speed"
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (below Ice Beam)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1000,
+                    "y": 1424
+                  },
+                  {
+                    "map": "norfair",
+                    "x": 120,
+                    "y": 212
+                  }
+                ]
               }
             ]
           },
           {
             "name": "Hi-Jump Boots",
             "access_rules": [
-              "$canOpenRedDoors,$canPassBombPassages",
+              "$canOpenRedDoors,$canPassBombPassages"
             ],
             "sections": [
               {
@@ -141,18 +149,59 @@
         ]
       },
       {
+        "name": "Norfair Upper Cathedral",
+        "access_rules": [
+          "normal,@Norfair Upper West,varia,$canOpenRedDoors,$canFly",
+          "normal,@Norfair Upper West,varia,$canOpenRedDoors,hijump",
+          "normal,@Norfair Upper West,varia,$canOpenRedDoors,speed",
+
+          "[hard],@Norfair Upper West,$canHellRun,$canOpenRedDoors,$canFly",
+          "[hard],@Norfair Upper West,$canHellRun,$canOpenRedDoors,hijump",
+          "[hard],@Norfair Upper West,$canHellRun,$canOpenRedDoors,speed",
+          "[hard],@Norfair Upper West,$canHellRun,$canOpenRedDoors,$canSpringBallJump",
+          "[hard],@Norfair Upper West,$canHellRun,$canOpenRedDoors,varia,ice",
+        ],
+        "children": [
+          {
+            "name": "Missile (lava room)",
+            "sections": [
+              {
+                "name": "Missile (lava room)",
+                "capture_item": true,
+                "access_rules": [
+                  "morph",
+                  "{}"
+                ],
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1448,
+                "y": 1424
+              },
+              {
+                "map": "norfair",
+                "x": 568,
+                "y": 212
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Norfair Upper Speedway",
+        "access_rules": [
+          "normal,@Norfair Upper West,varia,speed",
+          "[hard],@Norfair Upper West,$canHellRun,speed"
+        ]
+      },
+      {
         "name": "Norfair Upper East",
         "access_rules": [
-          "normal,@Norfair Upper West,varia,super,$canFly",
-          "normal,@Norfair Upper West,varia,super,hijump",
-          "normal,@Norfair Upper West,varia,super,speed",
-
-          "[hard],@Norfair Upper West,$canHellRun,super,$canFly",
-          "[hard],@Norfair Upper West,$canHellRun,super,hijump",
-          "[hard],@Norfair Upper West,$canHellRun,super,speed",
-          "[hard],@Norfair Upper West,$canHellRun,super,$canSpringBallJump",
-          "[hard],@Norfair Upper West,$canHellRun,super,varia,ice",
-          "[hard],@Norfair Upper West,$canHellRun,speed,$canUsePowerBombs"
+          "@Norfair Upper Cathedral,@Upper Norfair Cathedral Rising Door",
+          "@Norfair Upper Speedway,@Upper Norfair Bubble Mountain Door,$canUsePowerBombs"
         ],
         "children": [
           {
@@ -246,95 +295,6 @@
             ]
           },
           {
-            "name": "Wave Beam",
-            "access_rules": [
-              "normal,morph,$canFly",
-              "normal,morph,speed",
-              "normal,morph,$canPassBombPassages",
-              "normal,morph,hijump",
-              "normal,morph,ice",
-
-              "[hard],$canOpenRedDoors,morph",
-              "[hard],$canOpenRedDoors,grapple",
-              "[hard],$canOpenRedDoors,hijump,varia",
-              "[hard],$canOpenRedDoors,space"
-            ],
-            "sections": [
-              {
-                "name": "Wave Beam",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1864,
-                "y": 1424
-              },
-              {
-                "map": "norfair",
-                "x": 984,
-                "y": 212
-              }
-            ]
-          },
-          {
-            "name": "Missile (Wave Beam)",
-            "access_rules": [
-              "normal,$canFly",
-              "normal,morph,speed",
-              "normal,morph,$canPassBombPassages",
-              "normal,hijump",
-              "normal,ice",
-
-              "[hard]"
-            ],
-            "sections": [
-              {
-                "name": "Missile (Wave Beam)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1768,
-                "y": 1424
-              },
-              {
-                "map": "norfair",
-                "x": 888,
-                "y": 212
-              }
-            ]
-          },
-          {
-            "name": "Missile (lava room)",
-            "sections": [
-              {
-                "name": "Missile (lava room)",
-                "capture_item": true,
-                "access_rules": [
-                  "morph",
-                  "{}"
-                ],
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1448,
-                "y": 1424
-              },
-              {
-                "map": "norfair",
-                "x": 568,
-                "y": 212
-              }
-            ]
-          },
-          {
             "name": "Missile (bubble Norfair green door)",
             "access_rules": [
               "normal,$canFly",
@@ -390,23 +350,25 @@
       {
         "name": "Norfair Upper Crocomire",
         "access_rules": [
-          "normal,@Norfair Upper West,varia,super,$canUsePowerBombs,speed",
-          "normal,@Norfair Upper West,varia,super,speed,wave",
-          "normal,@Norfair Upper West,varia,super,morph,$canFly,gravity,wave",
-          "normal,@Norfair Upper West,varia,super,morph,hijump,gravity,wave",
+          "normal,@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Ice Beam Door,varia,$canUsePowerBombs,speed",
+          "normal,@Norfair Upper West,@Upper Norfair Crocomire Door,varia,speed,wave",
+          "normal,@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,varia,morph,$canFly,$canPassBombPassages,wave",
+          "normal,@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,varia,morph,$canFly,gravity,wave",
+          "normal,@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,varia,morph,hijump,$canPassBombPassages,wave",
+          "normal,@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,varia,morph,hijump,gravity,wave",
 
-          "[hard],@Norfair Upper West,super,$countEnergyReserves:2,speed",
-          "[hard],@Norfair Upper West,super,$canHellRun,$canFly,$canPassBombPassages",
-          "[hard],@Norfair Upper West,super,$canHellRun,$canFly,varia,morph",
-          "[hard],@Norfair Upper West,super,$canHellRun,hijump,$canPassBombPassages",
-          "[hard],@Norfair Upper West,super,$canHellRun,hijump,varia,morph",
-          "[hard],@Norfair Upper West,super,$canHellRun,$canSpringBallJump,$canPassBombPassages",
-          "[hard],@Norfair Upper West,super,$canHellRun,$canSpringBallJump,varia,morph",
-          "[hard],@Norfair Upper West,super,$canHellRun,varia,ice,$canPassBombPassages",
-          "[hard],@Norfair Upper West,super,$canHellRun,varia,ice,morph",
-          "[hard],@Norfair Upper West,super,$canHellRun,speed",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,$canFly,$canPassBombPassages",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,$canFly,varia,morph",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,hijump,$canPassBombPassages",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,hijump,varia,morph",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,$canSpringBallJump,$canPassBombPassages",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,$canSpringBallJump,varia,morph",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,varia,ice,$canPassBombPassages",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,@Upper Norfair Cathedral Rising Door,$canHellRun,varia,ice,morph",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,$countEnergyReserves:2,speed",
+          "[hard],@Norfair Upper West,@Upper Norfair Crocomire Door,$canHellRun,speed",
 
-          "[hard],@Norfair Lower Portal,screw,space,varia,super,$countEnergyReserves:2"
+          "[hard],@Norfair Lower Portal,@Upper Norfair Crocomire Door,screw,space,varia,$countEnergyReserves:2"
         ],
         "children": [
           {
@@ -543,7 +505,7 @@
                 "y": 596
               }
             ]
-          },
+          }
         ]
       },
       {

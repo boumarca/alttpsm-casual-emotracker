@@ -105,30 +105,6 @@ function hasSpeedBooster()
     return hasItem("speed")
 end
 
-function hasKraidKey()
-    return hasItem("kraid_key")
-end
-
-function defeatedKraid()
-    return hasItem("kraid")
-end
-
-function hasPhantoonKey()
-    return hasItem("phantoon_key")
-end
-
-function defeatedPhantoon()
-    return hasItem("phantoon")
-end
-
-function hasDraygonKey()
-    return hasItem("draygon_key")
-end
-
-function hasRidleyKey()
-    return hasItem("ridley_key")
-end
-
 
 ----------------------------------- Link to the Past Items
 
@@ -236,10 +212,10 @@ end
 function countMagicBars()
     -- Half magic gives 2x multiplier, bottle gives another 2x multiplier.
     local maxBars = 1
-    if hasHalfMagic() then
+    if hasHalfMagic() == 1 then
         maxBars = maxBars * 2
     end
-    if hasBottle() then
+    if hasBottle() == 1 then
         maxBars = maxBars * 2
     end
     return maxBars

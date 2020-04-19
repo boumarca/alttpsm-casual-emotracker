@@ -5,8 +5,20 @@
     "margin": "0,0",
     "content": [
       {
-        "type": "layout",
-        "key": "alttp_item_grid",
+        "type": "array",
+        "orientation": "horizontal",
+        "h_alignment": "stretch",
+        "margin": "0,0",
+        "content": [
+          {
+            "type": "layout",
+            "key": "alttp_item_grid",
+          },
+          {
+            "type": "layout",
+            "key": "alttp_keys_item_grid",
+          }
+        ]
       },
       {
         "type": "array",
@@ -20,7 +32,7 @@
           },
           {
             "type": "layout",
-            "key": "keys_item_grid",
+            "key": "sm_keys_item_grid",
           }
         ]
       },

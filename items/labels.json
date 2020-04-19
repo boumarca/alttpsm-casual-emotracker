@@ -1,4 +1,5 @@
 [
+  // LTTP labels
   {
     "name": "Hyrule Castle",
     "type": "static",
@@ -76,5 +77,43 @@
     "type": "static",
     "img": "images/GT.png",
     "codes": "gt_label"
+  },
+
+  // SM labels
+  {
+    "name": "Crateria",
+    "type": "static",
+    "img": "images/CR.png",
+    "codes": "crateria_label"
+  },
+  {
+    "name": "Brinstar",
+    "type": "static",
+    "img": "images/BR.png",
+    "codes": "brinstar_label"
+  },
+  {
+    "name": "Upper Norfair",
+    "type": "static",
+    "img": "images/UN.png",
+    "codes": "un_label"
+  },
+  {
+    "name": "Wrecked Ship",
+    "type": "static",
+    "img": "images/WS.png",
+    "codes": "ws_label"
+  },
+  {
+    "name": "Maridia",
+    "type": "static",
+    "img": "images/MA.png",
+    "codes": "maridia_label"
+  },
+  {
+    "name": "Lower Norfair",
+    "type": "static",
+    "img": "images/LN.png",
+    "codes": "ln_label"
   }
 ]

@@ -19,9 +19,9 @@
       {
         "name": "Can Defeat Draygon",
         "access_rules": [
-          "normal,@Can Defeat Botwoon,@Draygon's Lair,gravity,speed,hijump",
-          "normal,@Can Defeat Botwoon,@Draygon's Lair,gravity,$canFly",
-          "[hard],@Can Defeat Botwoon,@Draygon's Lair,gravity"
+          "normal,@Can Defeat Botwoon,@Maridia Draygon Door,gravity,speed,hijump",
+          "normal,@Can Defeat Botwoon,@Maridia Draygon Door,gravity,$canFly",
+          "[hard],@Can Defeat Botwoon,@Maridia Draygon Door,gravity"
         ]
       },
       {
@@ -162,60 +162,297 @@
         ],
         "children": [
           {
-            "name": "Watering Hole",
+            "name": "Crab Shaft Area",
             "access_rules": [
-              "normal,$canPassBombPassages",
-              "[hard],$canPassBombPassages,gravity",
-              "[hard],$canPassBombPassages,ice",
-              "[hard],$canPassBombPassages,hijump,$canSpringBallJump"
+              "@Maridia Crab Shaft Door"
             ],
-            "sections": [
+            "children": [
               {
-                "name": "Super Missile (yellow Maridia)",
-                "item_count": 1
+                "name": "Watering Hole",
+                "access_rules": [
+                  "normal,$canPassBombPassages",
+                  "[hard],$canPassBombPassages,gravity",
+                  "[hard],$canPassBombPassages,ice",
+                  "[hard],$canPassBombPassages,hijump,$canSpringBallJump"
+                ],
+                "sections": [
+                  {
+                    "name": "Super Missile (yellow Maridia)",
+                    "item_count": 1
+                  },
+                  {
+                    "name": "Missile (yellow Maridia super missile)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1224,
+                    "y": 848
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 296,
+                    "y": 276
+                  }
+                ]
               },
               {
-                "name": "Missile (yellow Maridia super missile)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1224,
-                "y": 848
-              },
-              {
-                "map": "maridia",
-                "x": 296,
-                "y": 276
+                "name": "Missile (yellow Maridia false wall)",
+                "access_rules": [
+                  "normal,$canPassBombPassages",
+                  "[hard],$canPassBombPassages,gravity",
+                  "[hard],$canPassBombPassages,ice",
+                  "[hard],$canPassBombPassages,hijump,$canSpringBallJump"
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (yellow Maridia false wall)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1480,
+                    "y": 848
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 552,
+                    "y": 276
+                  }
+                ]
               }
             ]
           },
           {
-            "name": "Missile (yellow Maridia false wall)",
+            "name": "Aquaduct Area",
             "access_rules": [
-              "normal,$canPassBombPassages",
-              "[hard],$canPassBombPassages,gravity",
-              "[hard],$canPassBombPassages,ice",
-              "[hard],$canPassBombPassages,hijump,$canSpringBallJump"
+              "@Maridia Crab Shaft Door,super",
+              "@Maridia Portal,@Maridia Botwoon Door"
             ],
-            "sections": [
+            "children": [
               {
-                "name": "Missile (yellow Maridia false wall)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1480,
-                "y": 848
+                "name": "West Sand Hole",
+                "access_rules": [
+                  "normal,super,$canPassBombPassages",
+                  "[hard],super,hijump,space",
+                  "[hard],super,hijump,$canSpringBallJump",
+                  "[hard],super,gravity"
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (left Maridia sand pit room)",
+                    "capture_item": true,
+                    "item_count": 1
+                  },
+                  {
+                    "name": "Reserve Tank, Maridia",
+                    "capture_item": true,
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1480,
+                    "y": 1104
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 552,
+                    "y": 532
+                  }
+                ]
               },
               {
-                "map": "maridia",
-                "x": 552,
-                "y": 276
+                "name": "Missile (right Maridia sand pit room)",
+                "access_rules": [
+                  "normal,super",
+                  "[hard],super,hijump",
+                  "[hard],super,gravity"
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (right Maridia sand pit room)",
+                    "capture_item": true,
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1576,
+                    "y": 1104
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 648,
+                    "y": 532
+                  }
+                ]
+              },
+              {
+                "name": "Power Bomb (right Maridia sand pit room)",
+                "access_rules": [
+                  "normal,super",
+                  "[hard],super,hijump,$canSpringBallJump",
+                  "[hard],super,gravity"
+                ],
+                "sections": [
+                  {
+                    "name": "Power Bomb (right Maridia sand pit room)",
+                    "capture_item": true,
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1608,
+                    "y": 1136
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 680,
+                    "y": 564
+                  }
+                ]
+              },
+              {
+                "name": "Super Missile (pink Maridia)",
+                "access_rules": [
+                  "normal,speed",
+                  "[hard],gravity"
+                ],
+                "sections": [
+                  {
+                    "name": "Super Missile (pink Maridia)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1640,
+                    "y": 944
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 712,
+                    "y": 372
+                  }
+                ]
+              },
+              {
+                "name": "Missile (pink Maridia)",
+                "sections": [
+                  {
+                    "name": "Missile (pink Maridia)",
+                    "capture_item": true,
+                    "access_rules": [
+                      "normal,speed",
+                      "[hard],gravity",
+                      "{}"
+                    ],
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1608,
+                    "y": 944
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 680,
+                    "y": 372
+                  }
+                ]
+              },
+              {
+                "name": "Energy Tank, Botwoon",
+                "access_rules": [
+                  "@Can Defeat Botwoon,@Maridia Botwoon Door"
+                ],
+                "sections": [
+                  {
+                    "name": "Energy Tank, Botwoon",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1768,
+                    "y": 912
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 840,
+                    "y": 340
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Draygon Area",
+            "access_rules": [
+              "@Aquaduct Area,@Maridia Botwoon Door",
+              "@Maridia Portal"
+            ],
+            "children": [
+              {
+                "name": "Missile (Draygon)",
+                "access_rules": [
+                  "@Can Defeat Botwoon,gravity"
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (Draygon)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 2184,
+                    "y": 880
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 1256,
+                    "y": 308
+                  }
+                ]
+              },
+              {
+                "name": "Space Jump",
+                "access_rules": [
+                  "@Can Defeat Draygon"
+                ],
+                "sections": [
+                  {
+                    "name": "Space Jump",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 2056,
+                    "y": 976
+                  },
+                  {
+                    "map": "maridia",
+                    "x": 1128,
+                    "y": 404
+                  }
+                ]
               }
             ]
           },
@@ -257,145 +494,6 @@
             ]
           },
           {
-            "name": "West Sand Hole",
-            "access_rules": [
-              "normal,super,$canPassBombPassages",
-              "[hard],super,hijump,space",
-              "[hard],super,hijump,$canSpringBallJump",
-              "[hard],super,gravity"
-            ],
-            "sections": [
-              {
-                "name": "Missile (left Maridia sand pit room)",
-                "capture_item": true,
-                "item_count": 1
-              },
-              {
-                "name": "Reserve Tank, Maridia",
-                "capture_item": true,
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1480,
-                "y": 1104
-              },
-              {
-                "map": "maridia",
-                "x": 552,
-                "y": 532
-              }
-            ]
-          },
-          {
-            "name": "Missile (right Maridia sand pit room)",
-            "access_rules": [
-              "normal,super",
-              "[hard],super,hijump",
-              "[hard],super,gravity"
-            ],
-            "sections": [
-              {
-                "name": "Missile (right Maridia sand pit room)",
-                "capture_item": true,
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1576,
-                "y": 1104
-              },
-              {
-                "map": "maridia",
-                "x": 648,
-                "y": 532
-              }
-            ]
-          },
-          {
-            "name": "Power Bomb (right Maridia sand pit room)",
-            "access_rules": [
-              "normal,super",
-              "[hard],super,hijump,$canSpringBallJump",
-              "[hard],super,gravity"
-            ],
-            "sections": [
-              {
-                "name": "Power Bomb (right Maridia sand pit room)",
-                "capture_item": true,
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1608,
-                "y": 1136
-              },
-              {
-                "map": "maridia",
-                "x": 680,
-                "y": 564
-              }
-            ]
-          },
-          {
-            "name": "Super Missile (pink Maridia)",
-            "access_rules": [
-              "normal,speed",
-              "[hard],gravity"
-            ],
-            "sections": [
-              {
-                "name": "Super Missile (pink Maridia)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1640,
-                "y": 944
-              },
-              {
-                "map": "maridia",
-                "x": 712,
-                "y": 372
-              }
-            ]
-          },
-          {
-            "name": "Missile (pink Maridia)",
-            "sections": [
-              {
-                "name": "Missile (pink Maridia)",
-                "capture_item": true,
-                "access_rules": [
-                  "normal,speed",
-                  "[hard],gravity",
-                  "{}"
-                ],
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1608,
-                "y": 944
-              },
-              {
-                "map": "maridia",
-                "x": 680,
-                "y": 372
-              }
-            ]
-          },
-          {
             "name": "Spring Ball",
             "access_rules": [
               "normal,super,grapple,$canUsePowerBombs,space",
@@ -423,79 +521,6 @@
               }
             ]
           },
-          {
-            "name": "Missile (Draygon)",
-            "access_rules": [
-              "@Can Defeat Botwoon,gravity"
-            ],
-            "sections": [
-              {
-                "name": "Missile (Draygon)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 2184,
-                "y": 880
-              },
-              {
-                "map": "maridia",
-                "x": 1256,
-                "y": 308
-              }
-            ]
-          },
-          {
-            "name": "Energy Tank, Botwoon",
-            "access_rules": [
-              "@Can Defeat Botwoon"
-            ],
-            "sections": [
-              {
-                "name": "Energy Tank, Botwoon",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1768,
-                "y": 912
-              },
-              {
-                "map": "maridia",
-                "x": 840,
-                "y": 340
-              }
-            ]
-          },
-          {
-            "name": "Space Jump",
-            "access_rules": [
-              "@Can Defeat Draygon,$canFly",
-              "@Can Defeat Draygon,speed,hijump"
-            ],
-            "sections": [
-              {
-                "name": "Space Jump",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 2056,
-                "y": 976
-              },
-              {
-                "map": "maridia",
-                "x": 1128,
-                "y": 404
-              }
-            ]
-          }
         ]
       }
     ]

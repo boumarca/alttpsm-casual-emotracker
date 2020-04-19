@@ -2,15 +2,21 @@
   "name": "Super Metroid and ALTTP Randomizer Map Tracker",
   "game_name": "Super Metroid + LTTP Randomizer",
   "platform": "snes",
-  "package_version": "3.3.5",
+  "package_version": "3.4.0",
   "package_uid": "smalttprando_gilgatex",
   "author": "Dorkmaster Flek & Ninban & gilgatex",
   "variants": {
     "standard": {
       "display_name": "Standard"
     },
-    "bizhawk": {
-      "display_name": "Bizhawk"
+    "keysanity": {
+      "display_name": "Keysanity *ALPHA*"
+    },
+    "bizhawk_standard": {
+      "display_name": "Bizhawk Standard"
+    },
+    "bizhawk_keysanity": {
+      "display_name": "Bizhawk Keysanity *ALPHA*"
     }
   }
 }

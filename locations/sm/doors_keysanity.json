@@ -1,0 +1,129 @@
+[
+  // Key door access locations for keysanity override logic.
+  {
+    "name": "Crateria Gauntlet Door",
+    "access_rules": [
+      "crateria_key1"
+    ]
+  },
+  {
+    "name": "Crateria Surface PB Door",
+    "access_rules": [
+      "crateria_key1"
+    ]
+  },
+  {
+    "name": "Crateria Moat Door",
+    "access_rules": [
+      "crateria_key2"
+    ]
+  },
+  {
+    "name": "Crateria G4 Door",
+    "access_rules": [
+      "crateria_bosskey"
+    ]
+  },
+  {
+    "name": "Brinstar Blue Right Door",
+    "access_rules": [
+      "brinstar_key1"
+    ]
+  },
+  {
+    "name": "Brinstar Etecoons Door",
+    "access_rules": [
+      "brinstar_key2"
+    ]
+  },
+  {
+    "name": "Brinstar Wave Gate Door",
+    "access_rules": [
+      "brinstar_key2"
+    ]
+  },
+  {
+    "name": "Brinstar Spore Spawn Back Door",
+    "access_rules": [
+      "brinstar_key2"
+    ]
+  },
+  {
+    "name": "Brinstar Spore Spawn Front Door",
+    "access_rules": [
+      "brinstar_bosskey"
+    ]
+  },
+  {
+    "name": "Brinstar Kraid Door",
+    "access_rules": [
+      "brinstar_bosskey"
+    ]
+  },
+  {
+    "name": "Upper Norfair Ice Beam Door",
+    "access_rules": [
+      "un_key1"
+    ]
+  },
+  {
+    "name": "Upper Norfair Cathedral Rising Door",
+    "access_rules": [
+      "un_key2"
+    ]
+  },
+  {
+    "name": "Upper Norfair Bubble Mountain Door",
+    "access_rules": [
+      "un_key2"
+    ]
+  },
+  {
+    "name": "Upper Norfair Crocomire Door",
+    "access_rules": [
+      "un_bosskey"
+    ]
+  },
+  {
+    "name": "Maridia Crab Shaft Door",
+    "access_rules": [
+      "maridia_key1"
+    ]
+  },
+  {
+    "name": "Maridia Botwoon Door",
+    "access_rules": [
+      "maridia_key2"
+    ]
+  },
+  {
+    "name": "Maridia Draygon Door",
+    "access_rules": [
+      "maridia_bosskey"
+    ]
+  },
+  {
+    "name": "Wrecked Ship Bowling Alley Door",
+    "access_rules": [
+      "ws_key1"
+    ]
+  },
+  {
+    "name": "Wrecked Ship Phantoon Door",
+    "access_rules": [
+      "ws_bosskey"
+    ]
+  },
+  {
+    "name": "Lower Norfair Amphitheatre Door",
+    "access_rules": [
+      "ln_key1"
+    ]
+  },
+  {
+    "name": "Lower Norfair Ridley Door",
+    "access_rules": [
+      "ln_bosskey"
+    ]
+  }
+]

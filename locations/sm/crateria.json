@@ -8,17 +8,17 @@
       {
         "name": "Can Enter And Leave Gauntlet",
         "access_rules": [
-          "normal,morph,$canFly,$canIbj",
-          "normal,morph,$canFly,$canUsePowerBombs,powerbomb:10",
-          "normal,morph,$canFly,screw",
-          "normal,morph,speed,$canIbj",
-          "normal,morph,speed,$canUsePowerBombs,powerbomb:10",
-          "normal,morph,speed,screw",
+          "normal,@Crateria Gauntlet Door,morph,$canFly,$canIbj",
+          "normal,@Crateria Gauntlet Door,morph,$canFly,$canUsePowerBombs,powerbomb:10",
+          "normal,@Crateria Gauntlet Door,morph,$canFly,screw",
+          "normal,@Crateria Gauntlet Door,morph,speed,$canIbj",
+          "normal,@Crateria Gauntlet Door,morph,speed,$canUsePowerBombs,powerbomb:10",
+          "normal,@Crateria Gauntlet Door,morph,speed,screw",
 
-          "[hard],morph,bomb",
-          "[hard],morph,powerbomb:10",
-          "[hard],screw",
-          "[hard],speed,$canUsePowerBombs,$countEnergyReserves:2"
+          "[hard],@Crateria Gauntlet Door,morph,bomb",
+          "[hard],@Crateria Gauntlet Door,morph,powerbomb:10",
+          "[hard],@Crateria Gauntlet Door,screw",
+          "[hard],@Crateria Gauntlet Door,speed,$canUsePowerBombs,$countEnergyReserves:2"
         ]
       },
       {
@@ -126,8 +126,8 @@
           {
             "name": "Power Bomb (Crateria surface)",
             "access_rules": [
-              "$canUsePowerBombs,speed",
-              "$canUsePowerBombs,$canFly"
+              "@Crateria Surface PB Door,speed",
+              "@Crateria Surface PB Door,$canFly"
             ],
             "sections": [
               {
@@ -166,8 +166,8 @@
                 "access_rules": [
                   "normal,@Can Enter And Leave Gauntlet,$countEnergyReserves:1",
                   "[hard],@Can Enter And Leave Gauntlet",
-                  "{morph,powerbomb}",
-                  "{speed,$countEnergyReserves:2}"
+                  "{@Crateria Gauntlet Door,morph,powerbomb}",
+                  "{@Crateria Gauntlet Door,speed,$countEnergyReserves:2}"
                 ],
                 "item_count": 1
               }
@@ -248,16 +248,16 @@
       {
         "name": "Crateria East",
         "access_rules": [
-          "$canUsePowerBombs,super",
-          "@Norfair Upper Portal,$canUsePowerBombs,ice",
-          "@Norfair Upper Portal,$canUsePowerBombs,hijump",
+          "@Crateria Moat Door,super",
+          "@Norfair Upper Portal,@Crateria Moat Door,ice",
+          "@Norfair Upper Portal,@Crateria Moat Door,hijump",
 
-          "normal,@Norfair Upper Portal,$canUsePowerBombs,space",
+          "normal,@Norfair Upper Portal,@Crateria Moat Door,space",
           "normal,@Maridia Portal,gravity,super,$canDestroyBombWalls",
           "normal,@Maridia Portal,gravity,super,draygon",
 
-          "[hard],@Norfair Upper Portal,$canUsePowerBombs,$canFly",
-          "[hard],@Norfair Upper Portal,$canUsePowerBombs,$canSpringBallJump",
+          "[hard],@Norfair Upper Portal,@Crateria Moat Door,$canFly",
+          "[hard],@Norfair Upper Portal,@Crateria Moat Door,$canSpringBallJump",
           "[hard],@Maridia Portal,super,hijump,$canPassBombPassages",
           "[hard],@Maridia Portal,gravity,draygon",
           "[hard],@Maridia Portal,gravity,$canDestroyBombWalls"
@@ -266,13 +266,13 @@
           {
             "name": "Missile (outside Wrecked Ship bottom)",
             "access_rules": [
-              "normal,speed",
-              "normal,grapple",
-              "normal,space",
-              "normal,gravity,$canFly",
-              "normal,gravity,hijump",
-              "normal,@Maridia Portal",
-              "[hard]"
+              "normal,morph,speed",
+              "normal,morph,grapple",
+              "normal,morph,space",
+              "normal,morph,gravity,$canFly",
+              "normal,morph,gravity,hijump",
+              "normal,@Wrecked Ship,morph",
+              "[hard],morph"
             ],
             "sections": [
               {
@@ -294,68 +294,52 @@
             ]
           },
           {
-            "name": "Missile (outside Wrecked Ship top)",
+            "name": "After Wrecked Ship",
             "access_rules": [
-              "normal,$canPassBombPassages,@Phantoon's Lair,super,speed",
-              "normal,$canPassBombPassages,@Phantoon's Lair,super,grapple,hijump",
-              "normal,$canPassBombPassages,@Phantoon's Lair,super,grapple,$canFly",
-              "normal,$canPassBombPassages,@Phantoon's Lair,super,space",
-              "normal,$canPassBombPassages,@Phantoon's Lair,super,gravity,$canFly",
-              "normal,$canPassBombPassages,@Phantoon's Lair,super,gravity,hijump",
-
-              "normal,$canPassBombPassages,@Phantoon's Lair,@Maridia Portal,hijump",
-              "normal,$canPassBombPassages,@Phantoon's Lair,@Maridia Portal,$canFly",
-              "normal,$canPassBombPassages,@Phantoon's Lair,@Maridia Portal,speed",
-
-              "[hard],super,$canPassBombPassages,@Phantoon's Lair"
+              "@Wrecked Ship,@After Phantoon"
             ],
-            "sections": [
+            "children": [
               {
                 "name": "Missile (outside Wrecked Ship top)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1290,
-                "y": 78
+                "sections": [
+                  {
+                    "name": "Missile (outside Wrecked Ship top)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1290,
+                    "y": 78
+                  },
+                  {
+                    "map": "crateria",
+                    "x": 1160,
+                    "y": 84
+                  }
+                ]
               },
-              {
-                "map": "crateria",
-                "x": 1160,
-                "y": 84
-              }
-            ]
-          },
-          {
-            "name": "Missile (outside Wrecked Ship middle)",
-            "access_rules": [
-              "normal,$canPassBombPassages,super,@Phantoon's Lair,speed",
-              "normal,$canPassBombPassages,super,@Phantoon's Lair,grapple",
-              "normal,$canPassBombPassages,super,@Phantoon's Lair,space",
-              "normal,$canPassBombPassages,super,@Phantoon's Lair,gravity,$canFly",
-              "normal,$canPassBombPassages,super,@Phantoon's Lair,gravity,hijump",
-              "normal,$canPassBombPassages,super,@Phantoon's Lair,@Maridia Portal",
-
-              "[hard],super,$canPassBombPassages,@Phantoon's Lair"
-            ],
-            "sections": [
               {
                 "name": "Missile (outside Wrecked Ship middle)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1256,
-                "y": 143
-              },
-              {
-                "map": "crateria",
-                "x": 1128,
-                "y": 148
+                "sections": [
+                  {
+                    "name": "Missile (outside Wrecked Ship middle)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1256,
+                    "y": 143
+                  },
+                  {
+                    "map": "crateria",
+                    "x": 1128,
+                    "y": 148
+                  }
+                ]
               }
             ]
           },

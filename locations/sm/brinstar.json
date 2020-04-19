@@ -30,61 +30,6 @@
             ]
           },
           {
-            "name": "Energy Tank, Brinstar Ceiling",
-            "sections": [
-              {
-                "name": "Energy Tank, Brinstar Ceiling",
-                "access_rules": [
-                  "normal,$canFly",
-                  "normal,hijump",
-                  "normal,speed",
-                  "normal,ice",
-                  "[hard]",
-                  "{}"
-                ],
-                "capture_item": true,
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 936,
-                "y": 976
-              },
-              {
-                "map": "brinstar",
-                "x": 936,
-                "y": 404
-              }
-            ]
-          },
-          {
-            "name": "Missile (blue Brinstar middle)",
-            "access_rules": [
-              "morph",
-            ],
-            "sections": [
-              {
-                "name": "Missile (blue Brinstar middle)",
-
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 968,
-                "y": 976
-              },
-              {
-                "map": "brinstar",
-                "x": 968,
-                "y": 404
-              }
-            ]
-          },
-          {
             "name": "Missile (blue Brinstar bottom)",
             "access_rules": [
               "morph"
@@ -109,34 +54,6 @@
             ]
           },
           {
-            "name": "Billy Mays Room",
-            "access_rules": [
-              "$canUsePowerBombs"
-            ],
-            "sections": [
-              {
-                "name": "Missile (blue Brinstar top)",
-                "item_count": 1
-              },
-              {
-                "name": "Missile (blue Brinstar behind missile)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 872,
-                "y": 912
-              },
-              {
-                "map": "brinstar",
-                "x": 872,
-                "y": 340
-              }
-            ]
-          },
-          {
             "name": "Power Bomb (blue Brinstar)",
             "access_rules": [
               "$canUsePowerBombs"
@@ -157,6 +74,97 @@
                 "map": "brinstar",
                 "x": 680,
                 "y": 404
+              }
+            ]
+          },
+          {
+            "name": "Brinstar Blue Right Section",
+            "access_rules": [
+              "@Brinstar Blue Right Door"
+            ],
+            "children": [
+              {
+                "name": "Energy Tank, Brinstar Ceiling",
+                "sections": [
+                  {
+                    "name": "Energy Tank, Brinstar Ceiling",
+                    "access_rules": [
+                      "normal,$canFly",
+                      "normal,hijump",
+                      "normal,speed",
+                      "normal,ice",
+                      "[hard]",
+                      "{}"
+                    ],
+                    "capture_item": true,
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 936,
+                    "y": 976
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 936,
+                    "y": 404
+                  }
+                ]
+              },
+              {
+                "name": "Missile (blue Brinstar middle)",
+                "access_rules": [
+                  "morph",
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (blue Brinstar middle)",
+
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 968,
+                    "y": 976
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 968,
+                    "y": 404
+                  }
+                ]
+              },
+              {
+                "name": "Billy Mays Room",
+                "access_rules": [
+                  "$canUsePowerBombs"
+                ],
+                "sections": [
+                  {
+                    "name": "Missile (blue Brinstar top)",
+                    "item_count": 1
+                  },
+                  {
+                    "name": "Missile (blue Brinstar behind missile)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 872,
+                    "y": 912
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 872,
+                    "y": 340
+                  }
+                ]
               }
             ]
           }
@@ -192,54 +200,6 @@
                 "map": "brinstar",
                 "x": 360,
                 "y": 212
-              }
-            ]
-          },
-          {
-            "name": "Energy Tank, Etecoons",
-            "access_rules": [
-              "$canUsePowerBombs"
-            ],
-            "sections": [
-              {
-                "name": "Energy Tank, Etecoons",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 136,
-                "y": 976
-              },
-              {
-                "map": "brinstar",
-                "x": 136,
-                "y": 404
-              }
-            ]
-          },
-          {
-            "name": "Power Bomb (green Brinstar bottom)",
-            "access_rules": [
-              "$canUsePowerBombs"
-            ],
-            "sections": [
-              {
-                "name": "Power Bomb (green Brinstar bottom)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 328,
-                "y": 880
-              },
-              {
-                "map": "brinstar",
-                "x": 328,
-                "y": 308
               }
             ]
           },
@@ -332,26 +292,82 @@
             ]
           },
           {
-            "name": "Super Missile (green Brinstar bottom)",
+            "name": "Brinstar Etecoons Section",
             "access_rules": [
-              "$canUsePowerBombs,super"
+              "@Brinstar Etecoons Door"
             ],
-            "sections": [
+            "children": [
               {
-                "name": "Super Missile (green Brinstar bottom)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 104,
-                "y": 976
+                "name": "Energy Tank, Etecoons",
+                "access_rules": [
+                  "$canUsePowerBombs"
+                ],
+                "sections": [
+                  {
+                    "name": "Energy Tank, Etecoons",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 136,
+                    "y": 976
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 136,
+                    "y": 404
+                  }
+                ]
               },
               {
-                "map": "brinstar",
-                "x": 104,
-                "y": 404
+                "name": "Power Bomb (green Brinstar bottom)",
+                "access_rules": [
+                  "$canUsePowerBombs"
+                ],
+                "sections": [
+                  {
+                    "name": "Power Bomb (green Brinstar bottom)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 328,
+                    "y": 880
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 328,
+                    "y": 308
+                  }
+                ]
+              },
+              {
+                "name": "Super Missile (green Brinstar bottom)",
+                "access_rules": [
+                  "$canUsePowerBombs,super"
+                ],
+                "sections": [
+                  {
+                    "name": "Super Missile (green Brinstar bottom)",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 104,
+                    "y": 976
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 104,
+                    "y": 404
+                  }
+                ]
               }
             ]
           }
@@ -455,9 +471,9 @@
           {
             "name": "Energy Tank, Brinstar Gate",
             "access_rules": [
-              "normal,$canUsePowerBombs,wave,$countEnergyReserves:1",
-              "[hard],$canUsePowerBombs,wave",
-              "[hard],$canUsePowerBombs,super"
+              "normal,@Brinstar Wave Gate Door,$canUsePowerBombs,wave,$countEnergyReserves:1",
+              "[hard],@Brinstar Wave Gate Door,$canUsePowerBombs,wave",
+              "[hard],@Brinstar Wave Gate Door,$canUsePowerBombs,super"
             ],
             "sections": [
               {
@@ -481,7 +497,8 @@
           {
             "name": "Super Missile (Pink Brinstar)",
             "access_rules": [
-              "$canPassBombPassages,super"
+              "@Brinstar Spore Spawn Front Door,$canPassBombPassages,super",
+              "[hard],@Brinstar Spore Spawn Back Door,$canPassBombPassages,super"
             ],
             "sections": [
               {
@@ -728,50 +745,52 @@
         ],
         "children": [
           {
-            "name": "Energy Tank, Kraid",
+            "name": "Kraid Boss Area",
             "access_rules": [
-              "@Kraid's Lair"
+              "@Brinstar Kraid Door"
             ],
-            "sections": [
+            "children": [
               {
                 "name": "Energy Tank, Kraid",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1320,
-                "y": 1264
+                "sections": [
+                  {
+                    "name": "Energy Tank, Kraid",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1320,
+                    "y": 1264
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 1320,
+                    "y": 692
+                  }
+                ]
               },
-              {
-                "map": "brinstar",
-                "x": 1320,
-                "y": 692
-              }
-            ]
-          },
-          {
-            "name": "Varia Suit",
-            "access_rules": [
-              "@Kraid's Lair"
-            ],
-            "sections": [
               {
                 "name": "Varia Suit",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1768,
-                "y": 1264
-              },
-              {
-                "map": "brinstar",
-                "x": 1768,
-                "y": 692
+                "sections": [
+                  {
+                    "name": "Varia Suit",
+                    "item_count": 1
+                  }
+                ],
+                "map_locations": [
+                  {
+                    "map": "metroid",
+                    "x": 1768,
+                    "y": 1264
+                  },
+                  {
+                    "map": "brinstar",
+                    "x": 1768,
+                    "y": 692
+                  }
+                ]
               }
             ]
           },
