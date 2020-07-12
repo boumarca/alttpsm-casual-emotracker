@@ -371,15 +371,20 @@
   // Mushroom
   {
     "name": "Mushroom",
-    "type": "progressive",
+    "type": "progressive_toggle",
     "stages": [
       {
         "img": "images/0004.png",
-        "codes": "mushroom"
+        "codes": "mushroom",
+        "secondary_codes": "none,default,clear"
       },
       {
-        "inherit_codes": false,
-        "img": "images/0056.png"
+        "img": "images/0004.png",
+        "img_mods": "overlay|images/overlay_witch.png",
+        "disabled_img": "images/0004.png",
+        "disabled_img_mods": "@disabled,overlay|images/overlay_witch.png",
+        "codes": "mushroom",
+        "secondary_codes": "witch,used"
       }
     ]
   },
@@ -486,15 +491,20 @@
   // Shovel
   {
     "name": "Shovel",
-    "type": "progressive",
+    "type": "progressive_toggle",
     "stages": [
       {
         "img": "images/0012.png",
-        "codes": "shovel"
+        "codes": "shovel",
+        "secondary_codes": "none,default,clear"
       },
       {
-        "img": "images/0057.png",
-        "inherit_codes": false
+        "img": "images/0012.png",
+        "img_mods": "overlay|images/overlay_cross.png",
+        "disabled_img": "images/0012.png",
+        "disabled_img_mods": "@disabled,overlay|images/overlay_cross.png",
+        "codes": "shovel",
+        "secondary_codes": "used"
       }
     ]
   },

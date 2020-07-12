@@ -1,3 +1,7 @@
+3.3.5
+-----
+Changed mushroom and shovel to progressive toggle like powder/bombs to match official Z3R pack
+
 3.3.4
 -----
 Tweaked vertical layout for bigger map size

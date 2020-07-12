@@ -488,29 +488,6 @@ function updateProgressiveItemFromByte(segment, code, address, offset)
     end
 end
 
-function updatePseudoProgressiveItemFromByteAndFlag(segment, code, address, flag)
-    local item = Tracker:FindObjectForCode(code)
-    if item then
-        local value = ReadU8(segment, address)
-        local flagTest = value & flag
-
-        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-            print("Progressive item: ", code, string.format('0x%x', address),
-                    string.format('0x%x', value), string.format('0x%x', flag), flagTest ~= 0)
-        end
-
-        if flagTest ~= 0 then
-            item.CurrentStage = math.max(1, item.CurrentStage)
-        -- For pseudo-progressive items, if the next stage has already been marked, don't downgrade it.
-        -- ex. Turning in the mushroom in LTTP removes it from your inventory.
-        elseif item.CurrentStage < 2 then
-            item.CurrentStage = 0
-        end
-    elseif SHOW_ERROR_DEBUG_LOGGING then
-        print("***ERROR*** Couldn't find item:", code)
-    end
-end
-
 function updateSectionChestCountFromByteAndFlag(segment, locationRef, address, flag, callback)
     local location = Tracker:FindObjectForCode(locationRef)
     if location then
@@ -1570,12 +1547,11 @@ function updateItemsLTTP(segment, address, inLTTP)
 
     updateToggleItemFromByteAndFlag(segment, "blueboomerang", address + 0x8c, 0x80)
     updateToggleItemFromByteAndFlag(segment, "redboomerang",  address + 0x8c, 0x40)
+    updateToggleItemFromByteAndFlag(segment, "shovel", address + 0x8c, 0x04)
     updateToggleItemFromByteAndFlag(segment, "powder", address + 0x8c, 0x10)
+    updateToggleItemFromByteAndFlag(segment, "mushroom", address + 0x8c, 0x20)
     updateToggleItemFromByte(segment, "bow", address + 0x40)
     updateToggleItemFromByteAndFlag(segment, "silvers", address + 0x8e, 0x40)
-
-    updatePseudoProgressiveItemFromByteAndFlag(segment, "mushroom", address + 0x8c, 0x20)
-    updatePseudoProgressiveItemFromByteAndFlag(segment, "shovel", address + 0x8c, 0x04)
 
     updateBottles(segment, address + 0x5c)
     updateFlute(segment, address + 0x8c)
@@ -1803,8 +1779,8 @@ function updateRoomsLTTP(segment, address, inLTTP)
     end
 end
 
-function updateBombIndicatorStatus(status)
-    local item = Tracker:FindObjectForCode("bombs")
+function updateItemIndicatorStatus(code, status)
+    local item = Tracker:FindObjectForCode(code)
     if item then
         if status then
             item.CurrentStage = 1
@@ -1812,30 +1788,24 @@ function updateBombIndicatorStatus(status)
             item.CurrentStage = 0
         end
     elseif SHOW_ERROR_DEBUG_LOGGING then
-        print("***ERROR*** Couldn't find bombs for status update")
+        print(string.format("***ERROR*** Couldn't find %s for status update", code))
     end
+end
+
+function updateBombIndicatorStatus(status)
+    updateItemIndicatorStatus("bombs", status)
 end
 
 function updateBatIndicatorStatus(status)
-    local item = Tracker:FindObjectForCode("powder")
-    if item then
-        if status then
-            item.CurrentStage = 1
-        else
-            item.CurrentStage = 0
-        end
-    end
+    updateItemIndicatorStatus("powder", status)
+end
+
+function updateShovelIndicatorStatus(status)
+    updateItemIndicatorStatus("shovel", status)
 end
 
 function updateMushroomStatus(status)
-    local item = Tracker:FindObjectForCode("mushroom")
-    if item then
-        if status then
-            item.CurrentStage = 2
-        end
-    elseif SHOW_ERROR_DEBUG_LOGGING then
-        print("***ERROR*** Couldn't find mushroom for status update")
-    end
+    updateItemIndicatorStatus("mushroom", status)
 end
 
 function updateNPCItemFlagsActiveLTTP(segment)
@@ -1910,7 +1880,7 @@ function updateOverworldEventsLTTP(segment, address)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Spectacle Rock/Spectacle Rock", address, 3)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Floating Island/Island", address, 5)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Maze Race/Maze Race", address, 40)
-    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Flute Spot/Flute Spot", address, 42)
+    updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Flute Spot/Flute Spot", address, 42, updateShovelIndicatorStatus)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Desert Ledge/Desert Ledge", address, 48)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@Lake Hylia Island/Lake Hylia Island", address, 53)
     updateSectionChestCountFromOverworldIndexAndFlag(segment, "@The Dam/Sunken Treasure", address, 59)
