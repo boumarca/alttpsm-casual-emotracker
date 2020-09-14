@@ -317,13 +317,19 @@
       }
     ]
   },
-  // Wave Beam area can be accessed via Lower Norfair, bypassing Upper Norfair key requirements in keysanity.
+  // Wave Beam area can be accessed via Upper or Lower Norfair, bypassing Upper Norfair key requirements in keysanity.
   {
     "name": "Wave Beam Area",
     "access_rules": [
+      // Upper Norfair
       "@Norfair Upper East",
-      "@Norfair Lower East,@After Amphitheatre,wave",
-      "[hard],@Norfair Lower East,@After Amphitheatre"
+      "@Norfair Upper Speedway,wave",
+      "[hard],@Norfair Upper Speedway",
+
+      // Lower Norfair (gravity needed for reverse volcano room at least)
+      "normal,@Norfair Lower East,@After Amphitheatre,gravity,wave",
+      "normal,@Norfair Lower East,@After Amphitheatre,gravity,space",
+      "[hard],@Norfair Lower East,@After Amphitheatre,gravity"
     ],
     "children": [
       {
