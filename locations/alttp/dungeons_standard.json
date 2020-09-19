@@ -59,7 +59,7 @@
     "access_rules": [
       "book",
       "mirror,lift2,flute",
-      "@Misery Mire Portal,mirror"
+      "@CanAccessMiseryMirePortal,mirror"
     ],
     "sections": [
       {
@@ -82,13 +82,13 @@
           "@Desert Palace/Dungeon,lift1,firesource,icerod",
           "@Desert Palace/Dungeon,lift1,firesource,byrna",
           "@Desert Palace/Dungeon,lift1,firesource,somaria",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,[sword]",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,hammer",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,bow",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,firerod",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,icerod",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,byrna",
-          "@Desert Palace/Dungeon,@Misery Mire Portal,mirror,firesource,somaria",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,[sword]",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,hammer",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,bow",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,firerod",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,icerod",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,byrna",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,somaria",
         ],
         "hosted_item": "desertpalace"
       }
@@ -138,8 +138,8 @@
     "name": "Castle Tower",
     "color": "#701d43",
     "access_rules": [
-      "$canKillManyEnemies,cape",
-      "$canKillManyEnemies,sword2"
+      "@CanKillManyEnemies,cape",
+      "@CanKillManyEnemies,sword2"
     ],
     "map_locations": [
       {
@@ -290,7 +290,7 @@
     "name": "Ice Palace",
     "color": "#af0000",
     "access_rules": [
-      "[flippers],pearl,lift2,$canMeltFreezors"
+      "[flippers],pearl,lift2,@CanMeltFreezors"
     ],
     "sections": [
       {
@@ -417,7 +417,7 @@
     "name": "Ganon's Tower",
     "color": "#af0000",
     "access_rules": [
-      "@Dark World Death Mountain East,pearl,$hasGTCrystals"
+      "@Dark World Death Mountain East,pearl,crystal:5,crystal56:2"
     ],
     "sections": [
       {

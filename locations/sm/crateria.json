@@ -6,19 +6,19 @@
     "color": "#d83890",
     "children": [
       {
-        "name": "Can Enter And Leave Gauntlet",
+        "name": "CanEnterAndLeaveGauntlet",
         "access_rules": [
-          "normal,@Crateria Gauntlet Door,morph,$canFly,$canIbj",
-          "normal,@Crateria Gauntlet Door,morph,$canFly,$canUsePowerBombs,powerbomb:10",
-          "normal,@Crateria Gauntlet Door,morph,$canFly,screw",
-          "normal,@Crateria Gauntlet Door,morph,speed,$canIbj",
-          "normal,@Crateria Gauntlet Door,morph,speed,$canUsePowerBombs,powerbomb:10",
-          "normal,@Crateria Gauntlet Door,morph,speed,screw",
+          "normal,@CardCrateriaL1,morph,@CanFly,@CanIbj",
+          "normal,@CardCrateriaL1,morph,@CanFly,@CanUsePowerBombs,powerbomb:10",
+          "normal,@CardCrateriaL1,morph,@CanFly,screw",
+          "normal,@CardCrateriaL1,morph,speed,@CanIbj",
+          "normal,@CardCrateriaL1,morph,speed,@CanUsePowerBombs,powerbomb:10",
+          "normal,@CardCrateriaL1,morph,speed,screw",
 
-          "[hard],@Crateria Gauntlet Door,morph,bomb",
-          "[hard],@Crateria Gauntlet Door,morph,powerbomb:10",
-          "[hard],@Crateria Gauntlet Door,screw",
-          "[hard],@Crateria Gauntlet Door,speed,$canUsePowerBombs,$countEnergyReserves:2"
+          "[hard],@CardCrateriaL1,morph,bomb",
+          "[hard],@CardCrateriaL1,morph,powerbomb:10",
+          "[hard],@CardCrateriaL1,screw",
+          "[hard],@CardCrateriaL1,speed,@CanUsePowerBombs,alltanks:2"
         ]
       },
       {
@@ -27,8 +27,8 @@
           {
             "name": "Bombs",
             "access_rules": [
-              "normal,$canPassBombPassages,$canOpenRedDoors",
-              "[hard],morph,$canOpenRedDoors"
+              "normal,@CanOpenBombTorizoDoor,@CanPassBombPassages",
+              "[hard],@CanOpenBombTorizoDoor,morph"
             ],
             "sections": [
               {
@@ -56,8 +56,8 @@
                 "name": "Super Missile (Crateria)",
                 "capture_item": true,
                 "access_rules": [
-                  "$canUsePowerBombs,$countEnergyReserves:2,speed",
-                  "{$canUsePowerBombs}"
+                  "@CanUsePowerBombs,alltanks:2,speed",
+                  "{@CanUsePowerBombs}"
                 ],
                 "item_count": 1
               }
@@ -78,7 +78,7 @@
           {
             "name": "Missile (Crateria middle)",
             "access_rules": [
-              "$canPassBombPassages"
+              "@CanPassBombPassages"
             ],
             "sections": [
               {
@@ -102,7 +102,7 @@
           {
             "name": "Missile (Crateria bottom)",
             "access_rules": [
-              "$canDestroyBombWalls"
+              "@CanDestroyBombWalls"
             ],
             "sections": [
               {
@@ -126,8 +126,8 @@
           {
             "name": "Power Bomb (Crateria surface)",
             "access_rules": [
-              "@Crateria Surface PB Door,speed",
-              "@Crateria Surface PB Door,$canFly"
+              "@CanOpenCrateriaSurfaceDoor,speed",
+              "@CanOpenCrateriaSurfaceDoor,@CanFly"
             ],
             "sections": [
               {
@@ -153,7 +153,7 @@
       {
         "name": "Crateria West",
         "access_rules": [
-          "$canDestroyBombWalls",
+          "@CanDestroyBombWalls",
           "speed"
         ],
         "children": [
@@ -164,10 +164,10 @@
                 "name": "Energy Tank, Gauntlet",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@Can Enter And Leave Gauntlet,$countEnergyReserves:1",
-                  "[hard],@Can Enter And Leave Gauntlet",
-                  "{@Crateria Gauntlet Door,morph,powerbomb}",
-                  "{@Crateria Gauntlet Door,speed,$countEnergyReserves:2}"
+                  "normal,@CanEnterAndLeaveGauntlet,alltanks:1",
+                  "[hard],@CanEnterAndLeaveGauntlet",
+                  "{@CardCrateriaL1,morph,powerbomb}",
+                  "{@CardCrateriaL1,speed,alltanks:2}"
                 ],
                 "item_count": 1
               }
@@ -213,9 +213,9 @@
                 "name": "Missile (Crateria gauntlet left)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@Can Enter And Leave Gauntlet,$canPassBombPassages,[$countEnergyReserves:2]",
-                  "[hard],@Can Enter And Leave Gauntlet,$canPassBombPassages",
-                  "{$canUsePowerBombs}",
+                  "normal,@CanEnterAndLeaveGauntlet,@CanPassBombPassages,alltanks:2",
+                  "[hard],@CanEnterAndLeaveGauntlet,@CanPassBombPassages",
+                  "{@CanUsePowerBombs}",
                 ],
                 "item_count": 1
               },
@@ -223,9 +223,9 @@
                 "name": "Missile (Crateria gauntlet right)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@Can Enter And Leave Gauntlet,$canPassBombPassages,[$countEnergyReserves:2]",
-                  "[hard],@Can Enter And Leave Gauntlet,$canPassBombPassages",
-                  "{$canUsePowerBombs}",
+                  "normal,@CanEnterAndLeaveGauntlet,@CanPassBombPassages,alltanks:2",
+                  "[hard],@CanEnterAndLeaveGauntlet,@CanPassBombPassages",
+                  "{@CanUsePowerBombs}",
                 ],
                 "item_count": 1
               }
@@ -248,19 +248,19 @@
       {
         "name": "Crateria East",
         "access_rules": [
-          "@Crateria Moat Door,super",
-          "@Norfair Upper Portal,@Crateria Moat Door,ice",
-          "@Norfair Upper Portal,@Crateria Moat Door,hijump",
+          "@CanOpenMoatDoor,super",
+          "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,ice",
+          "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,hijump",
 
-          "normal,@Norfair Upper Portal,@Crateria Moat Door,space",
-          "normal,@Maridia Portal,gravity,super,$canDestroyBombWalls",
-          "normal,@Maridia Portal,gravity,super,draygon",
+          "normal,@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,space",
+          "normal,@CanAccessMaridiaPortal,gravity,super,@CanDestroyBombWalls,@CardMaridiaL2",
+          "normal,@CanAccessMaridiaPortal,gravity,super,draygon",
 
-          "[hard],@Norfair Upper Portal,@Crateria Moat Door,$canFly",
-          "[hard],@Norfair Upper Portal,@Crateria Moat Door,$canSpringBallJump",
-          "[hard],@Maridia Portal,super,hijump,$canPassBombPassages",
-          "[hard],@Maridia Portal,gravity,draygon",
-          "[hard],@Maridia Portal,gravity,$canDestroyBombWalls"
+          "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanFly",
+          "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanSpringBallJump",
+          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,hijump,@CanPassBombPassages",
+          "[hard],@CanAccessMaridiaPortal,gravity,@CanDestroyBombWalls",
+          "[hard],@CanAccessMaridiaPortal,gravity,draygon"
         ],
         "children": [
           {
@@ -269,9 +269,9 @@
               "normal,morph,speed",
               "normal,morph,grapple",
               "normal,morph,space",
-              "normal,morph,gravity,$canFly",
+              "normal,morph,gravity,@CanFly",
               "normal,morph,gravity,hijump",
-              "normal,@Wrecked Ship,morph",
+              "normal,morph,@Wrecked Ship",
               "[hard],morph"
             ],
             "sections": [
@@ -294,52 +294,50 @@
             ]
           },
           {
-            "name": "After Wrecked Ship",
+            "name": "Missile (outside Wrecked Ship top)",
             "access_rules": [
-              "@Wrecked Ship,@After Phantoon"
+              "@Wrecked Ship,@CanUnlockShip"
             ],
-            "children": [
+            "sections": [
               {
                 "name": "Missile (outside Wrecked Ship top)",
-                "sections": [
-                  {
-                    "name": "Missile (outside Wrecked Ship top)",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 1290,
-                    "y": 78
-                  },
-                  {
-                    "map": "crateria",
-                    "x": 1160,
-                    "y": 84
-                  }
-                ]
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1290,
+                "y": 78
               },
               {
+                "map": "crateria",
+                "x": 1160,
+                "y": 84
+              }
+            ]
+          },
+          {
+            "name": "Missile (outside Wrecked Ship middle)",
+            "access_rules": [
+              "@Wrecked Ship,@CanUnlockShip"
+            ],
+            "sections": [
+              {
                 "name": "Missile (outside Wrecked Ship middle)",
-                "sections": [
-                  {
-                    "name": "Missile (outside Wrecked Ship middle)",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 1256,
-                    "y": 143
-                  },
-                  {
-                    "map": "crateria",
-                    "x": 1128,
-                    "y": 148
-                  }
-                ]
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1256,
+                "y": 143
+              },
+              {
+                "map": "crateria",
+                "x": 1128,
+                "y": 148
               }
             ]
           },

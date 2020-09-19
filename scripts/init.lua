@@ -4,9 +4,6 @@ ScriptHost:LoadScript("scripts/settings.lua")
 -- Are we using a keysanity variant?
 IS_KEYSANITY = string.find(Tracker.ActiveVariantUID, "keys") ~= nil
 
--- Access logic
-ScriptHost:LoadScript("scripts/logic.lua")
-
 -- Items
 Tracker:AddItems("items/common.json")
 if IS_KEYSANITY then
@@ -20,13 +17,13 @@ Tracker:AddItems("items/labels.json")
 -- Maps
 Tracker:AddMaps("maps/maps.json")
 
--- Locations (load doors first for portal logic)
+-- Locations (load SM cards first for portal logic)
 if IS_KEYSANITY then
-    Tracker:AddLocations("locations/sm/doors_keysanity.json")
+    Tracker:AddLocations("locations/sm/cards_keysanity.json")
 else
-    Tracker:AddLocations("locations/sm/doors_standard.json")
+    Tracker:AddLocations("locations/sm/cards_standard.json")
 end
-Tracker:AddLocations("locations/portals.json")
+Tracker:AddLocations("locations/logic.json")
 Tracker:AddLocations("locations/alttp/lightworld.json")
 Tracker:AddLocations("locations/alttp/darkworld.json")
 Tracker:AddLocations("locations/alttp/bothworlds.json")

@@ -11,7 +11,7 @@
           "aga1",
           "pearl,hammer,lift1",
           "pearl,lift2,flippers",
-          "pearl,@Dark World Portal,flippers"
+          "pearl,@CanAccessDarkWorldPortal,flippers"
         ],
         "children": [
           {
@@ -60,7 +60,7 @@
           "pearl,hookshot,aga1,flippers",
           "pearl,hookshot,aga1,lift1",
           "pearl,hookshot,aga1,hammer",
-          "pearl,hookshot,@Dark World Portal,flippers",
+          "pearl,hookshot,@CanAccessDarkWorldPortal,flippers",
           "pearl,hammer,lift1",
           "pearl,lift2"
         ],
@@ -234,8 +234,8 @@
           "pearl,aga1,hammer",
           "pearl,aga1,hookshot,flippers",
           "pearl,aga1,hookshot,lift1",
-          "pearl,@Dark World Portal,flippers,hammer",
-          "pearl,@Dark World Portal,flippers,hookshot",
+          "pearl,@CanAccessDarkWorldPortal,flippers,hammer",
+          "pearl,@CanAccessDarkWorldPortal,flippers,hookshot",
           "pearl,hammer,lift1",
           "pearl,lift2"
         ],
@@ -369,7 +369,7 @@
         "color": "#02473f",
         "access_rules": [
           "flute,lift2",
-          "@Misery Mire Portal"
+          "@CanAccessMiseryMirePortal"
         ],
         "children": [
           {
@@ -408,8 +408,8 @@
               {
                 "name": "Spike Cave",
                 "access_rules": [
-                  "pearl,hammer,lift1,[$countMagicBars:2],[cape]",
-                  "pearl,hammer,lift1,[$countMagicBars:2],[byrna]",
+                  "pearl,hammer,lift1,[@CanExtendMagic],[cape]",
+                  "pearl,hammer,lift1,[@CanExtendMagic],[byrna]",
                 ],
                 "item_count": 1
               }

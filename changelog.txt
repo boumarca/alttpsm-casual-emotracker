@@ -1,3 +1,7 @@
+3.4.2
+-----
+Additional refactoring and logic fixes for keysanity alpha
+
 3.4.1
 -----
 Wave Beam area access via frog speedway

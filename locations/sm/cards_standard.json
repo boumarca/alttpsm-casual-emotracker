@@ -1,0 +1,85 @@
+[
+  // Keycard access locations for keysanity override logic.
+  {
+    "name": "CardCrateriaL1",
+    "access_rules": []
+  },
+  {
+    "name": "CardCrateriaL2",
+    "access_rules": []
+  },
+  {
+    "name": "CardCrateriaBoss",
+    "access_rules": []
+  },
+  {
+    "name": "CardBrinstarL1",
+    "access_rules": []
+  },
+  {
+    "name": "CardBrinstarL2",
+    "access_rules": []
+  },
+  {
+    "name": "CardBrinstarBoss",
+    "access_rules": []
+  },
+  {
+    "name": "CardNorfairL1",
+    "access_rules": []
+  },
+  {
+    "name": "CardNorfairL2",
+    "access_rules": []
+  },
+  {
+    "name": "CardNorfairBoss",
+    "access_rules": []
+  },
+  {
+    "name": "CardMaridiaL1",
+    "access_rules": []
+  },
+  {
+    "name": "CardMaridiaL2",
+    "access_rules": []
+  },
+  {
+    "name": "CardMaridiaBoss",
+    "access_rules": []
+  },
+  {
+    "name": "CardWreckedShipL1",
+    "access_rules": []
+  },
+  {
+    "name": "CardWreckedShipBoss",
+    "access_rules": []
+  },
+  {
+    "name": "CardLowerNorfairL1",
+    "access_rules": []
+  },
+  {
+    "name": "CardLowerNorfairBoss",
+    "access_rules": []
+  },
+
+  // Extra locations for specific non-blue doors that are replaced by key doors in keysanity.
+  {
+    "name": "CanOpenCrateriaSurfaceDoor",
+    "access_rules": ["@CanUsePowerBombs"]
+  },
+  {
+    "name": "CanOpenBombTorizoDoor",
+    "access_rules": ["@CanOpenRedDoors"]
+  },
+  {
+    "name": "CanOpenMoatDoor",
+    "access_rules": ["@CanUsePowerBombs"]
+  },
+  {
+    "name": "CanOpenIceBeamDoor",
+    "access_rules": ["super"]
+  }
+]

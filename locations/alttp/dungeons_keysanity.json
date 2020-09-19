@@ -88,7 +88,7 @@
     "access_rules": [
       "book",
       "mirror,lift2,flute",
-      "@Misery Mire Portal,mirror"
+      "@CanAccessMiseryMirePortal,mirror"
     ],
     "sections": [
       {
@@ -129,13 +129,13 @@
           "dp_bigkey,lift1,firesource,icerod",
           "dp_bigkey,lift1,firesource,byrna",
           "dp_bigkey,lift1,firesource,somaria",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,[sword]",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,hammer",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,bow",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,firerod",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,icerod",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,byrna",
-          "dp_bigkey,@Misery Mire Portal,mirror,firesource,somaria",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,[sword]",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,hammer",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,bow",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,firerod",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,icerod",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,byrna",
+          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,somaria",
         ],
         "item_count": 1,
         "hosted_item": "desertpalace"
@@ -199,8 +199,8 @@
     "name": "Castle Tower",
     "color": "#701d43",
     "access_rules": [
-      "$canKillManyEnemies,cape",
-      "$canKillManyEnemies,sword2"
+      "@CanKillManyEnemies,cape",
+      "@CanKillManyEnemies,sword2"
     ],
     "map_locations": [
       {
@@ -443,7 +443,7 @@
     "name": "Ice Palace",
     "color": "#af0000",
     "access_rules": [
-      "[flippers],pearl,lift2,$canMeltFreezors"
+      "[flippers],pearl,lift2,@CanMeltFreezors"
     ],
     "sections": [
       {
@@ -640,7 +640,7 @@
     "name": "Ganon's Tower",
     "color": "#af0000",
     "access_rules": [
-      "@Dark World Death Mountain East,pearl,$hasGTCrystals"
+      "@Dark World Death Mountain East,pearl,crystal:5,crystal56:2"
     ],
     "sections": [
       {

@@ -10,23 +10,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "ep,easternpalace,crystal"
+        "codes": "ep,easternpalace,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "ep,easternpalace,crystal56"
+        "codes": "ep,easternpalace,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "ep,easternpalace,pendant"
+        "codes": "ep,easternpalace,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "ep,easternpalace,greenpendant"
+        "codes": "ep,easternpalace,greenpendant,allpendants"
       }
     ]
   },
@@ -41,23 +41,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "dp,desertpalace,crystal"
+        "codes": "dp,desertpalace,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "dp,desertpalace,crystal56"
+        "codes": "dp,desertpalace,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "dp,desertpalace,pendant"
+        "codes": "dp,desertpalace,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "dp,desertpalace,greenpendant"
+        "codes": "dp,desertpalace,greenpendant,allpendants"
       }
     ]
   },
@@ -72,23 +72,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "toh,towerofhera,crystal"
+        "codes": "toh,towerofhera,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "toh,towerofhera,crystal56"
+        "codes": "toh,towerofhera,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "toh,towerofhera,pendant"
+        "codes": "toh,towerofhera,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "toh,towerofhera,greenpendant"
+        "codes": "toh,towerofhera,greenpendant,allpendants"
       }
     ]
   },
@@ -103,23 +103,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "pod,palaceofdarkness,crystal"
+        "codes": "pod,palaceofdarkness,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "pod,palaceofdarkness,crystal56"
+        "codes": "pod,palaceofdarkness,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "pod,palaceofdarkness,pendant"
+        "codes": "pod,palaceofdarkness,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "pod,palaceofdarkness,greenpendant"
+        "codes": "pod,palaceofdarkness,greenpendant,allpendants"
       }
     ]
   },
@@ -134,23 +134,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "sp,swamppalace,crystal"
+        "codes": "sp,swamppalace,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "sp,swamppalace,crystal56"
+        "codes": "sp,swamppalace,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "sp,swamppalace,pendant"
+        "codes": "sp,swamppalace,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "sp,swamppalace,greenpendant"
+        "codes": "sp,swamppalace,greenpendant,allpendants"
       }
     ]
   },
@@ -165,23 +165,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "sw,skullwoods,crystal"
+        "codes": "sw,skullwoods,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "sw,skullwoods,crystal56"
+        "codes": "sw,skullwoods,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "sw,skullwoods,pendant"
+        "codes": "sw,skullwoods,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "sw,skullwoods,greenpendant"
+        "codes": "sw,skullwoods,greenpendant,allpendants"
       }
     ]
   },
@@ -196,23 +196,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "tt,thievestown,crystal"
+        "codes": "tt,thievestown,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "tt,thievestown,crystal56"
+        "codes": "tt,thievestown,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "tt,thievestown,pendant"
+        "codes": "tt,thievestown,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "tt,thievestown,greenpendant"
+        "codes": "tt,thievestown,greenpendant,allpendants"
       }
     ]
   },
@@ -227,23 +227,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "ip,icepalace,crystal"
+        "codes": "ip,icepalace,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "ip,icepalace,crystal56"
+        "codes": "ip,icepalace,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "ip,icepalace,pendant"
+        "codes": "ip,icepalace,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "ip,icepalace,greenpendant"
+        "codes": "ip,icepalace,greenpendant,allpendants"
       }
     ]
   },
@@ -258,23 +258,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "mm,miserymire,crystal"
+        "codes": "mm,miserymire,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "mm,miserymire,crystal56"
+        "codes": "mm,miserymire,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "mm,miserymire,pendant"
+        "codes": "mm,miserymire,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "mm,miserymire,greenpendant"
+        "codes": "mm,miserymire,greenpendant,allpendants"
       }
     ]
   },
@@ -289,23 +289,23 @@
       },
       {
         "img": "images/Crystal.png",
-        "codes": "tr,turtlerock,crystal"
+        "codes": "tr,turtlerock,crystal,allcrystals"
       },
       {
         "img": "images/FFCrystal.png",
         "disabled_img": "images/FFCrystalOFF.png",
         "disabled_img_mods": "",
-        "codes": "tr,turtlerock,crystal56"
+        "codes": "tr,turtlerock,crystal56,allcrystals"
       },
       {
         "img": "images/Pendant.png",
-        "codes": "tr,turtlerock,pendant"
+        "codes": "tr,turtlerock,pendant,allpendants"
       },
       {
         "img": "images/GreenPendant.png",
         "disabled_img": "images/GreenPendantOFF.png",
         "disabled_img_mods": "",
-        "codes": "tr,turtlerock,greenpendant"
+        "codes": "tr,turtlerock,greenpendant,allpendants"
       }
     ]
   }

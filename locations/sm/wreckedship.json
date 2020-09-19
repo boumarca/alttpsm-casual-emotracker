@@ -5,22 +5,28 @@
     "chest_opened_img": "images/major_opened.png",
     "color": "#707048",
     "access_rules": [
-      "super,@Maridia Portal,gravity,$canDestroyBombWalls",
-      "super,@Maridia Portal,gravity,draygon",
+      "super,@CanAccessMaridiaPortal,gravity,@CardMaridiaL2,@CanDestroyBombWalls",
+      "super,@CanAccessMaridiaPortal,gravity,draygon",
 
-      "normal,@Crateria Moat Door,super,speed",
-      "normal,@Crateria Moat Door,super,grapple",
-      "normal,@Crateria Moat Door,super,space",
-      "normal,@Crateria Moat Door,super,gravity",
+      "normal,super,@CanOpenMoatDoor,speed",
+      "normal,super,@CanOpenMoatDoor,grapple",
+      "normal,super,@CanOpenMoatDoor,space",
+      "normal,super,@CanOpenMoatDoor,gravity",
 
-      "[hard],@Crateria Moat Door,super",
-      "[hard],super,@Maridia Portal,hijump,$canPassBombPassages"
+      "[hard],super,@CanOpenMoatDoor",
+      "[hard],super,@CanAccessMaridiaPortal,hijump,@CanPassBombPassages,@CardMaridiaL2"
     ],
     "children": [
       {
+        "name": "CanUnlockShip",
+        "access_rules": [
+          "@CardWreckedShipBoss,@CanPassBombPassages"
+        ]
+      },
+      {
         "name": "Missile (Wrecked Ship middle)",
         "access_rules": [
-          "morph,$canPassBombPassages"
+          "@CanPassBombPassages"
         ],
         "sections": [
           {
@@ -42,206 +48,199 @@
         ]
       },
       {
-        "name": "After Phantoon",
+        "name": "Energy Tank, Wrecked Ship",
         "access_rules": [
-          "$canPassBombPassages,@Wrecked Ship Phantoon Door"
+          "@CanUnlockShip,hijump",
+          "@CanUnlockShip,space",
+          "@CanUnlockShip,speed",
+          "@CanUnlockShip,gravity",
+
+          "[hard],@CanUnlockShip,bomb",
+          "[hard],@CanUnlockShip,powerbomb",
+          "[hard],@CanUnlockShip,@CanSpringBallJump"
         ],
-        "children": [
+        "sections": [
           {
             "name": "Energy Tank, Wrecked Ship",
-            "access_rules": [
-              "hijump",
-              "space",
-              "speed",
-              "gravity",
-
-              "[hard],bomb",
-              "[hard],powerbomb",
-              "[hard],$canSpringBallJump",
-            ],
-            "sections": [
-              {
-                "name": "Energy Tank, Wrecked Ship",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1704,
-                "y": 176
-              },
-              {
-                "map": "wreckedship",
-                "x": 600,
-                "y": 244
-              }
-            ]
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1704,
+            "y": 176
           },
+          {
+            "map": "wreckedship",
+            "x": 600,
+            "y": 244
+          }
+        ]
+      },
+      {
+        "name": "Right Super, Wrecked Ship",
+        "access_rules": [
+          "@CanUnlockShip",
+        ],
+        "sections": [
           {
             "name": "Right Super, Wrecked Ship",
-            "sections": [
-              {
-                "name": "Right Super, Wrecked Ship",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1800,
-                "y": 304
-              },
-              {
-                "map": "wreckedship",
-                "x": 696,
-                "y": 372
-              }
-            ]
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1800,
+            "y": 304
           },
+          {
+            "map": "wreckedship",
+            "x": 696,
+            "y": 372
+          }
+        ]
+      },
+      {
+        "name": "Missile (Wrecked Ship top)",
+        "access_rules": [
+          "@CanUnlockShip",
+        ],
+        "sections": [
           {
             "name": "Missile (Wrecked Ship top)",
-            "sections": [
-              {
-                "name": "Missile (Wrecked Ship top)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1798,
-                "y": 79
-              },
-              {
-                "map": "wreckedship",
-                "x": 696,
-                "y": 148
-              }
-            ]
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1798,
+            "y": 79
           },
+          {
+            "map": "wreckedship",
+            "x": 696,
+            "y": 148
+          }
+        ]
+      },
+      {
+        "name": "Super Missile (Wrecked Ship left)",
+        "access_rules": [
+          "@CanUnlockShip",
+        ],
+        "sections": [
           {
             "name": "Super Missile (Wrecked Ship left)",
-            "sections": [
-              {
-                "name": "Super Missile (Wrecked Ship left)",
-                "item_count": 1
-              }
-            ],
-            "map_locations": [
-              {
-                "map": "metroid",
-                "x": 1608,
-                "y": 304
-              },
-              {
-                "map": "wreckedship",
-                "x": 504,
-                "y": 372
-              }
-            ]
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1608,
+            "y": 304
           },
           {
-            "name": "Bowling Alley Area",
+            "map": "wreckedship",
+            "x": 504,
+            "y": 372
+          }
+        ]
+      },
+      {
+        "name": "Reserve Tank, Wrecked Ship",
+        "sections": [
+          {
+            "name": "Reserve Tank, Wrecked Ship",
+            "capture_item": true,
             "access_rules": [
-              "@Wrecked Ship Bowling Alley Door"
+              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,grapple",
+              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,space",
+              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,varia,alltanks:2",
+              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,alltanks:3",
+
+              "[hard],@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs,speed,varia",
+              "[hard],@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs,speed,alltanks:2",
+
+              "{@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs}",
+              "{@CanUnlockShip,@CardWreckedShipL1,xray}"
             ],
-            "children": [
-              {
-                "name": "Reserve Tank, Wrecked Ship",
-                "sections": [
-                  {
-                    "name": "Reserve Tank, Wrecked Ship",
-                    "capture_item": true,
-                    "access_rules": [
-                      "normal,speed,$canUsePowerBombs,grapple",
-                      "normal,speed,$canUsePowerBombs,space",
-                      "normal,speed,$canUsePowerBombs,varia,$countEnergyReserves:2",
-                      "normal,speed,$canUsePowerBombs,$countEnergyReserves:3",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1608,
+            "y": 112
+          },
+          {
+            "map": "wreckedship",
+            "x": 504,
+            "y": 180
+          }
+        ]
+      },
+      {
+        "name": "Gravity Suit",
+        "access_rules": [
+          "normal,@CanUnlockShip,@CardWreckedShipL1,grapple",
+          "normal,@CanUnlockShip,@CardWreckedShipL1,space",
+          "normal,@CanUnlockShip,@CardWreckedShipL1,varia,alltanks:2",
+          "normal,@CanUnlockShip,@CardWreckedShipL1,alltanks:3",
 
-                      "[hard],$canUsePowerBombs,speed,varia",
-                      "[hard],$canUsePowerBombs,speed,$countEnergyReserves:2",
+          "[hard],@CanUnlockShip,@CardWreckedShipL1,varia",
+          "[hard],@CanUnlockShip,@CardWreckedShipL1,alltanks:1"
+        ],
+        "sections": [
+          {
+            "name": "Gravity Suit",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1448,
+            "y": 176
+          },
+          {
+            "map": "wreckedship",
+            "x": 344,
+            "y": 244
+          }
+        ]
+      },
+      {
+        "name": "Missile (Gravity Suit)",
+        "access_rules": [
+          "normal,@CanUnlockShip,@CardWreckedShipL1,grapple",
+          "normal,@CanUnlockShip,@CardWreckedShipL1,space",
+          "normal,@CanUnlockShip,@CardWreckedShipL1,varia,alltanks:2",
+          "normal,@CanUnlockShip,@CardWreckedShipL1,alltanks:3",
 
-                      "{$canUsePowerBombs}",
-                      "{xray}"
-                    ],
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 1608,
-                    "y": 112
-                  },
-                  {
-                    "map": "wreckedship",
-                    "x": 504,
-                    "y": 180
-                  }
-                ]
-              },
-              {
-                "name": "Gravity Suit",
-                "access_rules": [
-                  "normal,grapple",
-                  "normal,space",
-                  "normal,varia,$countEnergyReserves:2",
-                  "normal,$countEnergyReserves:3",
-
-                  "[hard],varia",
-                  "[hard],$countEnergyReserves:1"
-                ],
-                "sections": [
-                  {
-                    "name": "Gravity Suit",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 1448,
-                    "y": 176
-                  },
-                  {
-                    "map": "wreckedship",
-                    "x": 344,
-                    "y": 244
-                  }
-                ]
-              },
-              {
-                "name": "Missile (Gravity Suit)",
-                "access_rules": [
-                  "normal,grapple",
-                  "normal,space",
-                  "normal,varia,$countEnergyReserves:2",
-                  "normal,$countEnergyReserves:3",
-
-                  "[hard],varia",
-                  "[hard],$countEnergyReserves:1"
-                ],
-                "sections": [
-                  {
-                    "name": "Missile (Gravity Suit)",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 1542,
-                    "y": 176
-                  },
-                  {
-                    "map": "wreckedship",
-                    "x": 440,
-                    "y": 244
-                  }
-                ]
-              }
-            ]
+          "[hard],@CanUnlockShip,@CardWreckedShipL1,varia",
+          "[hard],@CanUnlockShip,@CardWreckedShipL1,alltanks:1"
+        ],
+        "sections": [
+          {
+            "name": "Missile (Gravity Suit)",
+            "item_count": 1
+          }
+        ],
+        "map_locations": [
+          {
+            "map": "metroid",
+            "x": 1542,
+            "y": 176
+          },
+          {
+            "map": "wreckedship",
+            "x": 440,
+            "y": 244
           }
         ]
       }

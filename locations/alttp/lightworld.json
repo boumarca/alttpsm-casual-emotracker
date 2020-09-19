@@ -473,7 +473,7 @@
             "color": "#aa860d",
             "access_rules": [
               "mirror,flute,lift2",
-              "mirror,@Misery Mire Portal,lift1"
+              "mirror,@CanAccessMiseryMirePortal,lift1"
             ],
             "sections": [
               {
@@ -542,7 +542,7 @@
                 "access_rules": [
                   "book",
                   "mirror,lift2,flute",
-                  "@Misery Mire Portal,mirror",
+                  "@CanAccessMiseryMirePortal,mirror",
                   "{}"
                 ],
                 "item_count": 1
@@ -583,7 +583,7 @@
         "access_rules": [
           "flute",
           "[lamp],lift1",
-          "@Death Mountain Portal"
+          "@CanAccessDeathMountainPortal"
         ],
         "children": [
           {

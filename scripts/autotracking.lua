@@ -26,26 +26,6 @@ BIZHAWK_MODE = string.find(Tracker.ActiveVariantUID, "bizhawk") ~= nil
 -- be able to directly address the SRAM banks but currently we have to use the bank 0xe0 mapping instead.
 -- See the getSRAMAddressLTTP() and getSRAMAddressSM() functions below for the mapping math.
 
------------------------------------------
--- TODO: CURRENT KEYSANITY DOORS
--- Crateria 1 locked landing site pbs and gauntlet
--- Crateria 2 locked moat (only from ship side)
--- Crateria B locked G4 hallway
--- Brinstar 1 locked Ceiling Etank
--- Brinstar 2 locked Etecoons, SpoSpo back door, and wave gate e-tank.
--- Brinstar B locked SpoSpo front door and Baby Kraid room
--- U Norfair 1 locked Ice and Crumble Tower (includes bottom door)
--- U Norfair 2 locked Cathedral<->Rising Tide
--- U Norfair B locked Croc
--- Maridia 1 locked Crab shaft (both from Everest and Aqueduct) and Aqueduct Save Room (troll)
--- Maridia 2 locked east door of Botwoon Hallway (both directions)
--- Maridia B locked Draygon
--- WS 1 locked Bowling Alley/Peekaboo room
--- WS B locked Phantoon
--- L Norfair 1 locked Ampitheater
--- L Norfair B locked Ridley
------------------------------------------
-
 print("")
 print("Active Auto-Tracker Configuration")
 print("---------------------------------------------------------------------")
@@ -2175,8 +2155,8 @@ function updateRoomsSM(segment, address)
     updateSectionChestCountFromByteAndFlag(segment, "@Energy Tank (Hi-Jump Boots)/Energy Tank (Hi-Jump Boots)", address + 0x7, 0x01)
     updateSectionChestCountFromByteAndFlag(segment, "@Power Bomb (Crocomire)/Power Bomb (Crocomire)", address + 0x7, 0x02)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (below Crocomire)/Missile (below Crocomire)", address + 0x7, 0x04)
-    updateSectionChestCountFromByteAndFlag(segment, "@Missile (Grapple Beam)/Missile (Grapple Beam)", address + 0x7, 0x08)
-    updateSectionChestCountFromByteAndFlag(segment, "@Grapple Beam/Grapple Beam", address + 0x7, 0x10)
+    updateSectionChestCountFromByteAndFlag(segment, "@Missile (Grappling Beam)/Missile (Grappling Beam)", address + 0x7, 0x08)
+    updateSectionChestCountFromByteAndFlag(segment, "@Grappling Beam/Grappling Beam", address + 0x7, 0x10)
     updateSectionChestCountFromByteAndFlag(segment, "@Norfair Reserve Tank Room/Reserve Tank, Norfair", address + 0x7, 0x20)
     updateSectionChestCountFromByteAndFlag(segment, "@Norfair Reserve Tank Room/Missile (Norfair Reserve Tank)", address + 0x7, 0x40)
     updateSectionChestCountFromByteAndFlag(segment, "@Missile (bubble Norfair green door)/Missile (bubble Norfair green door)", address + 0x7, 0x80)
