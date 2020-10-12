@@ -54,6 +54,18 @@
     ]
   },
   {
+    "name": "DesertPalaceCanBeatBoss",
+    "access_rules": [
+      "[sword]",
+      "hammer",
+      "bow",
+      "firerod",
+      "icerod",
+      "byrna",
+      "somaria"
+    ]
+  },
+  {
     "name": "Desert Palace",
     "color": "#af0000",
     "access_rules": [
@@ -75,20 +87,8 @@
         "name": "Lanmolas",
         "short_name": "Lanmo",
         "access_rules": [
-          "@Desert Palace/Dungeon,lift1,firesource,[sword]",
-          "@Desert Palace/Dungeon,lift1,firesource,hammer",
-          "@Desert Palace/Dungeon,lift1,firesource,bow",
-          "@Desert Palace/Dungeon,lift1,firesource,firerod",
-          "@Desert Palace/Dungeon,lift1,firesource,icerod",
-          "@Desert Palace/Dungeon,lift1,firesource,byrna",
-          "@Desert Palace/Dungeon,lift1,firesource,somaria",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,[sword]",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,hammer",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,bow",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,firerod",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,icerod",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,byrna",
-          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,firesource,somaria",
+          "@Desert Palace/Dungeon,lift1,@CanLightTorches,@DesertPalaceCanBeatBoss",
+          "@Desert Palace/Dungeon,@CanAccessMiseryMirePortal,mirror,@CanLightTorches,@DesertPalaceCanBeatBoss"
         ],
         "hosted_item": "desertpalace"
       }
@@ -113,7 +113,7 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[firesource]"
+          "[@CanLightTorches]"
         ],
         "item_count": 2
       },
@@ -253,7 +253,7 @@
     ]
   },
   {
-    "name": "Thieves Town",
+    "name": "Thieves' Town",
     "color": "#af0000",
     "access_rules": [
       "pearl,@Dark World North West"
@@ -331,7 +331,7 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[firesource]"
+          "[@CanLightTorches]"
         ],
         "item_count": 2
       },
@@ -432,7 +432,7 @@
         "name": "Tower",
         "clear_as_group": false,
         "access_rules": [
-          "@Ganon's Tower/Dungeon,bow,firesource,[hookshot]"
+          "@Ganon's Tower/Dungeon,bow,@CanLightTorches,[hookshot]"
         ],
         "item_count": 4
       }

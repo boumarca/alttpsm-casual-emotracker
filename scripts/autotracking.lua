@@ -909,10 +909,11 @@ function updateAllDungeonLocationsFromCache()
         updateDungeonLocationFromCache("@Skull Woods/Mothula", "sw4")
         updateDungeonSmallKeysFromCache("sw")
 
-        updateDungeonLocationFromCache("@Thieves Town/Front", "tt")
-        updateDungeonLocationFromCache("@Thieves Town/Back", "tt2")
-        updateDungeonLocationFromCache("@Thieves Town/Big Chest", "tt3")
-        updateDungeonLocationFromCache("@Thieves Town/Blind", "tt4")
+        updateDungeonLocationFromCache("@Thieves' Town/Front", "tt")
+        updateDungeonLocationFromCache("@Thieves' Town/Attic", "tt2")
+        updateDungeonLocationFromCache("@Thieves' Town/Blind's Cell", "tt3")
+        updateDungeonLocationFromCache("@Thieves' Town/Big Chest", "tt4")
+        updateDungeonLocationFromCache("@Thieves' Town/Blind", "tt5")
         updateDungeonSmallKeysFromCache("tt")
 
         updateDungeonLocationFromCache("@Ice Palace/Left Side", "ip")
@@ -950,7 +951,7 @@ function updateAllDungeonLocationsFromCache()
         updateDungeonLocationFromCache("@Palace of Darkness/Dungeon", "pod")
         updateDungeonLocationFromCache("@Swamp Palace/Dungeon", "sp")
         updateDungeonLocationFromCache("@Skull Woods/Dungeon", "sw")
-        updateDungeonLocationFromCache("@Thieves Town/Dungeon", "tt")
+        updateDungeonLocationFromCache("@Thieves' Town/Dungeon", "tt")
         updateDungeonLocationFromCache("@Ice Palace/Dungeon", "ip")
         updateDungeonLocationFromCache("@Misery Mire/Dungeon", "mm")
         updateDungeonLocationFromCache("@Turtle Rock/Dungeon", "tr")
@@ -1295,14 +1296,14 @@ function updateRoomDataFromCache(inLTTP)
     updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt2", { 101, 4 }, inLTTP)
 
     -- Room 69 (nice) offset 0x8A ("Maiden" cell)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt2", { 69, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt3", { 69, 4 }, inLTTP)
 
     -- Room 68 offset 0x88 (Big chest)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt3", { 68, 4 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt4", { 68, 4 }, inLTTP)
     updateDungeonCacheTableFromRoomSlot(newOpenedDoors, "tt", { 68, 14 }, inLTTP)
 
     -- Room 172 offset 0x158 (Blind)
-    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt4", { 172, 11 }, inLTTP)
+    updateDungeonCacheTableFromRoomSlot(newOpenedChests, "tt5", { 172, 11 }, inLTTP)
 
 
     -- *** Ice Palace

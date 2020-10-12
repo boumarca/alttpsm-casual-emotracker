@@ -83,6 +83,18 @@
     ]
   },
   {
+    "name": "DesertPalaceCanBeatBoss",
+    "access_rules": [
+      "[sword]",
+      "hammer",
+      "bow",
+      "firerod",
+      "icerod",
+      "byrna",
+      "somaria"
+    ]
+  },
+  {
     "name": "Desert Palace",
     "color": "#af0000",
     "access_rules": [
@@ -108,7 +120,7 @@
         "name": "Right Side",
         "clear_as_group": false,
         "access_rules": [
-          "dp_smallkey:1"
+          "[dp_smallkey:1]"
         ],
         "item_count": 2
       },
@@ -122,20 +134,8 @@
       {
         "name": "Lanmolas",
         "access_rules": [
-          "dp_bigkey,lift1,firesource,[sword]",
-          "dp_bigkey,lift1,firesource,hammer",
-          "dp_bigkey,lift1,firesource,bow",
-          "dp_bigkey,lift1,firesource,firerod",
-          "dp_bigkey,lift1,firesource,icerod",
-          "dp_bigkey,lift1,firesource,byrna",
-          "dp_bigkey,lift1,firesource,somaria",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,[sword]",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,hammer",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,bow",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,firerod",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,icerod",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,byrna",
-          "dp_bigkey,@CanAccessMiseryMirePortal,mirror,firesource,somaria",
+          "lift1,dp_bigkey,[dp_smallkey:1],@CanLightTorches,@DesertPalaceCanBeatBoss",
+          "@CanAccessMiseryMirePortal,mirror,dp_bigkey,[dp_smallkey:1],@CanLightTorches,@DesertPalaceCanBeatBoss"
         ],
         "item_count": 1,
         "hosted_item": "desertpalace"
@@ -165,7 +165,7 @@
       {
         "name": "Basement",
         "access_rules": [
-          "toh_smallkey,firesource"
+          "toh_smallkey:1,@CanLightTorches"
         ],
         "item_count": 1
       },
@@ -180,8 +180,8 @@
       {
         "name": "Moldorm",
         "access_rules": [
-          "@Tower of Hera/Upper,sword",
-          "@Tower of Hera/Upper,hammer"
+          "toh_bigkey,sword",
+          "toh_bigkey,hammer"
         ],
         "item_count": 1,
         "hosted_item": "towerofhera"
@@ -245,7 +245,7 @@
         "name": "Front",
         "clear_as_group": false,
         "access_rules": [
-          "[pod_smallkey:5],bow,hammer",
+          "[pod_smallkey:6],bow,hammer",
           "[pod_smallkey:6],pod_smallkey:1"
         ],
         "item_count": 3
@@ -320,7 +320,7 @@
       {
         "name": "Big Chest",
         "access_rules": [
-          "@Swamp Palace/Front,sp_bigkey"
+          "sp_bigkey,sp_smallkey:1,hammer"
         ],
         "item_count": 1
       },
@@ -328,14 +328,14 @@
         "name": "Back",
         "clear_as_group": false,
         "access_rules": [
-          "@Swamp Palace/Front,hookshot"
+          "sp_smallkey:1,hammer,hookshot"
         ],
         "item_count": 3
       },
       {
         "name": "Arrgus",
         "access_rules": [
-          "@Swamp Palace/Back"
+          "sp_smallkey:1,hammer,hookshot"
         ],
         "item_count": 1,
         "hosted_item": "swamppalace"
@@ -393,7 +393,7 @@
     ]
   },
   {
-    "name": "Thieves Town",
+    "name": "Thieves' Town",
     "color": "#af0000",
     "access_rules": [
       "pearl,@Dark World North West"
@@ -405,27 +405,33 @@
         "item_count": 4
       },
       {
-        "name": "Back",
-        "clear_as_group": false,
+        "name": "Attic",
+        "access_rules": [
+          "tt_bigkey,[tt_smallkey:1]"
+        ],
+        "item_count": 1
+      },
+      {
+        "name": "Blind's Cell",
         "access_rules": [
           "tt_bigkey"
         ],
-        "item_count": 2
+        "item_count": 1
       },
       {
         "name": "Big Chest",
         "access_rules": [
-          "@Thieves Town/Back,tt_smallkey:1,hammer"
+          "tt_bigkey,hammer,[tt_smallkey:1]"
         ],
         "item_count": 1
       },
       {
         "name": "Blind",
         "access_rules": [
-          "@Thieves Town/Back,sword",
-          "@Thieves Town/Back,hammer",
-          "@Thieves Town/Back,somaria",
-          "@Thieves Town/Back,byrna"
+          "tt_bigkey,[tt_smallkey:1],sword",
+          "tt_bigkey,[tt_smallkey:1],hammer",
+          "tt_bigkey,[tt_smallkey:1],somaria",
+          "tt_bigkey,[tt_smallkey:1],byrna"
         ],
         "item_count": 1,
         "hosted_item": "thievestown"
@@ -499,6 +505,10 @@
       {
         "name": "Right Side",
         "clear_as_group": false,
+        "access_rules": [
+          "[mm_bigkey]",
+          "[mm_smallkey:1]"
+        ],
         "item_count": 4
       },
       {
@@ -512,7 +522,7 @@
         "name": "Left Side",
         "clear_as_group": false,
         "access_rules": [
-          "firesource"
+          "@CanLightTorches,[mm_smallkey:3]"
         ],
         "item_count": 2
       },
@@ -563,7 +573,7 @@
       {
         "name": "Big Key Chest",
         "access_rules": [
-          "tr_smallkey:2"
+          "[tr_smallkey:4],tr_smallkey:2"
         ],
         "item_count": 1
       },
@@ -585,16 +595,16 @@
         "name": "Laser Bridge",
         "clear_as_group": false,
         "access_rules": [
-          "[lamp],[cape],[tr_smallkey:3],tr_smallkey:2,tr_bigkey",
-          "[lamp],[byrna],[tr_smallkey:3],tr_smallkey:2,tr_bigkey",
-          "[lamp],[shield3],[tr_smallkey:3],tr_smallkey:2,tr_bigkey"
+          "tr_bigkey,[tr_smallkey:3],tr_smallkey:2,[lamp],[cape]",
+          "tr_bigkey,[tr_smallkey:3],tr_smallkey:2,[lamp],[byrna]",
+          "tr_bigkey,[tr_smallkey:3],tr_smallkey:2,[lamp],[shield3]"
         ],
         "item_count": 4
       },
       {
         "name": "Trinexx",
         "access_rules": [
-          "[lamp],[tr_smallkey:4],tr_smallkey:3,tr_bigkey,firerod,icerod"
+          "tr_bigkey,[tr_smallkey:4],tr_smallkey:3,[lamp],firerod,icerod"
         ],
         "item_count": 1,
         "hosted_item": "turtlerock"
@@ -655,7 +665,7 @@
         "name": "Tower",
         "clear_as_group": false,
         "access_rules": [
-          "@Ganon's Tower/Dungeon,bow,firesource,[hookshot],gt_bigkey,gt_smallkey:1"
+          "gt_bigkey,gt_smallkey:1,[gt_smallkey:4],bow,@CanLightTorches,[hookshot]"
         ],
         "item_count": 4
       }
