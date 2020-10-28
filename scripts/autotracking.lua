@@ -56,13 +56,6 @@ end
 print("---------------------------------------------------------------------")
 print("")
 
--- Offset for different memory addressing for LUA vs SD2SNES.
-if BIZHAWK_MODE then
-    LUA_EXTRA_RAM_OFFSET = 0x0  -- Bizhawk uses the same memory addressing as SD2SNES for now even though it's LUA!
-else
-    LUA_EXTRA_RAM_OFFSET = 0x314000
-end
-
 CONNECTOR_NAME_SD2SNES = "SD2SNES"
 
 AUTOTRACKER_IS_IN_LTTP = false
@@ -112,6 +105,10 @@ DUNGEON_ROOMS = {
     tr = { 4, 19, 20, 21, 35, 36, 164, 180, 181, 182, 183, 196, 197, 198, 199, 213, 214 },
     gt = { 12, 13, 28, 29, 61, 76, 77, 91, 92, 93, 107, 108, 109, 123, 124, 125, 139, 140, 141, 149, 150, 155, 156, 157, 165, 166 },
 }
+
+-- Heart piece/container counts.
+HEART_PIECES = 0
+TOTAL_HEARTS = 0
 
 -- ************************** Table helper functions for debug printing
 
@@ -200,32 +197,48 @@ function clearMemoryWatches()
     end
 end
 
+function getSRAMOffset(address)
+    -- Compute SRAM offset based on raw ExHiROM address (used for usb2snes and Bizhawk Lua addressing).
+    -- For HiROM in general, SRAM is mapped to banks $A0-$BF for addresses $6000–$7FFF within each bank.  For example:
+    --   $A06000 = offset 0x0
+    --   $A07000 = offset 0x1000
+    --   $A16000 = offset 0x2000
+    --   $A17000 = offset 0x3000
+    --   and so on...
+    -- Start by subtracting 0xa06000 as the base, then offset 0x2000 for each additional bank.
+    local offset = 0x0
+    local remaining_addr = address - 0xa06000
+    while remaining_addr >= 0x2000 do
+        remaining_addr = remaining_addr - 0x10000
+        offset = offset + 0x2000
+    end
+    return offset + remaining_addr
+end
+
+function mapSRAMAddress(address)
+    -- Map SRAM address to the location needed based on the connector being used.
+    -- Bizhawk (Lua): SRAM starts at 0x700000 in the system bus for whatever reason.
+    -- SD2SNES: SRAM starts at 0xe00000 in the usb2snes protocol.
+    -- snes9x (Lua): Uses the raw address.
+    if BIZHAWK_MODE then
+        return 0x700000 + getSRAMOffset(address)
+    elseif AutoTracker.SelectedConnectorType.Name == CONNECTOR_NAME_SD2SNES then
+        return 0xe00000 + getSRAMOffset(address)
+    else
+        return address
+    end
+end
+
 function getSRAMAddressLTTP(offset)
     -- Map SRAM offset to address for LTTP based on which connector we're using.
     -- LTTP SRAM is in bank 0xa06000
-    -- SD2SNES connector currently uses usb2snes protocol mapping for SRAM until we can address directly in future!
-    -- Bizhawk is...even weirder.  SRAM is mapped to bank 0x700000 in the system bus for whatever reason.
-    if AutoTracker.SelectedConnectorType.Name == CONNECTOR_NAME_SD2SNES then
-        return 0xe00000 + offset
-    elseif BIZHAWK_MODE then
-        return 0x700000 + offset
-    else
-        return 0xa06000 + offset
-    end
+    return mapSRAMAddress(0xa06000 + offset)
 end
 
 function getSRAMAddressSM(offset)
     -- Map SRAM offset to address for SM based on which connector we're using.
     -- SM SRAM is in bank 0xa16000, and file 1 starts 0x10 bytes after the beginning.
-    -- SD2SNES connector currently uses usb2snes protocol mapping for SRAM until we can address directly in future!
-    -- Bizhawk is...even weirder.  SRAM is mapped to bank 0x700000 in the system bus for whatever reason.
-    if AutoTracker.SelectedConnectorType.Name == CONNECTOR_NAME_SD2SNES then
-        return 0xe02010 + offset
-    elseif BIZHAWK_MODE then
-        return 0x702010 + offset
-    else
-        return 0xa16010 + offset
-    end
+    return mapSRAMAddress(0xa16010 + offset)
 end
 
 -- *************************** Game status and memory watches
@@ -234,15 +247,7 @@ function updateGame()
     -- Figure out which game we're in.
     InvalidateReadCaches()
 
-    -- Offset for memory addressing of between game mirrored data that is outside the working RAM and save RAM ranges.
-    -- The usb2snes connector uses a different mapping than LUA for this currently, but hopefully this will change.
-    local cross_game_offset = 0x0
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        cross_game_offset = LUA_EXTRA_RAM_OFFSET
-    end
-
     local game = whichGameAreWeIn()
-
     local changingGame = false
     if (game == SM) then
         changingGame = not AUTOTRACKER_IS_IN_SM
@@ -277,15 +282,19 @@ function updateGame()
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Dungeon Location Update Check", 0x7e0000, 0x1, updateDungeonLocationsFromTimestamp))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Current Room Data", 0x7e0401, 0x8, updateCurrentRoomDataLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Item Data", 0x7ef340, 0x90, updateItemsActiveLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Heart Piece Data", 0x7ef448, 0x1, updateHeartPiecesActiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP NPC Item Data", 0x7ef410, 0x2, updateNPCItemFlagsActiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Room Data", 0x7ef000, 0x250, updateRoomsActiveLTTP))
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Overworld Event Data", 0x7ef280, 0x82, updateOverworldEventsActiveLTTP))
 
             -- Extra cross-game RAM watches specifically for items.
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Item Data In LTTP", 0x703900 + cross_game_offset, 0x10, updateItemsInactiveSM))
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Ammo Data In LTTP", 0x703920 + cross_game_offset, 0x16, updateAmmoInactiveSM))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Item Data In LTTP", mapSRAMAddress(0xa17900), 0x10,
+                    updateItemsInactiveSM))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Ammo Data In LTTP", mapSRAMAddress(0xa17920), 0x16,
+                    updateAmmoInactiveSM))
             if IS_KEYSANITY then
-                table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Key Data In LTTP", 0x703970 + cross_game_offset, 0x02, updateKeycardsInactiveSM))
+                table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Key Data In LTTP", mapSRAMAddress(0xa17970), 0x02,
+                        updateKeycardsInactiveSM))
             end
 
             -- SRAM watches for things that aren't in cross-game extra RAM.
@@ -293,8 +302,10 @@ function updateGame()
             table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM Room Data In LTTP", getSRAMAddressSM(0xb0), 0x20, updateRoomsInactiveSM))
 
             -- Game completion checks
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP DONE", 0x703506 + cross_game_offset, 0x01, updateLTTPcompletionInLTTP))
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM DONE", 0x703402 + cross_game_offset, 0x01, updateSMcompletionInLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP DONE", mapSRAMAddress(0xa17506), 0x01,
+                    updateLTTPcompletionInLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM DONE", mapSRAMAddress(0xa17402), 0x01,
+                    updateSMcompletionInLTTP))
 
         -- Super Metroid
         elseif AUTOTRACKER_IS_IN_SM then
@@ -308,16 +319,24 @@ function updateGame()
             end
 
             -- Extra cross-game RAM watches specifically for items.
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Item Data In SM", 0x703b40 + cross_game_offset, 0x90, updateItemsInactiveLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Item Data In SM", mapSRAMAddress(0xa17b40), 0x90,
+                    updateItemsInactiveLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Heart Piece Data In SM", mapSRAMAddress(0xa17f28), 0x1,
+                    updateHeartPiecesInactiveLTTP))
 
             -- SRAM watches for things that aren't in cross-game extra RAM.
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP NPC Item Data In SM", getSRAMAddressLTTP(0x410), 0x2, updateNPCItemFlagsInactiveLTTP))
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Room In SM", getSRAMAddressLTTP(0x0), 0x250, updateRoomsInactiveLTTP))
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Overworld Event Data In SM", getSRAMAddressLTTP(0x280), 0x82, updateOverworldEventsInactiveLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP NPC Item Data In SM", getSRAMAddressLTTP(0x410), 0x2,
+                    updateNPCItemFlagsInactiveLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Room In SM", getSRAMAddressLTTP(0x0), 0x250,
+                    updateRoomsInactiveLTTP))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP Overworld Event Data In SM", getSRAMAddressLTTP(0x280), 0x82,
+                    updateOverworldEventsInactiveLTTP))
 
             -- Game completion checks
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP DONE", 0x703506 + cross_game_offset, 0x01, updateLTTPcompletionInSM))
-            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM DONE", 0x703402 + cross_game_offset, 0x01, updateSMcompletionInSM))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("LTTP DONE", mapSRAMAddress(0xa17506), 0x01,
+                    updateLTTPcompletionInSM))
+            table.insert(MEMORY_WATCHES, ScriptHost:AddMemoryWatch("SM DONE", mapSRAMAddress(0xa17402), 0x01,
+                    updateSMcompletionInSM))
 
         end
     end
@@ -326,12 +345,7 @@ function updateGame()
 end
 
 function whichGameAreWeIn()
-    local address = 0x7033fe
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-
-    local value = AutoTracker:ReadU8(address, 0)
+    local value = AutoTracker:ReadU8(mapSRAMAddress(0xa173fe), 0)
     if (value == 0xFF) then
         return SM
     elseif (value == 0x00) then
@@ -395,12 +409,7 @@ end
 
 function updateLTTPcompletion(segment)
     InvalidateReadCaches()
-
-    local address = 0x703506
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-    updateToggleItemFromByte(segment, "ganon", address)
+    updateToggleItemFromByte(segment, "ganon", mapSRAMAddress(0xa17506))
 end
 
 function updateSMcompletionInLTTP(segment)
@@ -421,12 +430,7 @@ end
 
 function updateSMcompletion(segment)
     InvalidateReadCaches()
-
-    local address = 0x703402
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-    updateToggleItemFromByte(segment, "brain", address)
+    updateToggleItemFromByte(segment, "brain", mapSRAMAddress(0xa17402))
 end
 
 -- ******************** Helper functions for updating items and locations
@@ -1523,13 +1527,8 @@ function updateItemsInactiveLTTP(segment)
         return false
     end
 
-    local address = 0x703b00
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateItemsLTTP(segment, address, false)
+        updateItemsLTTP(segment, mapSRAMAddress(0xa17b00), false)
     end
     return true
 end
@@ -1593,6 +1592,15 @@ function updateItemsLTTP(segment, address, inLTTP)
     updateSectionChestCountFromByteAndFlag(segment, "@Hobo/Under The Bridge", address + 0xc9, 0x01)
     updateSectionChestCountFromByteAndFlag(segment, "@Bottle Merchant/Bottle Merchant", address + 0xc9, 0x02)
     updateSectionChestCountFromByteAndFlag(segment, "@Purple Chest/Purple Chest", address + 0xc9, 0x10)
+
+    -- Get total number of hearts to track heart pieces and containers.
+    local maxHealth = ReadU8(segment, address + 0x6c)
+    TOTAL_HEARTS = maxHealth // 8
+    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        print("LTTP current max health: ", string.format("0x%x", address + 0x6c),
+                string.format("0x%x", maxHealth), TOTAL_HEARTS, "total hearts")
+    end
+    updateHeartPieceAndContainerCount()
 
     -- Update remaining small keys and dungeon item (map/compass/big key) data caches from item data.
     if AUTOTRACKER_ENABLE_DUNGEON_TRACKING then
@@ -1692,6 +1700,50 @@ function updateItemsLTTP(segment, address, inLTTP)
         -- If we're not in LTTP, update dungeon locations immediately.  Otherwise wait for stable data.
         if not inLTTP then
             updateAllDungeonLocationsFromCache()
+        end
+    end
+end
+
+function updateHeartPiecesActiveLTTP(segment)
+    if not (isInLTTP() and isInGameLTTP()) then
+        return false
+    end
+    updateHeartPiecesLTTP(segment, 0x7ef448)
+    return true
+end
+
+function updateHeartPiecesInactiveLTTP(segment)
+    if not (isInSM() and isInGameSM()) then
+        return false
+    end
+    updateHeartPiecesLTTP(segment, mapSRAMAddress(0xa17f28))
+    return true
+end
+
+function updateHeartPiecesLTTP(segment, address)
+    HEART_PIECES = ReadU8(segment, address)
+    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+        print("LTTP current heart piece count: ", string.format("0x%x", address), HEART_PIECES)
+    end
+    updateHeartPieceAndContainerCount()
+end
+
+function updateHeartPieceAndContainerCount()
+    -- TODO: Remove this when the ROM change goes live!
+    if true then
+        return
+    end
+
+    -- Update heart piece and container item counts after reading them from memory.
+    local pieces = Tracker:FindObjectForCode("heartpiece")
+    local containers = Tracker:FindObjectForCode("heartcontainer")
+
+    if pieces and containers then
+        pieces.AcquiredCount = HEART_PIECES
+        -- Subtract starting 3 hearts and hearts from pieces to get containers acquired.
+        containers.AcquiredCount = (TOTAL_HEARTS - 3) - (HEART_PIECES // 4)
+        if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+            print("Heart pieces: ", pieces.AcquiredCount, "Heart containers: ", containers.AcquiredCount)
         end
     end
 end
@@ -1924,13 +1976,8 @@ function updateItemsInactiveSM(segment)
         return false
     end
 
-    local address = 0x703900
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateItemsSM(segment, address)
+        updateItemsSM(segment, mapSRAMAddress(0xa17900))
     end
     return true
 end
@@ -1973,13 +2020,8 @@ function updateKeycardsInactiveSM(segment)
         return false
     end
 
-    local address = 0x703970
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateKeycardsSM(segment, address)
+        updateKeycardsSM(segment, mapSRAMAddress(0xa17970))
     end
     return true
 end
@@ -2022,13 +2064,8 @@ function updateAmmoInactiveSM(segment)
         return false
     end
 
-    local address = 0x703920
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateAmmoSM(segment, address)
+        updateAmmoSM(segment, mapSRAMAddress(0xa17920))
     end
     return true
 end
@@ -2240,11 +2277,7 @@ function autotracker_started()
     cleanup()
 
     -- Initialize watch for when the game changes.  Everything else happens in there.
-    local address = 0x7033fe
-    if AutoTracker.SelectedConnectorType.Name ~= CONNECTOR_NAME_SD2SNES then
-        address = address + LUA_EXTRA_RAM_OFFSET
-    end
-    GAME_WATCH = ScriptHost:AddMemoryWatch("Which Game Is It Anyways", address, 0x02, updateGame, 250)
+    GAME_WATCH = ScriptHost:AddMemoryWatch("Which Game Is It Anyways", mapSRAMAddress(0xa173fe), 0x02, updateGame, 250)
 end
 
 --Invoked when the auto-tracker is stopped.
