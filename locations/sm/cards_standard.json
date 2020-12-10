@@ -63,23 +63,5 @@
   {
     "name": "CardLowerNorfairBoss",
     "access_rules": []
-  },
-
-  // Extra locations for specific non-blue doors that are replaced by key doors in keysanity.
-  {
-    "name": "CanOpenCrateriaSurfaceDoor",
-    "access_rules": ["@CanUsePowerBombs"]
-  },
-  {
-    "name": "CanOpenBombTorizoDoor",
-    "access_rules": ["@CanOpenRedDoors"]
-  },
-  {
-    "name": "CanOpenMoatDoor",
-    "access_rules": ["@CanUsePowerBombs"]
-  },
-  {
-    "name": "CanOpenIceBeamDoor",
-    "access_rules": ["super"]
   }
 ]

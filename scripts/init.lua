@@ -29,8 +29,10 @@ Tracker:AddLocations("locations/alttp/darkworld.json")
 Tracker:AddLocations("locations/alttp/bothworlds.json")
 if IS_KEYSANITY then
     Tracker:AddLocations("locations/alttp/dungeons_keysanity.json")
+    Tracker:AddLocations("locations/sm/doors_keysanity.json")
 else
     Tracker:AddLocations("locations/alttp/dungeons_standard.json")
+    Tracker:AddLocations("locations/sm/doors_standard.json")
 end
 Tracker:AddLocations("locations/sm/wreckedship.json")
 Tracker:AddLocations("locations/sm/crateria.json")
