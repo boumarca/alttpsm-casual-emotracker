@@ -1,3 +1,7 @@
+3.4.6
+-----
+Fixed incorrect sequence break display of speed booster spots in Maridia on normal
+
 3.4.5
 -----
 Bug fix for SM keysanity door corner cases

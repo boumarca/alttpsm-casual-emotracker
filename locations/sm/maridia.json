@@ -52,8 +52,7 @@
                 "name": "Missile (green Maridia shinespark)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,speed",
-                  "[hard],gravity,speed",
+                  "gravity,speed",
                   "{}"
                 ],
                 "item_count": 1
@@ -325,8 +324,8 @@
           {
             "name": "Super Missile (pink Maridia)",
             "access_rules": [
-              "normal,@CardMaridiaL1,speed",
-              "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,speed",
+              "normal,@CardMaridiaL1,gravity,speed",
+              "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,gravity,speed",
 
               "[hard],@CardMaridiaL1,gravity",
               "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,gravity"
@@ -357,8 +356,8 @@
                 "name": "Missile (pink Maridia)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@CardMaridiaL1,speed",
-                  "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,speed",
+                  "normal,@CardMaridiaL1,gravity,speed",
+                  "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,gravity,speed",
 
                   "[hard],@CardMaridiaL1,gravity",
                   "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,gravity",
@@ -410,11 +409,8 @@
           {
             "name": "Missile (Draygon)",
             "access_rules": [
-              "normal,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon",
-              "normal,@CanAccessMaridiaPortal",
-
-              "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon,gravity",
-              "[hard],@CanAccessMaridiaPortal,gravity"
+              "@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon,gravity",
+              "@CanAccessMaridiaPortal,gravity"
             ],
             "sections": [
               {
