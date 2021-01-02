@@ -82,7 +82,10 @@
   },
   {
     "name": "CanOpenRedDoors",
-    "access_rules": []
+    "access_rules": [
+      "missile",
+      "super"
+    ]
   },
 
   // Cross-game portals
