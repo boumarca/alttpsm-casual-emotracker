@@ -106,8 +106,7 @@ DUNGEON_ROOMS = {
     gt = { 12, 13, 28, 29, 61, 76, 77, 91, 92, 93, 107, 108, 109, 123, 124, 125, 139, 140, 141, 149, 150, 155, 156, 157, 165, 166 },
 }
 
--- Heart piece/container counts.
-HEART_PIECES = 0
+-- Track total hearts for changes.
 TOTAL_HEARTS = 0
 
 -- ************************** Table helper functions for debug printing
@@ -1594,13 +1593,34 @@ function updateItemsLTTP(segment, address, inLTTP)
     updateSectionChestCountFromByteAndFlag(segment, "@Purple Chest/Purple Chest", address + 0xc9, 0x10)
 
     -- Get total number of hearts to track heart pieces and containers.
-    local maxHealth = ReadU8(segment, address + 0x6c)
-    TOTAL_HEARTS = maxHealth // 8
-    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-        print("LTTP current max health: ", string.format("0x%x", address + 0x6c),
-                string.format("0x%x", maxHealth), TOTAL_HEARTS, "total hearts")
+    local containers = Tracker:FindObjectForCode("heartcontainer")
+    if containers then
+        local maxHealth = ReadU8(segment, address + 0x6c)
+        local total_hearts = maxHealth // 8
+
+        local changed = total_hearts ~= TOTAL_HEARTS
+        TOTAL_HEARTS = total_hearts
+
+        if changed then
+            if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+                print("LTTP current max health: ", string.format("0x%x", address + 0x6c),
+                        string.format("0x%x", maxHealth), total_hearts, "total hearts")
+            end
+
+            -- Need current heart pieces to compute containers.
+            local heart_pieces
+            if inLTTP then
+                heart_pieces = math.floor(AutoTracker:ReadU8(0x7ef448, 0))
+            else
+                heart_pieces = math.floor(AutoTracker:ReadU8(mapSRAMAddress(0xa17f28), 0))
+            end
+
+            containers.AcquiredCount = (total_hearts - 3) - (heart_pieces // 4)
+            if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
+                print("Heart pieces: ", heart_pieces, "Heart containers: ", containers.AcquiredCount)
+            end
+        end
     end
-    updateHeartPieceAndContainerCount()
 
     -- Update remaining small keys and dungeon item (map/compass/big key) data caches from item data.
     if AUTOTRACKER_ENABLE_DUNGEON_TRACKING then
@@ -1721,29 +1741,11 @@ function updateHeartPiecesInactiveLTTP(segment)
 end
 
 function updateHeartPiecesLTTP(segment, address)
-    HEART_PIECES = ReadU8(segment, address)
-    if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-        print("LTTP current heart piece count: ", string.format("0x%x", address), HEART_PIECES)
-    end
-    updateHeartPieceAndContainerCount()
-end
-
-function updateHeartPieceAndContainerCount()
-    -- TODO: Remove this when the ROM change goes live!
-    if true then
-        return
-    end
-
-    -- Update heart piece and container item counts after reading them from memory.
     local pieces = Tracker:FindObjectForCode("heartpiece")
-    local containers = Tracker:FindObjectForCode("heartcontainer")
-
-    if pieces and containers then
-        pieces.AcquiredCount = HEART_PIECES
-        -- Subtract starting 3 hearts and hearts from pieces to get containers acquired.
-        containers.AcquiredCount = (TOTAL_HEARTS - 3) - (HEART_PIECES // 4)
+    if pieces then
+        pieces.AcquiredCount = ReadU8(segment, address)
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then
-            print("Heart pieces: ", pieces.AcquiredCount, "Heart containers: ", containers.AcquiredCount)
+            print("LTTP current heart piece count: ", string.format("0x%x", address), pieces.AcquiredCount)
         end
     end
 end

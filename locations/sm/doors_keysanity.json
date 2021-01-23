@@ -15,5 +15,9 @@
   {
     "name": "CanOpenIceBeamDoor",
     "access_rules": ["@CardNorfairL1"]
+  },
+  {
+    "name": "CanOpenCrocomireDoor",
+    "access_rules": ["@CardNorfairBoss"]
   }
 ]

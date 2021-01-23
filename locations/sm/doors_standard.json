@@ -15,5 +15,9 @@
   {
     "name": "CanOpenIceBeamDoor",
     "access_rules": ["super"]
+  },
+  {
+    "name": "CanOpenCrocomireDoor",
+    "access_rules": ["super"]
   }
 ]

@@ -269,7 +269,7 @@
               "normal,morph,speed",
               "normal,morph,grapple",
               "normal,morph,space",
-              "normal,morph,gravity,@CanFly",
+              "normal,morph,gravity,@CanIbj",
               "normal,morph,gravity,hijump",
               "normal,morph,@Wrecked Ship",
               "[hard],morph"

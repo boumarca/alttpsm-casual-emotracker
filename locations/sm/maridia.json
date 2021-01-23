@@ -495,8 +495,8 @@
           {
             "name": "Spring Ball",
             "access_rules": [
-              "normal,super,grapple,@CanUsePowerBombs,space",
-              "normal,super,grapple,@CanUsePowerBombs,hijump",
+              "normal,super,grapple,@CanUsePowerBombs,gravity,space",
+              "normal,super,grapple,@CanUsePowerBombs,gravity,hijump",
 
               "[hard],super,grapple,@CanUsePowerBombs,gravity,@CanFly",
               "[hard],super,grapple,@CanUsePowerBombs,gravity,hijump",
