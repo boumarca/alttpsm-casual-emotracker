@@ -5,15 +5,19 @@
     "chest_opened_img": "images/major_opened.png",
     "color": "#707048",
     "access_rules": [
+      "super,@CanUsePowerBombs,gravity",
       "super,@CanAccessMaridiaPortal,gravity,@CardMaridiaL2,@CanDestroyBombWalls",
       "super,@CanAccessMaridiaPortal,gravity,draygon",
 
       "normal,super,@CanOpenMoatDoor,speed",
       "normal,super,@CanOpenMoatDoor,grapple",
       "normal,super,@CanOpenMoatDoor,space",
-      "normal,super,@CanOpenMoatDoor,gravity",
+      "normal,super,@CanOpenMoatDoor,gravity,@CanIbj",
+      "normal,super,@CanOpenMoatDoor,gravity,hijump",
 
       "[hard],super,@CanOpenMoatDoor",
+      "[hard],super,@CanUsePowerBombs,hijump,ice,grapple,@CardMaridiaL1",
+      "[hard],super,@CanUsePowerBombs,hijump,@CanSpringBallJump,grapple,@CardMaridiaL1",
       "[hard],super,@CanAccessMaridiaPortal,hijump,@CanPassBombPassages,@CardMaridiaL2"
     ],
     "children": [

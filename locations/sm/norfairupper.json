@@ -45,7 +45,9 @@
               "normal,@CanOpenIceBeamDoor,@CanUsePowerBombs,varia,speed",
               "[hard],@CanOpenIceBeamDoor,@CanUsePowerBombs,varia",
               "[hard],@CanOpenIceBeamDoor,@CanUsePowerBombs,alltanks:3",
-              "[hard],@CanOpenIceBeamDoor,varia,speed"
+              "[hard],missile,varia,speed,@CanOpenCrocomireDoor,@CardNorfairL1",
+              "[hard],super,varia,speed,@CanOpenCrocomireDoor,@CardNorfairL1",
+              "[hard],wave,varia,speed,@CanOpenCrocomireDoor,@CardNorfairL1"
             ],
             "sections": [
               {
