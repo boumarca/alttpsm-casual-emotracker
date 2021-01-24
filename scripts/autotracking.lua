@@ -740,7 +740,7 @@ function updateItemsActiveLTTP(segment)
         return false
     end
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateItemsLTTP(segment, 0x7ef300)
+        updateItemsLTTP(segment, 0x7ef300, true)
     end
     return true
 end
@@ -751,12 +751,12 @@ function updateItemsInactiveLTTP(segment)
     end
 
     if AUTOTRACKER_ENABLE_ITEM_TRACKING then
-        updateItemsLTTP(segment, mapSRAMAddress(0xa17b00))
+        updateItemsLTTP(segment, mapSRAMAddress(0xa17b00), false)
     end
     return true
 end
 
-function updateItemsLTTP(segment, address)
+function updateItemsLTTP(segment, address, inLTTP)
     InvalidateReadCaches()
 
     updateProgressiveItemFromByte(segment, "owsword",  address + 0x59)
