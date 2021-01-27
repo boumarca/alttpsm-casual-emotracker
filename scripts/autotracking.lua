@@ -1781,6 +1781,7 @@ function updateRoomsLTTP(segment, address, inLTTP)
         updateToggleFromRoomSlot(segment, address, "ip", { 222, 11 })
         updateToggleFromRoomSlot(segment, address, "mm", { 144, 11 })
         updateToggleFromRoomSlot(segment, address, "tr", { 164, 11 })
+        updateToggleFromRoomSlot(segment, address, "aga2", { 13, 11 })
     end
 
     if AUTOTRACKER_ENABLE_LOCATION_TRACKING then
