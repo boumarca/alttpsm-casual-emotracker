@@ -613,6 +613,14 @@
     "codes": "aga1,aga,aganhim"
   },
   {
+    "name": "Aganhim",
+    "capturable": false,
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/aga2.png",
+    "codes": "aga2,aganhim2"
+  },
+  {
     "name": "Ganon",
     "type": "toggle",
     "loop": true,
