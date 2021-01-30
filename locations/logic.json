@@ -87,6 +87,14 @@
       "super"
     ]
   },
+  {
+    "name": "CanBlueGateGlitch",
+    "access_rules": [
+      "missile",
+      "super",
+      "wave"
+    ]
+  },
 
   // Cross-game portals
   {

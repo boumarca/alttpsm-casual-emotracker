@@ -17,7 +17,11 @@
     "access_rules": ["@CardNorfairL1"]
   },
   {
-    "name": "CanOpenCrocomireDoor",
+    "name": "CanOpenCathedralDoor",
+    "access_rules": ["@CardNorfairL2"]
+  },
+  {
+    "name": "CanAccessCrocomire",
     "access_rules": ["@CardNorfairBoss"]
   }
 ]
