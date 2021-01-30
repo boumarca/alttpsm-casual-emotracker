@@ -259,7 +259,7 @@
           "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanFly",
           "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanSpringBallJump",
           "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,hijump,@CanPassBombPassages",
-          "[hard],@CanAccessMaridiaPortal,gravity,@CanDestroyBombWalls",
+          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,gravity,@CanDestroyBombWalls",
           "[hard],@CanAccessMaridiaPortal,gravity,draygon"
         ],
         "children": [

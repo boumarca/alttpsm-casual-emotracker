@@ -6,6 +6,20 @@
     "color": "#409078",
     "children": [
       {
+        "name": "CanReachAqueduct",
+        "access_rules": [
+          "@CardMaridiaL2,@CanAccessMaridiaPortal",
+
+          "normal,@CardMaridiaL1,@CanFly",
+          "normal,@CardMaridiaL1,speed",
+          "normal,@CardMaridiaL1,grapple",
+
+          "[hard],@CardMaridiaL1,gravity",
+          "[hard],@CardMaridiaL1,hijump,ice,grapple",
+          "[hard],@CardMaridiaL1,hijump,@CanSpringBallJump,grapple"
+        ]
+      },
+      {
         "name": "CanDefeatBotwoon",
         "access_rules": [
           "@CanAccessMaridiaPortal",
@@ -224,15 +238,11 @@
           {
             "name": "West Sand Hole",
             "access_rules": [
-              "normal,@CardMaridiaL1,super,@CanPassBombPassages",
-              "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,super,@CanPassBombPassages",
+              "normal,@CanReachAqueduct,super,@CanPassBombPassages",
 
-              "[hard],@CardMaridiaL1,super,hijump,space",
-              "[hard],@CardMaridiaL1,super,hijump,@CanSpringBallJump",
-              "[hard],@CardMaridiaL1,super,gravity",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,hijump,space",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,hijump,@CanSpringBallJump",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,gravity"
+              "[hard],@CanReachAqueduct,super,hijump,space",
+              "[hard],@CanReachAqueduct,super,hijump,@CanSpringBallJump",
+              "[hard],@CanReachAqueduct,super,gravity"
             ],
             "sections": [
               {
@@ -262,13 +272,10 @@
           {
             "name": "Missile (right Maridia sand pit room)",
             "access_rules": [
-              "normal,@CardMaridiaL1,super",
-              "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,super",
+              "normal,@CanReachAqueduct,super",
 
-              "[hard],@CardMaridiaL1,super,hijump",
-              "[hard],@CardMaridiaL1,super,gravity",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,hijump",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,gravity"
+              "[hard],@CanReachAqueduct,super,hijump",
+              "[hard],@CanReachAqueduct,super,gravity"
             ],
             "sections": [
               {
@@ -293,13 +300,10 @@
           {
             "name": "Power Bomb (right Maridia sand pit room)",
             "access_rules": [
-              "normal,@CardMaridiaL1,super",
-              "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,super",
+              "normal,@CanReachAqueduct,super",
 
-              "[hard],@CardMaridiaL1,super,hijump,@CanSpringBallJump",
-              "[hard],@CardMaridiaL1,super,gravity",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,hijump,@CanSpringBallJump",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,super,gravity"
+              "[hard],@CanReachAqueduct,super,hijump,@CanSpringBallJump",
+              "[hard],@CanReachAqueduct,super,gravity"
             ],
             "sections": [
               {
@@ -324,11 +328,8 @@
           {
             "name": "Super Missile (pink Maridia)",
             "access_rules": [
-              "normal,@CardMaridiaL1,gravity,speed",
-              "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,gravity,speed",
-
-              "[hard],@CardMaridiaL1,gravity",
-              "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,gravity"
+              "normal,@CanReachAqueduct,gravity,speed",
+              "[hard],@CanReachAqueduct,gravity"
             ],
             "sections": [
               {
@@ -356,14 +357,9 @@
                 "name": "Missile (pink Maridia)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@CardMaridiaL1,gravity,speed",
-                  "normal,@CardMaridiaL2,@CanAccessMaridiaPortal,gravity,speed",
-
-                  "[hard],@CardMaridiaL1,gravity",
-                  "[hard],@CardMaridiaL2,@CanAccessMaridiaPortal,gravity",
-
-                  "{@CardMaridiaL1}",
-                  "{@CardMaridiaL2,@CanAccessMaridiaPortal}"
+                  "normal,@CanReachAqueduct,gravity,speed",
+                  "[hard],@CanReachAqueduct,gravity",
+                  "{@CanReachAqueduct}"
                 ],
                 "item_count": 1
               }

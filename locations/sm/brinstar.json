@@ -78,93 +78,83 @@
             ]
           },
           {
-            "name": "Brinstar Blue Right Section",
-            "access_rules": [
-              "@CardBrinstarL1"
-            ],
-            "children": [
+            "name": "Energy Tank, Brinstar Ceiling",
+            "sections": [
               {
                 "name": "Energy Tank, Brinstar Ceiling",
-                "sections": [
-                  {
-                    "name": "Energy Tank, Brinstar Ceiling",
-                    "access_rules": [
-                      "normal,@CanFly",
-                      "normal,hijump",
-                      "normal,speed",
-                      "normal,ice",
-                      "[hard]",
-                      "{}"
-                    ],
-                    "capture_item": true,
-                    "item_count": 1
-                  }
+                "access_rules": [
+                  "normal,@CardBrinstarL1,@CanFly",
+                  "normal,@CardBrinstarL1,hijump",
+                  "normal,@CardBrinstarL1,speed",
+                  "normal,@CardBrinstarL1,ice",
+                  "[hard],@CardBrinstarL1"
                 ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 936,
-                    "y": 976
-                  },
-                  {
-                    "map": "brinstar",
-                    "x": 936,
-                    "y": 404
-                  }
-                ]
+                "capture_item": true,
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 936,
+                "y": 976
               },
+              {
+                "map": "brinstar",
+                "x": 936,
+                "y": 404
+              }
+            ]
+          },
+          {
+            "name": "Missile (blue Brinstar middle)",
+            "access_rules": [
+              "@CardBrinstarL1,morph"
+            ],
+            "sections": [
               {
                 "name": "Missile (blue Brinstar middle)",
-                "access_rules": [
-                  "morph",
-                ],
-                "sections": [
-                  {
-                    "name": "Missile (blue Brinstar middle)",
-
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 968,
-                    "y": 976
-                  },
-                  {
-                    "map": "brinstar",
-                    "x": 968,
-                    "y": 404
-                  }
-                ]
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 968,
+                "y": 976
               },
               {
-                "name": "Billy Mays Room",
-                "access_rules": [
-                  "@CanUsePowerBombs"
-                ],
-                "sections": [
-                  {
-                    "name": "Missile (blue Brinstar top)",
-                    "item_count": 1
-                  },
-                  {
-                    "name": "Missile (blue Brinstar behind missile)",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 872,
-                    "y": 912
-                  },
-                  {
-                    "map": "brinstar",
-                    "x": 872,
-                    "y": 340
-                  }
-                ]
+                "map": "brinstar",
+                "x": 968,
+                "y": 404
+              }
+            ]
+          },
+          {
+            "name": "Billy Mays Room",
+            "access_rules": [
+              "@CardBrinstarL1,@CanUsePowerBombs"
+            ],
+            "sections": [
+              {
+                "name": "Missile (blue Brinstar top)",
+                "item_count": 1
+              },
+              {
+                "name": "Missile (blue Brinstar behind missile)",
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 872,
+                "y": 912
+              },
+              {
+                "map": "brinstar",
+                "x": 872,
+                "y": 340
               }
             ]
           }
@@ -233,7 +223,7 @@
             "name": "Super Missile (green Brinstar top)",
             "access_rules": [
               "@CanOpenRedDoors,speed",
-              "[hard],@CanOpenRedDoors,morph",
+              "[hard],@CanOpenRedDoors,morph"
             ],
             "sections": [
               {
@@ -411,7 +401,7 @@
             "access_rules": [
               "morph,powerbomb",
               "morph,super",
-              "morph,@CanAccessNorfairUpperPortal",
+              "morph,@CanAccessNorfairUpperPortal"
             ],
             "sections": [
               {
@@ -589,7 +579,7 @@
           "normal,@CanAccessNorfairUpperPortal,space",
 
           "[hard],@CanAccessNorfairUpperPortal,@CanSpringBallJump",
-          "[hard],@CanAccessNorfairUpperPortal,@CanFly",
+          "[hard],@CanAccessNorfairUpperPortal,@CanFly"
         ],
         "children": [
           {
@@ -701,7 +691,7 @@
           {
             "name": "Missile (red Brinstar spike room)",
             "access_rules": [
-              "@CanUsePowerBombs,super",
+              "@CanUsePowerBombs,super"
             ],
             "sections": [
               {
