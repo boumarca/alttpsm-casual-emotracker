@@ -6,30 +6,44 @@
     "color": "#700010",
     "children": [
       {
-        "name": "CanExitThroughNorfair",
+        "name": "CanExitThroughUpperNorfair",
         "access_rules": [
           "normal,@CardLowerNorfairL1,@CardNorfairL2",
           "normal,gravity,@CardNorfairL2",
-          "normal,gravity,wave,speed",
+          "normal,gravity,wave,grapple",
+          "normal,gravity,wave,space",
 
           "[hard],@CardNorfairL2",
-          "[hard],morph,@CanBlueGateGlitch,speed",
+          "[hard],speed",
+          "[hard],@CanFly",
+          "[hard],grapple",
+          "[hard],hijump,@CanSpringBallJump",
+          "[hard],hijump,ice"
         ]
       },
       {
         "name": "CanExitThroughPortal",
         "access_rules": [
-          "@CanUsePowerBombs,space,super",
-          "@CanUsePowerBombs,space,charge",
+          "normal,@CanUsePowerBombs,space,super",
+          "normal,@CanUsePowerBombs,space,charge",
 
-          "[hard],super"
+          "[hard],@CanUsePowerBombs"
         ]
       },
       {
-        "name": "CanExitLowerNorfair",
+        "name": "CanExitLowerNorfairEast",
         "access_rules": [
-          "@CanExitThroughNorfair",
-          "@CanExitThroughPortal"
+          "normal,@CardNorfairL2",
+          "normal,gravity,wave,grapple",
+          "normal,gravity,wave,space",
+
+          "[hard],morph,@CardNorfairL2",
+          "[hard],morph,@CanBlueGateGlitch,speed",
+          "[hard],morph,@CanBlueGateGlitch,@CanFly",
+          "[hard],morph,@CanBlueGateGlitch,grapple",
+          "[hard],morph,@CanBlueGateGlitch,hijump,@CanSpringBallJump",
+          "[hard],morph,@CanBlueGateGlitch,hijump,ice",
+          "[hard],alltanks:5"
         ]
       },
       {
@@ -138,36 +152,21 @@
                 "y": 564
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Norfair Lower East",
-        "access_rules": [
-          "normal,varia,@Norfair Upper East,@CanUsePowerBombs,space,gravity",
-          "normal,varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanUsePowerBombs,@CanFly",
-
-          "[hard],varia,@Norfair Upper East,@CanUsePowerBombs,hijump",
-
-          "[hard],varia,@Norfair Upper East,@CanUsePowerBombs,gravity,@CanFly",
-          "[hard],varia,@Norfair Upper East,@CanUsePowerBombs,gravity,@CanSpringBallJump",
-          "[hard],varia,@Norfair Upper East,@CanUsePowerBombs,gravity,ice,charge",
-
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanFly,@CanPassBombPassages",
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,screw,space,morph",
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,screw,space,alltanks:5",
-
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanSpringBallJump,@CanPassBombPassages",
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanSpringBallJump,screw,space",
-
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,speed,hijump,@CanPassBombPassages",
-          "[hard],varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,speed,ice,charge,@CanPassBombPassages"
-        ],
-        "children": [
+          },
           {
             "name": "Missile (Mickey Mouse room)",
             "access_rules": [
-              "@CanExitLowerNorfair,morph,@CanDestroyBombWalls"
+              "normal,@CanFly,morph,super,@CanExitThroughUpperNorfair",
+              "normal,@CanFly,morph,super,@CanExitThroughPortal",
+
+              "[hard],morph,varia,super,@CanFly,@CanExitThroughUpperNorfair",
+              "[hard],morph,varia,super,@CanFly,@CanExitThroughPortal",
+              "[hard],morph,varia,super,@CanSpringBallJump,@CanExitThroughUpperNorfair",
+              "[hard],morph,varia,super,@CanSpringBallJump,@CanExitThroughPortal",
+              "[hard],morph,varia,super,speed,hijump,@CanUsePowerBombs,@CanExitThroughUpperNorfair",
+              "[hard],morph,varia,super,speed,hijump,@CanUsePowerBombs,@CanExitThroughPortal",
+              "[hard],morph,varia,super,speed,charge,ice,@CanExitThroughUpperNorfair",
+              "[hard],morph,varia,super,speed,charge,ice,@CanExitThroughPortal"
             ],
             "sections": [
               {
@@ -187,11 +186,35 @@
                 "y": 404
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "name": "Norfair Lower East",
+        "access_rules": [
+          "normal,varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,space,gravity",
+          "normal,varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanUsePowerBombs,@CanFly",
+
+          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,hijump",
+
+          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,gravity,@CanFly",
+          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,gravity,@CanSpringBallJump",
+          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,gravity,ice,charge",
+
+          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanFly,@CanPassBombPassages",
+          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,screw,space",
+
+          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanSpringBallJump,@CanPassBombPassages",
+          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanSpringBallJump,screw,space",
+
+          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,speed,hijump,@CanPassBombPassages",
+          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,speed,ice,charge,@CanPassBombPassages"
+        ],
+        "children": [
           {
             "name": "Missile (lower Norfair above fire flea room)",
             "access_rules": [
-              "@CanExitLowerNorfair,@CardLowerNorfairL1"
+              "@CanExitLowerNorfairEast"
             ],
             "sections": [
               {
@@ -215,8 +238,8 @@
           {
             "name": "Power Bomb (lower Norfair above fire flea room)",
             "access_rules": [
-              "normal,@CanExitLowerNorfair,@CardLowerNorfairL1",
-              "[hard],@CanExitLowerNorfair,@CardLowerNorfairL1,@CanPassBombPassages"
+              "normal,@CanExitLowerNorfairEast",
+              "[hard],@CanExitLowerNorfairEast,@CanPassBombPassages"
             ],
             "sections": [
               {
@@ -240,7 +263,7 @@
           {
             "name": "Power Bomb (Power Bombs of shame)",
             "access_rules": [
-              "@CanExitLowerNorfair,@CardLowerNorfairL1,@CanUsePowerBombs"
+              "@CanExitLowerNorfairEast,@CanUsePowerBombs"
             ],
             "sections": [
               {
@@ -264,8 +287,8 @@
           {
             "name": "Missile (lower Norfair near Wave Beam)",
             "access_rules": [
-              "normal,@CanExitLowerNorfair,@CardLowerNorfairL1",
-              "[hard],@CanExitLowerNorfair,@CardLowerNorfairL1,morph,@CanDestroyBombWalls"
+              "normal,@CanExitLowerNorfairEast",
+              "[hard],@CanExitLowerNorfairEast,morph,@CanDestroyBombWalls"
             ],
             "sections": [
               {
@@ -289,7 +312,7 @@
           {
             "name": "Energy Tank, Ridley",
             "access_rules": [
-              "@CanExitLowerNorfair,@CardLowerNorfairL1,@CardLowerNorfairBoss,@CanUsePowerBombs,super"
+              "@CanExitLowerNorfairEast,@CardLowerNorfairBoss,@CanUsePowerBombs,super"
             ],
             "sections": [
               {
@@ -313,7 +336,7 @@
           {
             "name": "Energy Tank, Firefleas",
             "access_rules": [
-              "@CanExitLowerNorfair,@CardLowerNorfairL1"
+              "@CanExitLowerNorfairEast"
             ],
             "sections": [
               {

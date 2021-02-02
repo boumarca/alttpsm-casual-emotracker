@@ -388,6 +388,9 @@
           "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,@CanPassBombPassages,wave",
           "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,gravity,morph,wave",
 
+          "normal,@CanAccessNorfairLowerPortal,varia,screw,space,super,gravity,wave,@CardNorfairL2",
+          "normal,@CanAccessNorfairLowerPortal,varia,screw,space,super,gravity,wave,morph",
+
           "[hard],@Norfair Upper West,@CanOpenIceBeamDoor,@CanUsePowerBombs,speed,alltanks:3",
           "[hard],@Norfair Upper West,@CanOpenIceBeamDoor,@CanUsePowerBombs,speed,varia",
           "[hard],@Norfair Upper West,speed,alltanks:2,@CanBlueGateGlitch",
@@ -403,7 +406,8 @@
           "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,varia,ice,@CanPassBombPassages,@CanBlueGateGlitch",
           "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,varia,ice,morph,@CanBlueGateGlitch",
 
-          "[hard],@CanAccessNorfairLowerPortal,screw,space,varia,super,alltanks:2"
+          "[hard],@CanAccessNorfairLowerPortal,screw,space,varia,super,alltanks:2,@CardNorfairL2",
+          "[hard],@CanAccessNorfairLowerPortal,screw,space,varia,super,alltanks:2,morph"
         ],
         "children": [
           {
