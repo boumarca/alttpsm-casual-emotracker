@@ -1,3 +1,7 @@
+3.4.9
+-----
+More logic changes for keysanity
+
 3.4.8
 -----
 Logic fixes and tweaks for keysanity
