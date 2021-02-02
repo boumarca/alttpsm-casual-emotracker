@@ -251,6 +251,7 @@
           "@CanOpenMoatDoor,super",
           "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,ice",
           "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,hijump",
+          "@CanUsePowerBombs,super,gravity",
 
           "normal,@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,space",
           "normal,@CanAccessMaridiaPortal,gravity,super,@CanDestroyBombWalls,@CardMaridiaL2",
@@ -260,7 +261,9 @@
           "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanSpringBallJump",
           "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,hijump,@CanPassBombPassages",
           "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,gravity,@CanDestroyBombWalls",
-          "[hard],@CanAccessMaridiaPortal,gravity,draygon"
+          "[hard],@CanAccessMaridiaPortal,gravity,draygon",
+          "[hard],@CanUsePowerBombs,super,hijump,ice,grapple,@CardMaridiaL1",
+          "[hard],@CanUsePowerBombs,super,hijump,@CanSpringBallJump,grapple,@CardMaridiaL1"
         ],
         "children": [
           {

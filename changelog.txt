@@ -1,3 +1,7 @@
+3.4.10
+------
+Crateria East access via Forgotten Highway in keysanity
+
 3.4.9
 -----
 More logic changes for keysanity
