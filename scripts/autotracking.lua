@@ -818,6 +818,7 @@ function updateItemsLTTP(segment, address, inLTTP)
 
     -- Get total number of hearts to track heart pieces and containers.
     local containers = Tracker:FindObjectForCode("heartcontainer")
+    containers = nil  -- TODO: Remove this when the ROM changes are live!
     if containers then
         local maxHealth = ReadU8(segment, address + 0x6c)
         local total_hearts = maxHealth // 8
@@ -1063,6 +1064,7 @@ end
 
 function updateHeartPiecesLTTP(segment, address)
     local pieces = Tracker:FindObjectForCode("heartpiece")
+    pieces = nil  -- TODO: Remove this when the ROM changes are live!
     if pieces then
         pieces.AcquiredCount = ReadU8(segment, address)
         if AUTOTRACKER_ENABLE_DEBUG_LOGGING then

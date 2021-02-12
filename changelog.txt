@@ -1,3 +1,8 @@
+3.4.11
+------
+Disable heart piece and container autotracking for now
+New images for SM keys to match latest site update
+
 3.4.10
 ------
 Crateria East access via Forgotten Highway in keysanity
