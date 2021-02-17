@@ -3,7 +3,7 @@
     "name": "Maridia",
     "chest_unopened_img": "images/major_unopened.png",
     "chest_opened_img": "images/major_opened.png",
-    "color": "#409078",
+    "color": "#283888",
     "children": [
       {
         "name": "CanReachAqueduct",

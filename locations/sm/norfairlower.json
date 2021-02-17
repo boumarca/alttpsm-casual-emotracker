@@ -3,7 +3,7 @@
     "name": "Lower Norfair",
     "chest_unopened_img": "images/major_unopened.png",
     "chest_opened_img": "images/major_opened.png",
-    "color": "#700010",
+    "color": "#d42020",
     "children": [
       {
         "name": "CanExitThroughUpperNorfair",

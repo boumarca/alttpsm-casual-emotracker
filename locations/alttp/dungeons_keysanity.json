@@ -254,7 +254,8 @@
         "name": "Right Side",
         "clear_as_group": false,
         "access_rules": [
-          "bow"
+          "bow",
+          "[bow],bottle"
         ],
         "item_count": 2
       },

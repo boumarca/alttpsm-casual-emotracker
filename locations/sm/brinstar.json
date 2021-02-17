@@ -3,10 +3,10 @@
     "name": "Brinstar",
     "chest_unopened_img": "images/major_unopened.png",
     "chest_opened_img": "images/major_opened.png",
+    "color": "#017e13",
     "children": [
       {
         "name": "Brinstar Blue",
-        "color": "#081848",
         "children": [
           {
             "name": "Morphing Ball",
@@ -162,7 +162,6 @@
       },
       {
         "name": "Brinstar Green",
-        "color": "#48a848",
         "access_rules": [
           "@CanDestroyBombWalls",
           "speed"
@@ -354,7 +353,6 @@
       },
       {
         "name": "Brinstar Pink",
-        "color": "#704858",
         "access_rules": [
           "@CanUsePowerBombs",
           "@CanOpenRedDoors,@CanDestroyBombWalls",
@@ -569,7 +567,6 @@
       },
       {
         "name": "Brinstar Red",
-        "color": "#601820",
         "access_rules": [
           "@CanDestroyBombWalls,super,morph",
           "speed,super,morph",
@@ -716,7 +713,6 @@
       },
       {
         "name": "Brinstar Kraid",
-        "color": "#007038",
         "access_rules": [
           "@CanDestroyBombWalls,super,@CanPassBombPassages",
           "speed,super,@CanPassBombPassages",
