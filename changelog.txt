@@ -1,3 +1,8 @@
+3.4.12
+------
+Make location ribbon colours for SM consistent with map
+Show right side PoD as yellow in keysanity with bottle
+
 3.4.11
 ------
 Disable heart piece and container autotracking for now
