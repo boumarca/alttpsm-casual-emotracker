@@ -3,10 +3,10 @@
     "name": "Norfair Upper",
     "chest_unopened_img": "images/major_unopened.png",
     "chest_opened_img": "images/major_opened.png",
+    "color": "#d42020",
     "children": [
       {
         "name": "Norfair Upper West",
-        "color": "#b81818",
         "access_rules": [
           "@CanDestroyBombWalls,super,morph",
           "speed,super,morph",

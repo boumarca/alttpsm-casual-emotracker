@@ -3,7 +3,7 @@
     "name": "Wrecked Ship",
     "chest_unopened_img": "images/major_unopened.png",
     "chest_opened_img": "images/major_opened.png",
-    "color": "#707048",
+    "color": "#d1b102",
     "access_rules": [
       "super,@CanUsePowerBombs,gravity",
       "super,@CanAccessMaridiaPortal,gravity,@CardMaridiaL2,@CanDestroyBombWalls",
