@@ -114,11 +114,14 @@
               "@CanOpenRedDoors,grapple",
 
               "[hard],@CanOpenRedDoors,@CanSpringBallJump,gravity",
-              "[hard],@CanOpenRedDoors,@CanSpringBallJump,hijump"
+              "[hard],@CanOpenRedDoors,@CanSpringBallJump,hijump",
+
+              "{@CanOpenRedDoors}"
             ],
             "sections": [
               {
                 "name": "Energy Tank, Mama turtle",
+                "capture_item": true,
                 "item_count": 1
               }
             ],

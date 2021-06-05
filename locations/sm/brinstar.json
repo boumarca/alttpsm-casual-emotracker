@@ -474,8 +474,8 @@
           {
             "name": "Super Missile (Pink Brinstar)",
             "access_rules": [
-              "@CardBrinstarL2,@CanPassBombPassages,super",
-              "@CardBrinstarBoss,@CanPassBombPassages,super"
+              "@CardBrinstarBoss,@CanPassBombPassages,super",
+              "[hard],@CardBrinstarL2,@CanPassBombPassages,super"
             ],
             "sections": [
               {
