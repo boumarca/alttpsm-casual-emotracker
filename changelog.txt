@@ -1,3 +1,7 @@
+3.5.2
+-----
+Logic fix for LN east PBs and missile above fire flea e-tank without morph
+
 3.5.1
 -----
 Logic fix for Spore Spawn supers in keysanity

@@ -33,9 +33,9 @@
       {
         "name": "CanExitLowerNorfairEast",
         "access_rules": [
-          "normal,@CardNorfairL2",
-          "normal,gravity,wave,grapple",
-          "normal,gravity,wave,space",
+          "normal,morph,@CardNorfairL2",
+          "normal,morph,gravity,wave,grapple",
+          "normal,morph,gravity,wave,space",
 
           "[hard],morph,@CardNorfairL2",
           "[hard],morph,@CanBlueGateGlitch,speed",
@@ -238,7 +238,7 @@
           {
             "name": "Power Bomb (lower Norfair above fire flea room)",
             "access_rules": [
-              "normal,@CanExitLowerNorfairEast",
+              "normal,morph,@CanExitLowerNorfairEast",
               "[hard],@CanExitLowerNorfairEast,@CanPassBombPassages"
             ],
             "sections": [
@@ -287,7 +287,7 @@
           {
             "name": "Missile (lower Norfair near Wave Beam)",
             "access_rules": [
-              "normal,@CanExitLowerNorfairEast",
+              "normal,morph,@CanExitLowerNorfairEast",
               "[hard],@CanExitLowerNorfairEast,morph,@CanDestroyBombWalls"
             ],
             "sections": [
