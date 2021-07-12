@@ -1,3 +1,7 @@
+3.5.3
+-----
+Fixed showing missiles above Crocomire as sequence breakable in normal mode when not in logic on hard
+
 3.5.2
 -----
 Logic fix for LN east PBs and missile above fire flea e-tank without morph

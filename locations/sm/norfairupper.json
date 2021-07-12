@@ -555,9 +555,9 @@
             "name": "Missile (above Crocomire)",
             "capture_item": true,
             "access_rules": [
-              "normal,@Norfair Upper Crocomire,@CanFly",
-              "normal,@Norfair Upper Crocomire,grapple",
-              "normal,@Norfair Upper Crocomire,hijump,speed",
+              "normal,@Norfair Upper Crocomire,varia,@CanFly",
+              "normal,@Norfair Upper Crocomire,varia,grapple",
+              "normal,@Norfair Upper Crocomire,varia,hijump,speed",
 
               "[hard],@Norfair Upper Crocomire,@CanHellRun,@CanFly",
               "[hard],@Norfair Upper Crocomire,@CanHellRun,grapple",
