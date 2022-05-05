@@ -417,7 +417,7 @@
     "name": "Ganon's Tower",
     "color": "#af0000",
     "access_rules": [
-      "@Dark World Death Mountain East,pearl,crystal:5,crystal56:2"
+      "@Dark World Death Mountain East,pearl,$gtCrystalCount"
     ],
     "sections": [
       {

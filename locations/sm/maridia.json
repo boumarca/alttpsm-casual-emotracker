@@ -181,11 +181,9 @@
           {
             "name": "Watering Hole",
             "access_rules": [
-              "normal,@CardMaridiaL1,@CanPassBombPassages",
-
-              "[hard],@CardMaridiaL1,@CanPassBombPassages,gravity",
-              "[hard],@CardMaridiaL1,@CanPassBombPassages,ice",
-              "[hard],@CardMaridiaL1,@CanPassBombPassages,hijump,@CanSpringBallJump"
+              "@CardMaridiaL1,@CanPassBombPassages,@CanReachAqueduct,gravity",
+              "@CardMaridiaL1,@CanPassBombPassages,@CanReachAqueduct,ice",
+              "@CardMaridiaL1,@CanPassBombPassages,@CanReachAqueduct,hijump,@CanSpringBallJump"
             ],
             "sections": [
               {
@@ -213,11 +211,9 @@
           {
             "name": "Missile (yellow Maridia false wall)",
             "access_rules": [
-              "normal,@CardMaridiaL1,@CanPassBombPassages",
-
-              "[hard],@CardMaridiaL1,@CanPassBombPassages,gravity",
-              "[hard],@CardMaridiaL1,@CanPassBombPassages,ice",
-              "[hard],@CardMaridiaL1,@CanPassBombPassages,hijump,@CanSpringBallJump"
+              "@CardMaridiaL1,@CanPassBombPassages,@CanReachAqueduct,gravity",
+              "@CardMaridiaL1,@CanPassBombPassages,@CanReachAqueduct,ice",
+              "@CardMaridiaL1,@CanPassBombPassages,@CanReachAqueduct,hijump,@CanSpringBallJump"
             ],
             "sections": [
               {

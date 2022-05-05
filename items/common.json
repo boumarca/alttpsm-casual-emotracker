@@ -132,38 +132,149 @@
     "codes": "xray"
   },
   {
-    "name": "Ridley",
-    "type": "toggle",
-    "loop": "true",
-    "img": "images/Boss1.png",
-    "codes": "ridley,g4"
-  },
-   {
     "name": "Kraid",
-    "type": "toggle",
-    "loop": "true",
-    "img": "images/Boss2.png",
-    "codes": "kraid,g4"
+    "type": "progressive_toggle",
+    "stages":[
+      {
+        "img": "images/KraidUnknown.png",
+        "codes": "kraid"
+      },
+      {
+        "img": "images/KraidCrystal.png",
+        "codes": "kraid,crystal,allcrystals"
+      },
+      {
+        "img": "images/KraidRedCrystal.png",
+        "disabled_img": "images/KraidRedCrystalOff.png",
+        "disabled_img_mods": "",
+        "codes": "kraid,crystal56,allcrystals"
+      },
+      {
+        "img": "images/KraidPendant.png",
+        "codes": "kraid,pendant,allpendants"
+      },
+      {
+        "img": "images/KraidGreenPendant.png",
+        "disabled_img": "images/KraidGreenPendantOff.png",
+        "disabled_img_mods": "",
+        "codes": "kraid,greenpendant,allpendants"
+      },
+      {
+        "img": "images/KraidG4.png",
+        "codes": "kraid,g4"
+      }
+    ]
   },
   {
     "name": "Phantoon",
-    "type": "toggle",
-    "loop": "true",
-    "img": "images/Boss3.png",
-    "codes": "phantoon,g4"
+    "type": "progressive_toggle",
+    "stages":[
+      {
+        "img": "images/PhantoonUnknown.png",
+        "codes": "phantoon"
+      },
+      {
+        "img": "images/PhantoonCrystal.png",
+        "codes": "phantoon,crystal,allcrystals"
+      },
+      {
+        "img": "images/PhantoonRedCrystal.png",
+        "disabled_img": "images/PhantoonRedCrystalOff.png",
+        "disabled_img_mods": "",
+        "codes": "phantoon,crystal56,allcrystals"
+      },
+      {
+        "img": "images/PhantoonPendant.png",
+        "codes": "phantoon,pendant,allpendants"
+      },
+      {
+        "img": "images/PhantoonGreenPendant.png",
+        "disabled_img": "images/PhantoonGreenPendantOff.png",
+        "disabled_img_mods": "",
+        "codes": "phantoon,greenpendant,allpendants"
+      },
+      {
+        "img": "images/PhantoonG4.png",
+        "codes": "phantoon,g4"
+      }
+    ]
   },
   {
     "name": "Draygon",
-    "type": "toggle",
-    "loop": "true",
-    "img": "images/Boss4.png",
-    "codes": "draygon,g4"
+    "type": "progressive_toggle",
+    "stages": [
+      {
+        "img": "images/DraygonUnknown.png",
+        "codes": "draygon"
+      },
+      {
+        "img": "images/DraygonCrystal.png",
+        "codes": "draygon,crystal,allcrystals"
+      },
+      {
+        "img": "images/DraygonRedCrystal.png",
+        "disabled_img": "images/DraygonRedCrystalOff.png",
+        "disabled_img_mods": "",
+        "codes": "draygon,crystal56,allcrystals"
+      },
+      {
+        "img": "images/DraygonPendant.png",
+        "codes": "draygon,pendant,allpendants"
+      },
+      {
+        "img": "images/DraygonGreenPendant.png",
+        "disabled_img": "images/DraygonGreenPendantOff.png",
+        "disabled_img_mods": "",
+        "codes": "draygon,greenpendant,allpendants"
+      },
+      {
+        "img": "images/DraygonG4.png",
+        "codes": "draygon,g4"
+      }
+    ]
+  },
+  {
+    "name": "Ridley",
+    "type": "progressive_toggle",
+    "stages": [
+      {
+        "img": "images/RidleyUnknown.png",
+        "codes": "ridley"
+      },
+      {
+        "img": "images/RidleyCrystal.png",
+        "codes": "ridley,crystal,allcrystals"
+      },
+      {
+        "img": "images/RidleyRedCrystal.png",
+        "disabled_img": "images/RidleyRedCrystalOff.png",
+        "disabled_img_mods": "",
+        "codes": "ridley,crystal56,allcrystals"
+      },
+      {
+        "img": "images/RidleyPendant.png",
+        "codes": "ridley,pendant,allpendants"
+      },
+      {
+        "img": "images/RidleyGreenPendant.png",
+        "disabled_img": "images/RidleyGreenPendantOff.png",
+        "disabled_img_mods": "",
+        "codes": "ridley,greenpendant,allpendants"
+      },
+      {
+        "img": "images/RidleyG4.png",
+        "codes": "ridley,g4"
+      }
+    ]
   },
   {
     "name": "Mother Brain",
-    "type": "toggle",
-    "loop": true,
-    "img": "images/mbrain.png",
+    "type": "consumable",
+    "swap_actions": true,
+    "img": "images/mbrain_token.png",
+    "max_quantity":4,
+    "disabled_img_mods":"overlay|images/mbrain_token0.png",
+    "initial_quantity":4,
     "codes": "brain,mother,mb,metroid,sm"
   },
   {
@@ -752,5 +863,53 @@
         "codes": "armor3,redmail"
       }
     ]
-  }
+  },
+  {
+    "name": "GT Required Crystals",
+    "type": "consumable",
+    "img": "images/gt_crystals.png",
+    "codes": "gt_crystals",
+    "swap_actions" :true,
+    "loop":"true",
+    "max_quantity": 7,
+    "disabled_img_mods":"overlay|images/gt_crystals0.png",
+    "initial_quantity": 7
+},
+{
+    "name": "Ganon Required Crystals",
+    "type": "consumable",
+    "img": "images/ganon_crystals.png",
+    "codes": "ganon_crystals",
+    "loop":"true",
+    "swap_actions" :true,
+    "max_quantity": 7,
+    "disabled_img_mods":"overlay|images/ganon_crystals0.png",
+    "initial_quantity": 7
+},
+{
+  "name": "Ganon Entry",
+  "type": "progressive",
+  "allow_disabled": "false",
+  "loop": "true",
+  "stages": [
+    {
+      "name": "Normal",
+      "img": "images/ganon_normal_border.png",
+      "inherit_codes": "false",
+      "codes": "ganon_entry, ganon_normal"
+    },
+    {
+      "name": "Fast",
+      "img": "images/ganon_fast_border.png",
+      "inherit_codes": "false",
+      "codes": "ganon_entry, ganon_fast"
+    },
+    {
+      "name": "All Dungeons",
+      "img": "images/ganon_all_border.png",
+      "inherit_codes": "false",
+      "codes": "ganon_entry, ganon_all"
+    }
+  ]
+}
 ]

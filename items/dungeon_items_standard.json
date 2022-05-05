@@ -19,6 +19,10 @@
       {
         "img": "images/0108.png",
         "codes": "ep,easternpalace,greenpendant,allpendants"
+      },
+      {
+        "img": "images/EPG4.png",
+        "codes": "ep,easternpalace,g4"
       }
     ]
   },
@@ -42,6 +46,10 @@
       {
         "img": "images/0112.png",
         "codes": "dp,desertpalace,greenpendant,allpendants"
+      },
+      {
+        "img": "images/DPG4.png",
+        "codes": "dp,desertpalace,g4"
       }
     ]
   },
@@ -65,6 +73,10 @@
       {
         "img": "images/0116.png",
         "codes": "toh,towerofhera,greenpendant,allpendants"
+      },
+      {
+        "img": "images/TOHG4.png",
+        "codes": "toh,towerofhera,g4"
       }
     ]
   },
@@ -88,6 +100,10 @@
       {
         "img": "images/0080.png",
         "codes": "pod,palaceofdarkness,greenpendant,allpendants"
+      },
+      {
+        "img": "images/PODG4.png",
+        "codes": "pod,palaceofdarkness,g4"
       }
     ]
   },
@@ -111,6 +127,10 @@
       {
         "img": "images/0084.png",
         "codes": "sp,swamppalace,greenpendant,allpendants"
+      },
+      {
+        "img": "images/SPG4.png",
+        "codes": "sp,swamppalace,g4"
       }
     ]
   },
@@ -134,6 +154,10 @@
       {
         "img": "images/0088.png",
         "codes": "sw,skullwoods,greenpendant,allpendants"
+      },
+      {
+        "img": "images/SWG4.png",
+        "codes": "sw,skullwoods,g4"
       }
     ]
   },
@@ -157,6 +181,10 @@
       {
         "img": "images/0092.png",
         "codes": "tt,thievestown,greenpendant,allpendants"
+      },
+      {
+        "img": "images/TTG4.png",
+        "codes": "tt,thievestown,g4"
       }
     ]
   },
@@ -180,6 +208,10 @@
       {
         "img": "images/0096.png",
         "codes": "ip,icepalace,greenpendant,allpendants"
+      },
+      {
+        "img": "images/IPG4.png",
+        "codes": "ip,icepalace,g4"
       }
     ]
   },
@@ -203,6 +235,10 @@
       {
         "img": "images/0100.png",
         "codes": "mm,miserymire,greenpendant,allpendants"
+      },
+      {
+        "img": "images/MMG4.png",
+        "codes": "mm,miserymire,g4"
       }
     ]
   },
@@ -226,6 +262,10 @@
       {
         "img": "images/0104.png",
         "codes": "tr,turtlerock,greenpendant,allpendants"
+      },
+      {
+        "img": "images/TRG4.png",
+        "codes": "tr,turtlerock,g4"
       }
     ]
   }

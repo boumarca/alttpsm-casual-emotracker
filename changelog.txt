@@ -1,3 +1,8 @@
+3.6.0
+-----
+Added support for v11.3 (SM boss prize shuffle and variable number of crystals required in LTTP)
+Logic tweaks for yellow Maridia
+
 3.5.3
 -----
 Fixed showing missiles above Crocomire as sequence breakable in normal mode when not in logic on hard

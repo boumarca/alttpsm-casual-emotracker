@@ -1208,8 +1208,10 @@ function updateRoomsLTTP(segment, address)
             -- *** Palace of Darkness
             updateSectionChestCountFromRoomSlotList(segment, address, "@Palace of Darkness/Entrance",
                     { { 9, 4 } })
+            updateSectionChestCountFromRoomSlotList(segment, address, "@Palace of Darkness/Big Key Chest",
+                    { { 58, 4 } })
             updateSectionChestCountFromRoomSlotList(segment, address, "@Palace of Darkness/Front",
-                    { { 10, 4 }, { 58, 4 }, { 42, 5 } })
+                    { { 10, 4 }, { 42, 5 } })
             updateSectionChestCountFromRoomSlotList(segment, address, "@Palace of Darkness/Right Side",
                     { { 42, 4 }, { 43, 4 } })
             updateSectionChestCountFromRoomSlotList(segment, address, "@Palace of Darkness/Back",

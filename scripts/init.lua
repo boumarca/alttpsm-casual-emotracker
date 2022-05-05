@@ -1,5 +1,6 @@
 -- Load configuration options up front
 ScriptHost:LoadScript("scripts/settings.lua")
+ScriptHost:LoadScript("scripts/common.lua")
 
 -- Are we using a keysanity variant?
 IS_KEYSANITY = string.find(Tracker.ActiveVariantUID, "keys") ~= nil

@@ -1,15 +1,51 @@
 ﻿{
   "alttp_item_grid": {
-    "type": "itemgrid",
-    "h_alignment": "center",
-    "item_margin": "1,2",
-    "rows": [
-      [ "bowandarrows", "boomerangs", "hookshot", "bombs", "powder", "mushroom", "aga"],
-      [ "firerod", "icerod", "bombos", "ether", "quake", "shovel", "kraid"],
-      [ "lamp", "hammer", "ocarina", "net", "book", "pearl", "phantoon"],
-      [ "bottle", "somaria", "byrna", "cape", "mirror", "gomode", "draygon"],
-      [ "lift1", "boots", "flippers", "halfmagic", "heartpiece", "heartcontainer", "ridley"],
-      [ "", "", "", "owsword", "shield", "armor", ""]
+    "type":"array",
+    "orientation":"vertical",
+    "content": [
+      {
+      "type": "itemgrid",
+      "h_alignment": "center",
+      "item_margin": "1,2",
+      "rows": [
+          [ "bowandarrows", "boomerangs", "hookshot", "bombs", "powder", "mushroom"],
+          [ "firerod", "icerod", "bombos", "ether", "quake", "shovel"],
+          [ "lamp", "hammer", "ocarina", "net", "book", "pearl"],
+          [ "bottle", "somaria", "byrna", "cape", "mirror", "gomode"],
+          [ "lift1", "boots", "flippers", "halfmagic", "heartpiece", "heartcontainer"]          
+        ]
+      },
+      {
+        "type": "array",
+        "orientation": "horizontal",
+        "margin": "0,0",
+        "content": [
+          {
+            "type": "item",
+            "item": "ganon_entry"
+          },
+          {
+            "type": "itemgrid",
+            "h_alignment": "center",
+            "item_margin": "1,2",
+            "rows": [
+              [ "owsword", "shield", "armor"]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "big_boss_grid": {
+    "type":"itemgrid",
+    "h_alignment":"center",
+    "item_margin":"1,2",
+    "item_size": "48",
+    "rows":[
+      ["aga"],
+      ["gt_crystals"],
+      ["ganon_crystals"],
+      ["mb"]
     ]
   },
   "alttp_keys_item_grid": {
@@ -201,11 +237,11 @@
         "item_margin": "1,2",
         "h_alignment": "left",
         "rows": [
-          [ "charge", "ice", "wave", "spazer", "plasma"],
-          [ "morph", "bomb", "spring", "space","screw"],
-          [ "varia", "gravity", "hijump", "speed", ""],
-          [ "grapple", "xray", "etank", "reservetank", ""],
-          [ "missile", "supermissile", "powerbomb", "", ""]
+          [ "charge", "wave", "ice", "spazer", "plasma"],
+          [ "morph", "bomb", "spring", "space","kraid"],
+          [ "varia", "gravity", "hijump", "speed", "phantoon"],
+          [ "grapple", "xray", "etank", "reservetank", "draygon"],
+          [ "missile", "supermissile", "powerbomb", "screw", "ridley"]
         ]
       },
       {
@@ -231,7 +267,7 @@
       [ "un_label", "un_key1", "un_key2", "un_bosskey"],
       [ "maridia_label", "maridia_key1", "maridia_key2", "maridia_bosskey"],
       [ "ws_label", "ws_key1", "", "ws_bosskey"],
-      [ "ln_label", "ln_key1", "", "ln_bosskey"],
+      [ "ln_label", "ln_key1", "", "ln_bosskey"]
     ]
   },
   "tracker_capture_item": {
@@ -281,19 +317,23 @@
                         "content": [
                           {
                             "type": "layout",
-                            "key": "alttp_item_grid",
+                            "key": "alttp_item_grid"
                           },
                           {
                             "type": "layout",
-                            "key": "alttp_keys_item_grid",
+                            "key": "big_boss_grid"
                           },
                           {
                             "type": "layout",
-                            "key": "sm_item_grid",
+                            "key": "alttp_keys_item_grid"
                           },
                           {
                             "type": "layout",
-                            "key": "sm_keys_item_grid",
+                            "key": "sm_item_grid"
+                          },
+                          {
+                            "type": "layout",
+                            "key": "sm_keys_item_grid"
                           }
                         ]
                       }

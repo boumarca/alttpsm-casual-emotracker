@@ -242,13 +242,20 @@
         "item_count": 1
       },
       {
+        "name": "Big Key Chest",
+        "access_rules": [
+          "[pod_smallkey:6],pod_smallkey:1"
+        ],
+        "item_count": 1
+      },
+      {
         "name": "Front",
         "clear_as_group": false,
         "access_rules": [
-          "[pod_smallkey:6],bow,hammer",
-          "[pod_smallkey:6],pod_smallkey:1"
+          "bow,hammer",
+          "pod_smallkey:1"
         ],
-        "item_count": 3
+        "item_count": 2
       },
       {
         "name": "Right Side",
@@ -651,7 +658,7 @@
     "name": "Ganon's Tower",
     "color": "#af0000",
     "access_rules": [
-      "@Dark World Death Mountain East,pearl,crystal:5,crystal56:2"
+      "@Dark World Death Mountain East,pearl,$gtCrystalCount"
     ],
     "sections": [
       {
