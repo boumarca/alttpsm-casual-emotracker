@@ -1,7 +1,13 @@
+3.6.1
+-----
+Set WS reserve tank viewable with wave beam
+
 3.6.0
 -----
 Added support for v11.3 (SM boss prize shuffle and variable number of crystals required in LTTP)
+Split PoD big key chest to its own location in keysanity for logic difference from the other front chests
 Logic tweaks for yellow Maridia
+Logic tweaks for Crocomire area
 
 3.5.3
 -----

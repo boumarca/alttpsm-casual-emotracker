@@ -170,6 +170,7 @@
               "[hard],@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs,speed,alltanks:2",
 
               "{@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs}",
+              "{@CanUnlockShip,@CardWreckedShipL1,wave}",
               "{@CanUnlockShip,@CardWreckedShipL1,xray}"
             ],
             "item_count": 1
