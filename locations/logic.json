@@ -51,7 +51,8 @@
   {
     "name": "CanUsePowerBombs",
     "access_rules": [
-      "morph,powerbomb"
+      "[normal],morph,powerbomb",
+	  "easy,morph,powerbomb:10"
     ]
   },
   {
