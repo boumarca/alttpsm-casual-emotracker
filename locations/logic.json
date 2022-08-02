@@ -68,8 +68,10 @@
   {
     "name": "CanSafelyUseScrewAttack",
 	"access_rules": [
-		"[normal],screw",
-		"easy,screw,morph"
+	  "easy,screw,morph",
+	  "[normal],screw",
+	  "[hard],screw"
+		
 	]
   },
   {
