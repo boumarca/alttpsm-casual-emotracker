@@ -16,6 +16,12 @@
         "img": "images/diff_hard_border.png",
         "inherit_codes": "false",
         "codes": "difficulty,tournament,hard"
+      },
+	  {
+        "name": "Casual",
+        "img": "images/diff_casual_border.png",
+        "inherit_codes": "false",
+        "codes": "difficulty,easy,casual"
       }
     ]
   },
