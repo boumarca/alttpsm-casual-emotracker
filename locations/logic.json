@@ -37,7 +37,8 @@
   {
     "name": "CanIbj",
     "access_rules": [
-      "morph,bomb"
+      "[normal],morph,bomb",
+	  "easy,morph,bomb"
     ]
   },
   {
