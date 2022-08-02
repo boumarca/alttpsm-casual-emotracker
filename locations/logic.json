@@ -122,8 +122,8 @@
   {
     "name": "CanAccessMiseryMirePortal",
     "access_rules": [
-      "normal,speed,wave,varia,super,gravity,space,@CanUsePowerBombs",
-      "normal,@CardNorfairL2,varia,super,gravity,space,@CanUsePowerBombs",
+      "casual,speed,wave,varia,super,gravity,space,@CanUsePowerBombs",
+      "casual,@CardNorfairL2,varia,super,gravity,space,@CanUsePowerBombs",
 
       "[hard],speed,varia,super,gravity,@CanUsePowerBombs",
       "[hard],speed,varia,super,hijump,@CanUsePowerBombs",
