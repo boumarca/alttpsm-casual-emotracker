@@ -63,10 +63,17 @@
     ]
   },
   {
+    "name": "CanSafelyUseScrewAttack",
+	"access_rules": [
+		"[normal],screw",
+		"easy,screw,morph"
+	]
+  },
+  {
     "name": "CanDestroyBombWalls",
     "access_rules": [
       "@CanPassBombPassages",
-      "screw"
+      "@CanSafelyUseScrewAttack"
     ]
   },
   {
