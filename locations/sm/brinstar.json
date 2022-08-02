@@ -595,7 +595,7 @@
           "@CanAccessNorfairUpperPortal,ice",
           "@CanAccessNorfairUpperPortal,hijump",
 
-          "normal,@CanAccessNorfairUpperPortal,space",
+          "casual,@CanAccessNorfairUpperPortal,space",
 
           "[hard],@CanAccessNorfairUpperPortal,@CanSpringBallJump",
           "[hard],@CanAccessNorfairUpperPortal,@CanFly"
@@ -636,7 +636,9 @@
           {
             "name": "Spazer",
             "access_rules": [
-              "@CanPassBombPassages,super"
+              "@CanPassBombPassages,super,hijump",
+			  "@CanPassBombPassages,super,@CanWallJumpEasy",
+			  "@CanPassBombPassages,super,@CanFly"
             ],
             "sections": [
               {
@@ -684,8 +686,8 @@
           {
             "name": "Power Bomb (red Brinstar spike room)",
             "access_rules": [
-              "normal,@CanUsePowerBombs,super",
-              "normal,ice,super",
+              "casual,@CanUsePowerBombs,super",
+              "casual,ice,super",
               "[hard],super"
             ],
             "sections": [
