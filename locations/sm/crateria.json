@@ -27,8 +27,8 @@
           {
             "name": "Bombs",
             "access_rules": [
-              "normal,@CanOpenBombTorizoDoor,@CanPassBombPassages",
-              "[hard],@CanOpenBombTorizoDoor,morph"
+              "@CanOpenBombTorizoDoor,@CanPassBombPassages",
+			  "@CanOpenBombTorizoDoor,@CanWallJumpHard"
             ],
             "sections": [
               {
@@ -56,8 +56,9 @@
                 "name": "Super Missile (Crateria)",
                 "capture_item": true,
                 "access_rules": [
-                  "@CanUsePowerBombs,alltanks:2,speed",
-                  "{@CanUsePowerBombs}"
+                  "@CanUsePowerBombs,alltanks:2,speed,@LaunchPadRequiresIceBeam",
+				  "@CanUsePowerBombs,alltanks:2,speed,ice",				  
+                  "{@CanUsePowerBombs},@CanWallJumpMedium"
                 ],
                 "item_count": 1
               }

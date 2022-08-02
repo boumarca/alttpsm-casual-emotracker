@@ -64,6 +64,12 @@
     ]
   },
   {
+    "name": "CanWallJumpHard",
+    "access_rules": [
+      "[hard]"
+    ]
+  },
+  {
     "name": "CanUsePowerBombs",
     "access_rules": [
 	  "easy,morph,powerbomb:10",
@@ -135,6 +141,13 @@
     "access_rules": [
       "speed",
 	  "[hard],morph"
+    ]
+  },
+  {
+    "name": "LaunchPadRequiresIceBeam",
+    "access_rules": [
+      "[normal]",
+	  "[hard]"
     ]
   },
 
