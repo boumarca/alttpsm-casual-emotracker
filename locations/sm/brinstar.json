@@ -83,10 +83,10 @@
               {
                 "name": "Energy Tank, Brinstar Ceiling",
                 "access_rules": [
-                  "normal,@CardBrinstarL1,@CanFly",
-                  "normal,@CardBrinstarL1,hijump",
-                  "normal,@CardBrinstarL1,speed",
-                  "normal,@CardBrinstarL1,ice",
+                  "casual,@CardBrinstarL1,@CanFly",
+                  "casual,@CardBrinstarL1,hijump",
+                  "casual,@CardBrinstarL1,speed",
+                  "casual,@CardBrinstarL1,ice",
                   "[hard],@CardBrinstarL1"
                 ],
                 "capture_item": true,
@@ -133,7 +133,12 @@
           {
             "name": "Billy Mays Room",
             "access_rules": [
-              "@CardBrinstarL1,@CanUsePowerBombs"
+			  "easy,@CardBrinstarL1,@CanUsePowerBombs,hijump,speed",
+			  "easy,@CardBrinstarL1,@CanUsePowerBombs,gravity,speed",
+			  "easy,@CardBrinstarL1,@CanUsePowerBombs,space",
+
+              "[normal],@CardBrinstarL1,@CanUsePowerBombs",
+			  "[hard],@CardBrinstarL1,@CanUsePowerBombs",
             ],
             "sections": [
               {
