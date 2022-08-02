@@ -109,6 +109,20 @@
       "wave"
     ]
   },
+  {
+    "name": "CanParlorSpeedBoost",
+    "access_rules": [
+      "[normal],speed",
+	  "[hard],speed"
+    ]
+  },
+  {
+    "name": "CanMoveAtHighSpeeds",
+    "access_rules": [
+      "speed",
+	  "[hard],morph"
+    ]
+  },
 
   // Cross-game portals
   {

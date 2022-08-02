@@ -169,14 +169,13 @@
         "name": "Brinstar Green",
         "access_rules": [
           "@CanDestroyBombWalls",
-          "speed"
+          "@CanParlorSpeedBoost"
         ],
         "children": [
           {
             "name": "Reserve Tank, Brinstar",
             "access_rules": [
-              "@CanOpenRedDoors,speed",
-              "[hard],@CanOpenRedDoors,morph"
+              "@CanOpenRedDoors,@CanMoveAtHighSpeeds",
             ],
             "sections": [
               {
@@ -226,7 +225,7 @@
           {
             "name": "Super Missile (green Brinstar top)",
             "access_rules": [
-              "@CanOpenRedDoors,speed",
+              "@CanOpenRedDoors,@CanMoveAtHighSpeeds",
               "[hard],@CanOpenRedDoors,morph"
             ],
             "sections": [
@@ -254,7 +253,7 @@
               {
                 "name": "Missile (green Brinstar behind reserve tank)",
                 "access_rules": [
-                  "normal,speed,@CanOpenRedDoors,morph",
+                  "casual,@CanMoveAtHighSpeeds,@CanOpenRedDoors,morph",
                   "[hard],@CanOpenRedDoors,morph"
                 ],
                 "item_count": 1
@@ -262,7 +261,7 @@
               {
                 "name": "Missile (green Brinstar behind missile)",
                 "access_rules": [
-                  "normal,speed,@CanPassBombPassages,@CanOpenRedDoors",
+                  "casual,@CanMoveAtHighSpeeds,@CanPassBombPassages,@CanOpenRedDoors",
                   "[hard],@CanPassBombPassages,@CanOpenRedDoors",
                   "[hard],morph,screw,@CanOpenRedDoors"
                 ],
@@ -285,7 +284,9 @@
           {
             "name": "Energy Tank, Etecoons",
             "access_rules": [
-              "@CardBrinstarL2,@CanUsePowerBombs"
+			  "easy,@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
+              "[normal],@CardBrinstarL2,@CanUsePowerBombs",
+			  "[hard],@CardBrinstarL2,@CanUsePowerBombs"
             ],
             "sections": [
               {
@@ -309,7 +310,9 @@
           {
             "name": "Power Bomb (green Brinstar bottom)",
             "access_rules": [
-              "@CardBrinstarL2,@CanUsePowerBombs"
+			  "easy,@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
+              "[normal],@CardBrinstarL2,@CanUsePowerBombs",
+			  "[hard],@CardBrinstarL2,@CanUsePowerBombs"
             ],
             "sections": [
               {
@@ -333,7 +336,9 @@
           {
             "name": "Super Missile (green Brinstar bottom)",
             "access_rules": [
-              "@CardBrinstarL2,@CanUsePowerBombs,super"
+			  "easy,@CardBrinstarL2,@CanUsePowerBombs,super,@CanFly",
+              "[normal],@CardBrinstarL2,@CanUsePowerBombs,super",
+			  "[hard],@CardBrinstarL2,@CanUsePowerBombs,super"
             ],
             "sections": [
               {
