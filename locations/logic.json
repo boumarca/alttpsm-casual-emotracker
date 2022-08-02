@@ -109,7 +109,7 @@
   {
     "name": "CanAccessDarkWorldPortal",
     "access_rules": [
-      "normal,@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,gravity,speed",
+      "casual,@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,gravity,speed",
 
       "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,charge,gravity,ice",
       "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,charge,gravity,speed",
