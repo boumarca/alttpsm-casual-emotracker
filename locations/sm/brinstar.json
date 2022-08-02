@@ -83,11 +83,10 @@
               {
                 "name": "Energy Tank, Brinstar Ceiling",
                 "access_rules": [
-                  "casual,@CardBrinstarL1,@CanFly",
-                  "casual,@CardBrinstarL1,hijump",
-                  "casual,@CardBrinstarL1,speed",
-                  "casual,@CardBrinstarL1,ice",
-                  "[hard],@CardBrinstarL1"
+                  "@CardBrinstarL1,@CanFly",
+                  "@CardBrinstarL1,hijump",
+                  "@CardBrinstarL1,speed",
+                  "@CardBrinstarL1,ice"
                 ],
                 "capture_item": true,
                 "item_count": 1
@@ -133,11 +132,11 @@
           {
             "name": "Billy Mays Room",
             "access_rules": [
-			  "easy,@CardBrinstarL1,@CanUsePowerBombs,hijump,speed",
-			  "easy,@CardBrinstarL1,@CanUsePowerBombs,gravity,speed",
-			  "easy,@CardBrinstarL1,@CanUsePowerBombs,space",
-			  
-              "@CardBrinstarL1,@CanUsePowerBombs,@CanWallJumpMedium"
+			  "@CardBrinstarL1,@CanUsePowerBombs,hijump,speed",
+			  "@CardBrinstarL1,@CanUsePowerBombs,gravity,speed",
+			  "@CardBrinstarL1,@CanUsePowerBombs,@CanWallJumpMedium",
+			  "@CardBrinstarL1,@CanUsePowerBombs,space"			  
+              
             ],
             "sections": [
               {
@@ -224,8 +223,7 @@
           {
             "name": "Super Missile (green Brinstar top)",
             "access_rules": [
-              "@CanOpenRedDoors,@CanMoveAtHighSpeeds",
-              "[hard],@CanOpenRedDoors,morph"
+              "@CanOpenRedDoors,@CanMoveAtHighSpeeds"
             ],
             "sections": [
               {
@@ -252,17 +250,14 @@
               {
                 "name": "Missile (green Brinstar behind reserve tank)",
                 "access_rules": [
-                  "casual,@CanMoveAtHighSpeeds,@CanOpenRedDoors,morph",
-                  "[hard],@CanOpenRedDoors,morph"
+                  "@CanMoveAtHighSpeeds,@CanOpenRedDoors,morph"
                 ],
                 "item_count": 1
               },
               {
                 "name": "Missile (green Brinstar behind missile)",
                 "access_rules": [
-                  "casual,@CanMoveAtHighSpeeds,@CanPassBombPassages,@CanOpenRedDoors",
-                  "[hard],@CanPassBombPassages,@CanOpenRedDoors",
-                  "[hard],morph,screw,@CanOpenRedDoors"
+                  "@CanMoveAtHighSpeeds,@CanPassBombPassages,@CanOpenRedDoors"
                 ],
                 "item_count": 1
               }
@@ -282,9 +277,9 @@
           },
           {
             "name": "Energy Tank, Etecoons",
-            "access_rules": [
-			  "easy,@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
-              "@CardBrinstarL2,@CanUsePowerBombs,@CanWallJumpEasy"
+            "access_rules": [			  
+              "@CardBrinstarL2,@CanUsePowerBombs,@CanWallJumpEasy",
+			  "@CardBrinstarL2,@CanUsePowerBombs,@CanFly"
             ],
             "sections": [
               {
@@ -308,8 +303,8 @@
           {
             "name": "Power Bomb (green Brinstar bottom)",
             "access_rules": [
-			  "easy,@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
-              "@CardBrinstarL2,@CanUsePowerBombs,@CanWallJumpEasy"
+              "@CardBrinstarL2,@CanUsePowerBombs,@CanWallJumpEasy",			  
+			  "@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
             ],
             "sections": [
               {
@@ -333,8 +328,8 @@
           {
             "name": "Super Missile (green Brinstar bottom)",
             "access_rules": [
-			  "easy,@CardBrinstarL2,@CanUsePowerBombs,super,@CanFly",
-              "@CardBrinstarL2,@CanUsePowerBombs,super,@CanWallJumpEasy"
+			  "@CardBrinstarL2,@CanUsePowerBombs,super,@CanWallJumpEasy",
+			  "@CardBrinstarL2,@CanUsePowerBombs,super,@CanFly"              
             ],
             "sections": [
               {
@@ -359,21 +354,13 @@
       },
       {
         "name": "Brinstar Pink",
-        "access_rules": [
-          "@CanUsePowerBombs",
-          "@CanOpenRedDoors,@CanDestroyBombWalls",
+        "access_rules": [          
+          "@CanOpenRedDoors,@CanDestroyBombWalls",		  
           "@CanOpenRedDoors,@CanParlorSpeedBoost",
+		  "@CanUsePowerBombs",
           "@CanAccessNorfairUpperPortal,morph,wave,ice",
           "@CanAccessNorfairUpperPortal,morph,wave,hijump",
-
-          "casual,@CanAccessNorfairUpperPortal,morph,wave,space",
-
-          "[hard],@CanAccessNorfairUpperPortal,morph,@CanOpenRedDoors,ice",
-          "[hard],@CanAccessNorfairUpperPortal,morph,@CanOpenRedDoors,hijump",
-          "[hard],@CanAccessNorfairUpperPortal,morph,@CanOpenRedDoors,@CanSpringBallJump",
-          "[hard],@CanAccessNorfairUpperPortal,morph,@CanOpenRedDoors,@CanFly",
-          "[hard],@CanAccessNorfairUpperPortal,morph,wave,@CanSpringBallJump",
-          "[hard],@CanAccessNorfairUpperPortal,morph,wave,@CanFly"
+          "@CanAccessNorfairUpperPortal,morph,wave,space"
         ],
         "children": [
           {
@@ -462,10 +449,7 @@
             "access_rules": [
 			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,grapple",
 			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,@CanWallJumpEasy",
-			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,@CanFly",			
-			
-              "[hard],@CardBrinstarL2,@CanUsePowerBombs,wave",
-              "[hard],@CardBrinstarL2,@CanUsePowerBombs,super"
+			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,@CanFly"
             ],
             "sections": [
               {
@@ -489,8 +473,7 @@
           {
             "name": "Super Missile (Pink Brinstar)",
             "access_rules": [
-              "@CardBrinstarBoss,@CanPassBombPassages,super",
-              "[hard],@CardBrinstarL2,@CanPassBombPassages,super"
+              "@CardBrinstarBoss,@CanPassBombPassages,super"
             ],
             "sections": [
               {
@@ -516,8 +499,7 @@
             "access_rules": [
               "@CanUsePowerBombs,super,alltanks:1,grapple",
 			  "@CanUsePowerBombs,super,alltanks:1,@CanWallJumpEasy",
-			  "@CanUsePowerBombs,super,alltanks:1,@CanFly",
-              "[hard],@CanUsePowerBombs,super"
+			  "@CanUsePowerBombs,super,alltanks:1,@CanFly"
             ],
             "sections": [
               {
@@ -594,25 +576,14 @@
           "speed,super,morph",
           "@CanAccessNorfairUpperPortal,ice",
           "@CanAccessNorfairUpperPortal,hijump",
-
-          "casual,@CanAccessNorfairUpperPortal,space",
-
-          "[hard],@CanAccessNorfairUpperPortal,@CanSpringBallJump",
-          "[hard],@CanAccessNorfairUpperPortal,@CanFly"
+          "@CanAccessNorfairUpperPortal,space"
         ],
         "children": [
           {
             "name": "X-Ray Scope",
             "access_rules": [
               "@CanUsePowerBombs,@CanOpenRedDoors,grapple",
-              "@CanUsePowerBombs,@CanOpenRedDoors,space",
-
-              "[hard],@CanUsePowerBombs,@CanOpenRedDoors,@CanIbj,varia,alltanks:3",
-              "[hard],@CanUsePowerBombs,@CanOpenRedDoors,@CanIbj,alltanks:5",
-              "[hard],@CanUsePowerBombs,@CanOpenRedDoors,hijump,speed,varia,alltanks:3",
-              "[hard],@CanUsePowerBombs,@CanOpenRedDoors,hijump,speed,alltanks:5",
-              "[hard],@CanUsePowerBombs,@CanOpenRedDoors,@CanSpringBallJump,varia,alltanks:3",
-              "[hard],@CanUsePowerBombs,@CanOpenRedDoors,@CanSpringBallJump,alltanks:5"
+              "@CanUsePowerBombs,@CanOpenRedDoors,space"
             ],
             "sections": [
               {
@@ -686,9 +657,8 @@
           {
             "name": "Power Bomb (red Brinstar spike room)",
             "access_rules": [
-              "casual,@CanUsePowerBombs,super",
-              "casual,ice,super",
-              "[hard],super"
+              "@CanUsePowerBombs,super",
+              "ice,super"
             ],
             "sections": [
               {

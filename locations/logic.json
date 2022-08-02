@@ -149,28 +149,14 @@
   {
     "name": "CanAccessDarkWorldPortal",
     "access_rules": [
-      "casual,@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,gravity,speed",
-
-      "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,charge,gravity,ice",
-      "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,charge,gravity,speed",
-      "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,charge,hijump,ice,grapple",
-      "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,missile,gravity,ice",
-      "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,missile,gravity,speed",
-      "[hard],@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,missile,hijump,ice,grapple"
+      "@CardMaridiaL1,@CardMaridiaL2,@CanUsePowerBombs,super,gravity,speed"
     ]
   },
   {
     "name": "CanAccessMiseryMirePortal",
     "access_rules": [
-      "casual,speed,wave,varia,super,gravity,space,@CanUsePowerBombs",
-      "casual,@CardNorfairL2,varia,super,gravity,space,@CanUsePowerBombs",
-
-      "[hard],speed,varia,super,gravity,@CanUsePowerBombs",
-      "[hard],speed,varia,super,hijump,@CanUsePowerBombs",
-      "[hard],@CardNorfairL2,varia,super,hijump,@CanUsePowerBombs",
-      "[hard],@CardNorfairL2,varia,super,@CanFly,gravity,@CanUsePowerBombs",
-      "[hard],@CardNorfairL2,varia,super,@CanSpringBallJump,gravity,@CanUsePowerBombs",
-      "[hard],@CardNorfairL2,varia,super,ice,gravity,@CanUsePowerBombs"
+      "speed,wave,varia,super,gravity,space,@CanUsePowerBombs",
+      "@CardNorfairL2,varia,super,gravity,space,@CanUsePowerBombs"
     ]
   },
   {
@@ -192,13 +178,6 @@
       "pearl,flippers,gravity,morph,aga1",
       "pearl,flippers,gravity,morph,hammer,lift1",
       "pearl,flippers,gravity,morph,lift2",
-
-      "[hard],pearl,flippers,morph,@CanSpringBallJump,aga1",
-      "[hard],pearl,flippers,morph,@CanSpringBallJump,hammer,lift1",
-      "[hard],pearl,flippers,morph,@CanSpringBallJump,lift2",
-      "[hard],pearl,flippers,morph,hijump,aga1",
-      "[hard],pearl,flippers,morph,hijump,hammer,lift1",
-      "[hard],pearl,flippers,morph,hijump,lift2",
     ]
   }
 ]
