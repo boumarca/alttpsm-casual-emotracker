@@ -362,11 +362,11 @@
         "access_rules": [
           "@CanUsePowerBombs",
           "@CanOpenRedDoors,@CanDestroyBombWalls",
-          "@CanOpenRedDoors,speed",
+          "@CanOpenRedDoors,@CanParlorSpeedBoost",
           "@CanAccessNorfairUpperPortal,morph,wave,ice",
           "@CanAccessNorfairUpperPortal,morph,wave,hijump",
 
-          "normal,@CanAccessNorfairUpperPortal,morph,wave,space",
+          "casual,@CanAccessNorfairUpperPortal,morph,wave,space",
 
           "[hard],@CanAccessNorfairUpperPortal,morph,@CanOpenRedDoors,ice",
           "[hard],@CanAccessNorfairUpperPortal,morph,@CanOpenRedDoors,hijump",
@@ -403,9 +403,15 @@
           {
             "name": "Missile (green Brinstar pipe)",
             "access_rules": [
-              "morph,powerbomb",
-              "morph,super",
-              "morph,@CanAccessNorfairUpperPortal"
+              "morph,powerbomb,hijump",
+			  "morph,powerbomb,@CanWallJumpEasy",
+			  "morph,powerbomb,@CanFly",
+              "morph,super,hijump",
+			  "morph,super,@CanWallJumpEasy",
+			  "morph,super,@CanFly",
+              "morph,@CanAccessNorfairUpperPortal,hijump",
+			  "morph,@CanAccessNorfairUpperPortal,@CanWallJumpEasy",
+			  "morph,@CanAccessNorfairUpperPortal,@CanFly"
             ],
             "sections": [
               {
@@ -454,7 +460,10 @@
           {
             "name": "Energy Tank, Brinstar Gate",
             "access_rules": [
-              "normal,@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1",
+			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,grapple",
+			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,@CanWallJumpEasy",
+			  "@CardBrinstarL2,@CanUsePowerBombs,wave,alltanks:1,@CanFly",			
+			
               "[hard],@CardBrinstarL2,@CanUsePowerBombs,wave",
               "[hard],@CardBrinstarL2,@CanUsePowerBombs,super"
             ],
@@ -505,7 +514,9 @@
           {
             "name": "Power Bomb (pink Brinstar)",
             "access_rules": [
-              "normal,@CanUsePowerBombs,super,alltanks:1",
+              "@CanUsePowerBombs,super,alltanks:1,grapple",
+			  "@CanUsePowerBombs,super,alltanks:1,@CanWallJumpEasy",
+			  "@CanUsePowerBombs,super,alltanks:1,@CanFly",
               "[hard],@CanUsePowerBombs,super"
             ],
             "sections": [
@@ -529,6 +540,11 @@
           },
           {
             "name": "Missile (pink Brinstar top)",
+			"access_rules": [
+              "grapple",
+			  "@CanWallJumpEasy",
+			  "@CanFly"
+            ],
             "sections": [
               {
                 "name": "Missile (pink Brinstar top)",
