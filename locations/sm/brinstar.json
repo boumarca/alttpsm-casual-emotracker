@@ -738,9 +738,15 @@
       {
         "name": "Brinstar Kraid",
         "access_rules": [
-          "@CanDestroyBombWalls,super,@CanPassBombPassages",
-          "speed,super,@CanPassBombPassages",
-          "@CanAccessNorfairUpperPortal,super,@CanPassBombPassages"
+          "@CanDestroyBombWalls,super,@CanPassBombPassages,hijump",
+		  "@CanDestroyBombWalls,super,@CanPassBombPassages,@CanWallJumpMedium",
+		  "@CanDestroyBombWalls,super,@CanPassBombPassages,@CanFly",
+          "speed,super,@CanPassBombPassages,hijump",
+		  "speed,super,@CanPassBombPassages,@CanWallJumpMedium",
+		  "speed,super,@CanPassBombPassages,@CanFly",
+          "@CanAccessNorfairUpperPortal,super,@CanPassBombPassages,hijump",
+		  "@CanAccessNorfairUpperPortal,super,@CanPassBombPassages,@CanWallJumpMedium",
+		  "@CanAccessNorfairUpperPortal,super,@CanPassBombPassages,@CanFly"
         ],
         "children": [
           {
