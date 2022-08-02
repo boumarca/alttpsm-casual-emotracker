@@ -8,17 +8,15 @@
       {
         "name": "CanEnterAndLeaveGauntlet",
         "access_rules": [
-          "normal,@CardCrateriaL1,morph,@CanFly,@CanIbj",
-          "normal,@CardCrateriaL1,morph,@CanFly,@CanUsePowerBombs,powerbomb:10",
-          "normal,@CardCrateriaL1,morph,@CanFly,screw",
-          "normal,@CardCrateriaL1,morph,speed,@CanIbj",
-          "normal,@CardCrateriaL1,morph,speed,@CanUsePowerBombs,powerbomb:10",
-          "normal,@CardCrateriaL1,morph,speed,screw",
-
-          "[hard],@CardCrateriaL1,morph,bomb",
-          "[hard],@CardCrateriaL1,morph,powerbomb:10",
-          "[hard],@CardCrateriaL1,screw",
-          "[hard],@CardCrateriaL1,speed,@CanUsePowerBombs,alltanks:2"
+          "@CardCrateriaL1,morph,@CanFly,@CanIbj",
+          "@CardCrateriaL1,morph,@CanFly,@CanUsePowerBombs,powerbomb:10",
+          "@CardCrateriaL1,morph,@CanFly,@CanSafelyUseScrewAttack",
+          "@CardCrateriaL1,morph,speed,@CanIbj",
+          "@CardCrateriaL1,morph,speed,@CanUsePowerBombs,powerbomb:10",
+          "@CardCrateriaL1,morph,speed,@CanSafelyUseScrewAttack",		  
+		  "@CardCrateriaL1,morph,@CanWallJumpHard,@CanIbj",
+          "@CardCrateriaL1,morph,@CanWallJumpHard,@CanUsePowerBombs,powerbomb:10",
+          "@CardCrateriaL1,morph,@CanWallJumpHard,@CanSafelyUseScrewAttack"
         ]
       },
       {
@@ -58,7 +56,7 @@
                 "access_rules": [
                   "@CanUsePowerBombs,alltanks:2,speed,@LaunchPadRequiresIceBeam",
 				  "@CanUsePowerBombs,alltanks:2,speed,ice",				  
-                  "{@CanUsePowerBombs},@CanWallJumpMedium"
+                  "{@CanUsePowerBombs}"
                 ],
                 "item_count": 1
               }
@@ -155,7 +153,7 @@
         "name": "Crateria West",
         "access_rules": [
           "@CanDestroyBombWalls",
-          "speed"
+          "@CanParlorSpeedBoost"
         ],
         "children": [
           {
@@ -165,8 +163,7 @@
                 "name": "Energy Tank, Gauntlet",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@CanEnterAndLeaveGauntlet,alltanks:1",
-                  "[hard],@CanEnterAndLeaveGauntlet",
+                  "@CanEnterAndLeaveGauntlet,alltanks:1",
                   "{@CardCrateriaL1,morph,powerbomb}",
                   "{@CardCrateriaL1,speed,alltanks:2}"
                 ],
@@ -214,9 +211,8 @@
                 "name": "Missile (Crateria gauntlet left)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@CanEnterAndLeaveGauntlet,@CanPassBombPassages,alltanks:2",
-                  "[hard],@CanEnterAndLeaveGauntlet,@CanPassBombPassages",
-                  "{@CanUsePowerBombs}",
+                  "@CanEnterAndLeaveGauntlet,@CanPassBombPassages,alltanks:2",
+                  "{@CanUsePowerBombs}"
                 ],
                 "item_count": 1
               },
@@ -224,9 +220,8 @@
                 "name": "Missile (Crateria gauntlet right)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@CanEnterAndLeaveGauntlet,@CanPassBombPassages,alltanks:2",
-                  "[hard],@CanEnterAndLeaveGauntlet,@CanPassBombPassages",
-                  "{@CanUsePowerBombs}",
+                  "@CanEnterAndLeaveGauntlet,@CanPassBombPassages,alltanks:2",
+                  "{@CanUsePowerBombs}"
                 ],
                 "item_count": 1
               }
