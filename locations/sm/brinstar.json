@@ -136,9 +136,8 @@
 			  "easy,@CardBrinstarL1,@CanUsePowerBombs,hijump,speed",
 			  "easy,@CardBrinstarL1,@CanUsePowerBombs,gravity,speed",
 			  "easy,@CardBrinstarL1,@CanUsePowerBombs,space",
-
-              "[normal],@CardBrinstarL1,@CanUsePowerBombs",
-			  "[hard],@CardBrinstarL1,@CanUsePowerBombs",
+			  
+              "@CardBrinstarL1,@CanUsePowerBombs,@CanWallJumpMedium"
             ],
             "sections": [
               {
@@ -285,8 +284,7 @@
             "name": "Energy Tank, Etecoons",
             "access_rules": [
 			  "easy,@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
-              "[normal],@CardBrinstarL2,@CanUsePowerBombs",
-			  "[hard],@CardBrinstarL2,@CanUsePowerBombs"
+              "@CardBrinstarL2,@CanUsePowerBombs,@CanWallJumpEasy"
             ],
             "sections": [
               {
@@ -311,8 +309,7 @@
             "name": "Power Bomb (green Brinstar bottom)",
             "access_rules": [
 			  "easy,@CardBrinstarL2,@CanUsePowerBombs,@CanFly",
-              "[normal],@CardBrinstarL2,@CanUsePowerBombs",
-			  "[hard],@CardBrinstarL2,@CanUsePowerBombs"
+              "@CardBrinstarL2,@CanUsePowerBombs,@CanWallJumpEasy"
             ],
             "sections": [
               {
@@ -337,8 +334,7 @@
             "name": "Super Missile (green Brinstar bottom)",
             "access_rules": [
 			  "easy,@CardBrinstarL2,@CanUsePowerBombs,super,@CanFly",
-              "[normal],@CardBrinstarL2,@CanUsePowerBombs,super",
-			  "[hard],@CardBrinstarL2,@CanUsePowerBombs,super"
+              "@CardBrinstarL2,@CanUsePowerBombs,super,@CanWallJumpEasy"
             ],
             "sections": [
               {

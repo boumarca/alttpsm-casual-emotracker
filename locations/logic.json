@@ -50,6 +50,20 @@
     ]
   },
   {
+    "name": "CanWallJumpEasy",
+    "access_rules": [
+      "[normal]",
+      "[hard]"
+    ]
+  },
+  {
+    "name": "CanWallJumpMedium",
+    "access_rules": [
+      "[normal]",
+      "[hard]"
+    ]
+  },
+  {
     "name": "CanUsePowerBombs",
     "access_rules": [
 	  "easy,morph,powerbomb:10",
