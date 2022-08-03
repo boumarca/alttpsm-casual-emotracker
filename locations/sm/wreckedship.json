@@ -17,17 +17,29 @@
       "super,@CanAccessMaridiaPortal,@CanPassReverseForgottenHighway,@CanDestroyBombWalls,@CardMaridiaL2",
       "super,@CanAccessMaridiaPortal,@CanPassReverseForgottenHighway,draygon"
     ],
-    "children": [
-      {
-        "name": "CanUnlockShip",
-        "access_rules": [
-          "@CardWreckedShipBoss,@CanPassBombPassages"
-        ]
-      },
+    "children": [      
 	  {
         "name": "CanAccessShutDownRooms",
         "access_rules": [
           "phantoon"
+        ]
+      },
+	  {
+        "name": "CanAccessWreckedPool",
+        "access_rules": [
+          "@CanAccessShutDownRooms,hijump,@CanWallJumpEasy",
+		  "@CanAccessShutDownRooms,space",
+		  "@CanAccessShutDownRooms,speed",
+		  "@CanAccessShutDownRooms,gravity"
+        ]
+      },
+	  {
+        "name": "CanViewConcert",
+        "access_rules": [
+          "@CanAccessShutDownRooms,@CardWreckedShipL1,grapple",
+		  "@CanAccessShutDownRooms,@CardWreckedShipL1,space",
+		  "@CanAccessShutDownRooms,@CardWreckedShipL1,varia,alltanks:2",
+		  "@CanAccessShutDownRooms,@CardWreckedShipL1,alltanks:3"
         ]
       },
       {
@@ -57,14 +69,7 @@
       {
         "name": "Energy Tank, Wrecked Ship",
         "access_rules": [
-          "@CanUnlockShip,hijump",
-          "@CanUnlockShip,space",
-          "@CanUnlockShip,speed",
-          "@CanUnlockShip,gravity",
-
-          "[hard],@CanUnlockShip,bomb",
-          "[hard],@CanUnlockShip,powerbomb",
-          "[hard],@CanUnlockShip,@CanSpringBallJump"
+          "@CanAccessWreckedPool"
         ],
         "sections": [
           {
@@ -88,7 +93,7 @@
       {
         "name": "Right Super, Wrecked Ship",
         "access_rules": [
-          "@CanUnlockShip",
+          "@CanAccessShutDownRooms",
         ],
         "sections": [
           {
@@ -112,7 +117,7 @@
       {
         "name": "Missile (Wrecked Ship top)",
         "access_rules": [
-          "@CanUnlockShip",
+          "@CanAccessShutDownRooms",
         ],
         "sections": [
           {
@@ -136,7 +141,7 @@
       {
         "name": "Super Missile (Wrecked Ship left)",
         "access_rules": [
-          "@CanUnlockShip",
+          "@CanAccessShutDownRooms",
         ],
         "sections": [
           {
@@ -164,17 +169,10 @@
             "name": "Reserve Tank, Wrecked Ship",
             "capture_item": true,
             "access_rules": [
-              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,grapple",
-              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,space",
-              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,varia,alltanks:2",
-              "normal,@CanUnlockShip,@CardWreckedShipL1,speed,@CanUsePowerBombs,alltanks:3",
-
-              "[hard],@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs,speed,varia",
-              "[hard],@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs,speed,alltanks:2",
-
-              "{@CanUnlockShip,@CardWreckedShipL1,@CanUsePowerBombs}",
-              "{@CanUnlockShip,@CardWreckedShipL1,wave}",
-              "{@CanUnlockShip,@CardWreckedShipL1,xray}"
+              "@CanViewConcert,speed,@CanUsePowerBombs",
+              "{@CanAccessShutDownRooms,@CardWreckedShipL1,@CanUsePowerBombs}",
+              "{@CanAccessShutDownRooms,@CardWreckedShipL1,wave}",
+              "{@CanAccessShutDownRooms,@CardWreckedShipL1,xray}"
             ],
             "item_count": 1
           }
@@ -195,13 +193,7 @@
       {
         "name": "Gravity Suit",
         "access_rules": [
-          "normal,@CanUnlockShip,@CardWreckedShipL1,grapple",
-          "normal,@CanUnlockShip,@CardWreckedShipL1,space",
-          "normal,@CanUnlockShip,@CardWreckedShipL1,varia,alltanks:2",
-          "normal,@CanUnlockShip,@CardWreckedShipL1,alltanks:3",
-
-          "[hard],@CanUnlockShip,@CardWreckedShipL1,varia",
-          "[hard],@CanUnlockShip,@CardWreckedShipL1,alltanks:1"
+          "@CanViewConcert"
         ],
         "sections": [
           {
@@ -225,13 +217,7 @@
       {
         "name": "Missile (Gravity Suit)",
         "access_rules": [
-          "normal,@CanUnlockShip,@CardWreckedShipL1,grapple",
-          "normal,@CanUnlockShip,@CardWreckedShipL1,space",
-          "normal,@CanUnlockShip,@CardWreckedShipL1,varia,alltanks:2",
-          "normal,@CanUnlockShip,@CardWreckedShipL1,alltanks:3",
-
-          "[hard],@CanUnlockShip,@CardWreckedShipL1,varia",
-          "[hard],@CanUnlockShip,@CardWreckedShipL1,alltanks:1"
+          "@CanViewConcert"
         ],
         "sections": [
           {
