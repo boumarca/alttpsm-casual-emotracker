@@ -8,26 +8,17 @@
       {
         "name": "CanExitThroughUpperNorfair",
         "access_rules": [
-          "normal,@CardLowerNorfairL1,@CardNorfairL2",
-          "normal,gravity,@CardNorfairL2",
-          "normal,gravity,wave,grapple",
-          "normal,gravity,wave,space",
-
-          "[hard],@CardNorfairL2",
-          "[hard],speed",
-          "[hard],@CanFly",
-          "[hard],grapple",
-          "[hard],hijump,@CanSpringBallJump",
-          "[hard],hijump,ice"
+          "@CardLowerNorfairL1,@CardNorfairL2",
+          "gravity,@CardNorfairL2",		  
+          "gravity,wave,grapple",
+          "gravity,wave,space"
         ]
       },
       {
         "name": "CanExitThroughPortal",
         "access_rules": [
-          "normal,@CanUsePowerBombs,space,super",
-          "normal,@CanUsePowerBombs,space,charge",
-
-          "[hard],@CanUsePowerBombs"
+          "@CanUsePowerBombs,space,super",
+          "@CanUsePowerBombs,space,charge"
         ]
       },
       {
@@ -49,25 +40,18 @@
       {
         "name": "Norfair Lower West",
         "access_rules": [
-          "normal,varia,@Norfair Upper East,@CanUsePowerBombs,space,gravity,@CardNorfairL2",
-          "normal,varia,@Norfair Upper East,@CanUsePowerBombs,space,gravity,wave,speed",
-          "normal,varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls",
-
-          "[hard],@Norfair Upper East,@CanUsePowerBombs,varia,hijump,@CardNorfairL2",
-          "[hard],@Norfair Upper East,@CanUsePowerBombs,varia,hijump,speed,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper East,@CanUsePowerBombs,varia,gravity,@CardNorfairL2",
-          "[hard],@Norfair Upper East,@CanUsePowerBombs,varia,gravity,speed,@CanBlueGateGlitch",
-          "[hard],@CanAccessNorfairLowerPortal,@CanDestroyBombWalls"
+          "varia,@Norfair Upper East,@CanUsePowerBombs,@CanFly,gravity,@CardNorfairL2",
+          "varia,@Norfair Upper East,@CanUsePowerBombs,@CanFly,gravity,wave,speed",
+          "varia,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls"
         ],
         "children": [
           {
             "name": "Screw Attack",
             "access_rules": [
-              "normal,@CanDestroyBombWalls,space,@CanUsePowerBombs",
-              "normal,@CanDestroyBombWalls,@CanAccessNorfairLowerPortal",
-
-              "[hard],@CanDestroyBombWalls,varia",
-              "[hard],@CanDestroyBombWalls,@CanAccessNorfairLowerPortal"
+              "@CanDestroyBombWalls,space,@CanUsePowerBombs",
+			  "@CanDestroyBombWalls,@CanAccessNorfairLowerPortal",
+			  "screw,space,@CanUsePowerBombs",
+			  "screw,@CanAccessNorfairLowerPortal",
             ],
             "sections": [
               {
@@ -95,16 +79,7 @@
                 "name": "Missile (Gold Torizo)",
                 "capture_item": true,
                 "access_rules": [
-                  "normal,@CanUsePowerBombs,space,super",
-
-                  "[hard],@CanUsePowerBombs,space,varia,hijump",
-                  "[hard],@CanUsePowerBombs,space,varia,gravity",
-                  "[hard],@CanUsePowerBombs,space,varia,@CanAccessNorfairLowerPortal,super,@CanFly",
-                  "[hard],@CanUsePowerBombs,space,varia,@CanAccessNorfairLowerPortal,super,@CanSpringBallJump",
-                  "[hard],@CanUsePowerBombs,space,varia,@CanAccessNorfairLowerPortal,super,speed",
-
-                  // Allow viewable on hard mode via green gate glitch.
-                  "{hard,super}",
+                  "@CanUsePowerBombs,space,super",
                   "{@CanAccessNorfairLowerPortal}"
                 ],
                 "item_count": 1
@@ -126,13 +101,14 @@
           {
             "name": "Super Missile (Gold Torizo)",
             "access_rules": [
-              "normal,@CanDestroyBombWalls,super,@CanAccessNorfairLowerPortal",
-              "normal,@CanDestroyBombWalls,super,space,@CanUsePowerBombs",
-              "normal,@CanDestroyBombWalls,charge,@CanAccessNorfairLowerPortal",
-              "normal,@CanDestroyBombWalls,charge,space,@CanUsePowerBombs",
-
-              "[hard],@CanDestroyBombWalls,varia,super",
-              "[hard],@CanDestroyBombWalls,varia,charge"
+              "@CanDestroyBombWalls,super,@CanWallJumpEasy,@CanAccessNorfairLowerPortal",
+			  "@CanDestroyBombWalls,super,@CanWallJumpEasy,space,@CanUsePowerBombs",
+			  "@CanDestroyBombWalls,super,@CanFly,@CanAccessNorfairLowerPortal",
+			  "@CanDestroyBombWalls,super,@CanFly,space,@CanUsePowerBombs",
+			  "@CanDestroyBombWalls,charge,@CanWallJumpEasy,@CanAccessNorfairLowerPortal",
+			  "@CanDestroyBombWalls,charge,@CanWallJumpEasy,space,@CanUsePowerBombs",
+			  "@CanDestroyBombWalls,charge,@CanFly,@CanAccessNorfairLowerPortal",
+			  "@CanDestroyBombWalls,charge,@CanFly,space,@CanUsePowerBombs"
             ],
             "sections": [
               {
@@ -156,17 +132,12 @@
           {
             "name": "Missile (Mickey Mouse room)",
             "access_rules": [
-              "normal,@CanFly,morph,super,@CanExitThroughUpperNorfair",
-              "normal,@CanFly,morph,super,@CanExitThroughPortal",
-
-              "[hard],morph,varia,super,@CanFly,@CanExitThroughUpperNorfair",
-              "[hard],morph,varia,super,@CanFly,@CanExitThroughPortal",
-              "[hard],morph,varia,super,@CanSpringBallJump,@CanExitThroughUpperNorfair",
-              "[hard],morph,varia,super,@CanSpringBallJump,@CanExitThroughPortal",
-              "[hard],morph,varia,super,speed,hijump,@CanUsePowerBombs,@CanExitThroughUpperNorfair",
-              "[hard],morph,varia,super,speed,hijump,@CanUsePowerBombs,@CanExitThroughPortal",
-              "[hard],morph,varia,super,speed,charge,ice,@CanExitThroughUpperNorfair",
-              "[hard],morph,varia,super,speed,charge,ice,@CanExitThroughPortal"
+              "morph,super,@CanWallJumpInsane,@CanExitThroughUpperNorfair",
+			  "morph,super,hijump,@CanWallJumpHard,@CanExitThroughUpperNorfair",
+			  "morph,super,@CanFly,@CanExitThroughUpperNorfair",
+              "morph,super,@CanWallJumpInsane,@CanExitThroughPortal",
+			  "morph,super,hijump,@CanWallJumpHard,@CanExitThroughPortal",
+			  "morph,super,@CanFly,@CanExitThroughPortal"
             ],
             "sections": [
               {
