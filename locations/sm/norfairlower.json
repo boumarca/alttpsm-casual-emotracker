@@ -24,17 +24,9 @@
       {
         "name": "CanExitLowerNorfairEast",
         "access_rules": [
-          "normal,morph,@CardNorfairL2",
-          "normal,morph,gravity,wave,grapple",
-          "normal,morph,gravity,wave,space",
-
-          "[hard],morph,@CardNorfairL2",
-          "[hard],morph,@CanBlueGateGlitch,speed",
-          "[hard],morph,@CanBlueGateGlitch,@CanFly",
-          "[hard],morph,@CanBlueGateGlitch,grapple",
-          "[hard],morph,@CanBlueGateGlitch,hijump,@CanSpringBallJump",
-          "[hard],morph,@CanBlueGateGlitch,hijump,ice",
-          "[hard],alltanks:5"
+          "@CardNorfairL2",
+          "gravity,wave,grapple",
+          "gravity,wave,space"
         ]
       },
       {
@@ -163,23 +155,10 @@
       {
         "name": "Norfair Lower East",
         "access_rules": [
-          "normal,varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,space,gravity",
-          "normal,varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanUsePowerBombs,@CanFly",
-
-          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,hijump",
-
-          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,gravity,@CanFly",
-          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,gravity,@CanSpringBallJump",
-          "[hard],varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,gravity,ice,charge",
-
-          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanFly,@CanPassBombPassages",
-          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,screw,space",
-
-          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanSpringBallJump,@CanPassBombPassages",
-          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanSpringBallJump,screw,space",
-
-          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,speed,hijump,@CanPassBombPassages",
-          "[hard],varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,speed,ice,charge,@CanPassBombPassages"
+          "varia,@CardLowerNorfairL1,@Norfair Upper East,@CanUsePowerBombs,@CanFly,gravity",
+		  "varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanUsePowerBombs,@CanWallJumpInsane",
+		  "varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanUsePowerBombs,hijump,@CanWallJumpHard",
+          "varia,@CardLowerNorfairL1,@CanAccessNorfairLowerPortal,@CanDestroyBombWalls,super,@CanUsePowerBombs,@CanFly"
         ],
         "children": [
           {
@@ -209,8 +188,7 @@
           {
             "name": "Power Bomb (lower Norfair above fire flea room)",
             "access_rules": [
-              "normal,morph,@CanExitLowerNorfairEast",
-              "[hard],@CanExitLowerNorfairEast,@CanPassBombPassages"
+              "@CanExitLowerNorfairEast",
             ],
             "sections": [
               {
@@ -258,8 +236,7 @@
           {
             "name": "Missile (lower Norfair near Wave Beam)",
             "access_rules": [
-              "normal,morph,@CanExitLowerNorfairEast",
-              "[hard],@CanExitLowerNorfairEast,morph,@CanDestroyBombWalls"
+              "@CanExitLowerNorfairEast",
             ],
             "sections": [
               {
