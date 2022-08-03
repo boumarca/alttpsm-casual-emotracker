@@ -164,6 +164,15 @@
 	  "gravity,hijump,ice"
     ]
   },
+  {
+    "name": "CanNavigateMaridiaLeftSandPit",
+    "access_rules": [
+      "easy,spring,hijump",
+	  "@CanWallJumpMedium",
+	  "@CanWallJumpEasy,spring",
+	  "@CanFly"
+    ]
+  },
 
   // Cross-game portals
   {
