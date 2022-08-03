@@ -45,20 +45,21 @@
       {
         "name": "Maridia Outer",
         "access_rules": [
-          "normal,gravity,@Norfair Upper West,@CanUsePowerBombs",
-          "normal,gravity,@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,@CanPassBombPassages",
-          "normal,gravity,@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,screw",
-
-          "[hard],@Norfair Upper West,@CanUsePowerBombs,gravity",
-          "[hard],@Norfair Upper West,@CanUsePowerBombs,hijump,@CanSpringBallJump",
-          "[hard],@Norfair Upper West,@CanUsePowerBombs,hijump,ice",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,@CanPassBombPassages",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,gravity,screw",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,super,gravity",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,super,hijump,@CanSpringBallJump",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,super,hijump,ice"
+          "gravity,@Norfair Upper West,@CanUsePowerBombs",
+          "gravity,@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,@CanPassBombPassages",
+          "gravity,@CanAccessMaridiaPortal,@CardMaridiaL1,@CardMaridiaL2,screw"
         ],
         "children": [
+		  {
+			"name": "CanReachTurtleRoom",
+			"access_rules": [
+			  "@CanOpenRedDoors,@CanWallJumpMedium",
+			  "@CanOpenRedDoors,@CanWallJumpEasy,plasma",
+			  "@CanOpenRedDoors,@CanWallJumpEasy,screw",
+			  "@CanOpenRedDoors,hijump",
+			  "@CanOpenRedDoors,@CanFly"
+			]
+		  },
           {
             "name": "Missile (green Maridia shinespark)",
             "sections": [
@@ -66,7 +67,7 @@
                 "name": "Missile (green Maridia shinespark)",
                 "capture_item": true,
                 "access_rules": [
-                  "gravity,speed",
+                  "speed",
                   "{}"
                 ],
                 "item_count": 1
@@ -87,6 +88,12 @@
           },
           {
             "name": "Super Missile (green Maridia)",
+			"access_rules": [
+              "@CanWallJumpMedium",
+			  "@CanWallJumpEasy,ice",
+			  "hijump",
+			  "@CanFly"
+            ],
             "sections": [
               {
                 "name": "Super Missile (green Maridia)",
@@ -109,14 +116,10 @@
           {
             "name": "Energy Tank, Mama turtle",
             "access_rules": [
-              "@CanOpenRedDoors,@CanFly",
-              "@CanOpenRedDoors,speed",
-              "@CanOpenRedDoors,grapple",
-
-              "[hard],@CanOpenRedDoors,@CanSpringBallJump,gravity",
-              "[hard],@CanOpenRedDoors,@CanSpringBallJump,hijump",
-
-              "{@CanOpenRedDoors}"
+			  "@CanReachTurtleRoom,@CanFly",
+			  "@CanReachTurtleRoom,speed",
+			  "@CanReachTurtleRoom,grapple",
+              "{@CanReachTurtleRoom}"
             ],
             "sections": [
               {
@@ -141,7 +144,10 @@
           {
             "name": "Missile (green Maridia tatori)",
             "access_rules": [
-              "@CanOpenRedDoors"
+              "@CanReachTurtleRoom,@CanWallJumpEasy",
+			  "@CanReachTurtleRoom,speed",
+			  "@CanReachTurtleRoom,grapple,hijump",
+			  "@CanReachTurtleRoom,@CanFly"
             ],
             "sections": [
               {
