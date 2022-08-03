@@ -179,16 +179,32 @@
           "@Norfair Upper West,varia,super,speed,wave,@CanUsePowerBombs"
         ],
         "children": [
+		  {
+		    "name": "CanReachBubbleMountainLeftSide",
+            "access_rules": [
+              "@CanFly",
+			  "grapple,morph,speed",
+			  "hijump,@CanWallJumpEasy",
+			  "ice,hijump",
+			  "@CanWallJumpInsane",
+			  "@CanWallJumpHard,grapple"
+            ]
+		  },
+		  {
+		    "name": "CanReachBubbleMountainRightSide",
+            "access_rules": [
+              "@CanFly",
+			  "morph,speed",
+			  "morph,@CanPassBombPassages",
+			  "hijump,@CanWallJumpEasy",
+			  "ice,hijump",
+			  "@CanWallJumpHard"
+            ]
+		  },
           {
             "name": "Norfair Reserve Tank Room",
             "access_rules": [
-              "normal,@CardNorfairL2,morph,@CanFly",
-              "normal,@CardNorfairL2,morph,grapple,speed",
-              "normal,@CardNorfairL2,morph,grapple,@CanPassBombPassages",
-              "normal,@CardNorfairL2,morph,hijump",
-              "normal,@CardNorfairL2,morph,ice",
-
-              "[hard],@CardNorfairL2,morph,super"
+              "@CardNorfairL2,morph,@CanReachBubbleMountainLeftSide"
             ],
             "sections": [
               {
@@ -213,72 +229,60 @@
               }
             ]
           },
-          {
-            "name": "Speed Booster Hallway",
+		  {
+            "name": "Speed Booster",
             "access_rules": [
-              "normal,@CardNorfairL2,@CanFly",
-              "normal,@CardNorfairL2,morph,speed",
-              "normal,@CardNorfairL2,morph,@CanPassBombPassages",
-              "normal,@CardNorfairL2,hijump",
-              "normal,@CardNorfairL2,ice",
-
-              "[hard],@CardNorfairL2,super"
+              "@CardNorfairL2,@CanReachBubbleMountainRightSide,@CanWallJumpEasy",
+			  "@CardNorfairL2,@CanReachBubbleMountainRightSide,hijump"
             ],
-            "children": [
+            "sections": [
               {
                 "name": "Speed Booster",
-                "sections": [
-                  {
-                    "name": "Speed Booster",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 2120,
-                    "y": 1360
-                  },
-                  {
-                    "map": "norfair",
-                    "x": 1240,
-                    "y": 148
-                  }
-                ]
-              },
+                "item_count": 1
+              }
+            ],
+            "map_locations": [
+			  {
+				"map": "metroid",
+				"x": 2120,
+				"y": 1360
+			  },
+			  {
+				"map": "norfair",
+				"x": 1240,
+				"y": 148
+			  }
+			]
+          },
+		  {
+            "name": "Missile (Speed Booster)",
+            "access_rules": [
+              "@CardNorfairL2,@CanReachBubbleMountainRightSide,@CanWallJumpEasy",
+			  "@CardNorfairL2,@CanReachBubbleMountainRightSide,hijump"
+            ],
+            "sections": [
               {
                 "name": "Missile (Speed Booster)",
-                "sections": [
-                  {
-                    "name": "Missile (Speed Booster)",
-                    "item_count": 1
-                  }
-                ],
-                "map_locations": [
-                  {
-                    "map": "metroid",
-                    "x": 2088,
-                    "y": 1360
-                  },
-                  {
-                    "map": "norfair",
-                    "x": 1208,
-                    "y": 148
-                  }
-                ]
+                "item_count": 1
               }
-            ]
-          },
+            ],
+            "map_locations": [
+			  {
+				"map": "metroid",
+				"x": 2088,
+				"y": 1360
+			  },
+			  {
+				"map": "norfair",
+				"x": 1208,
+				"y": 148
+			  }
+			]
+          },		  
           {
             "name": "Missile (bubble Norfair green door)",
             "access_rules": [
-              "normal,@CardNorfairL2,@CanFly",
-              "normal,@CardNorfairL2,grapple,morph,speed",
-              "normal,@CardNorfairL2,grapple,morph,@CanPassBombPassages",
-              "normal,@CardNorfairL2,hijump",
-              "normal,@CardNorfairL2,ice",
-
-              "[hard],@CardNorfairL2,super"
+              "@CardNorfairL2,@CanReachBubbleMountainLeftSide"
             ],
             "sections": [
               {
@@ -326,21 +330,8 @@
           {
             "name": "Wave Beam",
             "access_rules": [
-              "normal,morph,@CardNorfairL2,@CanFly",
-              "normal,morph,@CardNorfairL2,speed",
-              "normal,morph,@CardNorfairL2,@CanPassBombPassages",
-              "normal,morph,@CardNorfairL2,hijump",
-              "normal,morph,@CardNorfairL2,ice",
-              "normal,morph,speed,wave,super",
-
-              "[hard],@CanOpenRedDoors,@CardNorfairL2,morph",
-              "[hard],@CanOpenRedDoors,@CardNorfairL2,grapple",
-              "[hard],@CanOpenRedDoors,@CardNorfairL2,hijump,varia",
-              "[hard],@CanOpenRedDoors,@CardNorfairL2,space",
-              "[hard],@CanOpenRedDoors,varia,morph",
-              "[hard],@CanOpenRedDoors,varia,grapple",
-              "[hard],@CanOpenRedDoors,varia,hijump",
-              "[hard],@CanOpenRedDoors,varia,space"
+              "morph,@CardNorfairL2,@CanReachBubbleMountainRightSide",
+			  "morph,speed,wave,super"
             ],
             "sections": [
               {
@@ -364,15 +355,8 @@
           {
             "name": "Missile (Wave Beam)",
             "access_rules": [
-              "normal,@CardNorfairL2,@CanFly",
-              "normal,@CardNorfairL2,morph,speed",
-              "normal,@CardNorfairL2,morph,@CanPassBombPassages",
-              "normal,@CardNorfairL2,hijump",
-              "normal,@CardNorfairL2,ice",
-              "normal,morph,speed,wave,super",
-
-              "[hard],@CardNorfairL2",
-              "[hard],varia"
+              "@CardNorfairL2,@CanReachBubbleMountainRightSide",
+			  "speed,wave,morph,super"
             ],
             "sections": [
               {
