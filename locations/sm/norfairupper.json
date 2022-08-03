@@ -382,44 +382,25 @@
       {
         "name": "Norfair Upper Crocomire",
         "access_rules": [
-          "normal,@Norfair Upper West,varia,@CanOpenIceBeamDoor,@CanUsePowerBombs,speed",
-          "normal,@Norfair Upper West,varia,speed,wave",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly,@CanPassBombPassages,wave",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly,gravity,morph,wave",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump,@CanPassBombPassages,wave",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump,gravity,morph,wave",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,@CanPassBombPassages,wave",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,gravity,morph,wave",
+          "@Norfair Upper West,varia,@CanOpenIceBeamDoor,@CanUsePowerBombs,speed",
+          "@Norfair Upper West,varia,speed,wave",
+          "@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly,@CanPassBombPassages,wave",
+          "@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly,gravity,morph,wave",
+          "@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump,@CanPassBombPassages,wave",
+          "@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump,gravity,morph,wave",
+          "@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,@CanPassBombPassages,wave",
+          "@Norfair Upper West,varia,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,gravity,morph,wave",
 
-          "normal,@CanAccessNorfairLowerPortal,varia,screw,space,super,gravity,wave,@CardNorfairL2",
-          "normal,@CanAccessNorfairLowerPortal,varia,screw,space,super,gravity,wave,morph",
-
-          "[hard],@Norfair Upper West,@CanOpenIceBeamDoor,@CanUsePowerBombs,speed,alltanks:3",
-          "[hard],@Norfair Upper West,@CanOpenIceBeamDoor,@CanUsePowerBombs,speed,varia",
-          "[hard],@Norfair Upper West,speed,alltanks:2,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,speed,varia,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly,@CanPassBombPassages,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly,varia,morph,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump,@CanPassBombPassages,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump,varia,morph,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,@CanPassBombPassages,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,speed,varia,morph,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanSpringBallJump,@CanPassBombPassages,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanSpringBallJump,varia,morph,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,varia,ice,@CanPassBombPassages,@CanBlueGateGlitch",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,varia,ice,morph,@CanBlueGateGlitch",
-
-          "[hard],@CanAccessNorfairLowerPortal,screw,space,varia,super,alltanks:2,@CardNorfairL2",
-          "[hard],@CanAccessNorfairLowerPortal,screw,space,varia,super,alltanks:2,morph"
+          "@Norfair Upper West,varia,@CanAccessNorfairLowerPortal,screw,space,super,gravity,wave,@CardNorfairL2",
+          "@Norfair Upper West,varia,@CanAccessNorfairLowerPortal,screw,space,super,gravity,wave,morph"
         ],
         "children": [
           {
             "name": "Energy Tank, Crocomire",
             "access_rules": [
-              "normal,@CanAccessCrocomire,alltanks:1",
-              "normal,@CanAccessCrocomire,space",
-              "normal,@CanAccessCrocomire,grapple",
-              "[hard],@CanAccessCrocomire"
+              "@CanAccessCrocomire,alltanks:1,@CanWallJumpEasy",
+              "@CanAccessCrocomire,space",
+              "@CanAccessCrocomire,grapple"
             ],
             "sections": [
               {
@@ -443,7 +424,9 @@
           {
             "name": "Missile (below Crocomire)",
             "access_rules": [
-              "@CanAccessCrocomire,morph"
+              "@CanAccessCrocomire,morph,@CanFly",
+			  "@CanAccessCrocomire,morph,@CanWallJumpMedium",
+			  "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,hijump,grapple"
             ],
             "sections": [
               {
@@ -467,10 +450,9 @@
           {
             "name": "Power Bomb (Crocomire)",
             "access_rules": [
-              "normal,@CanAccessCrocomire,@CanFly",
-              "normal,@CanAccessCrocomire,hijump",
-              "normal,@CanAccessCrocomire,grapple",
-              "[hard],@CanAccessCrocomire"
+              "@CanAccessCrocomire,@CanFly",
+              "@CanAccessCrocomire,hijump",
+              "@CanAccessCrocomire,grapple"
             ],
             "sections": [
               {
@@ -494,11 +476,10 @@
           {
             "name": "Missile (Grappling Beam)",
             "access_rules": [
-              "normal,@CanAccessCrocomire,morph,@CanFly",
-              "normal,@CanAccessCrocomire,morph,speed,@CanUsePowerBombs",
-              "[hard],@CanAccessCrocomire,speed",
-              "[hard],@CanAccessCrocomire,morph,@CanFly",
-              "[hard],@CanAccessCrocomire,morph,grapple"
+              "@CanAccessCrocomire,morph,@CanFly",
+              "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,@CanFly",
+			  "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,@CanWallJumpMedium",
+			  "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,hijump,grapple"
             ],
             "sections": [
               {
@@ -522,12 +503,10 @@
           {
             "name": "Grappling Beam",
             "access_rules": [
-              "normal,@CanAccessCrocomire,morph,@CanFly",
-              "normal,@CanAccessCrocomire,morph,speed,@CanUsePowerBombs",
-              "[hard],@CanAccessCrocomire,space",
-              "[hard],@CanAccessCrocomire,morph",
-              "[hard],@CanAccessCrocomire,grapple",
-              "[hard],@CanAccessCrocomire,hijump,speed"
+              "@CanAccessCrocomire,morph,@CanFly",
+              "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,@CanFly",
+			  "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,@CanWallJumpMedium",
+			  "@CanAccessCrocomire,morph,speed,@CanUsePowerBombs,hijump,grapple"
             ],
             "sections": [
               {
@@ -558,16 +537,10 @@
             "name": "Missile (above Crocomire)",
             "capture_item": true,
             "access_rules": [
-              "normal,@Norfair Upper Crocomire,varia,@CanFly",
-              "normal,@Norfair Upper Crocomire,varia,grapple",
-              "normal,@Norfair Upper Crocomire,varia,hijump,speed",
-
-              "[hard],@Norfair Upper Crocomire,@CanHellRun,@CanFly",
-              "[hard],@Norfair Upper Crocomire,@CanHellRun,grapple",
-              "[hard],@Norfair Upper Crocomire,@CanHellRun,hijump,speed",
-              "[hard],@Norfair Upper Crocomire,@CanHellRun,hijump,@CanSpringBallJump",
-              "[hard],@Norfair Upper Crocomire,@CanHellRun,hijump,varia,ice",
-
+              "@Norfair Upper Crocomire,@CanFly",
+              "@Norfair Upper Crocomire,grapple",
+              "@Norfair Upper Crocomire,hijump,speed",
+			  
               "{@Norfair Upper West,@CanDestroyBombWalls}"
             ],
             "item_count": 1
