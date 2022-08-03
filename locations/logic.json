@@ -70,6 +70,12 @@
     ]
   },
   {
+    "name": "CanWallJumpInsane",
+    "access_rules": [
+      "[hard]"
+    ]
+  },
+  {
     "name": "CanUsePowerBombs",
     "access_rules": [
 	  "easy,morph,powerbomb:10",
@@ -148,6 +154,14 @@
     "access_rules": [
       "[normal]",
 	  "[hard]"
+    ]
+  },
+  {
+    "name": "CanPassReverseForgottenHighway",
+    "access_rules": [
+      "gravity,@CanFly",
+	  "gravity,@CanWallJumpEasy",
+	  "gravity,hijump,ice"
     ]
   },
 

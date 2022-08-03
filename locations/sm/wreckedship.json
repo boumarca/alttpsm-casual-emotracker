@@ -5,20 +5,17 @@
     "chest_opened_img": "images/major_opened.png",
     "color": "#d1b102",
     "access_rules": [
-      "super,@CanUsePowerBombs,gravity",
-      "super,@CanAccessMaridiaPortal,gravity,@CardMaridiaL2,@CanDestroyBombWalls",
-      "super,@CanAccessMaridiaPortal,gravity,draygon",
-
-      "normal,super,@CanOpenMoatDoor,speed",
-      "normal,super,@CanOpenMoatDoor,grapple",
-      "normal,super,@CanOpenMoatDoor,space",
-      "normal,super,@CanOpenMoatDoor,gravity,@CanIbj",
-      "normal,super,@CanOpenMoatDoor,gravity,hijump",
-
-      "[hard],super,@CanOpenMoatDoor",
-      "[hard],super,@CanUsePowerBombs,hijump,ice,grapple,@CardMaridiaL1",
-      "[hard],super,@CanUsePowerBombs,hijump,@CanSpringBallJump,grapple,@CardMaridiaL1",
-      "[hard],super,@CanAccessMaridiaPortal,hijump,@CanPassBombPassages,@CardMaridiaL2"
+	  "super,@CanOpenMoatDoor,speed",
+      "super,@CanOpenMoatDoor,grapple",
+      "super,@CanOpenMoatDoor,space",
+      "super,@CanOpenMoatDoor,gravity,@CanIbj",
+      "super,@CanOpenMoatDoor,gravity,hijump,@CanWallJumpEasy",
+	  "super,@CanOpenMoatDoor,@CanWallJumpInsane",
+	  
+      "super,@CanUsePowerBombs,@CanPassReverseForgottenHighway",
+	  
+      "super,@CanAccessMaridiaPortal,@CanPassReverseForgottenHighway,@CanDestroyBombWalls,@CardMaridiaL2",
+      "super,@CanAccessMaridiaPortal,@CanPassReverseForgottenHighway,draygon"
     ],
     "children": [
       {

@@ -244,34 +244,27 @@
       {
         "name": "Crateria East",
         "access_rules": [
-          "@CanOpenMoatDoor,super",
-          "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,ice",
-          "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,hijump",
-          "@CanUsePowerBombs,super,gravity",
-
-          "normal,@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,space",
-          "normal,@CanAccessMaridiaPortal,gravity,super,@CanDestroyBombWalls,@CardMaridiaL2",
-          "normal,@CanAccessMaridiaPortal,gravity,super,draygon",
-
-          "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanFly",
-          "[hard],@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,@CanUsePowerBombs,@CanSpringBallJump",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,hijump,@CanPassBombPassages",
-          "[hard],@CanAccessMaridiaPortal,@CardMaridiaL2,super,gravity,@CanDestroyBombWalls",
-          "[hard],@CanAccessMaridiaPortal,gravity,draygon",
-          "[hard],@CanUsePowerBombs,super,hijump,ice,grapple,@CardMaridiaL1",
-          "[hard],@CanUsePowerBombs,super,hijump,@CanSpringBallJump,grapple,@CardMaridiaL1"
+          "@CanOpenMoatDoor,super",	
+		  
+          "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,ice",
+          "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,hijump",
+		  "@CanOpenMoatDoor,@CanAccessNorfairUpperPortal,space",
+		  
+		  "@CanAccessMaridiaPortal,gravity,super,@CardMaridiaL2,@CanDestroyBombWalls",
+          "@CanAccessMaridiaPortal,gravity,super,draygon",	
+		  
+          "@CanUsePowerBombs,super,gravity"
         ],
         "children": [
           {
             "name": "Missile (outside Wrecked Ship bottom)",
             "access_rules": [
-              "normal,morph,speed",
-              "normal,morph,grapple",
-              "normal,morph,space",
-              "normal,morph,gravity,@CanIbj",
-              "normal,morph,gravity,hijump",
-              "normal,morph,@Wrecked Ship",
-              "[hard],morph"
+              "morph,speed",
+              "morph,grapple",
+              "morph,space",
+              "morph,gravity,@CanIbj",
+              "morph,gravity,hijump",
+              "morph,@Wrecked Ship"
             ],
             "sections": [
               {
@@ -295,7 +288,7 @@
           {
             "name": "Missile (outside Wrecked Ship top)",
             "access_rules": [
-              "@Wrecked Ship,@CanUnlockShip"
+              "@Wrecked Ship,@CardWreckedShipBoss,@CanPassBombPassages"
             ],
             "sections": [
               {
@@ -319,7 +312,7 @@
           {
             "name": "Missile (outside Wrecked Ship middle)",
             "access_rules": [
-              "@Wrecked Ship,@CanUnlockShip"
+              "@Wrecked Ship,@CardWreckedShipBoss,@CanPassBombPassages"
             ],
             "sections": [
               {
