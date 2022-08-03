@@ -256,8 +256,8 @@
           "@CanUsePowerBombs,super,gravity"
         ],
         "children": [
-          {
-            "name": "Missile (outside Wrecked Ship bottom)",
+		  {
+            "name": "CanAccessFloodedCavernUnderWater",
             "access_rules": [
               "morph,speed",
               "morph,grapple",
@@ -265,6 +265,18 @@
               "morph,gravity,@CanIbj",
               "morph,gravity,hijump",
               "morph,@Wrecked Ship"
+            ]
+          },
+		  {
+            "name": "CanPassThroughWreckedShip",
+            "access_rules": [
+              "@Wrecked Ship,@CanAccessShutDownRooms"
+            ]
+          },
+          {
+            "name": "Missile (outside Wrecked Ship bottom)",
+            "access_rules": [
+              "@CanAccessFloodedCavernUnderWater"
             ],
             "sections": [
               {
@@ -288,7 +300,7 @@
           {
             "name": "Missile (outside Wrecked Ship top)",
             "access_rules": [
-              "@Wrecked Ship,@CardWreckedShipBoss,@CanPassBombPassages"
+			  "@CanPassThroughWreckedShip"              
             ],
             "sections": [
               {
@@ -312,7 +324,7 @@
           {
             "name": "Missile (outside Wrecked Ship middle)",
             "access_rules": [
-              "@Wrecked Ship,@CardWreckedShipBoss,@CanPassBombPassages"
+              "@CanPassThroughWreckedShip"
             ],
             "sections": [
               {

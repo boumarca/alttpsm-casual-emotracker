@@ -24,6 +24,12 @@
           "@CardWreckedShipBoss,@CanPassBombPassages"
         ]
       },
+	  {
+        "name": "CanAccessShutDownRooms",
+        "access_rules": [
+          "phantoon"
+        ]
+      },
       {
         "name": "Missile (Wrecked Ship middle)",
         "access_rules": [

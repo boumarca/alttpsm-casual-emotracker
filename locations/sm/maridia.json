@@ -14,6 +14,17 @@
           "@CardMaridiaL2,@CanAccessMaridiaPortal"
         ]
       },
+	  {
+		"name": "CanAccessPreciousRoom",
+		"access_rules": [
+		  "super,@CanWallJumpHard,@CanAccessMaridiaPortal",
+		  "super,@CanWallJumpHard,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon",
+		  "super,grapple,@CanAccessMaridiaPortal",
+		  "super,grapple,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon",
+		  "super,space,@CanAccessMaridiaPortal",
+		  "super,space,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon"
+		],
+	  },
       {
         "name": "CanDefeatBotwoon",
         "access_rules": [
@@ -24,7 +35,13 @@
 		  "@CanAccessMaridiaPortal,grapple",
 		  "@CanAccessMaridiaPortal,@CanFly"
         ]
-      },
+      },	  
+	  {
+		"name": "CanAccessDraygon",
+		"access_rules": [
+		  "@CanAccessPreciousRoom,@CardMaridiaBoss"
+		],
+	  },
 	  {
         "name": "CanLeaveDraygonRoom",
         "access_rules": [
@@ -35,8 +52,7 @@
       {
         "name": "CanDefeatDraygon",
         "access_rules": [
-		  "@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon,@CardMaridiaBoss,gravity,@CanLeaveDraygonRoom",
-		  "@CanAccessMaridiaPortal,@CardMaridiaBoss,gravity,@CanLeaveDraygonRoom"
+		  "@CanAccessDraygon,@CanLeaveDraygonRoom"
         ]
       },
       {
@@ -184,6 +200,23 @@
 			  "@CanFly"
             ],
 		  },
+		  {
+			"name": "CanAccessPlasmaBeamRoom",
+            "access_rules": [
+              "draygon,screw,hijump,@CanWallJumpMedium",
+			  "draygon,screw,@CanFly",
+			  "draygon,plasma,hijump,@CanWallJumpMedium",
+			  "draygon,plasma,@CanFly"
+            ],
+		  },		  		  
+		  {
+			"name": "CanReachRightSandPit",
+            "access_rules": [
+              "@CanReachAqueduct,super,@CanWallJumpEasy",
+			  "@CanReachAqueduct,super,hijump",
+			  "@CanReachAqueduct,super,space"  
+            ],
+		  },
           {		  
             "name": "Watering Hole",            
             "sections": [
@@ -278,9 +311,7 @@
           {
             "name": "Missile (right Maridia sand pit room)",
             "access_rules": [
-              "@CanReachAqueduct,super,@CanWallJumpEasy",
-			  "@CanReachAqueduct,super,hijump",
-			  "@CanReachAqueduct,super,space"
+			  "@CanReachRightSandPit"
             ],
             "sections": [
               {
@@ -305,9 +336,7 @@
           {
             "name": "Power Bomb (right Maridia sand pit room)",
             "access_rules": [
-              "@CanReachAqueduct,super,@CanWallJumpEasy",
-			  "@CanReachAqueduct,super,hijump",
-			  "@CanReachAqueduct,super,space"
+              "@CanReachRightSandPit"
             ],
             "sections": [
               {
@@ -407,12 +436,7 @@
           {
             "name": "Missile (Draygon)",
             "access_rules": [
-			  "super,@CanWallJumpHard,@CanAccessMaridiaPortal",
-			  "super,@CanWallJumpHard,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon",
-			  "super,grapple,@CanAccessMaridiaPortal",
-			  "super,grapple,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon",
-			  "super,space,@CanAccessMaridiaPortal",
-			  "super,space,@CardMaridiaL1,@CardMaridiaL2,@CanDefeatBotwoon"
+			  "@CanAccessPreciousRoom"
             ],
             "sections": [
               {
@@ -464,10 +488,7 @@
                 "name": "Plasma Beam",
                 "capture_item": true,
                 "access_rules": [
-                  "@CanDefeatDraygon,screw,hijump,@CanWallJumpMedium",
-				  "@CanDefeatDraygon,screw,@CanFly",
-				  "@CanDefeatDraygon,plasma,hijump,@CanWallJumpMedium",
-				  "@CanDefeatDraygon,plasma,@CanFly",
+				  "@CanAccessPlasmaBeamRoom",                  
                   "{draygon,@CanDefeatDraygon}"
                 ],
                 "item_count": 1
@@ -495,6 +516,12 @@
 			  "super,grapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium",
 			  //"super,grapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,spring",
 			  //"super,grapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,space",
+			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,space,@CanWallJumpMedium",
+			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,space,spring",
+			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,space",
+			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium"
+			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,spring",
+			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,space",
             ],
             "sections": [
               {

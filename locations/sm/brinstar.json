@@ -722,7 +722,7 @@
           {
             "name": "Energy Tank, Kraid",
             "access_rules": [
-              "@CardBrinstarBoss"
+              "@CardBrinstarBoss,kraid"
             ],
             "sections": [
               {
