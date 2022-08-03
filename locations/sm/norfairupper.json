@@ -16,9 +16,7 @@
           {
             "name": "Ice Beam",
             "access_rules": [
-              "normal,@CanOpenIceBeamDoor,@CanPassBombPassages,varia,speed",
-              "[hard],@CanOpenIceBeamDoor,morph,varia",
-              "[hard],@CanOpenIceBeamDoor,morph,alltanks:3"
+              "@CanOpenIceBeamDoor,@CanPassBombPassages,varia,@CanMoveAtHighSpeeds"
             ],
             "sections": [
               {
@@ -42,12 +40,8 @@
           {
             "name": "Missile (below Ice Beam)",
             "access_rules": [
-              "normal,@CanOpenIceBeamDoor,@CanUsePowerBombs,varia,speed",
-              "[hard],@CanOpenIceBeamDoor,@CanUsePowerBombs,varia",
-              "[hard],@CanOpenIceBeamDoor,@CanUsePowerBombs,alltanks:3",
-              "[hard],missile,varia,speed,@CanAccessCrocomire,@CardNorfairL1",
-              "[hard],super,varia,speed,@CanAccessCrocomire,@CardNorfairL1",
-              "[hard],wave,varia,speed,@CanAccessCrocomire,@CardNorfairL1"
+              "@CanOpenIceBeamDoor,@CanUsePowerBombs,varia,@CanMoveAtHighSpeeds,@CanWallJumpEasy",
+			  "@CanOpenIceBeamDoor,@CanUsePowerBombs,varia,@CanMoveAtHighSpeeds,@CanFly"
             ],
             "sections": [
               {
@@ -139,25 +133,50 @@
                 "y": 244
               }
             ]
-          }
+          },
+		  {
+			// Put morph requirement inside section so we can make it able to be scouted.
+			"name": "Missile (lava room)",
+			"access_rules": [
+			  "varia,@CanOpenRedDoors,@CanFly",
+			  "varia,@CanOpenRedDoors,hijump",
+			  "varia,@CanOpenRedDoors,speed",
+			  "varia,@Norfair Upper East,@CardNorfairL2"
+			],
+			"sections": [
+			  {
+				"name": "Missile (lava room)",
+				"capture_item": true,
+				"access_rules": [
+				  "morph",
+				  "{}"
+				],
+				"item_count": 1
+			  }
+			],
+			"map_locations": [
+			  {
+				"map": "metroid",
+				"x": 1448,
+				"y": 1424
+			  },
+			  {
+				"map": "norfair",
+				"x": 568,
+				"y": 212
+			  }
+			]
+		  }
         ]
       },
       {
         "name": "Norfair Upper East",
-        "access_rules": [
-          "normal,@Norfair Upper West,varia,super,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly",
-          "normal,@Norfair Upper West,varia,super,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump",
-          "normal,@Norfair Upper West,varia,super,@CanOpenRedDoors,@CanOpenCathedralDoor,speed",
-          "normal,@Norfair Upper West,varia,super,speed,@CardNorfairL2,@CanUsePowerBombs",
-          "normal,@Norfair Upper West,varia,super,speed,wave,@CanUsePowerBombs",
-
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,speed",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanSpringBallJump",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanOpenCathedralDoor,varia,ice",
-          "[hard],@Norfair Upper West,@CanHellRun,speed,@CardNorfairL2,@CanUsePowerBombs",
-          "[hard],@Norfair Upper West,@CanHellRun,speed,@CanBlueGateGlitch,@CanUsePowerBombs",
+        "access_rules": [		  
+          "@Norfair Upper West,varia,super,@CanOpenRedDoors,@CanOpenCathedralDoor,@CanFly",
+          "@Norfair Upper West,varia,super,@CanOpenRedDoors,@CanOpenCathedralDoor,hijump",
+          "@Norfair Upper West,varia,super,@CanOpenRedDoors,@CanOpenCathedralDoor,speed",
+          "@Norfair Upper West,varia,super,speed,@CardNorfairL2,@CanUsePowerBombs",
+          "@Norfair Upper West,varia,super,speed,wave,@CanUsePowerBombs"
         ],
         "children": [
           {
@@ -582,48 +601,7 @@
             "y": 276
           }
         ]
-      },
-      {
-        // This item can be accessed via UN west or east so it's easier to put it here to reference those areas.
-        // Put morph requirement inside section so we can make it able to be scouted.
-        "name": "Missile (lava room)",
-        "access_rules": [
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,@CanFly",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,hijump",
-          "normal,@Norfair Upper West,varia,@CanOpenRedDoors,speed",
-          "normal,@Norfair Upper East,varia,@CardNorfairL2",
-
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanFly",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,hijump",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,speed",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,@CanSpringBallJump",
-          "[hard],@Norfair Upper West,@CanHellRun,@CanOpenRedDoors,varia,ice",
-          "[hard],@Norfair Upper East,varia,@CardNorfairL2"
-        ],
-        "sections": [
-          {
-            "name": "Missile (lava room)",
-            "capture_item": true,
-            "access_rules": [
-              "morph",
-              "{}"
-            ],
-            "item_count": 1
-          }
-        ],
-        "map_locations": [
-          {
-            "map": "metroid",
-            "x": 1448,
-            "y": 1424
-          },
-          {
-            "map": "norfair",
-            "x": 568,
-            "y": 212
-          }
-        ]
-      }
+      }      
     ]
   }
 ]
