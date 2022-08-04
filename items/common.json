@@ -920,10 +920,22 @@
   },
   {
     "name": "Prevent Screw Attack Soft Locks",
-    "type": "toggle",
+    "type": "progressive",
+	"allow_disabled": false,
     "loop": "true",
-    "img": "images/safe_screw.png",
-    "codes": "safe_screw"
+	"stages": [
+	  {
+		"img": "images/safe_screw.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "safe_screw,safe_screw_off"
+	  },
+	  {
+		"img": "images/safe_screw.png",
+		"inherit_codes": "false",
+		"codes": "safe_screw,safe_screw_on"
+	  }
+	]
   },
   {
     "name": "Prevent Five Power Bomb Seeds",
@@ -998,7 +1010,7 @@
 	    "name": "None",
         "img": "images/wj_none.png",
         "img_mods": "@disabled",
-		"codes": "walljump"
+		"codes": "walljump,walljump_none"
       },
       {
         "name": "Easy",
