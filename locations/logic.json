@@ -137,7 +137,7 @@
     "name": "CanMoveAtHighSpeeds",
     "access_rules": [
       "speed",
-	  "[hard],morph"
+	  "[mockball],morph"
     ]
   },
   {
