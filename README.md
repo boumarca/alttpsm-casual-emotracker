@@ -3,7 +3,7 @@ This is a map & item tracker for the [Super Metroid + A Link to the Past Casual 
 
 ## My changes
 - Changed tracker SM logic to follow the randomizer logic.
-- Removed hard logic, because this is a Casual randomizer.
+- Removed hard logic, because this is intended for a Casual randomizer.
 - Added locations for SM 4 bosses.
 - Added config "items" section in tracker for the randomizer options.
 
