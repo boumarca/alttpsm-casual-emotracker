@@ -111,7 +111,18 @@
                   {
                     "type": "layout",
                     "key": "sm_item_grid"
-                  },
+                  }
+                ]
+              }
+            },
+			{
+              "type": "group",
+              "header": "Configs",
+              "content": {
+                "type": "array",
+                "orientation": "horizontal",
+                "margin": "0,0",
+                "content": [
 				  {
                     "type": "layout",
                     "key": "config_grid"
