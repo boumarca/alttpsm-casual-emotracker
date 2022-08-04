@@ -32,6 +32,22 @@
       "byrna,@CanExtendMagic"
     ]
   },
+  {
+    "name": "CanPassSwordOnlyDarkRooms",
+    "access_rules": [
+      "[lamp]",
+	  "[sword_dark],sword"
+    ]
+  },
+  {
+    "name": "CanPassFireRodDarkRooms",
+    "access_rules": [
+      "@CanPassSwordOnlyDarkRooms",
+	  "[firerod_dark],firerod"
+    ]
+  },
+  
+  
 
   // SM logic
   {

@@ -19,7 +19,7 @@
         "name": "Escape",
         "clear_as_group": false,
         "access_rules": [
-          "[lift1],[lamp]"
+          "[lift1],@CanPassFireRodDarkRooms"
         ],
         "item_count": 6
       }
@@ -33,14 +33,14 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[lamp]"
+          "@CanPassSwordOnlyDarkRooms"
         ],
         "item_count": 3
       },
       {
         "name": "Armos Knights",
         "access_rules": [
-          "bow,[lamp]"
+          "bow,@CanPassFireRodDarkRooms"
         ],
         "hosted_item": "easternpalace"
       }
@@ -169,7 +169,7 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[bow],[lamp]"
+          "[bow],@CanPassFireRodDarkRooms,@CanPassSwordOnlyDarkRooms"
         ],
         "item_count": 5
       },
@@ -177,7 +177,7 @@
         "name": "Helmasaur King",
         "short_name": "Helma",
         "access_rules": [
-          "@Palace of Darkness/Dungeon,bow,hammer,[lamp]"
+          "@Palace of Darkness/Dungeon,bow,hammer,@CanPassSwordOnlyDarkRooms"
         ],
         "hosted_item": "palaceofdarkness"
       }
@@ -338,7 +338,7 @@
       {
         "name": "Vitreous",
         "access_rules": [
-          "[lamp],somaria"
+          "@CanPassSwordOnlyDarkRooms,somaria"
         ],
         "hosted_item": "miserymire"
       }
@@ -363,16 +363,16 @@
         "name": "Dungeon",
         "clear_as_group": false,
         "access_rules": [
-          "[firerod],[lamp],[cape]",
-          "[firerod],[lamp],[byrna]",
-          "[firerod],[lamp],[shield3]"
+          "[firerod],@CanPassSwordOnlyDarkRooms,[cape]",
+          "[firerod],@CanPassSwordOnlyDarkRooms,[byrna]",
+          "[firerod],@CanPassSwordOnlyDarkRooms,[shield3]"
         ],
         "item_count": 5
       },
       {
         "name": "Trinexx",
         "access_rules": [
-          "@Turtle Rock/Dungeon,[lamp],firerod,icerod"
+          "@Turtle Rock/Dungeon,@CanPassSwordOnlyDarkRooms,firerod,icerod"
         ],
         "hosted_item": "turtlerock"
       }

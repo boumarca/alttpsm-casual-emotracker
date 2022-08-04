@@ -582,14 +582,14 @@
         "color": "#934f17",
         "access_rules": [
           "flute",
-          "[lamp],lift1",
+          "@CanPassSwordOnlyDarkRooms,lift1",
           "@CanAccessDeathMountainPortal"
         ],
         "children": [
           {
             "name": "Old Man",
             "access_rules": [
-              "[lamp]"
+              "@CanPassSwordOnlyDarkRooms"
             ],
             "sections": [
               {
