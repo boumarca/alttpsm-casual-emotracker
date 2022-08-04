@@ -164,7 +164,7 @@
                 "capture_item": true,
                 "access_rules": [
                   "@CanEnterAndLeaveGauntlet,alltanks:1",
-                  "{@CardCrateriaL1,morph,powerbomb}",
+                  "{@CardCrateriaL1,morph,@CanUsePowerBombs}",
                   "{@CardCrateriaL1,speed,alltanks:2}"
                 ],
                 "item_count": 1

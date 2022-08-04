@@ -76,17 +76,15 @@
   {
     "name": "CanUsePowerBombs",
     "access_rules": [
-	  "easy,morph,powerbomb:10",
-      "[normal],morph,powerbomb",
-	  "[hard],morph,powerbomb"
-	  
+	  "no_5_pb_on,morph,powerbomb,[powerbomb:10]",
+      "no_5_pb_off,morph,powerbomb"
     ]
   },
   {
     "name": "CanPassBombPassages",
     "access_rules": [
       "morph,bomb",
-      "morph,powerbomb"
+      "morph,@CanUsePowerBombs"
     ]
   },
   {

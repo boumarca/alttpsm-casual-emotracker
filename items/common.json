@@ -939,10 +939,22 @@
   },
   {
     "name": "Prevent Five Power Bomb Seeds",
-    "type": "toggle",
+    "type": "progressive",
+	"allow_disabled": false,
     "loop": "true",
-    "img": "images/pb_5.png",
-    "codes": "pb_5"
+	"stages": [
+	  {
+		"img": "images/pb_5.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "no_5_pb,no_5_pb_off"
+	  },
+	  {
+		"img": "images/pb_5.png",
+		"inherit_codes": "false",
+		"codes": "no_5_pb,no_5_pb_on"
+	  }
+	]
   },
   {
     "name": "Left Sand Pit Needs Spring Ball",

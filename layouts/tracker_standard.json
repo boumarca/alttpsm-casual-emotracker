@@ -61,7 +61,7 @@
     "h_alignment": "center",
     "item_margin": "1,2",
     "rows": [
-	  [ "safe_screw", "pb_5" ],
+	  [ "safe_screw", "no_5_pb" ],
 	  [ "spring_leftpit", "launchpad_ice" ],
 	  [ "firerod_dark", "ibj" ],
 	  [ "parlor_speed", "mockball" ],
