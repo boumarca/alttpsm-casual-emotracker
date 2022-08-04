@@ -55,7 +55,6 @@
                 "capture_item": true,
                 "access_rules": [
                   "@CanUsePowerBombs,alltanks:2,speed,@LaunchPadRequiresIceBeam",
-				  "@CanUsePowerBombs,alltanks:2,speed,ice",				  
                   "{@CanUsePowerBombs}"
                 ],
                 "item_count": 1

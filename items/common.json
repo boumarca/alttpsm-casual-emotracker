@@ -977,10 +977,23 @@
   },
   {
     "name": "Launchpad Needs Ice Beam",
-    "type": "toggle",
+    "type": "progressive",
+	"allow_disabled": false,
     "loop": "true",
-    "img": "images/launchpad_ice.png",
-    "codes": "launchpad_ice"
+	"stages": [
+	  {
+		"img": "images/launchpad_ice.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "launchpad_ice,launchpad_ice_off"
+	  },
+	  {
+		"img": "images/launchpad_ice.png",
+		"inherit_codes": "false",
+		"codes": "launchpad_ice,launchpad_ice_on"
+	  }
+	]
+    
   },
   {
     "name": "Fire Rod for Dark Rooms",
