@@ -919,6 +919,76 @@
     ]
   },
   {
+    "name": "Prevent Screw Attack Soft Locks",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/safe_screw.png",
+    "codes": "safe_screw"
+  },
+  {
+    "name": "Prevent Five Power Bomb Seeds",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/pb_5.png",
+    "codes": "pb_5"
+  },
+  {
+    "name": "Left Sand Pit Needs Spring Ball",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/spring_leftpit.png",
+    "codes": "spring_leftpit"
+  },
+  {
+    "name": "Launchpad Needs Ice Beam",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/launchpad_ice.png",
+    "codes": "launchpad_ice"
+  },
+  {
+    "name": "Fire Rod for Dark Rooms",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/firerod_dark.png",
+    "codes": "firerod_dark"
+  },
+  {
+    "name": "Infinite Bomb Jump",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/ibj.png",
+    "codes": "ibj"
+  },
+  {
+    "name": "Parlor Speed Booster Break In",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/parlor_speed.png",
+    "codes": "parlor_speed"
+  },
+  {
+    "name": "Mockball",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/mockball.png",
+    "codes": "mockball"
+  },
+  {
+    "name": "Sword Only Dark Rooms",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/sword_dark.png",
+    "codes": "sword_dark"
+  },
+  {
+    "name": "Light World South Fake Flippers",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/fakeflippers.png",
+    "codes": "fakeflippers"
+  },
+  {
     "name": "Wall Jump Difficulty",
     "type": "progressive",
 	"allow_disabled": false,
@@ -951,5 +1021,12 @@
         "codes": "walljump_insane"
       }
     ]
+  },
+  {
+    "name": "Shaktool does not require Grapple Beam",
+    "type": "toggle",
+    "loop": "true",
+    "img": "images/launchpad_ice.png",
+    "codes": "shaktool_nograpple"
   },
 ]

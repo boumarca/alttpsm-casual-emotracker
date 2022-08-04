@@ -61,7 +61,13 @@
     "h_alignment": "center",
     "item_margin": "1,2",
     "rows": [
-      [ "walljump" ]
+	  [ "safe_screw", "pb_5" ],
+	  [ "spring_leftpit", "launchpad_ice" ],
+	  [ "firerod_dark", "ibj" ],
+	  [ "parlor_speed", "mockball" ],
+	  [ "sword_dark", "fakeflippers" ],
+      [ "walljump", "" ],
+	  [ "shaktool_nograpple", "" ]
     ]
   },
   "tracker_capture_item": {
