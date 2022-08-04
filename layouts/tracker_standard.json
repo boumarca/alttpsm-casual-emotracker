@@ -56,6 +56,14 @@
       }
     ]
   },
+  "config_grid": {
+    "type": "itemgrid",
+    "h_alignment": "center",
+    "item_margin": "1,2",
+    "rows": [
+      [ "walljump" ]
+    ]
+  },
   "tracker_capture_item": {
     "type": "container",
     "content": {
@@ -97,6 +105,10 @@
                   {
                     "type": "layout",
                     "key": "sm_item_grid"
+                  },
+				  {
+                    "type": "layout",
+                    "key": "config_grid"
                   }
                 ]
               }

@@ -52,27 +52,25 @@
   {
     "name": "CanWallJumpEasy",
     "access_rules": [
-      "[normal]",
-      "[hard]"
+      "walljump_easy"
     ]
   },
   {
     "name": "CanWallJumpMedium",
     "access_rules": [
-      "[normal]",
-      "[hard]"
+      "walljump_medium"
     ]
   },
   {
     "name": "CanWallJumpHard",
     "access_rules": [
-      "[hard]"
+      "walljump_hard"
     ]
   },
   {
     "name": "CanWallJumpInsane",
     "access_rules": [
-      "[hard]"
+      "walljump_insane"
     ]
   },
   {

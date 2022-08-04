@@ -880,8 +880,8 @@
     "max_quantity": 7,
     "disabled_img_mods":"overlay|images/gt_crystals0.png",
     "initial_quantity": 7
-},
-{
+  },
+  {
     "name": "Ganon Required Crystals",
     "type": "consumable",
     "img": "images/ganon_crystals.png",
@@ -891,31 +891,65 @@
     "max_quantity": 7,
     "disabled_img_mods":"overlay|images/ganon_crystals0.png",
     "initial_quantity": 7
-},
-{
-  "name": "Ganon Entry",
-  "type": "progressive",
-  "allow_disabled": "false",
-  "loop": "true",
-  "stages": [
-    {
-      "name": "Normal",
-      "img": "images/ganon_normal_border.png",
-      "inherit_codes": "false",
-      "codes": "ganon_entry, ganon_normal"
-    },
-    {
-      "name": "Fast",
-      "img": "images/ganon_fast_border.png",
-      "inherit_codes": "false",
-      "codes": "ganon_entry, ganon_fast"
-    },
-    {
-      "name": "All Dungeons",
-      "img": "images/ganon_all_border.png",
-      "inherit_codes": "false",
-      "codes": "ganon_entry, ganon_all"
-    }
-  ]
-}
+  },
+  {
+    "name": "Ganon Entry",
+    "type": "progressive",
+    "allow_disabled": "false",
+    "loop": "true",
+	"stages": [
+	  {
+	    "name": "Normal",
+	    "img": "images/ganon_normal_border.png",
+	    "inherit_codes": "false",
+	    "codes": "ganon_entry, ganon_normal"
+	  },
+	  {
+	    "name": "Fast",
+	    "img": "images/ganon_fast_border.png",
+	    "inherit_codes": "false",
+	    "codes": "ganon_entry, ganon_fast"
+	  },
+	  {
+	    "name": "All Dungeons",
+	    "img": "images/ganon_all_border.png",
+	    "inherit_codes": "false",
+	    "codes": "ganon_entry, ganon_all"
+	  }
+    ]
+  },
+  {
+    "name": "Wall Jump Difficulty",
+    "type": "progressive",
+	"allow_disabled": false,
+    "loop": "true",
+    "stages": [
+	  {
+	    "name": "None",
+        "img": "images/wj_none.png",
+        "img_mods": "@disabled",
+		"codes": "walljump"
+      },
+      {
+        "name": "Easy",
+        "img": "images/wj_ez.png",
+        "codes": "walljump_easy"
+      },
+	  {
+        "name": "Medium",
+        "img": "images/wj_med.png",
+        "codes": "walljump_medium"
+      },
+	  {
+        "name": "Hard",
+        "img": "images/wj_hard.png",
+        "codes": "walljump_hard"
+      },
+	  {
+        "name": "Insane",
+        "img": "images/wj_insane.png",
+        "codes": "walljump_insane"
+      }
+    ]
+  },
 ]
