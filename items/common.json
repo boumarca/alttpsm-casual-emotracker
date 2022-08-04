@@ -955,13 +955,25 @@
 		"codes": "no_5_pb,no_5_pb_on"
 	  }
 	]
-  },
+  },  
   {
     "name": "Left Sand Pit Needs Spring Ball",
-    "type": "toggle",
+    "type": "progressive",
+	"allow_disabled": false,
     "loop": "true",
-    "img": "images/spring_leftpit.png",
-    "codes": "spring_leftpit"
+	"stages": [
+	  {
+		"img": "images/spring_leftpit.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "spring_leftpit,spring_leftpit_off"
+	  },
+	  {
+		"img": "images/spring_leftpit.png",
+		"inherit_codes": "false",
+		"codes": "spring_leftpit,spring_leftpit_on"
+	  }
+	]
   },
   {
     "name": "Launchpad Needs Ice Beam",

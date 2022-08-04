@@ -161,10 +161,13 @@
   {
     "name": "CanNavigateMaridiaLeftSandPit",
     "access_rules": [
-      "easy,spring,hijump",
-	  "@CanWallJumpMedium",
-	  "@CanWallJumpEasy,spring",
-	  "@CanFly"
+      "spring_leftpit_on,spring,hijump",
+	  "spring_leftpit_on,@CanWallJumpMedium,[spring],[hijump]",
+	  "spring_leftpit_on,@CanWallJumpEasy,spring,[hijump]",
+	  "spring_leftpit_on,@CanFly,[spring],[hijump]",
+	  "spring_leftpit_off,@CanWallJumpMedium",
+	  "spring_leftpit_off,@CanWallJumpEasy,spring",
+	  "spring_leftpit_off,@CanFly"
     ]
   },
 
