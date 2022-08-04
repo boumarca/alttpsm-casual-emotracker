@@ -1026,7 +1026,7 @@
     "name": "Shaktool does not require Grapple Beam",
     "type": "toggle",
     "loop": "true",
-    "img": "images/launchpad_ice.png",
+    "img": "images/shaktool_nograpple.png",
     "codes": "shaktool_nograpple"
   },
 ]
