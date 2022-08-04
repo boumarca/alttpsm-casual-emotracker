@@ -50,25 +50,25 @@
   {
     "name": "CanWallJumpEasy",
     "access_rules": [
-      "walljump_easy"
+      "[walljump_easy]"
     ]
   },
   {
     "name": "CanWallJumpMedium",
     "access_rules": [
-      "walljump_medium"
+      "[walljump_medium]"
     ]
   },
   {
     "name": "CanWallJumpHard",
     "access_rules": [
-      "walljump_hard"
+      "[walljump_hard]"
     ]
   },
   {
     "name": "CanWallJumpInsane",
     "access_rules": [
-      "walljump_insane"
+      "[walljump_insane]"
     ]
   },
   {
