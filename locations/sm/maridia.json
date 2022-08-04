@@ -538,18 +538,10 @@
           {
             "name": "Spring Ball",
             "access_rules": [
-              //"super,grapple,@CanUsePowerBombs,space,@CanWallJumpMedium",
-			  //"super,grapple,@CanUsePowerBombs,space,spring",
-			  "super,grapple,@CanUsePowerBombs,space",
-			  "super,grapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium",
-			  //"super,grapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,spring",
-			  //"super,grapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,space",
-			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,space,@CanWallJumpMedium",
-			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,space,spring",
-			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,space",
-			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium"
-			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,spring",
-			  //"super,shaktoolwithoutgrapple,@CanUsePowerBombs,hijump,@CanWallJumpMedium,space",
+			  "super,@CanUsePowerBombs,grapple,space",
+			  "super,@CanUsePowerBombs,grapple,hijump,@CanWallJumpMedium",
+			  "super,@CanUsePowerBombs,shaktool_nograpple,space",
+			  "super,@CanUsePowerBombs,shaktool_nograpple,hijump,@CanWallJumpMedium",
             ],
             "sections": [
               {
