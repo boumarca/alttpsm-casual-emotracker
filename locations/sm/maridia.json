@@ -457,10 +457,38 @@
               }
             ]
           },
+		  {
+            "name": "Draygon",
+            "access_rules": [
+              "@CanDefeatDraygon,missile",
+			  "@CanDefeatDraygon,super",
+			  "@CanDefeatDraygon,charge",
+			  "@CanDefeatDraygon,grapple",
+			  "@CanDefeatDraygon,charge,plasma,xray"
+            ],
+            "sections": [
+              {
+                "name": "Draygon",
+				"hosted_item": "draygon"
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 2108,
+                "y": 968
+              },
+              {
+                "map": "maridia",
+                "x": 1180,
+                "y": 392
+              }
+            ]
+          },
           {
             "name": "Space Jump",
             "access_rules": [
-              "@CanDefeatDraygon"
+              "draygon"
             ],
             "sections": [
               {

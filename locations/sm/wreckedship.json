@@ -66,6 +66,32 @@
           }
         ]
       },
+	  {
+		"name": "Phantoon",
+		"access_rules": [
+		  "@CardWreckedShipBoss,@CanPassBombPassages,missile",
+		  "@CardWreckedShipBoss,@CanPassBombPassages,super",
+		  "@CardWreckedShipBoss,@CanPassBombPassages,charge"
+		],
+		"sections": [
+		  {
+			"name": "Phantoon",
+			"hosted_item": "phantoon"
+		  }
+		],
+		"map_locations": [
+		  {
+			"map": "metroid",
+			"x": 1740,
+			"y": 376
+		  },
+		  {
+			"map": "wreckedship",
+			"x": 636,
+			"y": 440
+		  }
+		]
+	  },
       {
         "name": "Energy Tank, Wrecked Ship",
         "access_rules": [

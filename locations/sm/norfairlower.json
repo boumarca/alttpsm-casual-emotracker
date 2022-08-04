@@ -257,10 +257,34 @@
               }
             ]
           },
+		  {
+            "name": "Ridley",
+            "access_rules": [
+              "@CanExitLowerNorfairEast,@CardLowerNorfairBoss,@CanUsePowerBombs,super"
+            ],
+            "sections": [
+              {
+                "name": "Ridley",
+				"hosted_item": "ridley"
+              }
+            ],
+            "map_locations": [
+              {
+                "map": "metroid",
+                "x": 1676,
+                "y": 1848
+              },
+              {
+                "map": "norfair",
+                "x": 796,
+                "y": 632
+              }
+            ]
+          },
           {
             "name": "Energy Tank, Ridley",
             "access_rules": [
-              "@CanExitLowerNorfairEast,@CardLowerNorfairBoss,@CanUsePowerBombs,super"
+              "ridley"
             ],
             "sections": [
               {
