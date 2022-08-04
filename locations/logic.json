@@ -76,8 +76,8 @@
   {
     "name": "CanUsePowerBombs",
     "access_rules": [
-	  "no_5_pb_on,morph,powerbomb,[powerbomb:10]",
-      "no_5_pb_off,morph,powerbomb"
+	  "no_5_pb_on,morph,powerbomb:10",
+      "[no_5_pb_off],morph,powerbomb"
     ]
   },
   {
@@ -90,8 +90,8 @@
   {
     "name": "CanSafelyUseScrewAttack",
 	"access_rules": [
-	  "safe_screw_on,screw,[morph]",
-	  "safe_screw_off,screw"
+	  "safe_screw_on,screw,morph",
+	  "[safe_screw_off],screw"
 	]
   },
   {
@@ -162,12 +162,9 @@
     "name": "CanNavigateMaridiaLeftSandPit",
     "access_rules": [
       "spring_leftpit_on,spring,hijump",
-	  "spring_leftpit_on,@CanWallJumpMedium,[spring],[hijump]",
-	  "spring_leftpit_on,@CanWallJumpEasy,spring,[hijump]",
-	  "spring_leftpit_on,@CanFly,[spring],[hijump]",
-	  "spring_leftpit_off,@CanWallJumpMedium",
-	  "spring_leftpit_off,@CanWallJumpEasy,spring",
-	  "spring_leftpit_off,@CanFly"
+	  "[spring_leftpit_off],@CanWallJumpMedium",
+	  "[spring_leftpit_off],@CanWallJumpEasy,spring",
+	  "[spring_leftpit_off],@CanFly"
     ]
   },
 
