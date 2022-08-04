@@ -130,8 +130,7 @@
   {
     "name": "CanParlorSpeedBoost",
     "access_rules": [
-      "[normal],speed",
-	  "[hard],speed"
+      "[parlor_speed],speed"
     ]
   },
   {
