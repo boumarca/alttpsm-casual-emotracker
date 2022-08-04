@@ -5,24 +5,24 @@
     "allow_disabled": "false",
     "loop": "true",
     "stages": [
+	  {
+        "name": "Casual",
+        "img": "images/diff_casual_border.png",
+        "inherit_codes": "false",
+        "codes": "difficulty,casual"
+      },
       {
         "name": "Normal",
         "img": "images/diff_normal_border.png",
         "inherit_codes": "false",
-        "codes": "difficulty,casual,normal"
+        "codes": "difficulty,normal"
       },
       {
         "name": "Hard",
         "img": "images/diff_hard_border.png",
         "inherit_codes": "false",
         "codes": "difficulty,tournament,hard"
-      },
-	  {
-        "name": "Casual",
-        "img": "images/diff_casual_border.png",
-        "inherit_codes": "false",
-        "codes": "difficulty,easy,casual"
-      }
+      }	  
     ]
   },
   {
