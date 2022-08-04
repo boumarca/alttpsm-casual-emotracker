@@ -341,7 +341,7 @@
             "name": "Waterfall Fairy",
             "access_rules": [
               "flippers",
-              "pearl,[flippers]",
+              "pearl,@CanHyruleSouthFakeFlippers",
               "boots,[flippers]"
             ],
             "sections": [
@@ -452,7 +452,8 @@
           {
             "name": "Hobo",
             "access_rules": [
-              "[flippers]"
+              "flippers",
+			  "@CanHyruleSouthFakeFlippers"
             ],
             "sections": [
               {

@@ -46,7 +46,12 @@
 	  "[firerod_dark],firerod"
     ]
   },
-  
+  {
+    "name": "CanHyruleSouthFakeFlippers",
+    "access_rules": [      
+	  "[fakeflippers]"
+    ]
+  },
   
 
   // SM logic
