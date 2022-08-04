@@ -1,4 +1,13 @@
 ﻿{
+  "config_grid_broadcast": {
+    "type": "itemgrid",
+    "h_alignment": "left",
+    "item_margin": "1,2",
+    "rows": [
+	  [ "safe_screw", "no_5_pb", "spring_leftpit", "launchpad_ice", "", "", "", "", "" ],
+	  [ "firerod_dark", "ibj", "parlor_speed", "mockball", "sword_dark", "fakeflippers", "walljump", "","shaktool_nograpple" ]
+    ]
+  },
   "tracker_broadcast": {
     "type": "array",
     "orientation": "vertical",
@@ -36,6 +45,18 @@
           }
         ]
       },
+	  {
+        "type": "array",
+        "orientation": "horizontal",
+        "h_alignment": "stretch",
+        "margin": "0,0",
+        "content": [
+          {
+            "type": "layout",
+            "key": "config_grid_broadcast",
+          }
+        ]
+      }
     ]
   }
 }

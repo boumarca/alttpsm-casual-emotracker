@@ -270,6 +270,19 @@
       [ "ln_label", "ln_key1", "", "ln_bosskey"]
     ]
   },
+  "config_grid": {
+    "type": "itemgrid",
+    "h_alignment": "center",
+    "item_margin": "1,2",
+    "rows": [
+	  [ "safe_screw", "no_5_pb" ],
+	  [ "spring_leftpit", "launchpad_ice" ],
+	  [ "firerod_dark", "ibj" ],
+	  [ "parlor_speed", "mockball" ],
+	  [ "sword_dark", "fakeflippers" ],
+      [ "walljump", "shaktool_nograpple" ]
+    ]
+  },
   "tracker_capture_item": {
     "type": "container",
     "content": {
@@ -341,6 +354,21 @@
                   }
                 }
               ]
+            },
+			{
+              "type": "group",
+              "header": "Configs",
+              "content": {
+                "type": "array",
+                "orientation": "horizontal",
+                "margin": "0,0",
+                "content": [
+				  {
+                    "type": "layout",
+                    "key": "config_grid"
+                  }
+                ]
+              }
             },
             {
               "type": "group",
