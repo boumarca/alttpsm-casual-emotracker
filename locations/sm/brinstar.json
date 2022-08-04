@@ -605,7 +605,7 @@
             ]
           },
           {
-            "name": "Spazer",
+            "name": "~ S p A z E r ~",
             "access_rules": [
               "@CanPassBombPassages,super,hijump",
 			  "@CanPassBombPassages,super,@CanWallJumpEasy",
@@ -613,7 +613,7 @@
             ],
             "sections": [
               {
-                "name": "Spazer",
+                "name": "~ S p A z E r ~",
                 "item_count": 1
               }
             ],
