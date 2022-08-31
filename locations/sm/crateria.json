@@ -272,6 +272,14 @@
               "@Wrecked Ship,@CanAccessShutDownRooms"
             ]
           },
+		  {
+            "name": "CanAccessSkyItem",
+            "access_rules": [
+              "@CanPassThroughWreckedShip,space,easy_sky_item_on",
+			  "@CanPassThroughWreckedShip,speed,easy_sky_item_on",
+			  "@CanPassThroughWreckedShip,[easy_sky_item_off]"
+            ]
+          },
           {
             "name": "Missile (outside Wrecked Ship bottom)",
             "access_rules": [
@@ -299,7 +307,7 @@
           {
             "name": "Missile (outside Wrecked Ship top)",
             "access_rules": [
-			  "@CanPassThroughWreckedShip"              
+			  "@CanAccessSkyItem"              
             ],
             "sections": [
               {

@@ -992,8 +992,45 @@
 		"inherit_codes": "false",
 		"codes": "launchpad_ice,launchpad_ice_on"
 	  }
-	]
-    
+	]    
+  },
+  {
+    "name": "Waterway Needs Gravity Suit",
+    "type": "progressive",
+	"allow_disabled": false,
+    "loop": "true",
+	"stages": [
+	  {
+		"img": "images/waterway_gravity.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "waterway_gravity,waterway_gravity_off"
+	  },
+	  {
+		"img": "images/waterway_gravity.png",
+		"inherit_codes": "false",
+		"codes": "waterway_gravity,waterway_gravity_on"
+	  }
+	]    
+  },
+  {
+    "name": "Easy East Crateria Sky Item",
+    "type": "progressive",
+	"allow_disabled": false,
+    "loop": "true",
+	"stages": [
+	  {
+		"img": "images/easy_sky_item.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "easy_sky_item,easy_sky_item_off"
+	  },
+	  {
+		"img": "images/easy_sky_item.png",
+		"inherit_codes": "false",
+		"codes": "easy_sky_item,easy_sky_item_on"
+	  }
+	]    
   },
   {
     "name": "Fire Rod for Dark Rooms",

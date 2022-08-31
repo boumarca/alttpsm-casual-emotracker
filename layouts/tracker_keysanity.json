@@ -275,11 +275,10 @@
     "h_alignment": "center",
     "item_margin": "1,2",
     "rows": [
-	  [ "safe_screw", "no_5_pb" ],
-	  [ "spring_leftpit", "launchpad_ice" ],
-	  [ "firerod_dark", "ibj" ],
-	  [ "parlor_speed", "mockball" ],
-	  [ "sword_dark", "fakeflippers" ],
+	  [ "safe_screw", "no_5_pb", "spring_leftpit" ],
+	  [ "launchpad_ice", "waterway_gravity", "easy_sky_item" ],
+	  [ "firerod_dark", "ibj", "parlor_speed" ],
+	  [ "mockball", "sword_dark", "fakeflippers" ],
       [ "walljump", "shaktool_nograpple" ]
     ]
   },

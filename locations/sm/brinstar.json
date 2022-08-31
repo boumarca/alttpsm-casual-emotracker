@@ -422,8 +422,8 @@
           {
             "name": "Energy Tank, Waterway",
             "access_rules": [
-              "@CanUsePowerBombs,@CanOpenRedDoors,speed,alltanks:1",
-              "@CanUsePowerBombs,@CanOpenRedDoors,speed,gravity"
+              "@CanUsePowerBombs,@CanOpenRedDoors,speed,waterway_gravity_on,gravity",
+			  "@CanUsePowerBombs,@CanOpenRedDoors,speed,[waterway_gravity_off],alltanks:1"
             ],
             "sections": [
               {
