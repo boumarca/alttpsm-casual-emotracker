@@ -540,8 +540,6 @@
             "access_rules": [
 			  "super,@CanUsePowerBombs,grapple,space",
 			  "super,@CanUsePowerBombs,grapple,hijump,@CanWallJumpMedium",
-			  "super,@CanUsePowerBombs,shaktool_nograpple,space",
-			  "super,@CanUsePowerBombs,shaktool_nograpple,hijump,@CanWallJumpMedium",
             ],
             "sections": [
               {
