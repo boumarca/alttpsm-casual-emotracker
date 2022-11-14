@@ -1033,6 +1033,25 @@
 	]    
   },
   {
+    "name": "Kholdstare Needs Somaria",
+    "type": "progressive",
+	"allow_disabled": false,
+    "loop": "true",
+	"stages": [
+	  {
+		"img": "images/kholdstare_somaria.png",
+		"img_mods": "@disabled",
+		"inherit_codes": "false",
+		"codes": "kholdstare_somaria,kholdstare_somaria_off"
+	  },
+	  {
+		"img": "images/kholdstare_somaria.png",
+		"inherit_codes": "false",
+		"codes": "kholdstare_somaria,kholdstare_somaria_on"
+	  }
+	]    
+  },
+  {
     "name": "Fire Rod for Dark Rooms",
     "type": "toggle",
     "loop": "true",

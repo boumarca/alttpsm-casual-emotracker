@@ -304,7 +304,7 @@
       {
         "name": "Kholdstare",
         "access_rules": [
-          "@Ice Palace/Dungeon,hammer,[somaria]"
+		  "@Ice Palace/Dungeon,hammer,@KholdstareNeedsSomaria"
         ],
         "hosted_item": "icepalace"
       }

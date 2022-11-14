@@ -485,8 +485,8 @@
       {
         "name": "Kholdstare",
         "access_rules": [
-          "[ip_bigkey],[ip_smallkey:1],somaria,hammer",
-          "[ip_bigkey],[ip_smallkey:2],hammer"
+          "[ip_bigkey],[ip_smallkey:1],somaria,hammer,@KholdstareNeedsSomaria",
+          "[ip_bigkey],[ip_smallkey:2],hammer,@KholdstareNeedsSomaria"
         ],
         "item_count": 1,
         "hosted_item": "icepalace"

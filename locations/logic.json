@@ -169,6 +169,13 @@
     ]
   },
   {
+    "name": "KholdstareNeedsSomaria",
+    "access_rules": [
+      "kholdstare_somaria_on,somaria",
+	  "kholdstare_somaria_off,[somaria]"
+    ]
+  },
+  {
     "name": "CanPassReverseForgottenHighway",
     "access_rules": [
       "gravity,@CanFly",
