@@ -66,7 +66,7 @@
 	  [ "kholdstare_somaria" ],
 	  [ "firerod_dark", "ibj", "parlor_speed" ],
 	  [ "mockball", "sword_dark", "fakeflippers" ],
-      [ "walljump", "shaktool_nograpple" ]
+      [ "walljump" ]
     ]
   },
   "tracker_capture_item": {

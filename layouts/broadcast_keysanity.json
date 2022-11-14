@@ -4,8 +4,8 @@
     "h_alignment": "left",
     "item_margin": "1,2",
     "rows": [
-	  [ "firerod_dark", "ibj", "parlor_speed", "mockball", "sword_dark", "fakeflippers", "walljump", "","shaktool_nograpple" ]
 	  [ "safe_screw", "no_5_pb", "spring_leftpit", "launchpad_ice", "waterway_gravity", "easy_sky_item", "kholdstare_somaria" ],
+	  [ "firerod_dark", "ibj", "parlor_speed", "mockball", "sword_dark", "fakeflippers", "walljump" ]
     ]
   },
   "tracker_broadcast": {
